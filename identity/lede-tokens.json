@@ -1,0 +1,80 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "brand": "Lede (formerly Boosted.ai)",
+    "version": "1.0.0",
+    "delivered": "2026-10-16",
+    "notes": "Drop-in remap for the existing alfa-ds token roles. Two registers: 'product' (dark, default for app surfaces) and 'brand' (light, default for marketing/brand surfaces). Hard rules inherited from alfa-ds and kept: elevation by surface stepping, no box shadows, no card borders, pill buttons. New hard rules: `brand` (Mark yellow) is highlight-only — never fills, buttons, or moods; one highlight per surface. Market up/down colors are data-only and never used as brand accents."
+  },
+  "registers": {
+    "product": {
+      "surface-primary":   "#15150E",
+      "surface-secondary": "#1D1D14",
+      "surface-tertiary":  "#26261B",
+      "surface-hover":     "#2E2E22",
+      "surface-overlay":   "#1A1A11",
+      "text-primary":   "#FBFAF4",
+      "text-secondary": "#EDECE0",
+      "text-muted":     "#C9C8B8",
+      "text-disabled":  "#6E6D5E",
+      "brand":        "#F3E52A",
+      "brand-hover":  "#FAF06A",
+      "accent-action":       "#8E9BFF",
+      "accent-action-hover": "#AAB4FF",
+      "border-primary":   "#2E2E22",
+      "border-secondary": "#3A3A2C",
+      "success": "#3FA971",
+      "error":   "#E05A47",
+      "warning": "#E2A93B",
+      "data-up":   "#3FA971",
+      "data-down": "#E05A47"
+    },
+    "brand": {
+      "surface-primary":   "#FBFAF4",
+      "surface-secondary": "#F3F1E6",
+      "surface-tertiary":  "#EAE8DA",
+      "surface-hover":     "#E2E0D0",
+      "surface-overlay":   "#F6F4EA",
+      "text-primary":   "#15150E",
+      "text-secondary": "#2B2B20",
+      "text-muted":     "#4C4B41",
+      "text-disabled":  "#8B8A7C",
+      "brand":        "#F3E52A",
+      "brand-hover":  "#E9DA18",
+      "accent-action":       "#2434B8",
+      "accent-action-hover": "#3A4AD4",
+      "border-primary":   "#E7E5D6",
+      "border-secondary": "#D8D6C4",
+      "success": "#1E7D4F",
+      "error":   "#C33B2E",
+      "warning": "#B07C1E",
+      "data-up":   "#1E7D4F",
+      "data-down": "#C33B2E"
+    }
+  },
+  "typography": {
+    "font-display": {
+      "family": "Lede Serif",
+      "interim": "Newsreader",
+      "usage": "Brand and marketing surfaces only (masthead voice: headlines, wordmark, The Morning Lede). Product surfaces keep the sans discipline.",
+      "weights": [500, 600]
+    },
+    "font-sans": {
+      "family": "Schibsted Grotesk",
+      "replaces": "Hanken Grotesk",
+      "usage": "Body, product UI, captions.",
+      "weight-remap": { "300-role": 400, "400-role": 400, "500-role": 500, "marketing-emphasis": 700 }
+    },
+    "font-mono": {
+      "family": "IBM Plex Mono",
+      "usage": "The tape layer: timestamps, tickers, figures, filings. tabular-nums wherever digits meet.",
+      "weights": [400, 500]
+    }
+  },
+  "motion": {
+    "gesture": "the-highlight-arrives",
+    "spec": "Material items receive a single left-to-right highlight sweep: 240ms, ease-out, once per event. Numbers change by ticking. No bounce, no pulse, no celebration. Quiet states produce no motion. prefers-reduced-motion renders all marks statically.",
+    "duration-mark": "240ms",
+    "easing-mark": "cubic-bezier(0.2, 0, 0, 1)"
+  }
+}
