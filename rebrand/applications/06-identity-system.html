@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfa — Visual Identity System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface-primary': '#080808', 'surface-secondary': '#121212', 'surface-tertiary': '#1F1F1F',
+            'surface-hover': '#262626', 'surface-overlay': '#171717',
+            'text-primary': '#FFFFFF', 'text-secondary': '#E8E8E8', 'text-muted': '#D1D1D1', 'text-disabled': '#6B6B6B',
+            'brand': '#C19A6B', 'brand-hover': '#d4b48a',
+            'border-primary': '#262626', 'border-secondary': '#2E2E2E',
+            'error': '#D43D51', 'success': '#00876C', 'warning': '#FFA600',
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .type-page-title { @apply text-[32px] font-light leading-tight tracking-tight text-text-primary }
+      .type-section-header { @apply text-2xl font-light leading-snug text-text-primary }
+      .type-card-title { @apply text-lg font-medium leading-snug text-text-primary }
+      .type-body-title { @apply text-base font-medium leading-normal text-text-primary }
+      .type-body { @apply text-base font-normal leading-relaxed text-text-muted }
+      .type-body-small { @apply text-sm font-normal leading-relaxed text-text-muted }
+      .type-label { @apply text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled }
+      .type-code { @apply text-sm font-normal leading-relaxed font-mono text-text-muted }
+    }
+    @layer utilities {
+      html { scroll-behavior: smooth; }
+    }
+  </style>
+</head>
+<body class="bg-surface-primary text-text-primary font-sans antialiased">
+
+  <!-- STICKY NAV -->
+  <nav class="sticky top-0 z-50 bg-surface-secondary border-b border-border-primary">
+    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand inline-block"></span>
+        <span class="type-body-title">Alfa Identity System</span>
+      </div>
+      <div class="flex items-center gap-6 overflow-x-auto">
+        <a href="#wordmark" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Wordmark</a>
+        <a href="#color" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Color</a>
+        <a href="#typography" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Typography</a>
+        <a href="#signal" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Signal Device</a>
+        <a href="#dataviz" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Data Viz</a>
+        <a href="#iconography" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Iconography</a>
+        <a href="#expression" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Expression</a>
+        <a href="#donts" class="type-label hover:text-text-muted transition-colors whitespace-nowrap">Don'ts</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="max-w-6xl mx-auto px-8 pt-20 pb-16">
+    <span class="type-label block mb-4">Boosted.ai — Brand Documentation</span>
+    <h1 class="type-page-title mb-3">Alfa Visual Identity System</h1>
+    <p class="type-body max-w-2xl">The complete reference for expressing Alfa across all surfaces — institutional to consumer, digital to print. Every decision in this system is intentional. Follow it exactly.</p>
+    <div class="mt-8 flex items-center gap-8">
+      <div>
+        <span class="type-label block mb-1">Version</span>
+        <span class="type-body-small">1.0 — July 2026</span>
+      </div>
+      <div>
+        <span class="type-label block mb-1">Category</span>
+        <span class="type-body-small">Agentic Investment Intelligence</span>
+      </div>
+      <div>
+        <span class="type-label block mb-1">Territory</span>
+        <span class="type-body-small text-brand">The Signal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 1: WORDMARK -->
+  <section id="wordmark" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">01</span>
+    <h2 class="type-section-header mb-2">Wordmark</h2>
+    <p class="type-body mb-12 max-w-xl">The Alfa wordmark is always set in Hanken Grotesk Light. The Signal — a brand gold marker — precedes the name and anchors the identity in every context where the wordmark appears.</p>
+
+    <!-- Scale -->
+    <div class="bg-surface-secondary rounded-2xl p-10 mb-8">
+      <span class="type-label block mb-8">Scale</span>
+      <div class="flex flex-col gap-10">
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-[56px] font-light leading-none tracking-tight text-text-primary">alfa</span>
+          </div>
+          <span class="type-label ml-2">56px — Hero / Campaign</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-[32px] font-light leading-none tracking-tight text-text-primary">alfa</span>
+          </div>
+          <span class="type-label ml-2">32px — Page Title / Product Header</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-xl font-light leading-none tracking-tight text-text-primary">alfa</span>
+          </div>
+          <span class="type-label ml-2">20px — UI Navigation / Utility</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear space -->
+    <div class="bg-surface-secondary rounded-2xl p-10 mb-8">
+      <span class="type-label block mb-10">Clear Space</span>
+      <div class="flex items-center justify-center py-8">
+        <div class="relative">
+          <div class="border border-dashed border-border-secondary p-10">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+              <span class="text-[32px] font-light tracking-tight text-text-primary">alfa</span>
+            </div>
+          </div>
+          <div class="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <span class="type-label text-brand">x — clear space</span>
+          </div>
+          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <span class="type-label text-brand">x — clear space</span>
+          </div>
+          <div class="absolute top-1/2 -translate-y-1/2 -left-24 whitespace-nowrap">
+            <span class="type-label text-brand">x — clear space</span>
+          </div>
+          <div class="absolute top-1/2 -translate-y-1/2 -right-24 whitespace-nowrap">
+            <span class="type-label text-brand">x — clear space</span>
+          </div>
+        </div>
+      </div>
+      <p class="type-body-small text-center mt-12 max-w-md mx-auto">Maintain clear space equal to the cap-height (x) of the wordmark on all four sides. No element, image, or text enters this zone.</p>
+    </div>
+
+    <!-- Don'ts -->
+    <div>
+      <span class="type-label block mb-6">Don'ts</span>
+      <div class="grid grid-cols-4 gap-4">
+        <div class="bg-surface-secondary rounded-2xl p-6">
+          <div class="bg-text-primary rounded-lg p-4 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-xl font-light tracking-tight text-surface-primary">alfa</span>
+          </div>
+          <span class="type-label block text-error mb-2">Never on light backgrounds</span>
+          <span class="type-body-small">Dark-surface only. Light treatments break system integrity.</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-6">
+          <div class="bg-surface-tertiary rounded-lg p-4 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-xl font-medium tracking-tight text-text-primary">alfa</span>
+          </div>
+          <span class="type-label block text-error mb-2">Never above font-light</span>
+          <span class="type-body-small">Wordmark is font-light (300) only. Medium or bold breaks the identity.</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-6">
+          <div class="bg-surface-tertiary rounded-lg p-4 mb-4 flex items-center gap-2 overflow-hidden">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-xl font-light tracking-widest text-text-primary">alfa</span>
+          </div>
+          <span class="type-label block text-error mb-2">Never letter-spaced</span>
+          <span class="type-body-small">Do not apply additional tracking. Natural tracking is intentional.</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-6">
+          <div class="bg-surface-tertiary rounded-lg p-4 mb-4 relative flex items-center gap-2 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center opacity-25">
+              <div class="w-12 h-12 rounded-full border-2 border-brand-hover"></div>
+              <div class="absolute w-6 h-6 rounded-full border border-text-disabled"></div>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0 relative z-10"></span>
+            <span class="text-xl font-light tracking-tight text-text-primary relative z-10">alfa</span>
+          </div>
+          <span class="type-label block text-error mb-2">Never with competing graphics</span>
+          <span class="type-body-small">No patterns or textures behind the wordmark. Clean surface only.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 2: COLOR SYSTEM -->
+  <section id="color" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">02</span>
+    <h2 class="type-section-header mb-2">Color System</h2>
+    <p class="type-body mb-12 max-w-xl">Every color has a token name. Raw hex values are never used in code or design files. Brand gold is the Signal color — applied with precision, never as decoration.</p>
+
+    <!-- Hero swatch -->
+    <div class="bg-brand rounded-2xl p-10 mb-8">
+      <div class="flex items-end justify-between">
+        <div>
+          <span class="type-label block text-surface-primary mb-3">Signal Color — Primary Brand Identity</span>
+          <span class="text-[48px] font-light leading-none text-surface-primary tracking-tight">brand</span>
+        </div>
+        <div class="text-right">
+          <span class="text-xl font-medium text-surface-primary block">#C19A6B</span>
+          <span class="text-sm font-normal text-surface-primary opacity-70">brand gold</span>
+        </div>
+      </div>
+      <p class="text-sm font-normal text-surface-primary opacity-80 mt-6 max-w-lg">Used as the Signal marker in data contexts, on interactive elements, and as the primary brand identifier. Applied sparingly — every instance must carry semantic meaning.</p>
+    </div>
+
+    <!-- Surface colors -->
+    <div class="mb-8">
+      <span class="type-label block mb-4">Surfaces — Elevation via Color Stepping</span>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-primary mb-4 border border-border-primary"></div>
+          <span class="type-body-title block mb-1">surface-primary</span>
+          <span class="type-code block mb-2">#080808</span>
+          <span class="type-body-small">Page canvas, hero backgrounds</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-secondary mb-4 border border-border-secondary"></div>
+          <span class="type-body-title block mb-1">surface-secondary</span>
+          <span class="type-code block mb-2">#121212</span>
+          <span class="type-body-small">Cards, nav, sidebars, panels</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-tertiary mb-4"></div>
+          <span class="type-body-title block mb-1">surface-tertiary</span>
+          <span class="type-code block mb-2">#1F1F1F</span>
+          <span class="type-body-small">Nested cards, table rows, inputs</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-hover mb-4"></div>
+          <span class="type-body-title block mb-1">surface-hover</span>
+          <span class="type-code block mb-2">#262626</span>
+          <span class="type-body-small">Hover states, active row highlight</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text colors -->
+    <div class="mb-8">
+      <span class="type-label block mb-4">Text — Hierarchy via Opacity</span>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-tertiary flex items-center justify-center mb-4">
+            <span class="text-3xl font-light text-text-primary">Aa</span>
+          </div>
+          <span class="type-body-title block mb-1">text-primary</span>
+          <span class="type-code block mb-2">#FFFFFF</span>
+          <span class="type-body-small">Headlines, numbers, key values</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-tertiary flex items-center justify-center mb-4">
+            <span class="text-3xl font-light text-text-secondary">Aa</span>
+          </div>
+          <span class="type-body-title block mb-1">text-secondary</span>
+          <span class="type-code block mb-2">#E8E8E8</span>
+          <span class="type-body-small">Subheadings, important body</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-tertiary flex items-center justify-center mb-4">
+            <span class="text-3xl font-light text-text-muted">Aa</span>
+          </div>
+          <span class="type-body-title block mb-1">text-muted</span>
+          <span class="type-code block mb-2">#D1D1D1</span>
+          <span class="type-body-small">Body copy, descriptions, captions</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-5">
+          <div class="h-20 w-full rounded-xl bg-surface-tertiary flex items-center justify-center mb-4">
+            <span class="text-3xl font-light text-text-disabled">Aa</span>
+          </div>
+          <span class="type-body-title block mb-1">text-disabled</span>
+          <span class="type-code block mb-2">#6B6B6B</span>
+          <span class="type-body-small">Labels, timestamps, metadata</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status + Borders -->
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <span class="type-label block mb-4">Status</span>
+        <div class="bg-surface-secondary rounded-2xl p-6 flex flex-col gap-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-success flex-shrink-0"></div>
+              <span class="type-body-small">success</span>
+            </div>
+            <span class="type-code">#00876C</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-warning flex-shrink-0"></div>
+              <span class="type-body-small">warning</span>
+            </div>
+            <span class="type-code">#FFA600</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-error flex-shrink-0"></div>
+              <span class="type-body-small">error</span>
+            </div>
+            <span class="type-code">#D43D51</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="type-label block mb-4">Borders</span>
+        <div class="bg-surface-secondary rounded-2xl p-6 flex flex-col gap-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-px bg-border-primary"></div>
+              <span class="type-body-small">border-primary</span>
+            </div>
+            <span class="type-code">#262626</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-px bg-border-secondary"></div>
+              <span class="type-body-small">border-secondary</span>
+            </div>
+            <span class="type-code">#2E2E2E</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-0.5 bg-brand"></div>
+              <span class="type-body-small">brand (signal accent border)</span>
+            </div>
+            <span class="type-code">#C19A6B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 3: TYPOGRAPHY -->
+  <section id="typography" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">03</span>
+    <h2 class="type-section-header mb-2">Typography Scale</h2>
+    <p class="type-body mb-12 max-w-xl">Hanken Grotesk in three weights only: 300, 400, 500. Seven named type classes cover every text use case. Every text element must use one of these classes — no unstyled text, no arbitrary sizes.</p>
+
+    <div class="bg-surface-secondary rounded-2xl p-8 mb-8">
+      <div class="flex flex-col">
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-page-title</span>
+            <span class="type-label block mt-2">32px / 300 / tight</span>
+            <span class="type-body-small block mt-1">Hero, page headers, key metrics</span>
+          </div>
+          <span class="type-page-title">Intelligence compounds over time.</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-section-header</span>
+            <span class="type-label block mt-2">24px / 300 / snug</span>
+            <span class="type-body-small block mt-1">Section titles, modal headers</span>
+          </div>
+          <span class="type-section-header">Precision signals. Every market.</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-card-title</span>
+            <span class="type-label block mt-2">18px / 500 / snug</span>
+            <span class="type-body-small block mt-1">Card headings, panel titles</span>
+          </div>
+          <span class="type-card-title">Earnings Intelligence Agent</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-body-title</span>
+            <span class="type-label block mt-2">16px / 500 / normal</span>
+            <span class="type-body-small block mt-1">Emphasized body, nav, CTAs</span>
+          </div>
+          <span class="type-body-title">40 hours reduced to 20 minutes.</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-body</span>
+            <span class="type-label block mt-2">16px / 400 / relaxed</span>
+            <span class="type-body-small block mt-1">Main paragraph copy, descriptions</span>
+          </div>
+          <span class="type-body max-w-lg">Alfa is the agentic investment intelligence platform built for institutional professionals managing capital at scale. Eight years of finance-specific AI, 15 patents, compounding with every workflow.</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-body-small</span>
+            <span class="type-label block mt-2">14px / 400 / relaxed</span>
+            <span class="type-body-small block mt-1">Captions, help text, metadata</span>
+          </div>
+          <span class="type-body-small max-w-lg">SOC 2 certified. FINRA-aware. CIRO-compliant. Built for regulated environments from the first commit — hallucination safeguards embedded at the model layer, not bolted on afterward.</span>
+        </div>
+        <div class="flex items-start gap-6 py-6 border-b border-border-primary">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-label</span>
+            <span class="type-label block mt-2">12px / 500 / wide tracking</span>
+            <span class="type-body-small block mt-1">Section labels, table headers</span>
+          </div>
+          <span class="type-label">Portfolio Attribution — Q2 2026</span>
+        </div>
+        <div class="flex items-start gap-6 pt-6">
+          <div class="w-48 flex-shrink-0">
+            <span class="type-code block text-brand">.type-code</span>
+            <span class="type-label block mt-2">14px / 400 / mono</span>
+            <span class="type-body-small block mt-1">Token names, API references</span>
+          </div>
+          <span class="type-code">alfa.agents.get("earnings-prep").run(ticker="AAPL", quarter="Q3")</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weight samples -->
+    <div>
+      <span class="type-label block mb-4">Permitted Weights — Three Only</span>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-surface-secondary rounded-2xl p-8">
+          <span class="text-[44px] font-light leading-none text-text-primary block mb-4">Signal</span>
+          <span class="type-label block mb-2">font-light — 300</span>
+          <span class="type-body-small">Wordmark, hero copy, page titles, section headers. The primary voice of Alfa.</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-8">
+          <span class="text-[44px] font-normal leading-none text-text-primary block mb-4">Signal</span>
+          <span class="type-label block mb-2">font-normal — 400</span>
+          <span class="type-body-small">Body copy, descriptions, metadata, code. The readable, informational voice.</span>
+        </div>
+        <div class="bg-surface-secondary rounded-2xl p-8">
+          <span class="text-[44px] font-medium leading-none text-text-primary block mb-4">Signal</span>
+          <span class="type-label block mb-2">font-medium — 500</span>
+          <span class="type-body-small">Card titles, nav items, labels, buttons. Emphasis without aggression.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 4: SIGNAL DEVICE -->
+  <section id="signal" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">04</span>
+    <h2 class="type-section-header mb-2">The Signal Device</h2>
+    <p class="type-body mb-12 max-w-xl">Brand gold applied as a precision instrument marker — not decoration. The Signal device marks what matters in a data context. Use it once per visual unit. Every use must carry meaning.</p>
+
+    <div class="grid grid-cols-2 gap-6">
+
+      <!-- Signal Dot -->
+      <div class="bg-surface-secondary rounded-2xl p-8">
+        <span class="type-label block mb-6">Signal Dot — Key Metric Marker</span>
+        <div class="flex items-start gap-3 mb-2">
+          <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0 mt-3"></span>
+          <div>
+            <span class="type-page-title block">$5.2T</span>
+            <span class="type-body-small block mt-1">Assets under management — active client network</span>
+          </div>
+        </div>
+        <div class="mt-6 pt-6 border-t border-border-primary">
+          <span class="type-label block mb-2">Code</span>
+          <span class="type-code block mb-4">w-2 h-2 rounded-full bg-brand</span>
+          <span class="type-label block mb-2">Rule</span>
+          <span class="type-body-small">One dot per data panel, preceding the single most important number. Never used decoratively or on secondary figures.</span>
+        </div>
+      </div>
+
+      <!-- Signal Bar -->
+      <div class="bg-surface-secondary rounded-2xl p-8">
+        <span class="type-label block mb-6">Signal Bar — Active Period Marker</span>
+        <div class="flex items-end gap-2 h-20 mb-4">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-6 rounded-sm bg-surface-hover" style="height: 36px;"></div>
+            <span class="type-label">Q3</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-6 rounded-sm bg-surface-hover" style="height: 48px;"></div>
+            <span class="type-label">Q4</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-6 rounded-sm bg-surface-hover" style="height: 42px;"></div>
+            <span class="type-label">Q1</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-6 rounded-sm bg-surface-hover" style="height: 54px;"></div>
+            <span class="type-label">Q2</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-1 h-16 rounded-full bg-brand"></div>
+            <span class="type-label text-brand">Now</span>
+          </div>
+        </div>
+        <div class="mt-2 pt-6 border-t border-border-primary">
+          <span class="type-label block mb-2">Code</span>
+          <span class="type-code block mb-4">w-1 h-{n} rounded-full bg-brand</span>
+          <span class="type-label block mb-2">Rule</span>
+          <span class="type-body-small">Marks the active or current period in a chart. All other bars use surface-hover. One signal bar per chart, always.</span>
+        </div>
+      </div>
+
+      <!-- Signal Row -->
+      <div class="bg-surface-secondary rounded-2xl p-8">
+        <span class="type-label block mb-6">Signal Row — Table Priority Accent</span>
+        <div class="rounded-xl overflow-hidden">
+          <div class="flex justify-between px-4 py-2.5 bg-surface-hover">
+            <span class="type-label">Ticker</span>
+            <span class="type-label">Score</span>
+            <span class="type-label">Position</span>
+          </div>
+          <div class="flex justify-between px-4 py-3 border-t border-border-primary bg-surface-tertiary">
+            <span class="type-body-small">MSFT</span>
+            <span class="type-body-small">74</span>
+            <span class="type-body-small">Long</span>
+          </div>
+          <div class="flex justify-between px-4 py-3 border-t border-border-primary border-l-2 border-l-brand bg-surface-hover">
+            <span class="type-body-title text-text-primary">AAPL</span>
+            <span class="type-body-title text-brand">91</span>
+            <span class="type-body-small">Long</span>
+          </div>
+          <div class="flex justify-between px-4 py-3 border-t border-border-primary bg-surface-tertiary">
+            <span class="type-body-small">NVDA</span>
+            <span class="type-body-small">68</span>
+            <span class="type-body-small">Watch</span>
+          </div>
+        </div>
+        <div class="mt-6 pt-6 border-t border-border-primary">
+          <span class="type-label block mb-2">Code</span>
+          <span class="type-code block mb-4">border-l-2 border-l-brand</span>
+          <span class="type-label block mb-2">Rule</span>
+          <span class="type-body-small">Applied to the single highest-priority row. One signal row per table. Pair with bg-surface-hover to complete the emphasis.</span>
+        </div>
+      </div>
+
+      <!-- Signal Underline -->
+      <div class="bg-surface-secondary rounded-2xl p-8">
+        <span class="type-label block mb-6">Signal Underline — Stat Anchor</span>
+        <div class="mb-4">
+          <span class="type-label block mb-4">Time Savings — Earnings Preparation</span>
+          <div class="inline-block pb-2 border-b-2 border-brand">
+            <span class="type-page-title">20 min</span>
+          </div>
+          <div class="flex items-center gap-3 mt-3">
+            <span class="type-body-small line-through text-text-disabled">Previously: 40 hours</span>
+            <span class="type-body-small text-success">120x improvement</span>
+          </div>
+        </div>
+        <div class="mt-6 pt-6 border-t border-border-primary">
+          <span class="type-label block mb-2">Code</span>
+          <span class="type-code block mb-4">pb-2 border-b-2 border-brand</span>
+          <span class="type-label block mb-2">Rule</span>
+          <span class="type-body-small">Anchors the key outcome metric in a proof-point stat display. Not a decorative underline — used only for documented business results.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 5: DATA VIZ -->
+  <section id="dataviz" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">05</span>
+    <h2 class="type-section-header mb-2">Data Visualization Style</h2>
+    <p class="type-body mb-12 max-w-xl">Alfa data visualizations read like precision instruments. Minimal chrome, maximum signal clarity. One active color (brand gold) per chart. No unnecessary gridlines. Data communicates; decoration is absent.</p>
+
+    <div class="grid grid-cols-3 gap-6 mb-6">
+
+      <!-- Bar Chart -->
+      <div class="bg-surface-secondary rounded-2xl p-6 col-span-2">
+        <div class="flex items-center justify-between mb-1">
+          <span class="type-card-title">Signal Intelligence Score</span>
+          <span class="type-label">Top Holdings</span>
+        </div>
+        <span class="type-body-small block mb-8">Portfolio attribution — Q2 2026</span>
+        <div class="flex items-end gap-5 h-36">
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <span class="type-label">62</span>
+            <div class="w-full rounded-t-sm bg-surface-hover" style="height: 62%;"></div>
+            <span class="type-label">META</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <span class="type-label">74</span>
+            <div class="w-full rounded-t-sm bg-surface-hover" style="height: 74%;"></div>
+            <span class="type-label">MSFT</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <span class="type-label text-brand">91</span>
+            <div class="w-full rounded-t-sm bg-brand" style="height: 91%;"></div>
+            <span class="type-label text-brand">AAPL</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <span class="type-label">68</span>
+            <div class="w-full rounded-t-sm bg-surface-hover" style="height: 68%;"></div>
+            <span class="type-label">NVDA</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 flex-1">
+            <span class="type-label">55</span>
+            <div class="w-full rounded-t-sm bg-surface-hover" style="height: 55%;"></div>
+            <span class="type-label">GOOGL</span>
+          </div>
+        </div>
+        <div class="mt-6 flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-1.5 rounded-full bg-brand"></div>
+            <span class="type-label">Active signal</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-1.5 rounded-full bg-surface-hover"></div>
+            <span class="type-label">Standard holding</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Card -->
+      <div class="bg-surface-secondary rounded-2xl p-6 flex flex-col justify-between">
+        <span class="type-label block">Live Agents Deployed</span>
+        <div class="py-6">
+          <div class="flex items-start gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0 mt-3"></span>
+            <span class="type-page-title">50,000+</span>
+          </div>
+          <span class="type-body-small block mt-2 ml-4">Active agents — institutional network</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-border-primary">
+          <div>
+            <span class="type-body-small text-success block">+12,400</span>
+            <span class="type-label block mt-0.5">This quarter</span>
+          </div>
+          <div class="text-right">
+            <span class="type-body-small block">120B+</span>
+            <span class="type-label block mt-0.5">Tokens / month</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Table -->
+    <div class="bg-surface-secondary rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-5">
+        <span class="type-card-title">Portfolio Signal Report</span>
+        <span class="type-label">Q2 2026 — Live</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-surface-tertiary">
+              <th class="text-left px-4 py-3 rounded-tl-lg"><span class="type-label">Holding</span></th>
+              <th class="text-left px-4 py-3"><span class="type-label">Sector</span></th>
+              <th class="text-right px-4 py-3"><span class="type-label">Weight</span></th>
+              <th class="text-right px-4 py-3"><span class="type-label">Signal Score</span></th>
+              <th class="text-right px-4 py-3 rounded-tr-lg"><span class="type-label">1W Return</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-surface-tertiary transition-colors border-t border-border-primary">
+              <td class="px-4 py-3"><span class="type-body-small">AAPL</span></td>
+              <td class="px-4 py-3"><span class="type-body-small">Technology</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">8.4%</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">74</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small text-success">+3.1%</span></td>
+            </tr>
+            <tr class="hover:bg-surface-hover transition-colors border-t border-border-primary border-l-2 border-l-brand bg-surface-tertiary">
+              <td class="px-4 py-3"><span class="type-body-title">MSFT</span></td>
+              <td class="px-4 py-3"><span class="type-body-small">Technology</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">7.9%</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-title text-brand">91</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small text-success">+5.8%</span></td>
+            </tr>
+            <tr class="hover:bg-surface-tertiary transition-colors border-t border-border-primary">
+              <td class="px-4 py-3"><span class="type-body-small">NVDA</span></td>
+              <td class="px-4 py-3"><span class="type-body-small">Semiconductors</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">6.2%</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">68</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small text-error">-1.2%</span></td>
+            </tr>
+            <tr class="hover:bg-surface-tertiary transition-colors border-t border-border-primary">
+              <td class="px-4 py-3"><span class="type-body-small">JPM</span></td>
+              <td class="px-4 py-3"><span class="type-body-small">Financials</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">5.1%</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small">61</span></td>
+              <td class="px-4 py-3 text-right"><span class="type-body-small text-success">+0.9%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 6: ICONOGRAPHY -->
+  <section id="iconography" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">06</span>
+    <h2 class="type-section-header mb-2">Iconography Direction</h2>
+    <p class="type-body mb-4 max-w-xl">Line icons only. Precise geometry. No fills, no gradients. Stroke width: 1.5px at 24x24 viewBox. Signal icons — those marking an active state or key action — use brand gold. Standard UI icons use currentColor at text-muted opacity.</p>
+    <div class="bg-surface-secondary rounded-2xl p-5 mb-10 flex gap-8 flex-wrap">
+      <div class="flex items-center gap-3">
+        <div class="w-1.5 h-1.5 rounded-full bg-brand"></div>
+        <span class="type-body-small">Signal icons: stroke="#C19A6B"</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-1.5 h-1.5 rounded-full bg-text-disabled"></div>
+        <span class="type-body-small">Standard icons: stroke="currentColor" (text-muted context)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-1.5 h-1.5 rounded-full bg-border-secondary"></div>
+        <span class="type-body-small">24x24 viewBox / stroke-width 1.5 / fill none / no drop shadow</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-4 gap-6">
+
+      <!-- Agent Icon -->
+      <div class="bg-surface-secondary rounded-2xl p-8 flex flex-col items-center gap-5">
+        <div class="w-16 h-16 bg-surface-tertiary rounded-2xl flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="7" width="16" height="13" rx="2" stroke="#C19A6B" stroke-width="1.5"/>
+            <path d="M9 7V5C9 3.895 9.895 3 11 3H13C14.105 3 15 3.895 15 5V7" stroke="#C19A6B" stroke-width="1.5"/>
+            <circle cx="9" cy="13" r="1.5" fill="#C19A6B"/>
+            <circle cx="15" cy="13" r="1.5" fill="#C19A6B"/>
+            <path d="M9 17H15" stroke="#C19A6B" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="text-center">
+          <span class="type-body-title block mb-1">Agent</span>
+          <span class="type-label block mb-3 text-brand">Signal icon</span>
+          <span class="type-body-small">Agent launch, workflow automation, active task surfaces</span>
+        </div>
+      </div>
+
+      <!-- Signal / Wave Icon -->
+      <div class="bg-surface-secondary rounded-2xl p-8 flex flex-col items-center gap-5">
+        <div class="w-16 h-16 bg-surface-tertiary rounded-2xl flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12C2 12 4 7 7 7C10 7 10 17 13 17C16 17 16 7 19 7C21 7 22 10 22 12" stroke="#C19A6B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="text-center">
+          <span class="type-body-title block mb-1">Signal</span>
+          <span class="type-label block mb-3 text-brand">Signal icon</span>
+          <span class="type-body-small">Market intelligence, insight alerts, signal score displays</span>
+        </div>
+      </div>
+
+      <!-- Portfolio Chart Icon -->
+      <div class="bg-surface-secondary rounded-2xl p-8 flex flex-col items-center gap-5">
+        <div class="w-16 h-16 bg-surface-tertiary rounded-2xl flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 20H21" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 20V15" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 20V11" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 20V13" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M18 20V7" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 11L10 8L14 10L18 5" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="text-center">
+          <span class="type-body-title block mb-1">Portfolio</span>
+          <span class="type-label block mb-3">Standard icon</span>
+          <span class="type-body-small">Portfolio views, analytics dashboards, attribution reports</span>
+        </div>
+      </div>
+
+      <!-- Shield Compliance Icon -->
+      <div class="bg-surface-secondary rounded-2xl p-8 flex flex-col items-center gap-5">
+        <div class="w-16 h-16 bg-surface-tertiary rounded-2xl flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L4 7V12C4 16.418 7.582 20.337 12 21C16.418 20.337 20 16.418 20 12V7L12 3Z" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10" stroke="#D1D1D1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="text-center">
+          <span class="type-body-title block mb-1">Compliance</span>
+          <span class="type-label block mb-3">Standard icon</span>
+          <span class="type-body-small">SOC 2, FINRA, CIRO indicators, audit trail, security</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 7: EXPRESSION -->
+  <section id="expression" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">07</span>
+    <h2 class="type-section-header mb-2">Institutional vs. Consumer Expression</h2>
+    <p class="type-body mb-12 max-w-xl">The same design tokens, the same type system, the same Signal device. Different density and emotional register. Institutional is sparse, formal, data-dense. Consumer is warm, personal, habitual. The system is the constant — content strategy is the variable.</p>
+
+    <div class="grid grid-cols-2 gap-6 mb-6">
+
+      <!-- INSTITUTIONAL -->
+      <div class="bg-surface-secondary rounded-2xl overflow-hidden">
+        <div class="px-6 pt-6 pb-4 border-b border-border-primary">
+          <span class="type-label block mb-2 text-brand">Institutional — Alfa Platform</span>
+          <span class="type-card-title">Earnings Intelligence Report</span>
+          <span class="type-body-small block mt-1">AAPL — Q3 2026 Post-Earnings Analysis</span>
+        </div>
+        <div class="p-6">
+          <div class="mb-5">
+            <span class="type-label block mb-2">Executive Summary</span>
+            <span class="type-body-small block">3 primary signal events identified. Revenue guidance raised +4.2% above consensus. Services segment acceleration confirmed. Options market implies ±5.8% post-earnings move. Recommended action: review position sizing before market open.</span>
+          </div>
+          <div class="rounded-xl overflow-hidden mb-5">
+            <div class="flex justify-between px-4 py-2.5 bg-surface-hover">
+              <span class="type-label">Metric</span>
+              <span class="type-label">Reported</span>
+              <span class="type-label">Consensus</span>
+              <span class="type-label">Delta</span>
+            </div>
+            <div class="flex justify-between px-4 py-2.5 border-t border-border-primary border-l-2 border-l-brand bg-surface-tertiary">
+              <span class="type-body-small text-text-primary">Revenue</span>
+              <span class="type-body-small">$96.1B</span>
+              <span class="type-body-small">$92.3B</span>
+              <span class="type-body-small text-success">+4.2%</span>
+            </div>
+            <div class="flex justify-between px-4 py-2.5 border-t border-border-primary bg-surface-tertiary">
+              <span class="type-body-small">EPS</span>
+              <span class="type-body-small">$1.89</span>
+              <span class="type-body-small">$1.83</span>
+              <span class="type-body-small text-success">+3.3%</span>
+            </div>
+            <div class="flex justify-between px-4 py-2.5 border-t border-border-primary bg-surface-tertiary">
+              <span class="type-body-small">Gross Margin</span>
+              <span class="type-body-small">46.3%</span>
+              <span class="type-body-small">45.8%</span>
+              <span class="type-body-small text-success">+50bps</span>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button class="rounded-full bg-brand px-4 py-2">
+              <span class="type-body-small font-medium text-surface-primary">Full report</span>
+            </button>
+            <button class="rounded-full bg-surface-tertiary px-4 py-2">
+              <span class="type-body-small font-medium">Export PDF</span>
+            </button>
+          </div>
+        </div>
+        <div class="px-6 pb-5 flex items-center gap-4">
+          <div class="flex items-center gap-1.5">
+            <div class="w-1 h-1 rounded-full bg-success"></div>
+            <span class="type-label">SOC 2</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-1 h-1 rounded-full bg-success"></div>
+            <span class="type-label">FINRA-aware</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-1 h-1 rounded-full bg-success"></div>
+            <span class="type-label">Hallucination safeguards</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONSUMER -->
+      <div class="bg-surface-secondary rounded-2xl overflow-hidden">
+        <div class="px-6 pt-6 pb-4 border-b border-border-primary">
+          <span class="type-label block mb-2 text-brand">Consumer — Alfa Retail via Questrade</span>
+          <span class="type-card-title">Good morning, Sarah.</span>
+          <span class="type-body-small block mt-1">Wednesday, July 30 — Markets open in 2h 14m</span>
+        </div>
+        <div class="p-6">
+          <div class="mb-6">
+            <span class="type-body block">Your portfolio is up this week. Apple had its strongest quarter in three years — Alfa flagged this signal two weeks before earnings.</span>
+          </div>
+          <div class="flex items-start gap-3 mb-6">
+            <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0 mt-2"></span>
+            <div>
+              <span class="type-page-title block">+3.8%</span>
+              <span class="type-body-small block mt-1">Your portfolio — past 7 days</span>
+            </div>
+          </div>
+          <div class="bg-surface-tertiary rounded-xl p-4 mb-5">
+            <span class="type-label block mb-2">Today's signal</span>
+            <span class="type-body-small block">NVDA reports tomorrow. Alfa gives it a 68 signal score — cautious optimism. Your current exposure is 4.2% of portfolio. Worth reviewing before open.</span>
+          </div>
+          <div class="flex gap-3">
+            <button class="rounded-full bg-brand px-4 py-2">
+              <span class="type-body-small font-medium text-surface-primary">See my signals</span>
+            </button>
+            <button class="rounded-full bg-surface-tertiary px-4 py-2">
+              <span class="type-body-small font-medium">Review NVDA</span>
+            </button>
+          </div>
+        </div>
+        <div class="px-6 pb-5">
+          <div class="flex items-center gap-2">
+            <div class="w-1 h-1 rounded-full bg-brand"></div>
+            <span class="type-label">Day 14 of your streak</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bg-surface-secondary rounded-2xl p-6">
+      <span class="type-label block mb-3">Design System Note</span>
+      <span class="type-body">Both expressions above use identical design tokens: surface-secondary, surface-tertiary, surface-hover, text-primary, text-muted, brand, type-card-title, type-body, type-body-small, type-label, rounded-full buttons, border-l-2 border-l-brand signal row. The difference is information density and content tone — never the visual primitives. Institutional uses tables and formal language; consumer uses conversational prose and simpler metrics. The system is the constant.</span>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+
+  <!-- SECTION 8: DON'TS -->
+  <section id="donts" class="max-w-6xl mx-auto px-8 py-20">
+    <span class="type-label block mb-3">08</span>
+    <h2 class="type-section-header mb-2">Don'ts</h2>
+    <p class="type-body mb-12 max-w-xl">These violations have been observed in the wild. Each one breaks system integrity. If any output contains one of these patterns, it must be corrected before shipping. This is not a style preference — it is a system rule.</p>
+
+    <div class="grid grid-cols-4 gap-4">
+
+      <!-- 1: Rectangular buttons -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="flex justify-center mb-5">
+          <button class="bg-brand px-4 py-2 rounded-none">
+            <span class="type-body-small font-medium text-surface-primary">Get started</span>
+          </button>
+        </div>
+        <span class="type-label block text-error mb-2">No rectangular buttons</span>
+        <span class="type-body-small">All buttons are rounded-full without exception. Sharp corners are not in the system vocabulary.</span>
+      </div>
+
+      <!-- 2: Card with border -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5">
+          <div class="bg-surface-tertiary rounded-xl p-4 border border-text-disabled">
+            <span class="type-body-small">A card component</span>
+          </div>
+        </div>
+        <span class="type-label block text-error mb-2">No borders on cards</span>
+        <span class="type-body-small">Elevation is achieved through surface stepping only. A visible border on a card is always wrong.</span>
+      </div>
+
+      <!-- 3: Box shadow -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5">
+          <div class="bg-surface-tertiary rounded-xl p-4 shadow-xl">
+            <span class="type-body-small">A panel element</span>
+          </div>
+        </div>
+        <span class="type-label block text-error mb-2">No box-shadow</span>
+        <span class="type-body-small">The shadow utility is not part of this system. Elevation comes from background color stepping, never from shadow.</span>
+      </div>
+
+      <!-- 4: Arbitrary values -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5 bg-surface-tertiary rounded-xl p-4">
+          <span class="type-code text-error block">text-[#3a7bc8]</span>
+          <span class="type-code text-error block">p-[17px]</span>
+          <span class="type-code text-error block">w-[342px]</span>
+        </div>
+        <span class="type-label block text-error mb-2">No arbitrary Tailwind values</span>
+        <span class="type-body-small">Square-bracket notation bypasses the token system. Use only named token classes from the defined config.</span>
+      </div>
+
+      <!-- 5: Gradient background -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5 rounded-xl p-4 bg-gradient-to-r from-surface-tertiary to-surface-primary">
+          <span class="type-body-small">A section panel</span>
+        </div>
+        <span class="type-label block text-error mb-2">No gradient backgrounds</span>
+        <span class="type-body-small">Solid surface tokens only. Gradients create visual noise and break the precision instrument aesthetic.</span>
+      </div>
+
+      <!-- 6: Weight above 500 -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5 bg-surface-tertiary rounded-xl p-4">
+          <span class="text-text-primary font-bold text-lg">Bold headline text</span>
+        </div>
+        <span class="type-label block text-error mb-2">No weight above 500</span>
+        <span class="type-body-small">font-semibold (600), font-bold (700), font-extrabold (800) are prohibited. The system uses 300, 400, 500 only.</span>
+      </div>
+
+      <!-- 7: Non-token color -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5 bg-surface-tertiary rounded-xl p-4 flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+          <span class="text-cyan-400 type-body-small">Active signal</span>
+        </div>
+        <span class="type-label block text-error mb-2">No non-token colors</span>
+        <span class="type-body-small">Every color must map to a defined token. Blue, cyan, purple, green accents outside the token set are not permitted. Brand gold is the only accent.</span>
+      </div>
+
+      <!-- 8: Logo on gray bg -->
+      <div class="bg-surface-secondary rounded-2xl p-5">
+        <div class="mb-5 bg-text-disabled rounded-xl p-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+          <span class="text-xl font-light tracking-tight text-surface-primary">alfa</span>
+        </div>
+        <span class="type-label block text-error mb-2">No wordmark on gray surfaces</span>
+        <span class="type-body-small">The wordmark lives on dark surfaces only — surface-primary, secondary, or tertiary. Mid-tone, gray, or light backgrounds are never acceptable.</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="max-w-6xl mx-auto px-8"><div class="h-px bg-border-primary"></div></div>
+  <footer class="max-w-6xl mx-auto px-8 py-12">
+    <div class="flex items-start justify-between">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+          <span class="text-xl font-light tracking-tight text-text-primary">alfa</span>
+        </div>
+        <span class="type-body-small block max-w-xs">Agentic Investment Intelligence. Built for the institutions managing the world's capital.</span>
+      </div>
+      <div class="text-right">
+        <span class="type-label block mb-2">Boosted.ai — Internal Reference</span>
+        <span class="type-body-small block">Visual Identity System v1.0</span>
+        <span class="type-body-small block">July 2026 — Confidential</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfa — Enterprise Sales Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface-primary': '#080808', 'surface-secondary': '#121212', 'surface-tertiary': '#1F1F1F',
+            'surface-hover': '#262626', 'surface-overlay': '#171717',
+            'text-primary': '#FFFFFF', 'text-secondary': '#E8E8E8', 'text-muted': '#D1D1D1', 'text-disabled': '#6B6B6B',
+            'brand': '#C19A6B', 'brand-hover': '#d4b48a',
+            'border-primary': '#262626', 'border-secondary': '#2E2E2E',
+            'error': '#D43D51', 'success': '#00876C', 'warning': '#FFA600',
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .type-page-title { @apply text-[32px] font-light leading-tight tracking-tight text-text-primary }
+      .type-section-header { @apply text-2xl font-light leading-snug text-text-primary }
+      .type-card-title { @apply text-lg font-medium leading-snug text-text-primary }
+      .type-body-title { @apply text-base font-medium leading-normal text-text-primary }
+      .type-body { @apply text-base font-normal leading-relaxed text-text-muted }
+      .type-body-small { @apply text-sm font-normal leading-relaxed text-text-muted }
+      .type-label { @apply text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled }
+      .type-code { @apply text-sm font-normal leading-relaxed font-mono text-text-muted }
+    }
+  </style>
+</head>
+<body class="bg-surface-primary text-text-primary font-sans antialiased overflow-hidden">
+
+  <!-- ================================================
+       SLIDE 1: OPENING
+  ================================================ -->
+  <div class="slide fixed inset-0 overflow-y-auto bg-surface-primary flex flex-col items-center justify-center px-12" id="slide-1">
+
+    <div class="text-center max-w-4xl mx-auto">
+      <p class="type-label mb-10">Agentic Investment Intelligence</p>
+      <h1 class="type-page-title text-5xl mb-16 max-w-3xl mx-auto">
+        The market doesn&rsquo;t wait.<br>Neither should your analysts.
+      </h1>
+      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+        <span class="type-label">HSBC</span>
+        <span class="type-label">RBC</span>
+        <span class="type-label">BMO</span>
+        <span class="type-label">Ameriprise</span>
+        <span class="type-label">Invesco</span>
+        <span class="type-label">Janus Henderson</span>
+        <span class="type-label">Barrow Hanley</span>
+        <span class="type-label">Raymond James</span>
+        <span class="type-label">Manulife</span>
+        <span class="type-label">FactSet</span>
+      </div>
+    </div>
+
+    <!-- Brand wordmark bottom-right -->
+    <div class="absolute bottom-10 right-12 flex items-center gap-1.5">
+      <span class="text-brand font-medium text-sm leading-none select-none">&middot;</span>
+      <span class="font-light text-lg text-text-primary tracking-tight">alfa</span>
+    </div>
+
+  </div>
+
+  <!-- ================================================
+       SLIDE 2: THE PROBLEM
+  ================================================ -->
+  <div class="slide fixed inset-0 overflow-y-auto bg-surface-primary hidden" id="slide-2">
+    <div class="min-h-full px-12 py-20">
+      <div class="max-w-5xl mx-auto">
+
+        <p class="type-label mb-6">The problem</p>
+        <h2 class="type-section-header text-3xl max-w-3xl mb-16">
+          Your analysts spend 80% of their time on gathering.<br>20% on thinking. Alfa inverts that.
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Before Alfa -->
+          <div class="bg-surface-secondary rounded-xl p-8">
+            <p class="type-label text-error mb-7">Before Alfa</p>
+            <div class="space-y-6">
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-error mt-0.5 flex-shrink-0">&#x25B2;</span>
+                <div>
+                  <p class="type-body-title text-text-disabled mb-1">Manual data gathering</p>
+                  <p class="type-body-small">Hours of terminal work, copying figures, reconciling sources across providers.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-error mt-0.5 flex-shrink-0">&#x25B2;</span>
+                <div>
+                  <p class="type-body-title text-text-disabled mb-1">Earnings model updates</p>
+                  <p class="type-body-small">Re-keying consensus estimates and updating spreadsheet models by hand after each print.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-error mt-0.5 flex-shrink-0">&#x25B2;</span>
+                <div>
+                  <p class="type-body-title text-text-disabled mb-1">Filing review</p>
+                  <p class="type-body-small">Reading 200-page 10-Ks to find the three paragraphs that actually matter to your thesis.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-error mt-0.5 flex-shrink-0">&#x25B2;</span>
+                <div>
+                  <p class="type-body-title text-text-disabled mb-1">Report writing</p>
+                  <p class="type-body-small">Describing what the data says before ever getting to what it means.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- After Alfa -->
+          <div class="bg-surface-secondary rounded-xl p-8">
+            <p class="type-label text-success mb-7">After Alfa</p>
+            <div class="space-y-6">
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-success mt-0.5 flex-shrink-0">&#x25BC;</span>
+                <div>
+                  <p class="type-body-title mb-1">Automated data gathering</p>
+                  <p class="type-body-small">Structured data delivered in seconds. Sources cited. Ready to act on before the market opens.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-success mt-0.5 flex-shrink-0">&#x25BC;</span>
+                <div>
+                  <p class="type-body-title mb-1">Instant model refresh</p>
+                  <p class="type-body-small">Earnings agents update models live as prints hit. Zero manual re-entry. Zero lag.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-success mt-0.5 flex-shrink-0">&#x25BC;</span>
+                <div>
+                  <p class="type-body-title mb-1">Automated filing extraction</p>
+                  <p class="type-body-small">Alfa surfaces the signal in any filing in under a minute. Key risks flagged. Comps pulled.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <span class="type-label text-success mt-0.5 flex-shrink-0">&#x25BC;</span>
+                <div>
+                  <p class="type-body-title mb-1">First draft in minutes</p>
+                  <p class="type-body-small">Alfa produces the draft. Your analyst edits for judgment — not for structure or formatting.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+       SLIDE 3: THE PLATFORM
+  ================================================ -->
+  <div class="slide fixed inset-0 overflow-y-auto bg-surface-primary hidden" id="slide-3">
+    <div class="min-h-full px-12 py-20">
+      <div class="max-w-5xl mx-auto">
+
+        <p class="type-label mb-6">The platform</p>
+        <h2 class="type-section-header text-3xl mb-3">
+          10,000+ pre-built agents.<br>50,000+ live right now.
+        </h2>
+        <p class="type-body mb-14 max-w-2xl">
+          One platform, three institutional tiers — each extending the intelligence of the last.
+        </p>
+
+        <!-- Platform tier card -->
+        <div class="bg-surface-secondary rounded-xl p-8 mb-6">
+          <p class="type-label text-brand mb-4">Alfa Platform &mdash; Institutional Infrastructure</p>
+          <p class="type-card-title mb-3">Enterprise SaaS for asset managers and broker-dealers</p>
+          <p class="type-body-small mb-8">
+            Custom agent deployment, API access, dedicated compliance controls, and priority onboarding. Most firms go live in under 30 days.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-surface-tertiary rounded-lg p-5">
+              <p class="type-label mb-2">Alfa Pro</p>
+              <p class="type-body-small">
+                Power users and independent investment professionals. The full research stack in a personal workspace — for the analyst who demands more than the terminal.
+              </p>
+            </div>
+            <div class="bg-surface-tertiary rounded-lg p-5">
+              <p class="type-label mb-2">Alfa Retail</p>
+              <p class="type-body-small">
+                Consumer-facing via brokerage embed. Questrade and TD Direct Investing went live in under 30 days from signed contract to production.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="grid grid-cols-3 gap-5">
+          <div class="bg-surface-secondary rounded-xl p-6 text-center">
+            <p class="type-section-header text-brand mb-2">120B+</p>
+            <p class="type-label">Tokens / month</p>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-6 text-center">
+            <p class="type-section-header text-brand mb-2">1,855</p>
+            <p class="type-label">PRs merged Q2 2026</p>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-6 text-center">
+            <p class="type-section-header text-brand mb-2">15</p>
+            <p class="type-label">Granted patents</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+       SLIDE 4: PROOF
+  ================================================ -->
+  <div class="slide fixed inset-0 overflow-y-auto bg-surface-primary hidden" id="slide-4">
+    <div class="min-h-full flex flex-col items-center justify-center px-12 py-20">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <p class="type-label mb-12 text-center">Why firms choose Alfa</p>
+
+        <div class="text-center mb-16">
+          <p class="type-page-title text-brand text-6xl mb-4">8 out of 10</p>
+          <p class="type-section-header mb-3">investment professionals prefer Alfa</p>
+          <p class="type-body">over ChatGPT, Perplexity, or Claude for investment research tasks</p>
+        </div>
+
+        <!-- Case study card -->
+        <div class="bg-surface-secondary rounded-xl p-8 border-l-4 border-brand mb-14">
+          <p class="type-label text-brand mb-4">Documented case study &mdash; HSBC Investment Research</p>
+          <p class="type-card-title mb-3">
+            Earnings preparation: 40 hours &rarr; 20 minutes.
+          </p>
+          <p class="type-body-small">
+            HSBC&rsquo;s investment research division deployed Alfa for earnings season preparation. The result was a 97% reduction in analyst time spent on data gathering, freeing the team for the higher-order analysis that differentiates their research.
+          </p>
+        </div>
+
+        <!-- Named client row -->
+        <div class="flex flex-wrap items-center justify-center gap-8">
+          <span class="type-label">HSBC</span>
+          <span class="type-label">RBC</span>
+          <span class="type-label">BMO</span>
+          <span class="type-label">CIBC</span>
+          <span class="type-label">Ameriprise</span>
+          <span class="type-label">Invesco</span>
+          <span class="type-label">Janus Henderson</span>
+          <span class="type-label">Manulife</span>
+          <span class="type-label">Tradeweb</span>
+          <span class="type-label">FactSet</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+       SLIDE 5: NEXT STEP
+  ================================================ -->
+  <div class="slide fixed inset-0 overflow-y-auto bg-surface-primary hidden" id="slide-5">
+    <div class="min-h-full flex flex-col items-center justify-center px-12 py-20">
+      <div class="max-w-2xl mx-auto text-center">
+
+        <p class="type-label mb-8">What comes next</p>
+
+        <h2 class="type-section-header text-3xl mb-7">
+          Let&rsquo;s build your<br>custom implementation.
+        </h2>
+
+        <p class="type-body mb-5">
+          Our team will design a working demo using your firm&rsquo;s actual investment workflows — not a generic product tour. You&rsquo;ll see Alfa running on your asset class, your data, your questions.
+        </p>
+
+        <p class="type-body mb-14">
+          Most clients go live in under 30 days. Questrade went from signed contract to production in under 30 days. Your firm can too.
+        </p>
+
+        <button class="type-body-title text-surface-primary bg-brand hover:bg-brand-hover transition-colors duration-150 px-10 py-4 rounded-full mb-8">
+          Request a Demo
+        </button>
+
+        <p class="type-body-small text-text-disabled mb-2">team@boosted.ai</p>
+        <p class="type-body-small text-text-disabled">boosted.ai</p>
+
+        <div class="mt-16 pt-8 border-t border-border-primary">
+          <p class="type-body-small text-text-disabled">Boosted.ai &mdash; the maker of Alfa</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================
+       SLIDE NAVIGATION (fixed overlay)
+  ================================================ -->
+  <div class="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-5 z-50">
+    <button
+      id="prev-btn"
+      class="type-label text-text-disabled hover:text-text-primary border border-border-primary hover:border-border-secondary transition-colors duration-150 px-5 py-2.5 rounded-full"
+    >
+      &larr; Prev
+    </button>
+    <span id="slide-counter" class="type-label min-w-8 text-center">1 / 5</span>
+    <button
+      id="next-btn"
+      class="type-label text-text-muted hover:text-text-primary border border-border-primary hover:border-border-secondary transition-colors duration-150 px-5 py-2.5 rounded-full"
+    >
+      Next &rarr;
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      var currentSlide = 0;
+      var slides = document.querySelectorAll('.slide');
+      var total = slides.length;
+      var counter = document.getElementById('slide-counter');
+      var prevBtn = document.getElementById('prev-btn');
+      var nextBtn = document.getElementById('next-btn');
+
+      function goTo(n) {
+        if (n < 0 || n >= total) return;
+        slides[currentSlide].classList.add('hidden');
+        currentSlide = n;
+        slides[currentSlide].classList.remove('hidden');
+        counter.textContent = (currentSlide + 1) + ' / ' + total;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === total - 1;
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') goTo(currentSlide + 1);
+        if (e.key === 'ArrowLeft') goTo(currentSlide - 1);
+      });
+
+      prevBtn.addEventListener('click', function () { goTo(currentSlide - 1); });
+      nextBtn.addEventListener('click', function () { goTo(currentSlide + 1); });
+
+      // Initialise: all slides except first are hidden
+      for (var i = 1; i < total; i++) {
+        slides[i].classList.add('hidden');
+      }
+      counter.textContent = '1 / ' + total;
+      prevBtn.disabled = true;
+    })();
+  </script>
+
+</body>
+</html>
+```
+
+---
+
+TOOL FAILURE NOTE: All file-writing tools (Write, Edit, Bash) and the Skill tool failed in this session with a permission handler configuration error: "The permission handler returned updatedInput that failed schema validation — required parameters are missing." This is a host-side permission hook bug, not a content issue. Both complete HTML files are delivered above as inline text. The calling workflow should write them to the specified paths.

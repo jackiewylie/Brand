@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfa — The Intelligence You Actually Need</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface-primary': '#080808', 'surface-secondary': '#121212', 'surface-tertiary': '#1F1F1F',
+            'surface-hover': '#262626', 'surface-overlay': '#171717',
+            'text-primary': '#FFFFFF', 'text-secondary': '#E8E8E8', 'text-muted': '#D1D1D1', 'text-disabled': '#6B6B6B',
+            'brand': '#C19A6B', 'brand-hover': '#d4b48a',
+            'border-primary': '#262626', 'border-secondary': '#2E2E2E',
+            'error': '#D43D51', 'success': '#00876C', 'warning': '#FFA600',
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .type-page-title { @apply text-[32px] font-light leading-tight tracking-tight text-text-primary }
+      .type-section-header { @apply text-2xl font-light leading-snug text-text-primary }
+      .type-card-title { @apply text-lg font-medium leading-snug text-text-primary }
+      .type-body-title { @apply text-base font-medium leading-normal text-text-primary }
+      .type-body { @apply text-base font-normal leading-relaxed text-text-muted }
+      .type-body-small { @apply text-sm font-normal leading-relaxed text-text-muted }
+      .type-label { @apply text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled }
+      .type-code { @apply text-sm font-normal leading-relaxed font-mono text-text-muted }
+    }
+  </style>
+</head>
+<body class="bg-surface-primary text-text-primary font-sans antialiased">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-surface-primary border-b border-border-primary">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span>
+        <span class="text-xl font-light text-text-primary tracking-tight">alfa</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#" class="type-body-small text-text-muted hover:text-text-primary transition-colors">Features</a>
+        <a href="#" class="type-body-small text-text-muted hover:text-text-primary transition-colors">Pricing</a>
+        <a href="#" class="type-body-small text-text-muted hover:text-text-primary transition-colors">Blog</a>
+        <a href="#" class="type-body-small text-text-muted hover:text-text-primary transition-colors">Login</a>
+      </div>
+      <a href="#" class="bg-brand text-surface-primary rounded-full px-6 py-2 type-body-small font-medium hover:bg-brand-hover transition-colors">Get Started Free</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="py-24">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="type-label text-brand block mb-6">Alfa Retail</span>
+      <h1 class="font-light leading-tight tracking-tight text-text-primary text-[44px] md:text-[56px] mb-6 max-w-3xl mx-auto">
+        The signal.<br>Before the noise.
+      </h1>
+      <p class="type-body max-w-xl mx-auto mb-10">
+        Alfa surfaces what matters for your portfolio every morning — before the market opens, before you have to ask. Stop spending three hours on research. Start making moves with confidence.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap mb-16">
+        <a href="#" class="bg-brand text-surface-primary rounded-full px-8 py-3 type-body-title hover:bg-brand-hover transition-colors">Download the app</a>
+        <a href="#" class="border border-border-secondary text-text-primary rounded-full px-8 py-3 type-body-title hover:bg-surface-hover transition-colors">See how it works</a>
+      </div>
+      <!-- Phone Frame -->
+      <div class="flex justify-center">
+        <div class="w-64 rounded-[40px] bg-surface-secondary border border-border-secondary p-4">
+          <div class="flex justify-between items-center mb-4 px-1">
+            <span class="type-label text-text-disabled">9:41</span>
+            <span class="type-label text-text-disabled">●●● 🔋</span>
+          </div>
+          <div class="bg-surface-tertiary rounded-2xl p-4 mb-4">
+            <p class="type-label text-text-disabled mb-1">Portfolio Value</p>
+            <p class="text-2xl font-light text-text-primary">$124,830</p>
+            <p class="type-body-small text-success mt-1">+$1,240 today (1.0%)</p>
+          </div>
+          <div class="mb-2">
+            <p class="type-label text-text-disabled mb-3">Alfa Signals</p>
+            <div class="flex items-center gap-3 py-3 border-b border-border-primary">
+              <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+              <div class="flex-1 min-w-0">
+                <p class="text-base font-medium leading-normal text-text-primary text-sm">AAPL</p>
+                <p class="type-body-small text-xs">Earnings signal</p>
+              </div>
+              <span class="text-success text-xs font-medium">+2.4%</span>
+            </div>
+            <div class="flex items-center gap-3 py-3 border-b border-border-primary">
+              <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+              <div class="flex-1 min-w-0">
+                <p class="text-base font-medium leading-normal text-text-primary text-sm">NVDA</p>
+                <p class="type-body-small text-xs">Momentum shift</p>
+              </div>
+              <span class="text-warning text-xs font-medium">+0.8%</span>
+            </div>
+            <div class="flex items-center gap-3 py-3">
+              <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></span>
+              <div class="flex-1 min-w-0">
+                <p class="text-base font-medium leading-normal text-text-primary text-sm">MSFT</p>
+                <p class="type-body-small text-xs">Sector rotation</p>
+              </div>
+              <span class="text-error text-xs font-medium">−1.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY HABIT -->
+  <section class="py-16 bg-surface-secondary">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="type-section-header text-center mb-12">What Alfa does before you ask.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <p class="type-label text-brand mb-3">6:00 AM — Pre-market</p>
+          <h3 class="type-card-title mb-3">Overnight signals, surfaced.</h3>
+          <p class="type-body-small">Alfa scans earnings releases, analyst upgrades, macroeconomic data, and news sentiment while you sleep. You wake up to what matters — not what's loud.</p>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <p class="type-label text-brand mb-3">9:30 AM — Market open</p>
+          <h3 class="type-card-title mb-3">Top movers. With the why.</h3>
+          <p class="type-body-small">Not just price movements — the context behind them. Alfa tells you which signals are significant for your portfolio and which are noise from the feed.</p>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <p class="type-label text-brand mb-3">4:00 PM — Market close</p>
+          <h3 class="type-card-title mb-3">Your portfolio digest.</h3>
+          <p class="type-body-small">A daily close summary focused on what happened to your positions and what to watch tomorrow. No infinite scroll required. Done in under two minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="type-section-header mb-6">8 out of 10 investment professionals chose Alfa.<br>Now you can too.</h2>
+      <div class="flex items-center justify-center gap-1 mb-3">
+        <span class="text-brand text-2xl">●●●●●</span>
+      </div>
+      <p class="type-body-small text-text-disabled">4.8 / 5 · 2,400+ reviews</p>
+      <p class="type-body max-w-lg mx-auto mt-6">In a head-to-head study, 8 out of 10 investment professionals preferred Alfa over ChatGPT, Perplexity, and Claude for investment research. Finance-native AI, built over 8 years — it shows.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="type-section-header text-center mb-12">Three steps to a sharper edge.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-8 h-8 rounded-full bg-brand text-surface-primary flex items-center justify-center mx-auto mb-5">
+            <span class="text-sm font-medium">1</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-surface-tertiary flex items-center justify-center mx-auto mb-4">
+            <div class="w-6 h-6 rounded border-2 border-brand opacity-80"></div>
+          </div>
+          <h3 class="type-card-title mb-2">Connect your brokerage</h3>
+          <p class="type-body-small">Link your existing account in seconds. Alfa works with all major brokerages — no switching required.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-8 h-8 rounded-full bg-brand text-surface-primary flex items-center justify-center mx-auto mb-5">
+            <span class="text-sm font-medium">2</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-surface-tertiary flex items-center justify-center mx-auto mb-4">
+            <div class="w-2 h-2 rounded-full bg-brand mx-auto mt-4"></div>
+          </div>
+          <h3 class="type-card-title mb-2">Get your signal</h3>
+          <p class="type-body-small">Alfa surfaces the intelligence most relevant to your holdings — before you search, before the market moves.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-8 h-8 rounded-full bg-brand text-surface-primary flex items-center justify-center mx-auto mb-5">
+            <span class="text-sm font-medium">3</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-surface-tertiary flex items-center justify-center mx-auto mb-4">
+            <div class="w-5 h-0.5 bg-brand rounded-full mx-auto mt-5"></div>
+          </div>
+          <h3 class="type-card-title mb-2">Act with confidence</h3>
+          <p class="type-body-small">Make decisions grounded in finance-native AI — not general-purpose chatbots. Compliance-ready. Hallucination-aware. Built for this.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="py-16 bg-surface-secondary">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="type-section-header text-center mb-4">Start free. Go deeper when you're ready.</h2>
+      <p class="type-body text-center mb-12">No credit card required to start. Upgrade when Alfa becomes your daily edge.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div class="bg-surface-tertiary rounded-xl p-8">
+          <p class="type-label text-text-disabled mb-4">Free</p>
+          <div class="mb-6">
+            <span class="text-3xl font-light text-text-primary">$0</span>
+            <span class="type-body-small ml-1">/ month</span>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-success flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">5 signals per day</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-success flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Core research agents</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-success flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Daily market overview</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-success flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Portfolio connection (1 account)</span>
+            </li>
+          </ul>
+          <a href="#" class="w-full border border-border-secondary text-text-primary rounded-full px-6 py-3 type-body-small font-medium hover:bg-surface-hover transition-colors flex items-center justify-center">Get Started Free</a>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-8 relative">
+          <span class="absolute top-5 right-5 bg-brand text-surface-primary rounded-full text-xs font-medium px-3 py-1">Most popular</span>
+          <p class="type-label text-text-disabled mb-4">Pro</p>
+          <div class="mb-6">
+            <span class="text-3xl font-light text-text-primary">$29</span>
+            <span class="type-body-small ml-1">/ month</span>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Unlimited signals, all day</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">All research agents unlocked</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Priority alerts and notifications</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Deep portfolio analysis</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Ask Alfa — chat interface</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-brand flex-shrink-0 font-medium mt-0.5">✓</span>
+              <span class="type-body-small">Multiple brokerage accounts</span>
+            </li>
+          </ul>
+          <a href="#" class="w-full bg-brand text-surface-primary rounded-full px-6 py-3 type-body-small font-medium hover:bg-brand-hover transition-colors flex items-center justify-center">Start Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP STORE CTA -->
+  <section class="py-16">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+      <p class="type-label text-brand mb-5">Available now</p>
+      <h2 class="type-section-header mb-4">Available on iOS and Android.</h2>
+      <p class="type-body mb-10">Your signal. Your schedule. In your pocket — always ready before you are.</p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="#" class="border border-border-secondary text-text-primary rounded-full px-8 py-3 type-body-small font-medium hover:bg-surface-hover transition-colors">Download on App Store</a>
+        <a href="#" class="border border-border-secondary text-text-primary rounded-full px-8 py-3 type-body-small font-medium hover:bg-surface-hover transition-colors">Get it on Google Play</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-border-primary">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></span>
+            <span class="text-xl font-light text-text-primary tracking-tight">alfa</span>
+          </div>
+          <p class="type-body-small text-text-disabled">A Boosted.ai product</p>
+        </div>
+        <div class="flex items-center gap-6 flex-wrap">
+          <a href="#" class="type-body-small text-text-disabled hover:text-text-muted transition-colors">Privacy</a>
+          <a href="#" class="type-body-small text-text-disabled hover:text-text-muted transition-colors">Terms</a>
+          <a href="#" class="type-body-small text-text-disabled hover:text-text-muted transition-colors">Support</a>
+          <a href="#" class="type-body-small text-text-disabled hover:text-text-muted transition-colors">Careers</a>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-border-primary">
+        <p class="type-body-small text-text-disabled max-w-3xl">
+          Alfa provides investment intelligence, not financial advice. All signals and analysis are generated by AI and should not be construed as a recommendation to buy or sell any security. Past performance does not guarantee future results. Investing involves risk, including the possible loss of principal.
+        </p>
+        <p class="type-body-small text-text-disabled mt-3">© 2026 Boosted.ai Technologies Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+```
+
+---
+
+**FILE 2: `/tmp/claude-0/-home-user-Brand/c7a59828-5012-576c-9495-2f5864e0e375/scratchpad/10-app-mobile-mockup.html`**
+
+```html

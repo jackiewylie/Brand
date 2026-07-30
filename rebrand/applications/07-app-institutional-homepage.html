@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfa Platform — Institutional Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface-primary': '#080808', 'surface-secondary': '#121212', 'surface-tertiary': '#1F1F1F',
+            'surface-hover': '#262626', 'surface-overlay': '#171717',
+            'text-primary': '#FFFFFF', 'text-secondary': '#E8E8E8', 'text-muted': '#D1D1D1', 'text-disabled': '#6B6B6B',
+            'brand': '#C19A6B', 'brand-hover': '#d4b48a',
+            'border-primary': '#262626', 'border-secondary': '#2E2E2E',
+            'error': '#D43D51', 'success': '#00876C', 'warning': '#FFA600',
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .type-page-title { @apply text-[32px] font-light leading-tight tracking-tight text-text-primary }
+      .type-section-header { @apply text-2xl font-light leading-snug text-text-primary }
+      .type-card-title { @apply text-lg font-medium leading-snug text-text-primary }
+      .type-body-title { @apply text-base font-medium leading-normal text-text-primary }
+      .type-body { @apply text-base font-normal leading-relaxed text-text-muted }
+      .type-body-small { @apply text-sm font-normal leading-relaxed text-text-muted }
+      .type-label { @apply text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled }
+      .type-code { @apply text-sm font-normal leading-relaxed font-mono text-text-muted }
+    }
+  </style>
+</head>
+<body class="bg-surface-primary text-text-primary font-sans antialiased">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-surface-primary/95 backdrop-blur-sm border-b border-border-primary">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+
+      <div class="flex items-center gap-1.5">
+        <span class="text-brand font-medium text-sm leading-none select-none">&middot;</span>
+        <span class="font-light text-lg text-text-primary tracking-tight">alfa</span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-10">
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Platform</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Research</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Compliance</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Pricing</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button class="type-body-small text-text-muted hover:text-text-primary border border-border-secondary hover:border-border-primary transition-colors duration-150 px-5 py-2 rounded-full">
+          Log in
+        </button>
+        <button class="type-body-small font-medium text-surface-primary bg-brand hover:bg-brand-hover transition-colors duration-150 px-6 py-2 rounded-full">
+          Request Demo
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-24 pb-0 px-8">
+    <div class="max-w-5xl mx-auto">
+
+      <p class="type-label text-brand mb-7">Agentic Investment Intelligence</p>
+
+      <h1 class="type-page-title text-5xl max-w-3xl mb-7">
+        The intelligence<br>your firm runs on.
+      </h1>
+
+      <p class="type-body max-w-2xl mb-10">
+        Alfa automates the repeatable work — data gathering, filing review, earnings modeling, report drafting — so your analysts spend their time on what actually drives alpha. Deployed in days, not quarters, with compliance controls built from the ground up for regulated environments.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4 mb-14">
+        <button class="type-body font-medium text-surface-primary bg-brand hover:bg-brand-hover transition-colors duration-150 px-8 py-3 rounded-full">
+          Request a Demo
+        </button>
+        <button class="type-body text-text-muted hover:text-text-primary border border-border-secondary hover:border-border-primary transition-colors duration-150 px-8 py-3 rounded-full">
+          See how it works
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 pb-24">
+        <span class="type-label">Trusted by</span>
+        <span class="type-label text-text-disabled">
+          HSBC &middot; RBC &middot; BMO &middot; CIBC &middot; Ameriprise &middot; Invesco &middot; Janus Henderson &middot; Barrow Hanley &middot; Raymond James &middot; Wells Fargo Advisors &middot; Manulife &middot; KeyBank
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <div class="bg-surface-secondary py-12">
+    <div class="max-w-5xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+
+      <div class="border-l-2 border-brand pl-6">
+        <p class="type-section-header">300+</p>
+        <p class="type-label mt-2">Institutions</p>
+      </div>
+
+      <div class="pl-6">
+        <p class="type-section-header">$5T+</p>
+        <p class="type-label mt-2">AUM Managed</p>
+      </div>
+
+      <div class="pl-6">
+        <p class="type-section-header">8 / 10</p>
+        <p class="type-label mt-2">Prefer Alfa</p>
+      </div>
+
+      <div class="pl-6">
+        <p class="type-section-header">40h &rarr; 20m</p>
+        <p class="type-label mt-2">Earnings Prep</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- THREE PILLARS -->
+  <section class="py-24 px-8">
+    <div class="max-w-5xl mx-auto">
+
+      <p class="type-label mb-4">Platform capabilities</p>
+      <h2 class="type-section-header max-w-xl mb-14">
+        One platform. Three layers<br>of institutional intelligence.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-5">01 &mdash; Agents</p>
+          <h3 class="type-card-title mb-3">Agentic Automation</h3>
+          <p class="type-body-small mb-7">
+            10,000+ pre-built agents handle data gathering, filing review, earnings prep, and report generation. Deploy a custom workflow in hours, not quarters.
+          </p>
+          <a href="#" class="type-body-small text-brand hover:text-brand-hover transition-colors duration-150">Explore agents &rarr;</a>
+        </div>
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-5">02 &mdash; Research</p>
+          <h3 class="type-card-title mb-3">Research Intelligence</h3>
+          <p class="type-body-small mb-7">
+            Finance-native AI trained on 8 years of institutional data surfaces signals other tools miss — with citations your compliance team can verify.
+          </p>
+          <a href="#" class="type-body-small text-brand hover:text-brand-hover transition-colors duration-150">See the research layer &rarr;</a>
+        </div>
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-5">03 &mdash; Compliance</p>
+          <h3 class="type-card-title mb-3">Compliance-Ready</h3>
+          <p class="type-body-small mb-7">
+            SOC 2 Type II certified. FINRA-aware and CIRO-aware from day one. Hallucination safeguards built into every output — not bolted on after.
+          </p>
+          <a href="#" class="type-body-small text-brand hover:text-brand-hover transition-colors duration-150">Review our compliance posture &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT PROOF -->
+  <div class="bg-surface-secondary py-24 px-8">
+    <div class="max-w-4xl mx-auto">
+
+      <p class="type-label mb-12">Client results</p>
+
+      <div class="border-l-4 border-brand pl-10">
+        <p class="type-section-header text-3xl max-w-2xl mb-6">
+          &ldquo;HSBC&rsquo;s research team reduced earnings preparation from 40 hours to 20 minutes.&rdquo;
+        </p>
+        <p class="type-body-small text-text-disabled">
+          Documented case study &mdash; Global Financial Institution, Investment Research Division
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPLIANCE TRUST GRID -->
+  <section class="py-24 px-8">
+    <div class="max-w-5xl mx-auto">
+
+      <p class="type-label mb-4">Security &amp; compliance</p>
+      <h2 class="type-section-header mb-14">Built for regulated environments.</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-4">SOC 2 Type II</p>
+          <h3 class="type-card-title mb-3">Certified from day one</h3>
+          <p class="type-body-small">
+            Annually audited controls across security, availability, and confidentiality. Your data is never used to train the underlying model.
+          </p>
+        </div>
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-4">FINRA-Aware</p>
+          <h3 class="type-card-title mb-3">Regulatory language built in</h3>
+          <p class="type-body-small">
+            Outputs align with FINRA communication standards, reducing compliance review burden for broker-dealers and their registered advisors.
+          </p>
+        </div>
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-4">CIRO-Aware</p>
+          <h3 class="type-card-title mb-3">Canadian markets ready</h3>
+          <p class="type-body-small">
+            Designed with Canadian Investment Regulatory Organization requirements in mind. Trusted by RBC, BMO, CIBC, TD Direct Investing, and Manulife.
+          </p>
+        </div>
+
+        <div class="bg-surface-secondary rounded-xl p-8">
+          <p class="type-label text-brand mb-4">Hallucination Safeguards</p>
+          <h3 class="type-card-title mb-3">Finance-grade accuracy</h3>
+          <p class="type-body-small">
+            8 out of 10 investment professionals prefer Alfa over ChatGPT, Perplexity, or Claude for investment research. Every claim is grounded in cited, verifiable sources.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM STATS ROW -->
+  <div class="bg-surface-secondary py-16 px-8">
+    <div class="max-w-5xl mx-auto">
+      <p class="type-label mb-12 text-center">By the numbers</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div class="bg-surface-tertiary rounded-xl p-6 text-center">
+          <p class="type-section-header text-brand mb-2">50,000+</p>
+          <p class="type-label">Live agents today</p>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-6 text-center">
+          <p class="type-section-header text-brand mb-2">10,000+</p>
+          <p class="type-label">Pre-built agents</p>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-6 text-center">
+          <p class="type-section-header text-brand mb-2">120B+</p>
+          <p class="type-label">Tokens / month</p>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-6 text-center">
+          <p class="type-section-header text-brand mb-2">15</p>
+          <p class="type-label">Granted patents</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA SECTION -->
+  <div class="py-28 px-8 text-center">
+    <div class="max-w-2xl mx-auto">
+      <p class="type-label mb-6">Get started</p>
+      <h2 class="type-section-header mb-6">Ready to see Alfa in your workflow?</h2>
+      <p class="type-body mb-12">
+        Our team will build a custom demo using your firm&rsquo;s actual investment workflows &mdash; not a generic product tour. Most clients go live in under 30 days.
+      </p>
+      <button class="type-body font-medium text-surface-primary bg-brand hover:bg-brand-hover transition-colors duration-150 px-10 py-4 rounded-full">
+        Request a Demo
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-8 border-t border-border-primary">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <div class="flex items-center gap-1.5">
+        <span class="text-brand font-medium text-sm leading-none select-none">&middot;</span>
+        <span class="font-light text-lg text-text-primary tracking-tight">alfa</span>
+      </div>
+
+      <div class="flex items-center flex-wrap justify-center gap-8">
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Platform</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Research</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Compliance</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Pricing</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Privacy</a>
+        <a href="#" class="type-body-small hover:text-text-primary transition-colors duration-150">Terms</a>
+      </div>
+
+      <p class="type-body-small text-text-disabled">A Boosted.ai product</p>
+
+    </div>
+  </footer>
+
+</body>
+</html>
+```
+
+---
+
+FILE 2: `/tmp/claude-0/-home-user-Brand/c7a59828-5012-576c-9495-2f5864e0e375/scratchpad/08-app-sales-deck.html`
+
+```html

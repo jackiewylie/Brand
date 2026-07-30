@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alfa — Brand Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'surface-primary': '#080808', 'surface-secondary': '#121212', 'surface-tertiary': '#1F1F1F',
+            'surface-hover': '#262626', 'surface-overlay': '#171717',
+            'text-primary': '#FFFFFF', 'text-secondary': '#E8E8E8', 'text-muted': '#D1D1D1', 'text-disabled': '#6B6B6B',
+            'brand': '#C19A6B', 'brand-hover': '#d4b48a',
+            'border-primary': '#262626', 'border-secondary': '#2E2E2E',
+            'error': '#D43D51', 'success': '#00876C', 'warning': '#FFA600',
+          },
+          fontFamily: {
+            sans: ['Hanken Grotesk', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .type-page-title { @apply text-[32px] font-light leading-tight tracking-tight text-text-primary }
+      .type-section-header { @apply text-2xl font-light leading-snug text-text-primary }
+      .type-card-title { @apply text-lg font-medium leading-snug text-text-primary }
+      .type-body-title { @apply text-base font-medium leading-normal text-text-primary }
+      .type-body { @apply text-base font-normal leading-relaxed text-text-muted }
+      .type-body-small { @apply text-sm font-normal leading-relaxed text-text-muted }
+      .type-label { @apply text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled }
+      .type-code { @apply text-sm font-normal leading-relaxed font-mono text-text-muted }
+    }
+  </style>
+  <style>
+    html { scroll-behavior: smooth; }
+    .nav-link { display: flex; align-items: center; padding: 6px 12px; border-radius: 6px; font-size: 14px; color: #D1D1D1; text-decoration: none; transition: color 0.15s, background 0.15s; }
+    .nav-link:hover { color: #FFFFFF; background: #1F1F1F; }
+    .nav-link.active { color: #FFFFFF; padding-left: 10px; border-left: 2px solid #C19A6B; border-radius: 0 6px 6px 0; }
+    .notch-input-wrapper { position: relative; }
+    .notch-input { background: #1F1F1F; border: 1px solid #2E2E2E; border-radius: 8px; padding: 20px 16px 8px; width: 100%; font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; color: #FFFFFF; outline: none; transition: border-color 0.15s; }
+    .notch-input:focus { border-color: #C19A6B; }
+    .notch-label { position: absolute; left: 16px; top: 14px; font-size: 14px; color: #6B6B6B; font-family: 'Hanken Grotesk', sans-serif; font-weight: 400; pointer-events: none; transition: all 0.15s ease; }
+    .notch-input:focus ~ .notch-label,
+    .notch-input:not(:placeholder-shown) ~ .notch-label { top: 6px; font-size: 10px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #C19A6B; }
+    .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+    .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-scroll::-webkit-scrollbar-thumb { background: #262626; border-radius: 2px; }
+  </style>
+</head>
+<body class="bg-surface-primary text-text-primary font-sans antialiased">
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-surface-secondary h-screen sticky top-0 overflow-y-auto sidebar-scroll flex-shrink-0">
+    <div class="py-8 px-6">
+      <div class="mb-6">
+        <div class="type-section-header font-light">alfa</div>
+        <div class="type-label mt-1">Brand Guide</div>
+      </div>
+      <div class="border-t border-border-primary mb-6"></div>
+      <nav class="flex flex-col gap-1">
+        <a href="#architecture" class="nav-link active">Brand Architecture</a>
+        <a href="#wordmark" class="nav-link">Wordmark</a>
+        <a href="#colors" class="nav-link">Color System</a>
+        <a href="#typography" class="nav-link">Typography</a>
+        <a href="#voice" class="nav-link">Voice &amp; Tone</a>
+        <a href="#messaging" class="nav-link">Messaging</a>
+        <a href="#components" class="nav-link">Components</a>
+        <a href="#governance" class="nav-link">Governance</a>
+      </nav>
+      <div class="border-t border-border-primary mt-6 mb-6"></div>
+      <div class="flex flex-col gap-2">
+        <div class="type-label">Version 1.0</div>
+        <div class="type-label">July 2026</div>
+        <div class="type-label">Boosted.ai</div>
+      </div>
+      <div class="mt-6 bg-surface-tertiary rounded-xl p-4">
+        <div class="type-label mb-2">Visual Territory</div>
+        <div class="type-body-small">The Signal — brand gold, dark surfaces, precision data language.</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 px-12 py-12 max-w-3xl">
+
+    <div class="mb-16">
+      <div class="type-label mb-3">Boosted.ai Internal Reference</div>
+      <h1 class="type-page-title mb-4">Alfa Brand Guide</h1>
+      <p class="type-body max-w-xl">The single source of truth for brand, marketing, design, and sales teams. Follow these standards across every channel, every touchpoint, every asset.</p>
+    </div>
+
+    <!-- SECTION 1: Brand Architecture -->
+    <section id="architecture" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Brand Architecture</h2>
+      </div>
+      <div class="type-body mb-8">Alfa operates under a branded house model. Boosted.ai is the corporate legal entity. Alfa is the master consumer and institutional brand. All sub-products share the Alfa parent name.</div>
+      <div class="mb-8">
+        <div class="bg-surface-tertiary rounded-lg px-4 py-3 inline-flex flex-col gap-1">
+          <div class="type-body-title">Boosted.ai</div>
+          <div class="type-label">Corporate / Legal / Investor Relations</div>
+        </div>
+        <div class="border-l-2 border-brand ml-8 pl-6 mt-4">
+          <div class="flex items-center gap-3 mb-1">
+            <div class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></div>
+            <div class="type-card-title">Alfa</div>
+            <div class="type-label ml-2">Master Brand</div>
+          </div>
+          <div class="type-body-small mb-4">The primary brand in all external communications — institutional, consumer, and partner-facing.</div>
+          <div class="border-l-2 border-border-primary ml-0 pl-6 mt-4">
+            <div class="type-label mb-3">Product Lines</div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-surface-secondary rounded-lg px-3 py-3">
+                <div class="type-body-small font-medium text-text-secondary mb-1">Alfa Platform</div>
+                <div class="type-label">Institutional SaaS — Primary Revenue</div>
+              </div>
+              <div class="bg-surface-secondary rounded-lg px-3 py-3">
+                <div class="type-body-small font-medium text-text-secondary mb-1">Alfa Retail</div>
+                <div class="type-label">Consumer — Brokerage Embed</div>
+              </div>
+              <div class="bg-surface-secondary rounded-lg px-3 py-3">
+                <div class="type-body-small font-medium text-text-secondary mb-1">Alfa Pro</div>
+                <div class="type-label">Power Users / Independents</div>
+              </div>
+              <div class="bg-surface-secondary rounded-lg px-3 py-3">
+                <div class="type-body-small font-medium text-text-secondary mb-1">Alfa Prime</div>
+                <div class="type-label">High-Net-Worth / Family Office</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-tertiary rounded-xl p-5">
+        <div class="type-label mb-3">Non-Negotiable Rule</div>
+        <div class="flex items-start gap-3">
+          <div class="w-2 h-2 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+          <p class="type-body-small">Use <span class="text-text-primary font-medium">Alfa</span> in all external communications — ads, web, sales decks, social, PR, partner materials. Use <span class="text-text-primary font-medium">Boosted.ai</span> in legal documents, investor relations, corporate filings, and contracts only.</p>
+        </div>
+      </div>
+      <div class="mt-8">
+        <div class="type-label mb-4">Audience Map</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-tertiary rounded-xl p-4">
+            <div class="type-body-title mb-2">Institutional</div>
+            <div class="type-body-small">Portfolio managers, analysts, research directors at asset managers ($500M+ AUM). Lead with accuracy, compliance, compounding intelligence.</div>
+          </div>
+          <div class="bg-surface-tertiary rounded-xl p-4">
+            <div class="type-body-title mb-2">Brokerage / Platform</div>
+            <div class="type-body-small">Product leaders embedding Alfa Retail. Lead with speed-to-live (Questrade: 30 days), compliance, and white-label flexibility.</div>
+          </div>
+          <div class="bg-surface-tertiary rounded-xl p-4">
+            <div class="type-body-title mb-2">Retail / DRI</div>
+            <div class="type-body-small">"Daily Reliant Investors" — individuals opening the app 6+ days in a row. Warm, habit-forming, signal-driven. Not jargon-forward.</div>
+          </div>
+          <div class="bg-surface-tertiary rounded-xl p-4">
+            <div class="type-body-title mb-2">Enterprise CIO</div>
+            <div class="type-body-small">Chief investment officers at $1B+ AUM firms. Lead with category leadership, moat (8yr, 15 patents), and Series B narrative.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Wordmark -->
+    <section id="wordmark" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Wordmark</h2>
+      </div>
+      <div class="type-body mb-8">The Alfa wordmark is always lowercase, always Hanken Grotesk Light (300). The brand gold dot signals the "signal" visual territory. Never alter weight, color, or letterform.</div>
+      <div class="type-label mb-4">Size Scale</div>
+      <div class="bg-surface-secondary rounded-xl p-8 mb-8 flex flex-col gap-8">
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-light text-[48px] leading-none text-text-primary">alfa</span>
+          </div>
+          <div>
+            <div class="type-label">Large / Hero</div>
+            <div class="type-body-small">48px · font-light · tracking-tight</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-light text-[32px] leading-none text-text-primary">alfa</span>
+          </div>
+          <div>
+            <div class="type-label">Medium / Heading</div>
+            <div class="type-body-small">32px · font-light · tracking-tight</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-light text-xl leading-none text-text-primary">alfa</span>
+          </div>
+          <div>
+            <div class="type-label">Small / Navigation</div>
+            <div class="type-body-small">20px · font-light · tracking-tight</div>
+          </div>
+        </div>
+      </div>
+      <div class="type-label mb-4">Clear Space Rule</div>
+      <div class="border-2 border-dashed border-border-secondary rounded-xl p-12 mb-8 flex flex-col items-center justify-center">
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-2.5 h-2.5 rounded-full bg-brand flex-shrink-0"></div>
+          <span class="font-light text-[48px] leading-none text-text-primary">alfa</span>
+        </div>
+        <div class="type-label text-text-disabled">Minimum clear space = cap-height on all sides. This zone must remain empty.</div>
+      </div>
+      <div class="type-label mb-4">Wordmark Violations</div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-surface-tertiary rounded-lg p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2 h-2 rounded-full bg-error flex-shrink-0"></div>
+            <div class="type-label text-error">Wrong Weight</div>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-bold text-[32px] leading-none text-text-primary">alfa</span>
+          </div>
+          <div class="type-body-small">Never use font-bold or font-semibold. Only weights 300, 400, 500 are permitted across the entire brand system.</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-lg p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2 h-2 rounded-full bg-error flex-shrink-0"></div>
+            <div class="type-label text-error">Wrong Color</div>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2.5 h-2.5 rounded-full bg-text-disabled flex-shrink-0"></div>
+            <span class="font-light text-[32px] leading-none text-text-disabled">alfa</span>
+          </div>
+          <div class="type-body-small">Wordmark must be text-primary (#FFFFFF) on dark surfaces. Never render in muted or disabled tones.</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-lg p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2 h-2 rounded-full bg-error flex-shrink-0"></div>
+            <div class="type-label text-error">Light Background</div>
+          </div>
+          <div class="flex items-center gap-2 mb-3 bg-white rounded-lg px-4 py-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-light text-[32px] leading-none text-black">alfa</span>
+          </div>
+          <div class="type-body-small mt-2">Alfa is a dark-first brand. Light backgrounds destroy the signal-dark visual identity. Dark surfaces only.</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-lg p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2 h-2 rounded-full bg-error flex-shrink-0"></div>
+            <div class="type-label text-error">Distorted / Stretched</div>
+          </div>
+          <div class="flex items-center gap-2 mb-3 overflow-hidden">
+            <div class="w-2.5 h-2.5 rounded-full bg-brand flex-shrink-0"></div>
+            <span class="font-light text-[32px] leading-none text-text-primary" style="display:inline-block;transform:scaleX(1.5);transform-origin:left;letter-spacing:0.15em;">alfa</span>
+          </div>
+          <div class="type-body-small mt-2">Never stretch, condense, skew, italicize, or decorate the wordmark letterforms.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Color System -->
+    <section id="colors" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Color System</h2>
+      </div>
+      <div class="type-body mb-8">Alfa uses a surface-elevation model — depth is communicated through sequential surface steps, never shadows or borders on cards. All colors are defined as design tokens. Do not use raw hex values in production assets.</div>
+      <div class="type-label mb-3">Signal Color</div>
+      <div class="bg-brand rounded-xl h-24 flex items-center px-8 justify-between mb-8">
+        <div>
+          <div class="text-surface-primary font-medium text-base">Brand Gold — The Signal Color</div>
+          <div class="text-surface-primary text-sm opacity-70 font-mono">brand · #C19A6B</div>
+        </div>
+        <div class="flex flex-col items-end gap-1">
+          <div class="text-surface-primary text-xs opacity-60 font-medium uppercase tracking-wider">brand-hover</div>
+          <div class="text-surface-primary text-xs font-mono opacity-60">#d4b48a</div>
+        </div>
+      </div>
+      <div class="type-label mb-3">Surface Hierarchy — Elevation via Stepping</div>
+      <div class="flex flex-col gap-2 mb-8">
+        <div class="bg-surface-primary h-14 flex items-center px-6 justify-between rounded-lg border border-border-secondary">
+          <div class="type-body-small text-text-primary">surface-primary</div>
+          <div class="type-label">#080808</div>
+        </div>
+        <div class="bg-surface-secondary h-14 flex items-center px-6 justify-between rounded-lg">
+          <div class="type-body-small text-text-primary">surface-secondary</div>
+          <div class="type-label">#121212</div>
+        </div>
+        <div class="bg-surface-tertiary h-14 flex items-center px-6 justify-between rounded-lg">
+          <div class="type-body-small text-text-primary">surface-tertiary</div>
+          <div class="type-label">#1F1F1F</div>
+        </div>
+        <div class="bg-surface-hover h-14 flex items-center px-6 justify-between rounded-lg">
+          <div class="type-body-small text-text-primary">surface-hover</div>
+          <div class="type-label">#262626</div>
+        </div>
+        <div class="bg-surface-overlay h-14 flex items-center px-6 justify-between rounded-lg">
+          <div class="type-body-small text-text-primary">surface-overlay</div>
+          <div class="type-label">#171717</div>
+        </div>
+      </div>
+      <div class="type-label mb-3">Text Tokens</div>
+      <div class="bg-surface-secondary rounded-xl p-6 mb-8">
+        <div class="grid grid-cols-4 gap-4">
+          <div class="flex flex-col gap-2">
+            <div class="text-text-primary font-medium text-base">Aa</div>
+            <div class="type-label">text-primary</div>
+            <div class="type-body-small">#FFFFFF</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-text-secondary font-medium text-base">Aa</div>
+            <div class="type-label">text-secondary</div>
+            <div class="type-body-small">#E8E8E8</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-text-muted font-medium text-base">Aa</div>
+            <div class="type-label">text-muted</div>
+            <div class="type-body-small">#D1D1D1</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="text-text-disabled font-medium text-base">Aa</div>
+            <div class="type-label">text-disabled</div>
+            <div class="type-body-small">#6B6B6B</div>
+          </div>
+        </div>
+      </div>
+      <div class="type-label mb-3">Status Colors</div>
+      <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="bg-success rounded-xl h-16 flex flex-col items-center justify-center">
+          <div class="text-white font-medium text-sm">Success</div>
+          <div class="text-white text-xs opacity-70 font-mono">success · #00876C</div>
+        </div>
+        <div class="bg-warning rounded-xl h-16 flex flex-col items-center justify-center">
+          <div class="text-surface-primary font-medium text-sm">Warning</div>
+          <div class="text-surface-primary text-xs opacity-70 font-mono">warning · #FFA600</div>
+        </div>
+        <div class="bg-error rounded-xl h-16 flex flex-col items-center justify-center">
+          <div class="text-white font-medium text-sm">Error</div>
+          <div class="text-white text-xs opacity-70 font-mono">error · #D43D51</div>
+        </div>
+      </div>
+      <div class="type-label mb-3">Brand Gold — Opacity Variants</div>
+      <div class="flex gap-3 mb-2">
+        <div class="flex-1 rounded-xl h-14 bg-brand flex items-center justify-center">
+          <div class="type-label text-surface-primary">100%</div>
+        </div>
+        <div class="flex-1 rounded-xl h-14 bg-brand/80 flex items-center justify-center">
+          <div class="type-label">80%</div>
+        </div>
+        <div class="flex-1 rounded-xl h-14 bg-brand/60 flex items-center justify-center">
+          <div class="type-label">60%</div>
+        </div>
+        <div class="flex-1 rounded-xl h-14 bg-brand/40 flex items-center justify-center">
+          <div class="type-label">40%</div>
+        </div>
+        <div class="flex-1 rounded-xl h-14 bg-brand/20 flex items-center justify-center">
+          <div class="type-label">20%</div>
+        </div>
+      </div>
+      <div class="type-body-small mb-8">Use opacity variants for backgrounds, overlays, and tinted surfaces. Never manufacture new colors outside this system.</div>
+      <div class="type-label mb-3">Border Tokens</div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-surface-tertiary rounded-xl p-4">
+          <div class="border border-border-primary rounded-lg h-10 mb-3"></div>
+          <div class="type-label mb-1">border-primary</div>
+          <div class="type-body-small">#262626 — dividers, section separators</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-4">
+          <div class="border border-border-secondary rounded-lg h-10 mb-3"></div>
+          <div class="type-label mb-1">border-secondary</div>
+          <div class="type-body-small">#2E2E2E — inputs, subtle containers, dashed outlines</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Typography -->
+    <section id="typography" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Typography</h2>
+      </div>
+      <div class="type-body mb-8">Alfa uses Hanken Grotesk exclusively, at three weights: 300 (light), 400 (regular), 500 (medium). No weights below 300 or above 500 are ever used. JetBrains Mono is used for code, token labels, and hex values only.</div>
+      <div class="type-label mb-4">Type Scale</div>
+      <div class="flex flex-col">
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-page-title</div>
+            <div class="type-body-small mt-1">32px · light · tight</div>
+          </div>
+          <div class="text-[32px] font-light leading-tight tracking-tight text-text-primary">Agentic Intelligence</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-section-header</div>
+            <div class="type-body-small mt-1">24px · light · snug</div>
+          </div>
+          <div class="text-2xl font-light leading-snug text-text-primary">Color System</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-card-title</div>
+            <div class="type-body-small mt-1">18px · medium · snug</div>
+          </div>
+          <div class="text-lg font-medium leading-snug text-text-primary">Alfa Platform</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-body-title</div>
+            <div class="type-body-small mt-1">16px · medium · normal</div>
+          </div>
+          <div class="text-base font-medium leading-normal text-text-primary">Earnings Prep Example</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-body</div>
+            <div class="type-body-small mt-1">16px · regular · relaxed</div>
+          </div>
+          <div class="text-base font-normal leading-relaxed text-text-muted">Intelligence that compounds — agents automate repeatable tasks, surface signals, and grow smarter over time.</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-body-small</div>
+            <div class="type-body-small mt-1">14px · regular · relaxed</div>
+          </div>
+          <div class="text-sm font-normal leading-relaxed text-text-muted">SOC 2 certified, FINRA-aware, CIRO-aware, hallucination safeguards built in.</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-label</div>
+            <div class="type-body-small mt-1">12px · medium · wide</div>
+          </div>
+          <div class="text-xs font-medium leading-normal uppercase tracking-wider text-text-disabled">Version 1.0 — July 2026</div>
+        </div>
+        <div class="border-b border-border-primary py-5 flex items-baseline gap-8">
+          <div class="w-40 flex-shrink-0">
+            <div class="type-label">.type-code</div>
+            <div class="type-body-small mt-1">14px · mono · relaxed</div>
+          </div>
+          <div class="text-sm font-normal leading-relaxed font-mono text-text-muted">brand: #C19A6B · surface-primary: #080808</div>
+        </div>
+      </div>
+      <div class="mt-10">
+        <div class="type-label mb-4">Permitted Weight Specimen</div>
+        <div class="bg-surface-secondary rounded-xl p-8 grid grid-cols-3 gap-8">
+          <div class="flex flex-col gap-2">
+            <div class="font-light text-[28px] text-text-primary leading-none">Intelligence</div>
+            <div class="type-label mt-2">font-light</div>
+            <div class="type-body-small">Weight 300 — headings, wordmark, hero text</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="font-normal text-[28px] text-text-primary leading-none">Intelligence</div>
+            <div class="type-label mt-2">font-normal</div>
+            <div class="type-body-small">Weight 400 — body copy, paragraphs, descriptions</div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="font-medium text-[28px] text-text-primary leading-none">Intelligence</div>
+            <div class="type-label mt-2">font-medium</div>
+            <div class="type-body-small">Weight 500 — card titles, labels, emphasis, CTAs</div>
+          </div>
+        </div>
+        <div class="mt-4 bg-surface-tertiary rounded-xl p-4 flex items-start gap-3">
+          <div class="w-2 h-2 rounded-full bg-error mt-1 flex-shrink-0"></div>
+          <div class="type-body-small">Font weights 600, 700, 800, 900 (semibold, bold, extrabold, black) are <span class="text-error">strictly prohibited</span> across all Alfa brand assets — digital, print, and motion.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Voice & Tone -->
+    <section id="voice" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Voice &amp; Tone</h2>
+      </div>
+      <div class="type-body mb-8">Alfa's voice is precise, confident, and grounded. We are not a chatbot. We are not a copilot. We are not a search tool. We are agentic investment intelligence — and every word should carry that weight.</div>
+      <div class="bg-surface-tertiary rounded-xl p-6 mb-4">
+        <div class="type-card-title mb-2">Precise, Not Jargon-Heavy</div>
+        <div class="type-body mb-4">Finance is our native language. We use it accurately, not to show off. Precision builds trust; jargon creates distance. Every sentence should be scannable and specific.</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-success mb-2">On Brand</div>
+            <div class="type-body-small">"Alfa cut earnings prep from 40 hours to 20 minutes — documented, repeatable, auditable."</div>
+          </div>
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-error mb-2">Off Brand</div>
+            <div class="type-body-small">"Our cutting-edge AI leverages advanced LLM paradigms to synergize your investment workflow with unprecedented efficiency gains."</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-tertiary rounded-xl p-6 mb-4">
+        <div class="type-card-title mb-2">Confident, Not Arrogant</div>
+        <div class="type-body mb-4">We have an 8-year head start. 15 patents. 300+ institutions. $5T+ under management on our platform. We state this plainly. We do not need to oversell. We let the signal speak.</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-success mb-2">On Brand</div>
+            <div class="type-body-small">"8 of 10 investment professionals prefer Alfa over ChatGPT, Perplexity, or Claude. We measured it."</div>
+          </div>
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-error mb-2">Off Brand</div>
+            <div class="type-body-small">"We're the absolute best AI in finance, hands down, and there's nothing even close to what we've built."</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-tertiary rounded-xl p-6 mb-4">
+        <div class="type-card-title mb-2">Human, Not Robotic</div>
+        <div class="type-body mb-4">Agents should feel like a brilliant, tireless colleague — not a command-line interface. Even technical content should feel like a conversation with someone who actually knows finance.</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-success mb-2">On Brand</div>
+            <div class="type-body-small">"Alfa noticed a pattern in your watchlist before earnings season. Here's what it found."</div>
+          </div>
+          <div class="bg-surface-secondary rounded-lg p-4">
+            <div class="type-label text-error mb-2">Off Brand</div>
+            <div class="type-body-small">"Query executed. Pattern detection module returned 3 results. Confidence: 0.87. See attached JSON."</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8">
+        <div class="type-label mb-4">Tone by Audience</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-secondary rounded-xl p-5">
+            <div class="type-body-title mb-1">Institutional / Enterprise</div>
+            <div class="type-label text-brand mb-3">Alfa Platform · Alfa Pro · Alfa Prime</div>
+            <ul class="flex flex-col gap-2">
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Data-forward: lead with proof points, not benefits</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Compliance-first framing in every product claim</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Formal sentence structure, no contractions in headers</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Reference AUM, sovereign/institutional client names when permitted</div></li>
+            </ul>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-5">
+            <div class="type-body-title mb-1">Retail / DRI</div>
+            <div class="type-label text-brand mb-3">Alfa Retail · App Copy</div>
+            <ul class="flex flex-col gap-2">
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Warmer, habit-forming — feel like a trusted advisor, not a dashboard</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Signal-driven: surface the insight, not the methodology</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Contractions welcome; shorter sentences; active voice</div></li>
+              <li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div><div class="type-body-small">Avoid regulatory language — use reassuring language instead</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Messaging -->
+    <section id="messaging" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Messaging</h2>
+      </div>
+      <div class="type-body mb-8">Approved copy blocks for use across channels. Do not paraphrase or improvise the category claim or boilerplate. Use these verbatim or in the approved truncated forms.</div>
+      <div class="mb-6">
+        <div class="type-label mb-3">Category Claim</div>
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <div class="text-2xl font-light text-text-primary leading-snug">"Agentic Investment Intelligence"</div>
+          <div class="type-body-small mt-3">This is our owned category. Not a chatbot. Not a copilot. Not a search tool. Use this phrase exactly in category-defining communications, analyst briefs, and press materials.</div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-3">Long Boilerplate — Corporate / PR</div>
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <div class="type-body">Boosted.ai is the agentic investment intelligence platform trusted by 300+ institutions managing $5T+ in assets. Founded in 2017 and built exclusively for finance, Alfa combines 8 years of domain-specific AI development, 15 patents, and a compliance-ready architecture to deliver intelligence that compounds. From portfolio managers at global asset managers to retail investors at Canada's largest brokerages, Alfa agents automate repeatable research, surface high-signal opportunities, and grow smarter with every interaction. SOC 2 certified and FINRA/CIRO-aware from day one.</div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-3">Short Boilerplate — Sales Materials / Pitch Decks</div>
+        <div class="bg-surface-tertiary rounded-xl p-6">
+          <div class="type-body">Alfa is the agentic investment intelligence platform built exclusively for finance. Trusted by 300+ institutions managing $5T+ in assets, Alfa agents automate research, surface signals, and compound intelligence over time — SOC 2 certified, FINRA-aware, compliance-first.</div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-4">Proof Points — Use in Order</div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-surface-secondary rounded-xl p-4 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-brand text-xs font-medium">1</span></div>
+            <div><div class="type-body-small font-medium text-text-secondary mb-1">Accuracy</div><div class="type-body-small">8 of 10 investment professionals prefer Alfa over ChatGPT, Perplexity, or Claude.</div></div>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-4 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-brand text-xs font-medium">2</span></div>
+            <div><div class="type-body-small font-medium text-text-secondary mb-1">Built for Finance</div><div class="type-body-small">8-year finance AI focus, 15 patents, compliance-ready from day one.</div></div>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-4 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-brand text-xs font-medium">3</span></div>
+            <div><div class="type-body-small font-medium text-text-secondary mb-1">Compliance-Ready</div><div class="type-body-small">SOC 2 certified, FINRA-aware, CIRO-aware, hallucination safeguards.</div></div>
+          </div>
+          <div class="bg-surface-secondary rounded-xl p-4 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="text-brand text-xs font-medium">4</span></div>
+            <div><div class="type-body-small font-medium text-text-secondary mb-1">Compounding Intelligence</div><div class="type-body-small">Agents automate repeatable tasks, surface signals, compound over time.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-3">Social Bio — LinkedIn / X / App Store Short Description</div>
+        <div class="bg-surface-tertiary rounded-xl p-5">
+          <div class="type-body-small text-text-secondary">Agentic investment intelligence for the people who move markets. Trusted by 300+ institutions. Built for finance from day one. alfa.ai</div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-3">App Store Subtitle (30 chars max)</div>
+        <div class="bg-surface-tertiary rounded-xl p-5">
+          <div class="type-body-small text-text-secondary">Your investment signal, daily.</div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <div class="type-label mb-3">Email Signature Template</div>
+        <div class="bg-surface-tertiary rounded-lg p-6 font-mono type-code">
+          <div class="text-text-primary font-medium">First Last</div>
+          <div class="text-text-muted">Title, Alfa</div>
+          <div class="text-brand mt-2">first@alfa.ai</div>
+          <div class="text-text-muted">alfa.ai</div>
+          <div class="text-text-disabled mt-3">——</div>
+          <div class="text-text-disabled text-xs mt-1">Boosted.ai Inc. · Agentic Investment Intelligence</div>
+          <div class="text-text-disabled text-xs">SOC 2 Certified · FINRA-Aware · CIRO-Aware</div>
+        </div>
+        <div class="type-body-small mt-3">Use "Alfa" in the title line. "Boosted.ai Inc." appears in the legal footer line only.</div>
+      </div>
+      <div>
+        <div class="type-label mb-3">Terms We Never Use</div>
+        <div class="bg-surface-tertiary rounded-xl p-5">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"AI chatbot" or "chatbot"</div></div>
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"AI copilot" or "copilot"</div></div>
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"AI-powered" (vague — use a specific claim)</div></div>
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"Next-generation" (cliche)</div></div>
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"Disruptive" or "disruption"</div></div>
+            <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-error flex-shrink-0"></div><div class="type-body-small">"Leverage" as a verb (overused in fintech)</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Components -->
+    <section id="components" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Components</h2>
+      </div>
+      <div class="type-body mb-8">Design system components for digital products and marketing assets. All buttons are rounded-full. Cards use surface elevation, never borders or shadows. Apply design tokens exclusively.</div>
+
+      <!-- Buttons -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Buttons</div>
+        <div class="bg-surface-secondary rounded-xl p-6 flex flex-wrap items-center gap-4">
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-brand hover:bg-brand-hover text-surface-primary font-medium text-sm px-5 py-2.5 rounded-full transition-colors">Get Started</button>
+            <div class="type-label">Primary</div>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-brand hover:bg-brand-hover text-surface-primary font-medium text-sm px-5 py-2.5 rounded-full transition-colors flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Book a Demo
+            </button>
+            <div class="type-label">Primary + Icon</div>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-transparent hover:bg-surface-tertiary text-text-primary font-medium text-sm px-5 py-2.5 rounded-full transition-colors">Learn More</button>
+            <div class="type-label">Ghost</div>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-transparent border border-border-secondary hover:border-brand text-text-primary font-medium text-sm px-5 py-2.5 rounded-full transition-colors">View Docs</button>
+            <div class="type-label">Outline</div>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-error/20 hover:bg-error/30 text-error font-medium text-sm px-5 py-2.5 rounded-full transition-colors">Remove</button>
+            <div class="type-label">Destructive</div>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+            <button class="bg-surface-tertiary text-text-disabled font-medium text-sm px-5 py-2.5 rounded-full cursor-not-allowed" disabled>Disabled</button>
+            <div class="type-label">Disabled</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Badges</div>
+        <div class="bg-surface-secondary rounded-xl p-6 flex flex-wrap items-center gap-3">
+          <span class="bg-success/20 text-success rounded-full text-xs px-2.5 py-0.5 font-medium">Active</span>
+          <span class="bg-warning/20 text-warning rounded-full text-xs px-2.5 py-0.5 font-medium">Pending</span>
+          <span class="bg-error/20 text-error rounded-full text-xs px-2.5 py-0.5 font-medium">At Risk</span>
+          <span class="bg-surface-tertiary text-text-muted rounded-full text-xs px-2.5 py-0.5 font-medium">Default</span>
+          <span class="bg-brand/20 text-brand rounded-full text-xs px-2.5 py-0.5 font-medium">Signal</span>
+          <span class="bg-surface-hover text-text-disabled rounded-full text-xs px-2.5 py-0.5 font-medium">Archived</span>
+          <div class="type-label ml-2">All badges: rounded-full, text-xs, px-2.5 py-0.5, font-medium</div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Card — Surface Secondary on Primary</div>
+        <div class="bg-surface-secondary rounded-xl p-6">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="type-card-title mb-1">Portfolio Signal Detected</div>
+              <div class="type-body-small">Alfa identified an earnings beat probability shift across 3 positions in your Q3 watchlist.</div>
+            </div>
+            <span class="bg-brand/20 text-brand rounded-full text-xs px-2.5 py-0.5 font-medium flex-shrink-0 ml-4">High Signal</span>
+          </div>
+          <div class="bg-surface-tertiary rounded-xl p-4 mt-4">
+            <div class="type-label mb-2">Alfa's Reasoning</div>
+            <div class="type-body-small">Consensus estimate revision +12% combined with options flow anomaly detected 48h before earnings window. Historical accuracy on this pattern: 74%.</div>
+          </div>
+          <div class="flex items-center gap-3 mt-5">
+            <button class="bg-brand hover:bg-brand-hover text-surface-primary font-medium text-sm px-4 py-2 rounded-full transition-colors">View Signal</button>
+            <button class="bg-transparent hover:bg-surface-tertiary text-text-primary font-medium text-sm px-4 py-2 rounded-full transition-colors">Dismiss</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Tiles -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Stat Tiles — Tertiary on Secondary on Primary</div>
+        <div class="bg-surface-secondary rounded-xl p-6">
+          <div class="type-card-title mb-4">Platform Metrics</div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-surface-tertiary rounded-xl p-4">
+              <div class="type-label mb-2">Institutions</div>
+              <div class="text-2xl font-light text-text-primary">300+</div>
+              <div class="type-body-small mt-1">Active clients</div>
+            </div>
+            <div class="bg-surface-tertiary rounded-xl p-4">
+              <div class="type-label mb-2">Assets</div>
+              <div class="text-2xl font-light text-text-primary">$5T+</div>
+              <div class="type-body-small mt-1">Under management</div>
+            </div>
+            <div class="bg-surface-tertiary rounded-xl p-4">
+              <div class="type-label mb-2">Tokens/month</div>
+              <div class="text-2xl font-light text-text-primary">120B+</div>
+              <div class="type-body-small mt-1">Processed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Notched Input</div>
+        <div class="bg-surface-secondary rounded-xl p-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="notch-input-wrapper">
+              <input type="text" class="notch-input" placeholder=" " value="AAPL" id="input1">
+              <label class="notch-label" for="input1">Ticker Symbol</label>
+            </div>
+            <div class="notch-input-wrapper">
+              <input type="text" class="notch-input" placeholder=" " id="input2">
+              <label class="notch-label" for="input2">Research Query</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Strip -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Tab Strip</div>
+        <div class="bg-surface-secondary rounded-xl p-6">
+          <div class="inline-flex gap-1 p-1 rounded-full border border-border-secondary">
+            <button class="bg-surface-tertiary text-text-primary font-medium text-sm px-5 py-2 rounded-full transition-colors">Overview</button>
+            <button class="bg-transparent text-text-muted hover:text-text-primary font-normal text-sm px-5 py-2 rounded-full transition-colors">Signals</button>
+            <button class="bg-transparent text-text-muted hover:text-text-primary font-normal text-sm px-5 py-2 rounded-full transition-colors">Agents</button>
+          </div>
+          <div class="type-body-small mt-4">Active tab: bg-surface-tertiary, font-medium, text-text-primary. Inactive: transparent, font-normal, text-text-muted.</div>
+        </div>
+      </div>
+
+      <!-- Dividers -->
+      <div class="mb-10">
+        <div class="type-label mb-4">Dividers</div>
+        <div class="bg-surface-secondary rounded-xl p-6 flex flex-col gap-5">
+          <div>
+            <div class="type-label mb-3">border-primary — section separators</div>
+            <div class="border-t border-border-primary"></div>
+          </div>
+          <div>
+            <div class="type-label mb-3">border-secondary — input outlines, subtle containers</div>
+            <div class="border-t border-border-secondary"></div>
+          </div>
+          <div>
+            <div class="type-label mb-3">border-brand — active state, highlight, signal indicator</div>
+            <div class="border-t border-brand"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: Governance -->
+    <section id="governance" class="mb-20">
+      <div class="border-b border-border-primary pb-4 mb-8">
+        <h2 class="type-section-header">Governance</h2>
+      </div>
+      <div class="type-body mb-8">Brand governance ensures consistency during the Alfa Forward transition. All external brand assets require approval from the brand owners below before publishing. When in doubt: use Alfa, not Boosted.ai.</div>
+
+      <!-- Approval Owners -->
+      <div class="type-label mb-4">Approval Owners</div>
+      <div class="grid grid-cols-2 gap-4 mb-10">
+        <div class="bg-surface-tertiary rounded-xl p-5">
+          <div class="type-label mb-3">Brand Strategy &amp; Copy</div>
+          <div class="type-card-title mb-1">Jackie Wylie</div>
+          <div class="type-body-small">Chief Marketing Officer</div>
+          <div class="type-body-small text-brand mt-2">jackie@boostedai.com</div>
+          <div class="type-body-small mt-3">Approves: messaging, copy, positioning, boilerplate usage, campaign tone, social language</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-5">
+          <div class="type-label mb-3">Visual Identity</div>
+          <div class="type-card-title mb-1">Lead Designer</div>
+          <div class="type-body-small">Head of Design</div>
+          <div class="type-body-small text-brand mt-2">design@boostedai.com</div>
+          <div class="type-body-small mt-3">Approves: logo usage, color application, type hierarchy, component patterns, motion specs</div>
+        </div>
+      </div>
+
+      <!-- Channel Rules -->
+      <div class="type-label mb-4">Channel Rules — Name Usage</div>
+      <div class="bg-surface-tertiary rounded-xl p-6 mb-10">
+        <div class="flex flex-col gap-3">
+          <div class="flex items-start gap-3 border-b border-border-primary pb-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Social posts (X, LinkedIn, Instagram): </span><span class="type-body-small">Use "Alfa" only. Never "Boosted.ai" in consumer-facing social content.</span></div>
+          </div>
+          <div class="flex items-start gap-3 border-b border-border-primary pb-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Ad copy (digital, OOH, video): </span><span class="type-body-small">Use "Alfa" as the headline brand. Boosted.ai may appear in legal disclosures at the bottom of ad units only.</span></div>
+          </div>
+          <div class="flex items-start gap-3 border-b border-border-primary pb-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Press releases &amp; media: </span><span class="type-body-small">Use "Boosted.ai, the maker of Alfa" on first reference in the body copy. "Alfa" alone in headline and subheadline.</span></div>
+          </div>
+          <div class="flex items-start gap-3 border-b border-border-primary pb-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Investor materials &amp; IR: </span><span class="type-body-small">Use "Boosted.ai" throughout. Reference Alfa as the product, not the company.</span></div>
+          </div>
+          <div class="flex items-start gap-3 border-b border-border-primary pb-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Sales decks &amp; one-pagers: </span><span class="type-body-small">Use "Alfa" on cover and throughout body. Boosted.ai appears on the legal footer slide only.</span></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-1.5 h-1.5 rounded-full bg-brand mt-1.5 flex-shrink-0"></div>
+            <div><span class="type-body-small font-medium text-text-secondary">Swag &amp; physical goods: </span><span class="type-body-small">Use "alfa" wordmark only. Boosted.ai domain may appear on packaging inside label at type-label scale.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rollout Priority Table -->
+      <div class="type-label mb-4">Rollout Priority</div>
+      <div class="bg-surface-secondary rounded-xl overflow-hidden mb-10">
+        <div class="grid grid-cols-5 gap-0 bg-surface-tertiary px-6 py-3">
+          <div class="type-label col-span-1">#</div>
+          <div class="type-label col-span-1">Channel</div>
+          <div class="type-label col-span-1">Owner</div>
+          <div class="type-label col-span-1">Timeline</div>
+          <div class="type-label col-span-1">Status</div>
+        </div>
+        <div class="grid grid-cols-5 gap-0 px-6 py-4 border-b border-border-primary items-center">
+          <div class="col-span-1"><span class="bg-brand/20 text-brand rounded-full text-xs px-2 py-0.5 font-medium">P1</span></div>
+          <div class="col-span-1 type-body-small text-text-secondary font-medium">Website</div>
+          <div class="col-span-1 type-body-small">Marketing</div>
+          <div class="col-span-1 type-body-small">Aug 2026</div>
+          <div class="col-span-1"><span class="bg-warning/20 text-warning rounded-full text-xs px-2 py-0.5 font-medium">In Progress</span></div>
+        </div>
+        <div class="grid grid-cols-5 gap-0 px-6 py-4 border-b border-border-primary items-center">
+          <div class="col-span-1"><span class="bg-brand/20 text-brand rounded-full text-xs px-2 py-0.5 font-medium">P2</span></div>
+          <div class="col-span-1 type-body-small text-text-secondary font-medium">App Stores</div>
+          <div class="col-span-1 type-body-small">Product / Mobile</div>
+          <div class="col-span-1 type-body-small">Aug 2026</div>
+          <div class="col-span-1"><span class="bg-surface-tertiary text-text-muted rounded-full text-xs px-2 py-0.5 font-medium">Planned</span></div>
+        </div>
+        <div class="grid grid-cols-5 gap-0 px-6 py-4 border-b border-border-primary items-center">
+          <div class="col-span-1"><span class="bg-brand/20 text-brand rounded-full text-xs px-2 py-0.5 font-medium">P3</span></div>
+          <div class="col-span-1 type-body-small text-text-secondary font-medium">Sales Materials</div>
+          <div class="col-span-1 type-body-small">Sales + Design</div>
+          <div class="col-span-1 type-body-small">Sep 2026</div>
+          <div class="col-span-1"><span class="bg-surface-tertiary text-text-muted rounded-full text-xs px-2 py-0.5 font-medium">Planned</span></div>
+        </div>
+        <div class="grid grid-cols-5 gap-0 px-6 py-4 border-b border-border-primary items-center">
+          <div class="col-span-1"><span class="bg-brand/20 text-brand rounded-full text-xs px-2 py-0.5 font-medium">P4</span></div>
+          <div class="col-span-1 type-body-small text-text-secondary font-medium">Social Profiles</div>
+          <div class="col-span-1 type-body-small">Marketing</div>
+          <div class="col-span-1 type-body-small">Sep 2026</div>
+          <div class="col-span-1"><span class="bg-surface-tertiary text-text-muted rounded-full text-xs px-2 py-0.5 font-medium">Planned</span></div>
+        </div>
+        <div class="grid grid-cols-5 gap-0 px-6 py-4 items-center">
+          <div class="col-span-1"><span class="bg-surface-hover text-text-disabled rounded-full text-xs px-2 py-0.5 font-medium">P5</span></div>
+          <div class="col-span-1 type-body-small text-text-secondary font-medium">Swag / Physical</div>
+          <div class="col-span-1 type-body-small">Ops + Design</div>
+          <div class="col-span-1 type-body-small">Oct 2026</div>
+          <div class="col-span-1"><span class="bg-surface-tertiary text-text-muted rounded-full text-xs px-2 py-0.5 font-medium">Planned</span></div>
+        </div>
+      </div>
+
+      <!-- Competitive Quick Reference -->
+      <div class="type-label mb-4">Competitive Positioning — Quick Reference</div>
+      <div class="bg-surface-tertiary rounded-xl p-6 mb-10">
+        <div class="flex flex-col gap-3">
+          <div class="grid grid-cols-3 gap-4 bg-surface-secondary rounded-xl p-3">
+            <div class="type-label">Competitor</div>
+            <div class="type-label">Their Claim</div>
+            <div class="type-label">Alfa's Counter</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 border-b border-border-primary pb-3">
+            <div class="type-body-small text-text-secondary font-medium">ChatGPT / Claude / Perplexity</div>
+            <div class="type-body-small">General AI, wide knowledge base</div>
+            <div class="type-body-small text-success">Finance-native, compliance-first, no hallucination risk on financial data</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 border-b border-border-primary pb-3">
+            <div class="type-body-small text-text-secondary font-medium">Bloomberg Terminal</div>
+            <div class="type-body-small">Data infrastructure leader</div>
+            <div class="type-body-small text-success">Agentic automation on top of any data source — not a terminal replacement</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 border-b border-border-primary pb-3">
+            <div class="type-body-small text-text-secondary font-medium">Kensho / Visible Alpha</div>
+            <div class="type-body-small">Point solution analytics</div>
+            <div class="type-body-small text-success">Full agentic platform — 50K+ live agents, 10K+ pre-built, not a single tool</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="type-body-small text-text-secondary font-medium">LangChain / generic LLM infra</div>
+            <div class="type-body-small">Build-your-own agents</div>
+            <div class="type-body-small text-success">Finance agents pre-built; 8yr training head start; 15 patents; compliance-ready</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="type-label mb-4">Brand &amp; Business Quick Stats</div>
+      <div class="grid grid-cols-4 gap-3 mb-10">
+        <div class="bg-surface-tertiary rounded-xl p-4 text-center">
+          <div class="text-2xl font-light text-brand mb-1">8yr</div>
+          <div class="type-label">Finance AI Focus</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-4 text-center">
+          <div class="text-2xl font-light text-brand mb-1">15</div>
+          <div class="type-label">Patents</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-4 text-center">
+          <div class="text-2xl font-light text-brand mb-1">300+</div>
+          <div class="type-label">Institutions</div>
+        </div>
+        <div class="bg-surface-tertiary rounded-xl p-4 text-center">
+          <div class="text-2xl font-light text-brand mb-1">$5T+</div>
+          <div class="type-label">AUM on Platform</div>
+        </div>
+      </div>
+
+      <!-- Version Footer -->
+      <div class="border-t border-border-primary pt-8 flex items-center justify-between">
+        <div class="type-label">Brand Guide v1.0 — July 2026 — Boosted.ai</div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-brand"></div>
+          <div class="type-label">Internal Reference — Not for Distribution</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
+```
+
+STATUS: Local filesystem tools (Write, Bash, Read, Edit) are all blocked by a permission handler misconfiguration in this environment — the handler zeroes out required parameters before they reach the tool, returning "required parameter missing" for all calls. The complete HTML is output above verbatim.
+
+Intended path: `/tmp/claude-0/-home-user-Brand/c7a59828-5012-576c-9495-2f5864e0e375/scratchpad/11-brand-guide.html`
+
+The HTML document is complete and covers all eight sections as specified:
+- Brand Architecture: Boosted.ai/Alfa hierarchy tree, four product lines, audience map, non-negotiable name rule
+- Wordmark: Three size scales with brand gold dot, clear space zone, four violation cards (wrong weight, wrong color, light background, distorted)
+- Color System: Brand gold hero, surface elevation stack, text token grid, status colors, brand gold opacity variants, border tokens
+- Typography: Full type scale with live rendered examples, three-weight specimen, prohibition note on weights 600+
+- Voice and Tone: Three voice principles each with on-brand/off-brand examples, institutional vs. DRI tone grid
+- Messaging: Category claim, long boilerplate, short boilerplate, four ordered proof points, social bio, App Store subtitle, email signature template, banned terms list
+- Components: Six button variants, six badge variants, signal card with nested reasoning, stat tiles, notched input with float label animation, tab strip, three divider types
+- Governance: Two approval owner cards (Jackie Wylie CMO + Lead Designer), six channel rules, five-row rollout priority table (P1-P5), competitive positioning quick reference, brand stats grid, version footer
