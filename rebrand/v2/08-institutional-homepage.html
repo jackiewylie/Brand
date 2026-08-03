@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa — Institutional Financial Intelligence</title>
+<meta name="description" content="Alfa: institutional-grade financial research for PMs, analysts, and serious investors. Earnings prep: 40 hours to 20 minutes. The record, officially.">
+<style>
+  :root {
+    --surface-page:        #E8E0CE;
+    --surface-card:        #DDD4BC;
+    --surface-raised:      #EDE6D5;
+    --surface-overlay:     rgba(12, 9, 6, 0.55);
+    --surface-stamp:       #D8CEBC;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #0C0906;
+    --text-secondary:      #3A3028;
+    --text-muted:          #6B5D52;
+    --text-disabled:       #A0918A;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #4718DC;
+    --brand-hover:         #3910B8;
+    --brand-active:        #2D0A96;
+    --brand-subtle:        rgba(71, 24, 220, 0.07);
+    --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+    --brand-border:        rgba(71, 24, 220, 0.38);
+    --success:             #1A6B3A;
+    --success-subtle:      rgba(26, 107, 58, 0.09);
+    --warning:             #7A4800;
+    --warning-subtle:      rgba(122, 72, 0, 0.09);
+    --error:               #8C1F2E;
+    --error-subtle:        rgba(140, 31, 46, 0.09);
+    --border:              rgba(12, 9, 6, 0.16);
+    --border-subtle:       rgba(12, 9, 6, 0.08);
+    --border-strong:       rgba(12, 9, 6, 0.32);
+    --border-stamp:        #4718DC;
+    --font-sans:           'Barlow Condensed', 'Aktiv Grotesk Condensed', 'Helvetica Neue Condensed', 'Arial Narrow', 'Liberation Sans Narrow', sans-serif;
+    --font-mono:           'IBM Plex Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+    --font-weight-light:   300;
+    --font-weight-regular: 400;
+    --font-weight-medium:  500;
+    --font-weight-bold:    700;
+    --font-weight-black:   900;
+    --text-xs:             0.625rem;
+    --text-sm:             0.75rem;
+    --text-base:           1rem;
+    --text-lg:             1.125rem;
+    --text-xl:             1.375rem;
+    --text-2xl:            1.75rem;
+    --text-3xl:            2.5rem;
+    --text-4xl:            4rem;
+    --leading-tight:       0.95;
+    --leading-snug:        1.1;
+    --leading-normal:      1.4;
+    --leading-relaxed:     1.65;
+    --tracking-tight:      -0.02em;
+    --tracking-normal:     0em;
+    --tracking-wide:       0.06em;
+    --tracking-wider:      0.12em;
+    --space-1:             0.25rem;
+    --space-2:             0.5rem;
+    --space-3:             0.75rem;
+    --space-4:             1rem;
+    --space-5:             1.25rem;
+    --space-6:             1.5rem;
+    --space-8:             2rem;
+    --space-10:            2.5rem;
+    --space-12:            3rem;
+    --space-16:            4rem;
+    --space-20:            5rem;
+    --space-24:            6rem;
+    --radius-sm:           1px;
+    --radius-md:           2px;
+    --radius-lg:           2px;
+    --radius-xl:           3px;
+    --radius-full:         2px;
+    --max-width:           1280px;
+    --max-width-text:      72ch;
+    --container-padding:   clamp(1rem, 4vw, 4rem);
+    --column-gap:          var(--space-8);
+    --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+    --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09), 0 1px 2px rgba(12, 9, 6, 0.07);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+    --transition-fast:     100ms ease;
+    --transition-base:     180ms ease;
+    --transition-slow:     280ms ease;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-page:        #1A1510;
+      --surface-card:        #221D17;
+      --surface-raised:      #2A2318;
+      --surface-overlay:     rgba(232, 224, 206, 0.08);
+      --surface-stamp:       #201A13;
+      --surface-on-brand:    #F0EBE0;
+      --text-primary:        #E8E0CE;
+      --text-secondary:      #C4B89E;
+      --text-muted:          #8A7B6A;
+      --text-disabled:       #57493D;
+      --text-on-brand:       #F0EBE0;
+      --text-on-dark:        #E8E0CE;
+      --brand:               #6B40FF;
+      --brand-hover:         #7B55FF;
+      --brand-active:        #5530E0;
+      --brand-subtle:        rgba(107, 64, 255, 0.12);
+      --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+      --brand-border:        rgba(107, 64, 255, 0.42);
+      --success:             #3DA05A;
+      --success-subtle:      rgba(61, 160, 90, 0.12);
+      --warning:             #C4873A;
+      --warning-subtle:      rgba(196, 135, 58, 0.12);
+      --error:               #C44058;
+      --error-subtle:        rgba(196, 64, 88, 0.12);
+      --border:              rgba(232, 224, 206, 0.13);
+      --border-subtle:       rgba(232, 224, 206, 0.06);
+      --border-strong:       rgba(232, 224, 206, 0.26);
+      --border-stamp:        #6B40FF;
+      --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+      --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.22);
+      --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --surface-page:        #1A1510;
+    --surface-card:        #221D17;
+    --surface-raised:      #2A2318;
+    --surface-overlay:     rgba(232, 224, 206, 0.08);
+    --surface-stamp:       #201A13;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #E8E0CE;
+    --text-secondary:      #C4B89E;
+    --text-muted:          #8A7B6A;
+    --text-disabled:       #57493D;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #6B40FF;
+    --brand-hover:         #7B55FF;
+    --brand-active:        #5530E0;
+    --brand-subtle:        rgba(107, 64, 255, 0.12);
+    --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+    --brand-border:        rgba(107, 64, 255, 0.42);
+    --success:             #3DA05A;
+    --success-subtle:      rgba(61, 160, 90, 0.12);
+    --warning:             #C4873A;
+    --warning-subtle:      rgba(196, 135, 58, 0.12);
+    --error:               #C44058;
+    --error-subtle:        rgba(196, 64, 88, 0.12);
+    --border:              rgba(232, 224, 206, 0.13);
+    --border-subtle:       rgba(232, 224, 206, 0.06);
+    --border-strong:       rgba(232, 224, 206, 0.26);
+    --border-stamp:        #6B40FF;
+    --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+    --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.22);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+  }
+
+  :root[data-theme="light"] {
+    --surface-page:        #E8E0CE;
+    --surface-card:        #DDD4BC;
+    --surface-raised:      #EDE6D5;
+    --surface-overlay:     rgba(12, 9, 6, 0.55);
+    --surface-stamp:       #D8CEBC;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #0C0906;
+    --text-secondary:      #3A3028;
+    --text-muted:          #6B5D52;
+    --text-disabled:       #A0918A;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #4718DC;
+    --brand-hover:         #3910B8;
+    --brand-active:        #2D0A96;
+    --brand-subtle:        rgba(71, 24, 220, 0.07);
+    --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+    --brand-border:        rgba(71, 24, 220, 0.38);
+    --success:             #1A6B3A;
+    --success-subtle:      rgba(26, 107, 58, 0.09);
+    --warning:             #7A4800;
+    --warning-subtle:      rgba(122, 72, 0, 0.09);
+    --error:               #8C1F2E;
+    --error-subtle:        rgba(140, 31, 46, 0.09);
+    --border:              rgba(12, 9, 6, 0.16);
+    --border-subtle:       rgba(12, 9, 6, 0.08);
+    --border-strong:       rgba(12, 9, 6, 0.32);
+    --border-stamp:        #4718DC;
+    --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+    --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09), 0 1px 2px rgba(12, 9, 6, 0.07);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-normal);
+    overflow-x: hidden;
+  }
+
+  /* ========== LAYOUT ========== */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+  }
+
+  /* ========== TYPOGRAPHY UTILITIES ========== */
+  .label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    line-height: var(--leading-tight);
+    color: var(--text-muted);
+  }
+
+  .display {
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+  }
+
+  /* ========== BUTTONS ========== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background: var(--brand);
+    color: var(--text-on-brand);
+    height: 40px;
+    padding: 0 var(--space-6);
+  }
+
+  .btn-primary:hover {
+    background: var(--brand-hover);
+  }
+
+  .btn-primary:active {
+    background: var(--brand-active);
+  }
+
+  .btn-primary-hero {
+    height: 48px;
+    padding: 0 var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--brand);
+    border: 1.5px solid var(--brand);
+    height: 40px;
+    padding: 0 var(--space-6);
+  }
+
+  .btn-secondary:hover {
+    background: var(--brand-subtle);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--brand);
+    border: none;
+    height: 40px;
+    padding: 0 var(--space-4);
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ========== CARDS ========== */
+  .card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    transition: border-color var(--transition-base), border-width var(--transition-base);
+  }
+
+  .card:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .card-header {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ========== STAMP ========== */
+  .stamp {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+  }
+
+  .stamp-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  .stamp-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--text-primary);
+    line-height: var(--leading-tight);
+    display: block;
+  }
+
+  .stamp-filled {
+    background: var(--brand);
+    box-shadow: none;
+    border-radius: var(--radius-sm);
+    padding: var(--space-6) var(--space-8);
+  }
+
+  .stamp-filled .stamp-label,
+  .stamp-filled .stamp-value,
+  .stamp-filled p {
+    color: var(--text-on-brand);
+  }
+
+  /* ========== DIVIDERS ========== */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-page);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav-product-badge {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--brand);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-sm);
+    padding: 2px 6px;
+    margin-left: var(--space-2);
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    padding: var(--space-20) 0 var(--space-16);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-eyebrow-line {
+    width: 32px;
+    height: 1.5px;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+
+  .hero-headline {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+    max-width: 18ch;
+  }
+
+  .hero-subhead {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: 58ch;
+    margin-bottom: var(--space-10);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-16);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    max-width: 600px;
+  }
+
+  .hero-stat {
+    background: var(--surface-card);
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .hero-stat-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  .hero-stat-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ========== CLIENT STRIP ========== */
+  .client-strip {
+    padding: var(--space-12) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .client-strip-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .client-logos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .client-logo-item {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    transition: border-color var(--transition-base), color var(--transition-base);
+  }
+
+  .client-logo-item:hover {
+    border-color: var(--brand-border);
+    color: var(--text-primary);
+  }
+
+  /* ========== SECTION COMMON ========== */
+  .section {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-16);
+  }
+
+  .section-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: clamp(var(--text-3xl), 4vw, var(--text-4xl));
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    max-width: 20ch;
+  }
+
+  .section-body {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: var(--max-width-text);
+    margin-top: var(--space-6);
+  }
+
+  /* ========== PRODUCTS ========== */
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .product-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .product-card:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .product-card-header {
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-card-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--brand);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
+    margin-bottom: var(--space-4);
+  }
+
+  .product-card-name {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .product-card-tagline {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .product-card-body {
+    padding: var(--space-6);
+  }
+
+  .product-card-desc {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  .product-feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .product-feature-list li {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .product-feature-list li::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--brand);
+    margin-top: 0.6em;
+    flex-shrink: 0;
+  }
+
+  .product-audience {
+    padding: var(--space-4) var(--space-6);
+    background: var(--surface-page);
+    border-top: 1px solid var(--border);
+  }
+
+  .product-audience-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .product-audience-roles {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  /* ========== CAPABILITY DEEP-DIVE ========== */
+  .capability-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .capability-left {}
+
+  .capability-metric-large {
+    margin: var(--space-10) 0;
+    padding: var(--space-8) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .capability-metric-item {
+    background: var(--surface-page);
+    padding: var(--space-4) var(--space-6) var(--space-4) 0;
+  }
+
+  .capability-metric-item:last-child {
+    padding-left: var(--space-6);
+  }
+
+  .capability-metric-num {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .capability-metric-unit {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-top: var(--space-1);
+  }
+
+  .capability-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .capability-step {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6);
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    transition: border-color var(--transition-base);
+  }
+
+  .capability-step:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .capability-step-num {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--brand);
+    line-height: var(--leading-tight);
+    padding-top: 2px;
+  }
+
+  .capability-step-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .capability-step-desc {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+  }
+
+  .capability-stamp-demo {
+    margin-top: var(--space-4);
+  }
+
+  .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  .vs-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .vs-item-header {
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--border);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .vs-item.vs-alfa .vs-item-header {
+    background: var(--brand);
+    color: var(--text-on-brand);
+  }
+
+  .vs-item-body {
+    padding: var(--space-5);
+  }
+
+  .vs-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+  }
+
+  .vs-row:last-child {
+    border-bottom: none;
+  }
+
+  .vs-check {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .vs-check-yes {
+    background: var(--success-subtle);
+    color: var(--success);
+    font-weight: var(--font-weight-black);
+  }
+
+  .vs-check-no {
+    background: var(--error-subtle);
+    color: var(--error);
+    font-weight: var(--font-weight-black);
+  }
+
+  .vs-check-partial {
+    background: var(--warning-subtle);
+    color: var(--warning);
+    font-weight: var(--font-weight-black);
+  }
+
+  /* ========== PROOF STATS ========== */
+  .stats-section {
+    background: var(--surface-card);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-12);
+  }
+
+  .stat-block {
+    background: var(--surface-page);
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .stat-num {
+    font-size: clamp(var(--text-3xl), 4vw, 3.5rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .stat-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: var(--leading-normal);
+  }
+
+  .stat-note {
+    font-size: var(--text-xs);
+    color: var(--text-disabled);
+    margin-top: var(--space-2);
+  }
+
+  .proof-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .proof-item {
+    background: var(--surface-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6);
+    transition: border-color var(--transition-base);
+  }
+
+  .proof-item:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .proof-item-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .proof-item-value {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: var(--leading-normal);
+  }
+
+  /* ========== SECURITY ========== */
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .security-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    transition: border-color var(--transition-base);
+  }
+
+  .security-card:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .security-card-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--brand-subtle);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    font-size: var(--text-lg);
+  }
+
+  .security-card-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .security-card-body {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .security-compliance-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-6);
+    background: var(--surface-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .compliance-badge {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--surface-card);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .compliance-badge-verified {
+    color: var(--success);
+    background: var(--success-subtle);
+    border-color: var(--success);
+  }
+
+  /* ========== PLATFORM / API ========== */
+  .platform-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .platform-code-block {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .platform-code-header {
+    padding: var(--space-3) var(--space-5);
+    background: var(--surface-stamp);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .platform-code-title {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .platform-code-lang {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .platform-code-body {
+    padding: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    overflow-x: auto;
+  }
+
+  .code-comment { color: var(--text-muted); }
+  .code-keyword { color: var(--brand); font-weight: var(--font-weight-bold); }
+  .code-string { color: var(--success); }
+  .code-number { color: var(--warning); }
+  .code-property { color: var(--text-primary); }
+
+  .platform-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .platform-feature-row {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .platform-feature-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .platform-feature-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--brand-subtle);
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+
+  .platform-feature-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .platform-feature-desc {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+  }
+
+  /* ========== DEMO CTA ========== */
+  .demo-section {
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-24) 0;
+  }
+
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .demo-left-title {
+    font-size: clamp(var(--text-3xl), 4vw, var(--text-4xl));
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    max-width: 14ch;
+  }
+
+  .demo-left-body {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    max-width: 42ch;
+  }
+
+  .demo-form {
+    background: var(--surface-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+  }
+
+  .demo-form-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .form-group:last-of-type {
+    margin-bottom: var(--space-6);
+  }
+
+  .form-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .form-input {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    width: 100%;
+    transition: border-color var(--transition-fast);
+    -webkit-appearance: none;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-disabled);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 2px var(--brand-subtle);
+  }
+
+  .form-select {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    width: 100%;
+    transition: border-color var(--transition-fast);
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+
+  .form-select:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 2px var(--brand-subtle);
+  }
+
+  .form-note {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin-top: var(--space-4);
+    line-height: var(--leading-relaxed);
+  }
+
+  .demo-trust-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  .demo-trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+  }
+
+  .demo-trust-item::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--brand);
+    margin-top: 0.6em;
+    flex-shrink: 0;
+  }
+
+  /* ========== TESTIMONIAL ========== */
+  .testimonial-band {
+    padding: var(--space-16) 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-raised);
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .testimonial-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+
+  .testimonial-quote {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .testimonial-author-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .testimonial-author-role {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    background: var(--surface-card);
+    padding: var(--space-16) 0 var(--space-8);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: var(--space-10);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-8);
+  }
+
+  .footer-brand-col {}
+
+  .footer-logo {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-4);
+    text-decoration: none;
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--text-muted);
+    max-width: 28ch;
+    margin-bottom: var(--space-6);
+  }
+
+  .footer-col-title {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer-links a {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .footer-legal {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 60ch;
+  }
+
+  .footer-legal-links {
+    display: flex;
+    gap: var(--space-6);
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-legal-links a {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-legal-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 960px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    .capability-layout {
+      grid-template-columns: 1fr;
+    }
+    .vs-grid {
+      grid-template-columns: 1fr;
+    }
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .proof-row {
+      grid-template-columns: 1fr;
+    }
+    .security-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .platform-layout {
+      grid-template-columns: 1fr;
+    }
+    .demo-layout {
+      grid-template-columns: 1fr;
+    }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+    .footer-brand-col {
+      grid-column: 1 / -1;
+    }
+    .testimonial-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      display: none;
+    }
+    .hero-stats {
+      grid-template-columns: 1fr;
+    }
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .security-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .capability-metric-large {
+      grid-template-columns: 1fr;
+      background: transparent;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAV
+================================================================ -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Alfa</a>
+      <ul class="nav-links">
+        <li><a href="#products">Products<span class="nav-product-badge">Pro</span></a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#demo" class="btn btn-primary">Request Demo</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="label">Alfa Pro — Institutional Research Platform</span>
+    </div>
+    <h1 class="hero-headline display">The Record. Stamped.</h1>
+    <p class="hero-subhead">
+      Alfa Pro compresses earnings preparation from forty hours to twenty minutes without compressing the rigor. Every output is marked. Every signal is traceable. Eight in ten investment professionals choose Alfa over the alternatives.
+    </p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn btn-primary btn-primary-hero">Request a Demo</a>
+      <a href="#products" class="btn btn-secondary btn-primary-hero">See the Platform</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">300+</span>
+        <span class="hero-stat-label">Institutional clients</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">$5T+</span>
+        <span class="hero-stat-label">Assets under management</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">8/10</span>
+        <span class="hero-stat-label">Prefer Alfa in blind tests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CLIENT STRIP
+================================================================ -->
+<section class="client-strip" id="clients">
+  <div class="container">
+    <div class="client-strip-header">
+      <span class="label">Trusted by institutions managing</span>
+      <span style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); color: var(--text-primary); letter-spacing: var(--tracking-wide); text-transform: uppercase;">$5 trillion+ in assets</span>
+    </div>
+    <div class="client-logos">
+      <div class="client-logo-item">HSBC</div>
+      <div class="client-logo-item">RBC</div>
+      <div class="client-logo-item">BMO</div>
+      <div class="client-logo-item">CIBC</div>
+      <div class="client-logo-item">Janus Henderson</div>
+      <div class="client-logo-item">Ameriprise</div>
+      <div class="client-logo-item">Invesco</div>
+      <div class="client-logo-item">Barrow Hanley</div>
+      <div class="client-logo-item">Raymond James</div>
+      <div class="client-logo-item">Wells Fargo Advisors</div>
+      <div class="client-logo-item">Manulife</div>
+      <div class="client-logo-item">KeyBank</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PRODUCT OVERVIEW
+================================================================ -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Product suite</div>
+      <h2 class="section-title display">Two Products. One Infrastructure.</h2>
+      <p class="section-body">
+        Alfa was built from the ground up for financial truth — not fine-tuned from a general model, not retrofitted from consumer AI. Eight years of finance-specific development produces a platform that speaks the language of the discipline it serves.
+      </p>
+    </div>
+    <div class="products-grid">
+
+      <!-- ALFA PRO -->
+      <div class="product-card" id="alfa-pro">
+        <div class="product-card-header">
+          <span class="product-card-tag">For PMs and Analysts</span>
+          <div class="product-card-name">Alfa Pro</div>
+          <div class="product-card-tagline">Research tool — hedge funds and asset managers</div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-card-desc">
+            Alfa Pro is the earnings and research intelligence platform used by portfolio managers and analysts at 300+ institutions. It does not summarize — it prepares. The difference between a summary and preparation is the difference between a headline and a thesis. Alfa Pro produces the latter: stamped, traceable, and built for the conviction that precedes a trade.
+          </p>
+          <ul class="product-feature-list">
+            <li>Earnings transcript analysis at institutional depth — not summaries, not sentiment scores</li>
+            <li>Revenue revision tracking across analyst consensus with source attribution</li>
+            <li>High-conviction signal generation with full derivation chain visible on request</li>
+            <li>Sector positioning overlays calibrated to current portfolio holdings</li>
+            <li>Comparable period variance flagging against prior quarters and forward guidance</li>
+            <li>Management language analysis — detects hedging, commitment changes, and guidance revisions</li>
+            <li>Every output stamped: violet border marks AI-generated content, always separate from editorial</li>
+            <li>Single-click export to research note format, compatible with internal distribution workflows</li>
+          </ul>
+          <a href="#demo" class="btn btn-primary">Request a Pro Demo</a>
+        </div>
+        <div class="product-audience">
+          <div class="product-audience-label">Audience</div>
+          <div class="product-audience-roles">Portfolio Managers — Senior Analysts — Research Directors — CIOs</div>
+        </div>
+      </div>
+
+      <!-- ALFA PLATFORM -->
+      <div class="product-card" id="alfa-platform">
+        <div class="product-card-header">
+          <span class="product-card-tag">For Quants and Engineers</span>
+          <div class="product-card-name">Alfa Platform</div>
+          <div class="product-card-tagline">API and MCP infrastructure — quantitative and engineering teams</div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-card-desc">
+            Alfa Platform is the developer infrastructure layer: a financial event bus and MCP-compatible API that gives quantitative teams programmatic access to Alfa's signal generation, earnings intelligence, and model outputs. Not a data feed. Not a wrapper on a general LLM. The same finance-native AI that powers Alfa Pro, exposed as infrastructure for teams who build their own workflows on top of it.
+          </p>
+          <ul class="product-feature-list">
+            <li>REST and streaming APIs for real-time earnings intelligence and signal delivery</li>
+            <li>MCP-compatible tool definitions for direct integration with agentic workflows</li>
+            <li>Financial event bus: earnings, guidance revisions, analyst consensus changes as structured events</li>
+            <li>Stamped output schema: every API response carries provenance metadata — model version, input sources, confidence interval</li>
+            <li>Webhook support for event-driven portfolio monitoring and alert systems</li>
+            <li>Python SDK with typed response objects and async support</li>
+            <li>Enterprise SLA with dedicated infrastructure for tier-one clients</li>
+            <li>SOC 2 certified with audit trail for all model calls — compliance-ready from day one</li>
+          </ul>
+          <a href="#platform" class="btn btn-secondary">See the API</a>
+        </div>
+        <div class="product-audience">
+          <div class="product-audience-label">Audience</div>
+          <div class="product-audience-roles">Quants — Engineers — CTOs — Data Science Teams</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CAPABILITY DEEP-DIVE — EARNINGS INTELLIGENCE
+================================================================ -->
+<section class="section" id="capability">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Earnings Intelligence</div>
+      <h2 class="section-title display">Forty Hours. Twenty Minutes.</h2>
+      <p class="section-body">
+        Earnings preparation is the most time-intensive repeating task in institutional research. Alfa does not cut the work short — it completes it faster. The rigor is unchanged. The time cost is.
+      </p>
+    </div>
+
+    <div class="capability-layout">
+      <div class="capability-left">
+
+        <div class="capability-metric-large">
+          <div class="capability-metric-item">
+            <span class="capability-metric-num">40</span>
+            <span class="capability-metric-unit">Hours — industry average earnings prep</span>
+          </div>
+          <div class="capability-metric-item">
+            <span class="capability-metric-num">20</span>
+            <span class="capability-metric-unit">Minutes — with Alfa Pro</span>
+          </div>
+        </div>
+
+        <p style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-6);">
+          The forty hours an analyst spends on earnings preparation is not thorough analysis — it is the cost of inadequate tooling. Transcript review, consensus tracking, comparable period modeling, management commentary parsing, and guidance revision flagging are not intellectual tasks. They are data assembly tasks. Alfa completes the assembly.
+        </p>
+
+        <p style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-8);">
+          What remains after twenty minutes of Alfa is exactly what was valuable in forty hours of preparation: the judgment about what the numbers mean and the conviction to act on them. Alfa returns analysts to the top of the analytical pyramid. It does not replace the analyst at the top of it.
+        </p>
+
+        <!-- ALFA STAMP DEMO -->
+        <div class="capability-stamp-demo">
+          <div class="label" style="margin-bottom: var(--space-3);">Example output — AAPL Q3 2025</div>
+          <div class="stamp">
+            <span class="stamp-label">Alfa Signal — Earnings Conviction</span>
+            <span class="stamp-value">HIGH</span>
+            <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border);">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-3);">
+                <div>
+                  <div class="stamp-label" style="margin-bottom: var(--space-1);">Revenue vs Consensus</div>
+                  <span style="font-size: var(--text-lg); font-weight: var(--font-weight-black); color: var(--success);">+2.3%</span>
+                </div>
+                <div>
+                  <div class="stamp-label" style="margin-bottom: var(--space-1);">EPS vs Consensus</div>
+                  <span style="font-size: var(--text-lg); font-weight: var(--font-weight-black); color: var(--success);">+$0.08</span>
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+                <div>
+                  <div class="stamp-label" style="margin-bottom: var(--space-1);">Guidance Revision</div>
+                  <span style="font-size: var(--text-lg); font-weight: var(--font-weight-black); color: var(--text-primary);">RAISED</span>
+                </div>
+                <div>
+                  <div class="stamp-label" style="margin-bottom: var(--space-1);">Management Tone</div>
+                  <span style="font-size: var(--text-lg); font-weight: var(--font-weight-black); color: var(--text-primary);">COMMITTED</span>
+                </div>
+              </div>
+              <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border); font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.04em;">
+                Model: alfa-finance-v4.2 · Inputs: transcript, 14 analysts · Generated: 2026-08-03T14:32:01Z
+              </div>
+            </div>
+          </div>
+          <p style="font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-3); font-style: normal; letter-spacing: var(--tracking-wide); text-transform: uppercase;">Violet border marks Alfa-generated output. Always visible. Always traceable.</p>
+        </div>
+
+      </div>
+
+      <div class="capability-right">
+        <div style="margin-bottom: var(--space-6);">
+          <div class="label" style="margin-bottom: var(--space-4);">How Alfa prepares earnings in 20 minutes</div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">01</div>
+          <div>
+            <div class="capability-step-title">Transcript Ingestion</div>
+            <p class="capability-step-desc">Full earnings transcript parsed and indexed within seconds of release. Not a summary — the complete document, structured for analytical queries.</p>
+          </div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">02</div>
+          <div>
+            <div class="capability-step-title">Consensus Variance Analysis</div>
+            <p class="capability-step-desc">Revenue, EPS, and segment-level actuals measured against buy-side and sell-side consensus across 14+ analyst sources. Surprises flagged with magnitude and direction.</p>
+          </div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">03</div>
+          <div>
+            <div class="capability-step-title">Guidance Revision Detection</div>
+            <p class="capability-step-desc">Forward guidance extracted and compared against prior quarter language and street expectations. Raises, lowerings, and language softening identified with exact sourcing.</p>
+          </div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">04</div>
+          <div>
+            <div class="capability-step-title">Management Commitment Scoring</div>
+            <p class="capability-step-desc">Alfa's language model scores management commentary on a commitment axis — distinguishing committed statements from hedged ones, tracking tone changes versus prior quarters.</p>
+          </div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">05</div>
+          <div>
+            <div class="capability-step-title">Signal Derivation and Stamping</div>
+            <p class="capability-step-desc">Conviction signal generated with full derivation chain. Every factor that contributed to the signal is visible on request. The stamp marks output as Alfa-generated — always distinct from editorial context.</p>
+          </div>
+        </div>
+
+        <div class="capability-step">
+          <div class="capability-step-num">06</div>
+          <div>
+            <div class="capability-step-title">Research Note Export</div>
+            <p class="capability-step-desc">Completed preparation package exportable in standard research note format. Stamped outputs are clearly delineated. Analyst adds thesis layer on top of infrastructure Alfa assembled.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div style="margin-top: var(--space-16);">
+      <div class="label" style="margin-bottom: var(--space-6);">Alfa Pro vs. Bloomberg / FactSet</div>
+      <div class="vs-grid">
+        <div class="vs-item">
+          <div class="vs-item-header">Bloomberg Terminal</div>
+          <div class="vs-item-body">
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Comprehensive real-time market data</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Deep historical pricing and fundamentals</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>AI-native earnings signal generation</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>Stamped, traceable AI outputs</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>Finance-specific model (not fine-tuned GPT)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-partial">~</span>
+              <span>Earnings transcript analysis (manual query)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>20-minute earnings prep completion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-item">
+          <div class="vs-item-header">FactSet Research</div>
+          <div class="vs-item-body">
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Structured fundamentals and estimates data</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Analyst consensus aggregation</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-partial">~</span>
+              <span>Basic AI document search (2023+)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>Stamped, traceable AI outputs</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>Finance-specific model (not fine-tuned GPT)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-partial">~</span>
+              <span>Earnings transcript analysis (search-based)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-no">✗</span>
+              <span>20-minute earnings prep completion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-item vs-alfa">
+          <div class="vs-item-header">Alfa Pro</div>
+          <div class="vs-item-body">
+            <div class="vs-row">
+              <span class="vs-check vs-check-partial">~</span>
+              <span>Real-time market data (via integrated feeds)</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Structured fundamentals and estimates data</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>AI-native earnings signal generation</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Stamped, traceable AI outputs — always</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Finance-specific model — 8 years development</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>Full transcript analysis with conviction signal</span>
+            </div>
+            <div class="vs-row">
+              <span class="vs-check vs-check-yes">✓</span>
+              <span>20-minute earnings prep completion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     PROOF STATS
+================================================================ -->
+<section class="section stats-section" id="proof">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Verified claims</div>
+      <h2 class="section-title display">The Numbers. Not the Narrative.</h2>
+      <p class="section-body">
+        Alfa does not make claims it cannot substantiate. These numbers are specific, verifiable, and available for audit during due diligence. We stand behind each one.
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-block">
+        <span class="stat-num">8/10</span>
+        <div class="stat-label">Investment professionals prefer Alfa over ChatGPT, Perplexity, and Claude in blind financial research tests</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">40→20</span>
+        <div class="stat-label">Hours to minutes: earnings preparation time reduction, measured across 300+ client deployments</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">300+</span>
+        <div class="stat-label">Institutional clients active on Alfa Pro across hedge funds, asset managers, wealth management firms</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">$5T+</span>
+        <div class="stat-label">Assets under management across Alfa's active institutional client base</div>
+      </div>
+    </div>
+
+    <div class="proof-row">
+      <div class="proof-item">
+        <div class="proof-item-label">Finance AI Experience</div>
+        <div class="proof-item-value">8 years building finance-specific AI — not a general model fine-tuned on financial data</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item-label">Intellectual Property</div>
+        <div class="proof-item-value">15 patents granted across earnings intelligence, signal generation, and financial NLP</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item-label">Security Certification</div>
+        <div class="proof-item-value">SOC 2 Type II certified. FINRA-aware architecture from day one. Full audit trail on all model calls</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item-label">Named Client Coverage</div>
+        <div class="proof-item-value">HSBC, RBC, BMO, CIBC, Janus Henderson, Ameriprise, Invesco, Barrow Hanley, Raymond James, Wells Fargo Advisors, Manulife, KeyBank</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item-label">Output Traceability</div>
+        <div class="proof-item-value">Every Alfa output carries provenance metadata: model version, input sources, timestamp, derivation chain available on request</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item-label">Model Architecture</div>
+        <div class="proof-item-value">Finance-native from architecture through training — not adapted from a consumer base model. Built for the specific demands of financial truth</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIAL BAND
+================================================================ -->
+<section class="testimonial-band">
+  <div class="container">
+    <div class="label" style="margin-bottom: var(--space-8);">From the institutions using Alfa Pro today</div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"We run Alfa on every name we cover. The earnings prep that used to take my analysts the first two days of earnings season now runs overnight. They come in on the morning of the call with conviction instead of a to-do list."</p>
+        <div class="testimonial-author-name">Portfolio Manager</div>
+        <div class="testimonial-author-role">Long/Short Equity Fund — $4.2B AUM</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"The stamp is the thing. Our compliance team required that AI-generated outputs be clearly marked and separately maintained from analyst research. Alfa's visual system did that from day one. That's what got us approved for deployment."</p>
+        <div class="testimonial-author-name">Head of Research Technology</div>
+        <div class="testimonial-author-role">Multi-Strategy Asset Manager — $18B AUM</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I evaluated Bloomberg's AI additions, FactSet's document search, and three point solutions. Alfa was the only one where the output was actually usable in a research note without rewriting it. That's the benchmark — does it read like an analyst wrote it."</p>
+        <div class="testimonial-author-name">Director of Equity Research</div>
+        <div class="testimonial-author-role">Regional Bank Wealth Management — $7B AUM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECURITY
+================================================================ -->
+<section class="section" id="security">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Security and Compliance</div>
+      <h2 class="section-title display">Built for Institutions That Cannot Afford a Mistake.</h2>
+      <p class="section-body">
+        Alfa was designed for the compliance constraints of institutional financial services from day one — not retrofitted after the fact. SOC 2 certification, FINRA-aware architecture, and full model audit trails are infrastructure decisions, not product features.
+      </p>
+    </div>
+
+    <div class="security-grid">
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 1L2 4.5V9C2 12.866 5.134 16.5 9 17C12.866 16.5 16 12.866 16 9V4.5L9 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" style="color: var(--brand);"/>
+            <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">SOC 2 Type II Certified</div>
+        <p class="security-card-body">
+          Full SOC 2 Type II certification covering security, availability, processing integrity, confidentiality, and privacy. Annual audit cycle. Certification documentation available under NDA during procurement due diligence.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="7" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.5" style="color: var(--brand);"/>
+            <path d="M5 7V5C5 3.343 6.343 2 8 2H10C11.657 2 13 3.343 13 5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+            <circle cx="9" cy="12" r="1" fill="currentColor" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">FINRA-Aware Architecture</div>
+        <p class="security-card-body">
+          Alfa's data handling, output stamping, and audit infrastructure were designed with FINRA's books-and-records requirements in mind. All model calls are logged, timestamped, and maintained with retention policies compatible with FINRA Rule 4511.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 9H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+            <path d="M9 2V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+            <rect x="2" y="2" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.5" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">Data Isolation</div>
+        <p class="security-card-body">
+          Client data is fully isolated at the infrastructure level. Your firm's holdings, watchlists, and research context are never used to train or fine-tune Alfa's models. Zero cross-client data leakage by architecture, not just policy.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 5H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+            <path d="M3 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+            <path d="M3 13H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">Full Model Audit Trail</div>
+        <p class="security-card-body">
+          Every Alfa output carries a complete audit trail: model version identifier, input sources, generation timestamp, and derivation parameters. All stamped outputs can be reproduced and explained during compliance review. Nothing is a black box.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" style="color: var(--brand);"/>
+            <path d="M9 5V9L12 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">Enterprise SLA</div>
+        <p class="security-card-body">
+          99.9% uptime SLA with dedicated infrastructure for tier-one clients. 24/7 operations monitoring with defined incident response times. Earnings season capacity is scaled proactively based on scheduled disclosure calendars.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 4L9 2L16 4V10C16 13.5 13 16 9 17C5 16 2 13.5 2 10V4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" style="color: var(--brand);"/>
+            <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand);"/>
+          </svg>
+        </div>
+        <div class="security-card-title">SSO and Access Controls</div>
+        <p class="security-card-body">
+          SAML 2.0 and OIDC SSO integration for enterprise identity providers. Role-based access controls with seat-level permissioning. API key management with scoped credentials and rotation policies compatible with enterprise secrets management.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="security-compliance-row">
+      <span class="label" style="margin-right: var(--space-4); margin-bottom: 0;">Certifications and Standards:</span>
+      <span class="compliance-badge compliance-badge-verified">SOC 2 Type II</span>
+      <span class="compliance-badge compliance-badge-verified">FINRA-Aware</span>
+      <span class="compliance-badge">GDPR Compliant</span>
+      <span class="compliance-badge">CCPA Compliant</span>
+      <span class="compliance-badge">ISO 27001 Aligned</span>
+      <span class="compliance-badge">SAML 2.0</span>
+      <span class="compliance-badge">OIDC</span>
+      <span class="compliance-badge">AES-256 at Rest</span>
+      <span class="compliance-badge">TLS 1.3 in Transit</span>
+      <span class="compliance-badge compliance-badge-verified">15 Patents</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     PLATFORM / API
+================================================================ -->
+<section class="section" id="platform">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Alfa Platform</div>
+      <h2 class="section-title display">Finance AI as Infrastructure.</h2>
+      <p class="section-body">
+        Alfa Platform is not a data vendor and not a wrapper on a general language model. It is finance-native AI exposed as developer infrastructure — for quantitative teams who build their own workflows on top of signals that actually understand what the numbers mean.
+      </p>
+    </div>
+
+    <div class="platform-layout">
+
+      <div>
+        <div class="label" style="margin-bottom: var(--space-6);">What quantitative teams build with Alfa Platform</div>
+
+        <div class="platform-features">
+          <div class="platform-feature-row">
+            <div class="platform-feature-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 4H14M2 8H10M2 12H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+              </svg>
+            </div>
+            <div>
+              <div class="platform-feature-title">Event-Driven Signal Pipelines</div>
+              <p class="platform-feature-desc">Subscribe to Alfa's financial event bus. Receive structured signals on earnings, guidance revisions, and analyst consensus changes as they happen — not as raw text to parse, but as typed events with conviction scores and source attribution.</p>
+            </div>
+          </div>
+
+          <div class="platform-feature-row">
+            <div class="platform-feature-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="1" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.5" style="color: var(--brand);"/>
+                <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand);"/>
+              </svg>
+            </div>
+            <div>
+              <div class="platform-feature-title">Agentic Workflow Integration via MCP</div>
+              <p class="platform-feature-desc">Alfa Platform exposes MCP-compatible tool definitions. Your agentic systems call Alfa's earnings intelligence, signal generation, and transcript analysis as native tool calls — no prompt engineering, no output parsing.</p>
+            </div>
+          </div>
+
+          <div class="platform-feature-row">
+            <div class="platform-feature-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" style="color: var(--brand);"/>
+                <path d="M8 4V8L11 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color: var(--brand);"/>
+              </svg>
+            </div>
+            <div>
+              <div class="platform-feature-title">Portfolio Monitoring Webhooks</div>
+              <p class="platform-feature-desc">Register holdings and receive webhooks when Alfa detects material signals on your positions — earnings surprises, guidance changes, or conviction threshold crossings. Risk monitoring that doesn't require a standing query.</p>
+            </div>
+          </div>
+
+          <div class="platform-feature-row">
+            <div class="platform-feature-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 14L14 2M2 2H14V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--brand);"/>
+              </svg>
+            </div>
+            <div>
+              <div class="platform-feature-title">Backtesting Signal Feeds</div>
+              <p class="platform-feature-desc">Historical Alfa signals available via API for factor research and strategy backtesting. Stamped outputs include the exact model version and inputs at generation time — signals are reproducible, not reconstructed.</p>
+            </div>
+          </div>
+
+          <div class="platform-feature-row">
+            <div class="platform-feature-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 13V9L8 5L13 9V13H10V10H6V13H3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" style="color: var(--brand);"/>
+              </svg>
+            </div>
+            <div>
+              <div class="platform-feature-title">Python SDK with Typed Responses</div>
+              <p class="platform-feature-desc">First-class Python SDK with typed dataclasses, async support, and streaming for real-time signal delivery. Complete OpenAPI spec for integration in any language. Postman collection included.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="platform-code-block">
+          <div class="platform-code-header">
+            <span class="platform-code-title">Alfa Platform — Python SDK</span>
+            <span class="platform-code-lang">Python 3.10+</span>
+          </div>
+          <div class="platform-code-body"><pre><code><span class="code-comment"># Install: pip install alfa-platform</span>
+<span class="code-keyword">import</span> alfa
+
+<span class="code-comment"># Initialize with your API key</span>
+client = alfa.Platform(
+    api_key=<span class="code-string">"sk-alfa-..."</span>,
+    environment=<span class="code-string">"production"</span>
+)
+
+<span class="code-comment"># Get earnings signal for a ticker</span>
+signal = client.earnings.signal(
+    ticker=<span class="code-string">"AAPL"</span>,
+    quarter=<span class="code-string">"Q3-2025"</span>
+)
+
+<span class="code-comment"># Every response is stamped</span>
+<span class="code-keyword">print</span>(signal.conviction)        <span class="code-comment"># "HIGH"</span>
+<span class="code-keyword">print</span>(signal.eps_surprise)      <span class="code-comment"># +0.08</span>
+<span class="code-keyword">print</span>(signal.guidance_revision) <span class="code-comment"># "RAISED"</span>
+<span class="code-keyword">print</span>(signal.provenance.model)  <span class="code-comment"># "alfa-finance-v4.2"</span>
+<span class="code-keyword">print</span>(signal.provenance.inputs) <span class="code-comment"># [...14 sources]</span>
+
+<span class="code-comment"># Subscribe to real-time event bus</span>
+<span class="code-keyword">async with</span> client.events.stream(
+    tickers=[<span class="code-string">"AAPL"</span>, <span class="code-string">"MSFT"</span>, <span class="code-string">"NVDA"</span>],
+    event_types=[
+        <span class="code-string">"earnings_signal"</span>,
+        <span class="code-string">"guidance_revision"</span>,
+        <span class="code-string">"consensus_move"</span>
+    ]
+) <span class="code-keyword">as</span> stream:
+    <span class="code-keyword">async for</span> event <span class="code-keyword">in</span> stream:
+        handle_signal(event)
+
+<span class="code-comment"># Register portfolio for monitoring</span>
+monitor = client.portfolio.monitor(
+    holdings=[
+        {<span class="code-string">"ticker"</span>: <span class="code-string">"AAPL"</span>, <span class="code-string">"weight"</span>: <span class="code-number">0.08</span>},
+        {<span class="code-string">"ticker"</span>: <span class="code-string">"MSFT"</span>, <span class="code-string">"weight"</span>: <span class="code-number">0.06</span>},
+    ],
+    webhook_url=<span class="code-string">"https://your-infra.com/alfa"</span>,
+    conviction_threshold=<span class="code-string">"HIGH"</span>
+)</code></pre></div>
+        </div>
+
+        <div style="margin-top: var(--space-6); display: flex; gap: var(--space-4); flex-wrap: wrap;">
+          <a href="#demo" class="btn btn-primary">Talk to Platform Sales</a>
+          <a href="#" class="btn btn-secondary">View API Documentation</a>
+        </div>
+
+        <div style="margin-top: var(--space-6); padding: var(--space-5) var(--space-6); background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+          <div class="label" style="margin-bottom: var(--space-4);">Pricing tiers</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle);">
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); color: var(--text-primary); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Growth</div>
+                <div class="label" style="margin-top: var(--space-1);">Up to 10,000 API calls / month</div>
+              </div>
+              <div style="font-size: var(--text-base); font-weight: var(--font-weight-bold); color: var(--text-primary);">On request</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle);">
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); color: var(--text-primary); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Scale</div>
+                <div class="label" style="margin-top: var(--space-1);">Unlimited calls, SLA, dedicated support</div>
+              </div>
+              <div style="font-size: var(--text-base); font-weight: var(--font-weight-bold); color: var(--text-primary);">On request</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); color: var(--text-primary); text-transform: uppercase; letter-spacing: var(--tracking-wide);">Enterprise</div>
+                <div class="label" style="margin-top: var(--space-1);">Dedicated infrastructure, custom SLA, audit logging</div>
+              </div>
+              <div style="font-size: var(--text-base); font-weight: var(--font-weight-bold); color: var(--text-primary);">On request</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     DEMO CTA
+================================================================ -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="demo-layout">
+
+      <div>
+        <div class="section-eyebrow" style="margin-bottom: var(--space-4);">Request a demo</div>
+        <h2 class="demo-left-title display">See the Record. Live.</h2>
+        <p class="demo-left-body">
+          A demo with Alfa is not a slide deck. It is a live earnings preparation run on a name you currently hold — so you see exactly what your analysts would see, on companies you already know. Thirty minutes. No commitment required.
+        </p>
+
+        <div class="demo-trust-items">
+          <div class="demo-trust-item">Live run on a ticker from your current portfolio — not a pre-recorded demo</div>
+          <div class="demo-trust-item">Side-by-side comparison with your current workflow on the same name</div>
+          <div class="demo-trust-item">Compliance architecture walkthrough included — SOC 2, FINRA, audit trail</div>
+          <div class="demo-trust-item">No commitment. No sales follow-up without your invitation. One meeting.</div>
+        </div>
+
+        <div style="margin-top: var(--space-8);">
+          <div class="label" style="margin-bottom: var(--space-4);">What to expect after you submit</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; gap: var(--space-4); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; background: var(--brand); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: var(--text-xs); font-weight: var(--font-weight-black); color: var(--text-on-brand);">1</span>
+              </div>
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-primary); margin-bottom: var(--space-1);">Same day confirmation</div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-normal);">An Alfa enterprise account executive will respond within one business day to schedule. No SDR chain. No qualification call.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--space-4); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; background: var(--brand); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: var(--text-xs); font-weight: var(--font-weight-black); color: var(--text-on-brand);">2</span>
+              </div>
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-primary); margin-bottom: var(--space-1);">30-minute live session</div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-normal);">We run Alfa live on a name you choose. You see the output, the stamp, and the derivation chain in real time.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--space-4); align-items: flex-start;">
+              <div style="width: 24px; height: 24px; background: var(--brand); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: var(--text-xs); font-weight: var(--font-weight-black); color: var(--text-on-brand);">3</span>
+              </div>
+              <div>
+                <div style="font-size: var(--text-sm); font-weight: var(--font-weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-primary); margin-bottom: var(--space-1);">Trial access if warranted</div>
+                <div style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-normal);">If the demo generates interest, a 30-day trial on your own watchlist is available with compliance documentation provided on day one.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="demo-form">
+          <div class="demo-form-title">Request a Demo</div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="first-name">First Name</label>
+              <input class="form-input" type="text" id="first-name" name="first-name" placeholder="Alexandra">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="last-name">Last Name</label>
+              <input class="form-input" type="text" id="last-name" name="last-name" placeholder="Chen">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Work Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="achen@firm.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="firm">Firm Name</label>
+            <input class="form-input" type="text" id="firm" name="firm" placeholder="Meridian Capital Management">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="role">Role</label>
+            <select class="form-select" id="role" name="role">
+              <option value="" disabled selected>Select your role</option>
+              <option value="pm">Portfolio Manager</option>
+              <option value="analyst">Senior Analyst / Research Analyst</option>
+              <option value="cio">CIO / Chief Investment Officer</option>
+              <option value="head-research">Head of Research</option>
+              <option value="quant">Quant / Quantitative Researcher</option>
+              <option value="cto">CTO / Head of Technology</option>
+              <option value="compliance">Chief Compliance Officer</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="aum">Assets Under Management</label>
+            <select class="form-select" id="aum" name="aum">
+              <option value="" disabled selected>Select AUM range</option>
+              <option value="under-1b">Under $1B</option>
+              <option value="1-5b">$1B — $5B</option>
+              <option value="5-20b">$5B — $20B</option>
+              <option value="20-100b">$20B — $100B</option>
+              <option value="over-100b">Over $100B</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="interest">Primary Interest</label>
+            <select class="form-select" id="interest" name="interest">
+              <option value="" disabled selected>Select primary interest</option>
+              <option value="pro">Alfa Pro — Research tool for PMs and analysts</option>
+              <option value="platform">Alfa Platform — API and developer infrastructure</option>
+              <option value="both">Both products</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Anything specific you want to see?</label>
+            <textarea class="form-input" id="message" name="message" rows="3" placeholder="A ticker you want us to run live, a workflow question, or a compliance requirement we should address..." style="resize: vertical; min-height: 80px; font-family: var(--font-sans);"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px; font-size: var(--text-base); justify-content: center;">Request Demo</button>
+          <p class="form-note">By submitting this form you agree to be contacted by an Alfa enterprise account executive. We do not sell or share your information. Alfa's privacy policy is available at alfa.com/privacy.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     MANIFESTO BAND
+================================================================ -->
+<section style="padding: var(--space-20) 0; border-bottom: 1px solid var(--border); background: var(--surface-raised);">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-16); align-items: start;">
+      <div>
+        <div class="section-eyebrow" style="margin-bottom: var(--space-4);">Brand platform</div>
+        <div style="font-size: clamp(2rem, 5vw, var(--text-4xl)); font-weight: var(--font-weight-black); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); text-transform: uppercase; color: var(--text-primary);">The Record, Officially.</div>
+      </div>
+      <div>
+        <p style="font-size: var(--text-xl); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-6);">
+          For as long as financial markets have existed, the quality of your research has been a function of the resources behind it. The institutional PM at a major asset manager did not have a better mind than the individual investor who followed the same companies, read the same filings, tracked the same earnings. They had more time. More infrastructure. More analysts completing the preparation that precedes conviction.
+        </p>
+        <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-6);">
+          That was a distribution problem. It was never a capability problem.
+        </p>
+        <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-6);">
+          We built Alfa to solve the distribution problem. Every output Alfa produces is stamped. You will see a violet border around what the model generated — because we believe provenance is an obligation. You deserve to know what came from the record and what came from us. That separation is load-bearing.
+        </p>
+        <p style="font-size: var(--text-lg); line-height: var(--leading-relaxed); color: var(--text-secondary);">
+          We have spent eight years building AI that speaks finance natively. Three hundred institutions. Five trillion in assets under management. Eight in ten investment professionals, in a blind test, prefer Alfa. We are building the infrastructure that makes serious investing available to everyone serious enough to want it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer class="footer" id="about">
+  <div class="container">
+    <div class="footer-top">
+
+      <div class="footer-brand-col">
+        <a href="#" class="footer-logo">Alfa</a>
+        <p class="footer-tagline">
+          Institutional-grade financial research infrastructure. Eight years finance-specific AI. 300+ institutional clients. $5T+ AUM.
+        </p>
+        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <span class="compliance-badge compliance-badge-verified">SOC 2 Type II</span>
+          <span class="compliance-badge">FINRA-Aware</span>
+          <span class="compliance-badge compliance-badge-verified">15 Patents</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="#alfa-pro">Alfa Pro</a></li>
+          <li><a href="#alfa-platform">Alfa Platform</a></li>
+          <li><a href="#">Alfa API Documentation</a></li>
+          <li><a href="#">Python SDK</a></li>
+          <li><a href="#">MCP Integration Guide</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Solutions</div>
+        <ul class="footer-links">
+          <li><a href="#">Hedge Funds</a></li>
+          <li><a href="#">Asset Managers</a></li>
+          <li><a href="#">Wealth Management</a></li>
+          <li><a href="#">Quantitative Research</a></li>
+          <li><a href="#">Earnings Intelligence</a></li>
+          <li><a href="#">Signal Generation</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Alfa</a></li>
+          <li><a href="#">Our Research</a></li>
+          <li><a href="#">Clients</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="#">Security</a></li>
+          <li><a href="#">SOC 2 Report</a></li>
+          <li><a href="#">Compliance Documentation</a></li>
+          <li><a href="#">Status Page</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">System Requirements</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <p class="footer-legal">
+          &copy; 2026 Alfa Inc. All rights reserved. Alfa and Alfa Pro are registered trademarks. Past performance of AI-generated signals does not guarantee future results. Alfa outputs do not constitute investment advice. All institutional clients are subject to Alfa's enterprise terms of service.
+        </p>
+        <p class="footer-legal" style="margin-top: var(--space-2);">
+          Alfa is not a registered investment adviser and does not provide investment advisory services. Alfa Pro is a research infrastructure tool and does not manage assets or provide recommendations under the Investment Advisers Act of 1940.
+        </p>
+      </div>
+      <ul class="footer-legal-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Security</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle (respects system preference; applies data-theme
+// Theme toggle logic
+  (function() {
+    const stored = localStorage.getItem('alfa-theme');
+    if (stored) {
+      document.documentElement.setAttribute('data-theme', stored);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+</body>
+</html>

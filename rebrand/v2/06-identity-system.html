@@ -1,0 +1,3193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa — Visual Identity Reference</title>
+<style>
+:root {
+  --surface-page:        #E8E0CE;
+  --surface-card:        #DDD4BC;
+  --surface-raised:      #EDE6D5;
+  --surface-overlay:     rgba(12, 9, 6, 0.55);
+  --surface-stamp:       #D8CEBC;
+  --surface-on-brand:    #F0EBE0;
+
+  --text-primary:        #0C0906;
+  --text-secondary:      #3A3028;
+  --text-muted:          #6B5D52;
+  --text-disabled:       #A0918A;
+  --text-on-brand:       #F0EBE0;
+  --text-on-dark:        #E8E0CE;
+
+  --brand:               #4718DC;
+  --brand-hover:         #3910B8;
+  --brand-active:        #2D0A96;
+  --brand-subtle:        rgba(71, 24, 220, 0.07);
+  --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+  --brand-border:        rgba(71, 24, 220, 0.38);
+
+  --success:             #1A6B3A;
+  --success-subtle:      rgba(26, 107, 58, 0.09);
+  --warning:             #7A4800;
+  --warning-subtle:      rgba(122, 72, 0, 0.09);
+  --error:               #8C1F2E;
+  --error-subtle:        rgba(140, 31, 46, 0.09);
+
+  --border:              rgba(12, 9, 6, 0.16);
+  --border-subtle:       rgba(12, 9, 6, 0.08);
+  --border-strong:       rgba(12, 9, 6, 0.32);
+  --border-stamp:        #4718DC;
+
+  --font-sans:           'Barlow Condensed', 'Aktiv Grotesk Condensed', 'Helvetica Neue Condensed', 'Arial Narrow', 'Liberation Sans Narrow', sans-serif;
+  --font-mono:           'IBM Plex Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+
+  --font-weight-light:   300;
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+  --font-weight-black:   900;
+
+  --text-xs:             0.625rem;
+  --text-sm:             0.75rem;
+  --text-base:           1rem;
+  --text-lg:             1.125rem;
+  --text-xl:             1.375rem;
+  --text-2xl:            1.75rem;
+  --text-3xl:            2.5rem;
+  --text-4xl:            4rem;
+
+  --leading-tight:       0.95;
+  --leading-snug:        1.1;
+  --leading-normal:      1.4;
+  --leading-relaxed:     1.65;
+
+  --tracking-tight:      -0.02em;
+  --tracking-normal:     0em;
+  --tracking-wide:       0.06em;
+  --tracking-wider:      0.12em;
+
+  --space-1:             0.25rem;
+  --space-2:             0.5rem;
+  --space-3:             0.75rem;
+  --space-4:             1rem;
+  --space-5:             1.25rem;
+  --space-6:             1.5rem;
+  --space-8:             2rem;
+  --space-10:            2.5rem;
+  --space-12:            3rem;
+  --space-16:            4rem;
+  --space-20:            5rem;
+  --space-24:            6rem;
+
+  --radius-sm:           1px;
+  --radius-md:           2px;
+  --radius-lg:           2px;
+  --radius-xl:           3px;
+  --radius-full:         2px;
+
+  --max-width:           1280px;
+  --max-width-text:      72ch;
+  --container-padding:   clamp(1rem, 4vw, 4rem);
+  --column-gap:          var(--space-8);
+
+  --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+  --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09), 0 1px 2px rgba(12, 9, 6, 0.07);
+  --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+
+  --transition-fast:     100ms ease;
+  --transition-base:     180ms ease;
+  --transition-slow:     280ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-page:        #1A1510;
+    --surface-card:        #221D17;
+    --surface-raised:      #2A2318;
+    --surface-overlay:     rgba(232, 224, 206, 0.08);
+    --surface-stamp:       #201A13;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #E8E0CE;
+    --text-secondary:      #C4B89E;
+    --text-muted:          #8A7B6A;
+    --text-disabled:       #57493D;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #6B40FF;
+    --brand-hover:         #7B55FF;
+    --brand-active:        #5530E0;
+    --brand-subtle:        rgba(107, 64, 255, 0.12);
+    --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+    --brand-border:        rgba(107, 64, 255, 0.42);
+    --success:             #3DA05A;
+    --success-subtle:      rgba(61, 160, 90, 0.12);
+    --warning:             #C4873A;
+    --warning-subtle:      rgba(196, 135, 58, 0.12);
+    --error:               #C44058;
+    --error-subtle:        rgba(196, 64, 88, 0.12);
+    --border:              rgba(232, 224, 206, 0.13);
+    --border-subtle:       rgba(232, 224, 206, 0.06);
+    --border-strong:       rgba(232, 224, 206, 0.26);
+    --border-stamp:        #6B40FF;
+    --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+    --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.22);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-page:        #1A1510;
+  --surface-card:        #221D17;
+  --surface-raised:      #2A2318;
+  --surface-overlay:     rgba(232, 224, 206, 0.08);
+  --surface-stamp:       #201A13;
+  --surface-on-brand:    #F0EBE0;
+  --text-primary:        #E8E0CE;
+  --text-secondary:      #C4B89E;
+  --text-muted:          #8A7B6A;
+  --text-disabled:       #57493D;
+  --text-on-brand:       #F0EBE0;
+  --text-on-dark:        #E8E0CE;
+  --brand:               #6B40FF;
+  --brand-hover:         #7B55FF;
+  --brand-active:        #5530E0;
+  --brand-subtle:        rgba(107, 64, 255, 0.12);
+  --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+  --brand-border:        rgba(107, 64, 255, 0.42);
+  --success:             #3DA05A;
+  --success-subtle:      rgba(61, 160, 90, 0.12);
+  --warning:             #C4873A;
+  --warning-subtle:      rgba(196, 135, 58, 0.12);
+  --error:               #C44058;
+  --error-subtle:        rgba(196, 64, 88, 0.12);
+  --border:              rgba(232, 224, 206, 0.13);
+  --border-subtle:       rgba(232, 224, 206, 0.06);
+  --border-strong:       rgba(232, 224, 206, 0.26);
+  --border-stamp:        #6B40FF;
+  --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+  --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.22);
+  --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+}
+
+:root[data-theme="light"] {
+  --surface-page:        #E8E0CE;
+  --surface-card:        #DDD4BC;
+  --surface-raised:      #EDE6D5;
+  --surface-overlay:     rgba(12, 9, 6, 0.55);
+  --surface-stamp:       #D8CEBC;
+  --surface-on-brand:    #F0EBE0;
+  --text-primary:        #0C0906;
+  --text-secondary:      #3A3028;
+  --text-muted:          #6B5D52;
+  --text-disabled:       #A0918A;
+  --text-on-brand:       #F0EBE0;
+  --text-on-dark:        #E8E0CE;
+  --brand:               #4718DC;
+  --brand-hover:         #3910B8;
+  --brand-active:        #2D0A96;
+  --brand-subtle:        rgba(71, 24, 220, 0.07);
+  --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+  --brand-border:        rgba(71, 24, 220, 0.38);
+  --success:             #1A6B3A;
+  --success-subtle:      rgba(26, 107, 58, 0.09);
+  --warning:             #7A4800;
+  --warning-subtle:      rgba(122, 72, 0, 0.09);
+  --error:               #8C1F2E;
+  --error-subtle:        rgba(140, 31, 46, 0.09);
+  --border:              rgba(12, 9, 6, 0.16);
+  --border-subtle:       rgba(12, 9, 6, 0.08);
+  --border-strong:       rgba(12, 9, 6, 0.32);
+  --border-stamp:        #4718DC;
+  --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+  --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09), 0 1px 2px rgba(12, 9, 6, 0.07);
+  --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+}
+
+/* ============================================
+   RESET & BASE
+============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+
+/* Layout */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section {
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-8);
+  display: block;
+}
+
+.section-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.section-desc {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: var(--max-width-text);
+  margin-bottom: var(--space-12);
+}
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--column-gap); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--column-gap); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--column-gap); }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--column-gap); }
+
+@media (max-width: 900px) {
+  .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+}
+
+/* Text utilities */
+.text-xs      { font-size: var(--text-xs); }
+.text-sm      { font-size: var(--text-sm); }
+.text-base    { font-size: var(--text-base); }
+.text-lg      { font-size: var(--text-lg); }
+.text-xl      { font-size: var(--text-xl); }
+.text-2xl     { font-size: var(--text-2xl); }
+.text-3xl     { font-size: var(--text-3xl); }
+.text-4xl     { font-size: var(--text-4xl); }
+
+.weight-light   { font-weight: var(--font-weight-light); }
+.weight-regular { font-weight: var(--font-weight-regular); }
+.weight-medium  { font-weight: var(--font-weight-medium); }
+.weight-bold    { font-weight: var(--font-weight-bold); }
+.weight-black   { font-weight: var(--font-weight-black); }
+
+.leading-tight   { line-height: var(--leading-tight); }
+.leading-snug    { line-height: var(--leading-snug); }
+.leading-normal  { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+
+.tracking-tight  { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide   { letter-spacing: var(--tracking-wide); }
+.tracking-wider  { letter-spacing: var(--tracking-wider); }
+
+.uppercase { text-transform: uppercase; }
+
+.color-primary   { color: var(--text-primary); }
+.color-secondary { color: var(--text-secondary); }
+.color-muted     { color: var(--text-muted); }
+.color-disabled  { color: var(--text-disabled); }
+.color-brand     { color: var(--brand); }
+.color-success   { color: var(--success); }
+.color-warning   { color: var(--warning); }
+.color-error     { color: var(--error); }
+
+/* Surface utilities */
+.surface-page    { background: var(--surface-page); }
+.surface-card    { background: var(--surface-card); }
+.surface-raised  { background: var(--surface-raised); }
+.surface-stamp   { background: var(--surface-stamp); }
+.surface-brand   { background: var(--brand); }
+
+/* Spacing utilities */
+.p-1  { padding: var(--space-1); }
+.p-2  { padding: var(--space-2); }
+.p-3  { padding: var(--space-3); }
+.p-4  { padding: var(--space-4); }
+.p-6  { padding: var(--space-6); }
+.p-8  { padding: var(--space-8); }
+.p-12 { padding: var(--space-12); }
+
+.mb-1  { margin-bottom: var(--space-1); }
+.mb-2  { margin-bottom: var(--space-2); }
+.mb-3  { margin-bottom: var(--space-3); }
+.mb-4  { margin-bottom: var(--space-4); }
+.mb-6  { margin-bottom: var(--space-6); }
+.mb-8  { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+
+/* Border utilities */
+.border        { border: 1px solid var(--border); }
+.border-subtle { border: 1px solid var(--border-subtle); }
+.border-strong { border: 1px solid var(--border-strong); }
+.border-stamp  { border: 1.5px solid var(--border-stamp); }
+
+/* Radius utilities */
+.radius-sm { border-radius: var(--radius-sm); }
+.radius-md { border-radius: var(--radius-md); }
+.radius-lg { border-radius: var(--radius-lg); }
+.radius-xl { border-radius: var(--radius-xl); }
+
+/* Shadow utilities */
+.shadow-sm   { box-shadow: var(--shadow-sm); }
+.shadow-md   { box-shadow: var(--shadow-md); }
+.shadow-stamp { box-shadow: var(--shadow-stamp); }
+
+/* ============================================
+   STAMP COMPONENT
+============================================ */
+.stamp {
+  display: inline-block;
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+}
+
+.stamp-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+  line-height: var(--leading-tight);
+}
+
+.stamp-value {
+  display: block;
+  font-weight: var(--font-weight-black);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+.stamp-value-lg {
+  font-size: var(--text-2xl);
+}
+
+.stamp-value-xl {
+  font-size: var(--text-3xl);
+}
+
+.stamp-filled {
+  background: var(--brand);
+  box-shadow: none;
+}
+
+.stamp-filled .stamp-label {
+  color: rgba(240, 235, 224, 0.65);
+}
+
+.stamp-filled .stamp-value {
+  color: var(--text-on-brand);
+}
+
+/* ============================================
+   BUTTONS
+============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+  white-space: nowrap;
+  height: 40px;
+  padding: 0 var(--space-6);
+  line-height: 1;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.btn-sm  { height: 32px; padding: 0 var(--space-4); font-size: var(--text-xs); }
+.btn-lg  { height: 48px; padding: 0 var(--space-8); font-size: var(--text-base); }
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--text-on-brand);
+  border: none;
+}
+.btn-primary:hover  { background: var(--brand-hover); }
+.btn-primary:active { background: var(--brand-active); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--brand);
+  border: 1.5px solid var(--brand);
+}
+.btn-secondary:hover  { background: var(--brand-subtle); }
+.btn-secondary:active { background: var(--brand-subtle-hover); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--brand);
+  border: none;
+  text-decoration: none;
+}
+.btn-ghost:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.btn-destructive {
+  background: var(--error);
+  color: var(--text-on-brand);
+  border: none;
+}
+.btn-destructive:hover  { background: #7A1927; }
+.btn-destructive:active { background: #681422; }
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   INPUTS
+============================================ */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.input-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.input {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  height: 40px;
+  padding: 0 var(--space-4);
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--text-disabled);
+}
+
+.input:hover {
+  border-color: var(--border-strong);
+}
+
+.input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-border);
+}
+
+.input-error {
+  border-color: var(--error);
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 2px rgba(140, 31, 46, 0.22);
+}
+
+.input-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+.input-hint-error {
+  color: var(--error);
+}
+
+textarea.input {
+  height: auto;
+  min-height: 96px;
+  padding: var(--space-3) var(--space-4);
+  resize: vertical;
+  line-height: var(--leading-normal);
+}
+
+/* ============================================
+   BADGES
+============================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  line-height: 1;
+}
+
+.badge-default {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.badge-brand {
+  background: var(--brand-subtle);
+  color: var(--brand);
+  border: 1px solid var(--brand-border);
+}
+
+.badge-success {
+  background: var(--success-subtle);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: var(--warning-subtle);
+  color: var(--warning);
+}
+
+.badge-error {
+  background: var(--error-subtle);
+  color: var(--error);
+}
+
+.badge-filled {
+  background: var(--brand);
+  color: var(--text-on-brand);
+  border: none;
+}
+
+/* ============================================
+   CARD COMPONENT
+============================================ */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--transition-base), border-width var(--transition-fast);
+}
+
+.card:hover {
+  border: 1.5px solid var(--border-stamp);
+}
+
+.card-header {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.card-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   DIVIDERS
+============================================ */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-6) 0;
+}
+
+.divider-subtle {
+  border-top-color: var(--border-subtle);
+}
+
+.divider-strong {
+  border-top-color: var(--border-strong);
+}
+
+.divider-with-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: var(--space-6) 0;
+}
+
+.divider-with-label::before,
+.divider-with-label::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================
+   NAV BAR
+============================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--container-padding);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  list-style: none;
+}
+
+.navbar-nav a {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.navbar-nav a:hover { color: var(--text-primary); }
+.navbar-nav a.active { color: var(--brand); }
+
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-3);
+  transition: all var(--transition-base);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   PAGE HEADER HERO
+============================================ */
+.page-hero {
+  padding: var(--space-20) 0 var(--space-16);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.hero-logotype {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: clamp(4rem, 14vw, 10rem);
+  margin-bottom: var(--space-4);
+}
+
+.hero-tagline {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 64ch;
+  margin-bottom: var(--space-8);
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   COLOR SWATCHES
+============================================ */
+.swatch-group {
+  margin-bottom: var(--space-10);
+}
+
+.swatch-group-title {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.swatch-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.swatch-color {
+  height: 80px;
+  width: 100%;
+}
+
+.swatch-info {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-raised);
+}
+
+.swatch-name {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+  font-family: var(--font-mono);
+}
+
+.swatch-hex {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-1);
+}
+
+.swatch-use {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE DEMO
+============================================ */
+.type-scale-row {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.type-scale-row:last-child {
+  border-bottom: none;
+}
+
+.type-scale-meta {
+  padding-top: var(--space-2);
+}
+
+.type-scale-token {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--brand);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.type-scale-size {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  display: block;
+}
+
+.type-scale-sample {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+}
+
+.type-scale-weight-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  text-align: right;
+  padding-top: var(--space-2);
+}
+
+/* ============================================
+   SPACING SCALE
+============================================ */
+.space-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.space-bar-container {
+  flex: 1;
+}
+
+.space-bar {
+  height: 12px;
+  background: var(--brand);
+  opacity: 0.35;
+  border-radius: var(--radius-sm);
+}
+
+.space-token {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--brand);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.space-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  width: 50px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   BRAND MARK DEMOS
+============================================ */
+.brand-mark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.brand-mark-cell {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.brand-mark-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--space-10) var(--space-8);
+  min-height: 160px;
+}
+
+.brand-mark-field-fill {
+  padding: var(--space-6) var(--space-8);
+  display: flex;
+  align-items: flex-end;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.brand-mark-caption {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: var(--space-3) var(--space-6);
+  border-top: 1px solid var(--border);
+  background: var(--surface-raised);
+}
+
+.logotype {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.logotype-on-brand {
+  color: var(--text-on-brand);
+}
+
+.logotype-fill {
+  font-size: clamp(3rem, 12vw, 7rem);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+}
+
+/* App icon */
+.app-icon {
+  width: 64px;
+  height: 64px;
+  background: #E8E0CE;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-icon-letter {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: 2.75rem;
+  color: #0C0906;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.app-icon-lg {
+  width: 96px;
+  height: 96px;
+}
+
+.app-icon-lg .app-icon-letter {
+  font-size: 4.25rem;
+}
+
+/* ============================================
+   STAMP DEMO SECTION
+============================================ */
+.stamp-demo-full {
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-8);
+  margin: var(--space-8) 0;
+}
+
+.stamp-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-6);
+}
+
+.stamp-inline {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* ============================================
+   APPLICATION PREVIEWS
+============================================ */
+
+/* Mobile screen */
+.preview-mobile {
+  width: 280px;
+  height: 560px;
+  background: var(--surface-page);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.mobile-statusbar {
+  height: 24px;
+  background: var(--surface-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-statusbar-text {
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mobile-nav {
+  height: 44px;
+  background: var(--surface-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav-logo {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.mobile-content {
+  flex: 1;
+  overflow: hidden;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mobile-feed-item {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.mobile-feed-item-label {
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.mobile-feed-item-headline {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.mobile-feed-item-stamp {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+.mobile-stamp-label {
+  font-size: 8px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.mobile-stamp-value {
+  font-size: 1rem;
+  font-weight: var(--font-weight-black);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.mobile-tab-bar {
+  height: 56px;
+  background: var(--surface-card);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 var(--space-4);
+}
+
+.mobile-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.mobile-tab-dot {
+  width: 20px;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--text-disabled);
+}
+
+.mobile-tab-dot.active {
+  background: var(--brand);
+}
+
+.mobile-tab-label {
+  font-size: 8px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-disabled);
+}
+
+.mobile-tab-label.active {
+  color: var(--brand);
+}
+
+/* Print ad */
+.preview-print {
+  width: 320px;
+  height: 480px;
+  background: var(--surface-stamp);
+  border: 1.5px solid var(--border-strong);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.print-border-frame {
+  position: absolute;
+  inset: var(--space-3);
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+
+.print-eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.print-headline {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: 2.25rem;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.print-body {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 44ch;
+}
+
+.print-stamp-block {
+  background: var(--brand);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-6);
+}
+
+.print-stamp-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(240, 235, 224, 0.65);
+  margin-bottom: var(--space-1);
+}
+
+.print-stamp-value {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-black);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-on-brand);
+  text-transform: uppercase;
+}
+
+.print-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.print-logo {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: var(--text-xl);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.print-url {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Presentation slide */
+.preview-slide {
+  width: 480px;
+  height: 320px;
+  background: var(--surface-page);
+  border: 1.5px solid var(--border-strong);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.slide-left {
+  background: var(--text-primary);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.slide-left-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: rgba(232, 224, 206, 0.5);
+}
+
+.slide-left-headline {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: 1.8rem;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+}
+
+.slide-left-logo {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-black);
+  font-size: var(--text-lg);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(232, 224, 206, 0.4);
+}
+
+.slide-right {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.slide-stat {
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+}
+
+.slide-stat-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.slide-stat-value {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.slide-stat-change {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--success);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Preview wrapper */
+.previews-row {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.preview-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-1);
+}
+
+/* ============================================
+   DATA TABLE DEMO
+============================================ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+}
+
+.data-table th {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1.5px solid var(--border-strong);
+}
+
+.data-table td {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: var(--brand-subtle);
+}
+
+.data-table .td-primary {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.data-table .td-pos { color: var(--success); }
+.data-table .td-neg { color: var(--error); }
+.data-table .td-stamp-cell {
+  padding: var(--space-2) var(--space-4);
+}
+
+/* ============================================
+   SECTION ANCHORS SCROLLSPY
+============================================ */
+.toc {
+  position: sticky;
+  top: 72px;
+  align-self: start;
+  padding: var(--space-6);
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.toc-title {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.toc-list a {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.toc-list a::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.toc-list a:hover { color: var(--text-primary); }
+.toc-list a.active { color: var(--brand); }
+.toc-list a.active::before { background: var(--brand); }
+
+/* ============================================
+   LAYOUT GRID SIDEBAR
+============================================ */
+.page-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+  }
+  .toc { display: none; }
+}
+
+/* ============================================
+   CONVICTION SIGNAL BLOCK
+============================================ */
+.signal-block {
+  background: var(--surface-stamp);
+  box-shadow: var(--shadow-stamp);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.signal-header {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.signal-header::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+
+.signal-ticker {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.signal-name {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.signal-summary {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  max-width: 60ch;
+}
+
+.signal-stamps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+/* ============================================
+   RESEARCH CARD
+============================================ */
+.research-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.research-card:hover {
+  border: 1.5px solid var(--border-stamp);
+}
+
+.research-card-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.research-card-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.research-card-body {
+  padding: var(--space-6);
+}
+
+.research-card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.research-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.research-card-author {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.research-card-excerpt {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.research-card-footer {
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Horizontal rule in content */
+.rule-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-12) 0;
+}
+
+.rule-section::before,
+.rule-section::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.rule-section-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <a class="navbar-logo" href="#">Alfa</a>
+  <ul class="navbar-nav">
+    <li><a href="#colors" class="active">Colors</a></li>
+    <li><a href="#typography">Type</a></li>
+    <li><a href="#brandmark">Mark</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#stamp">Stamp</a></li>
+    <li><a href="#previews">Previews</a></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+</nav>
+
+<!-- HERO HEADER -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      Visual Identity Reference — The Official Record
+    </div>
+    <div class="hero-logotype">Alfa</div>
+    <p class="hero-tagline">
+      The institutional-grade research intelligence platform. Every output marked, every signal owned.
+    </p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">Territory 3 — The Official Record</span>
+      <span class="hero-meta-item">Selected Score: 9/10</span>
+      <span class="hero-meta-item">Parchment + Electric Violet</span>
+      <span class="hero-meta-item">Barlow Condensed / Single Family System</span>
+      <span class="hero-meta-item">Version 1.0 — August 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT + TOC -->
+<div class="container" style="padding-top: var(--space-12);">
+  <div class="page-layout">
+
+    <!-- SIDEBAR TOC -->
+    <aside>
+      <nav class="toc">
+        <div class="toc-title">Contents</div>
+        <ul class="toc-list">
+          <li><a href="#colors">Color System</a></li>
+          <li><a href="#typography">Typography Scale</a></li>
+          <li><a href="#brandmark">Brand Mark</a></li>
+          <li><a href="#spacing">Spacing Reference</a></li>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#stamp">Stamp Gesture</a></li>
+          <li><a href="#datatables">Data Tables</a></li>
+          <li><a href="#previews">Application Previews</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+
+      <!-- ============================
+           SECTION 1: COLOR SYSTEM
+      ============================= -->
+      <section class="section" id="colors">
+        <span class="section-label">01 — Color System</span>
+        <h2 class="section-title">The Parchment System</h2>
+        <p class="section-desc">
+          The parchment palette is load-bearing. Surface warmth creates native familiarity with institutional document environments — filings, prospectuses, research reports — while being completely novel in the financial software vendor landscape. The single accent (Electric Violet #4718DC) has one function: marking Alfa outputs. It never appears decoratively.
+        </p>
+
+        <!-- Surfaces -->
+        <div class="swatch-group">
+          <div class="swatch-group-title">Surfaces</div>
+          <div class="swatch-grid">
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #E8E0CE;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--surface-page</div>
+                <div class="swatch-hex">#E8E0CE</div>
+                <div class="swatch-use">Primary document ground. The parchment. Never substitute cool white or neutral gray.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #DDD4BC;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--surface-card</div>
+                <div class="swatch-hex">#DDD4BC</div>
+                <div class="swatch-use">Card surfaces, navigation bars, elevated panels sitting on page.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #EDE6D5;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--surface-raised</div>
+                <div class="swatch-hex">#EDE6D5</div>
+                <div class="swatch-use">Input backgrounds, modals, popovers, dropdown menus.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #D8CEBC; border: 1.5px solid #4718DC;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--surface-stamp</div>
+                <div class="swatch-hex">#D8CEBC</div>
+                <div class="swatch-use">Stamp panel background. Used exclusively for Alfa-generated content blocks.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #F0EBE0;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--surface-on-brand</div>
+                <div class="swatch-hex">#F0EBE0</div>
+                <div class="swatch-use">Surface seen through or behind brand-colored containers.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="swatch-group">
+          <div class="swatch-group-title">Text</div>
+          <div class="swatch-grid">
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #0C0906;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--text-primary</div>
+                <div class="swatch-hex">#0C0906</div>
+                <div class="swatch-use">Warm-undertoned near-black ink. Primary headings, data values, logotype.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #3A3028;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--text-secondary</div>
+                <div class="swatch-hex">#3A3028</div>
+                <div class="swatch-use">Body prose, card content, paragraph text.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #6B5D52;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--text-muted</div>
+                <div class="swatch-hex">#6B5D52</div>
+                <div class="swatch-use">Labels, metadata, stamp identifiers, section headers.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #A0918A;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--text-disabled</div>
+                <div class="swatch-hex">#A0918A</div>
+                <div class="swatch-use">Placeholder text, disabled inputs, inactive states.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #F0EBE0;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--text-on-brand</div>
+                <div class="swatch-hex">#F0EBE0</div>
+                <div class="swatch-use">Text rendered on violet/brand backgrounds. Warm parchment-adjacent.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand -->
+        <div class="swatch-group">
+          <div class="swatch-group-title">Brand — Electric Violet</div>
+          <div class="swatch-grid">
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #4718DC;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--brand</div>
+                <div class="swatch-hex">#4718DC</div>
+                <div class="swatch-use">The AI layer. Stamps, active states, model-generated signals. Never decorative.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #3910B8;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--brand-hover</div>
+                <div class="swatch-hex">#3910B8</div>
+                <div class="swatch-use">Button hover state. Slightly deeper violet under cursor pressure.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #2D0A96;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--brand-active</div>
+                <div class="swatch-hex">#2D0A96</div>
+                <div class="swatch-use">Button pressed state. Maximum darkness, confirms intent.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: rgba(71,24,220,0.07); border: 1px solid #ddd;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--brand-subtle</div>
+                <div class="swatch-hex">rgba(71,24,220,0.07)</div>
+                <div class="swatch-use">Secondary button hover fill. Badge backgrounds. Hover tints on brand elements.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: rgba(71,24,220,0.38); border: 1px solid #ddd;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--brand-border</div>
+                <div class="swatch-hex">rgba(71,24,220,0.38)</div>
+                <div class="swatch-use">Focus ring shadow, badge borders, secondary UI brand presence.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantic -->
+        <div class="swatch-group">
+          <div class="swatch-group-title">Semantic</div>
+          <div class="swatch-grid">
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #1A6B3A;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--success</div>
+                <div class="swatch-hex">#1A6B3A</div>
+                <div class="swatch-use">Positive returns, buy signals, confirmed states. Dark warm green.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #7A4800;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--warning</div>
+                <div class="swatch-hex">#7A4800</div>
+                <div class="swatch-use">Risk flags, neutral revision signals, hold recommendations.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: #8C1F2E;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--error</div>
+                <div class="swatch-hex">#8C1F2E</div>
+                <div class="swatch-use">Destructive actions, sell signals, critical alerts. Never cosmetic.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: rgba(26,107,58,0.09); border: 1px solid #ddd;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--success-subtle</div>
+                <div class="swatch-hex">rgba(26,107,58,0.09)</div>
+                <div class="swatch-use">Positive row highlights, success badge backgrounds.</div>
+              </div>
+            </div>
+            <div class="swatch-item">
+              <div class="swatch-color" style="background: rgba(140,31,46,0.09); border: 1px solid #ddd;"></div>
+              <div class="swatch-info">
+                <div class="swatch-name">--error-subtle</div>
+                <div class="swatch-hex">rgba(140,31,46,0.09)</div>
+                <div class="swatch-use">Negative row highlights, error badge backgrounds.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borders -->
+        <div class="swatch-group">
+          <div class="swatch-group-title">Borders</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-4);">
+            <div style="padding: var(--space-4); background: var(--surface-raised); border-radius: var(--radius-md);">
+              <div style="height: 32px; border: 1px solid rgba(12,9,6,0.08); border-radius: var(--radius-sm); margin-bottom: var(--space-3);"></div>
+              <div class="swatch-name">--border-subtle</div>
+              <div class="swatch-hex">rgba(12,9,6,0.08)</div>
+              <div class="swatch-use" style="font-size: var(--text-xs); color: var(--text-muted);">Dividers, secondary separators, light structure.</div>
+            </div>
+            <div style="padding: var(--space-4); background: var(--surface-raised); border-radius: var(--radius-md);">
+              <div style="height: 32px; border: 1px solid rgba(12,9,6,0.16); border-radius: var(--radius-sm); margin-bottom: var(--space-3);"></div>
+              <div class="swatch-name">--border</div>
+              <div class="swatch-hex">rgba(12,9,6,0.16)</div>
+              <div class="swatch-use" style="font-size: var(--text-xs); color: var(--text-muted);">Standard card borders, input borders, table rules.</div>
+            </div>
+            <div style="padding: var(--space-4); background: var(--surface-raised); border-radius: var(--radius-md);">
+              <div style="height: 32px; border: 1px solid rgba(12,9,6,0.32); border-radius: var(--radius-sm); margin-bottom: var(--space-3);"></div>
+              <div class="swatch-name">--border-strong</div>
+              <div class="swatch-hex">rgba(12,9,6,0.32)</div>
+              <div class="swatch-use" style="font-size: var(--text-xs); color: var(--text-muted);">Table column headers, focused input states, prominence moments.</div>
+            </div>
+            <div style="padding: var(--space-4); background: var(--surface-raised); border-radius: var(--radius-md);">
+              <div style="height: 32px; border: 1.5px solid #4718DC; border-radius: var(--radius-sm); margin-bottom: var(--space-3);"></div>
+              <div class="swatch-name">--border-stamp</div>
+              <div class="swatch-hex">#4718DC</div>
+              <div class="swatch-use" style="font-size: var(--text-xs); color: var(--text-muted);">Always violet. Stamps only. Card hover state. The AI layer made visible.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           SECTION 2: TYPOGRAPHY
+      ============================= -->
+      <section class="section" id="typography">
+        <span class="section-label">02 — Typography Scale</span>
+        <h2 class="section-title">One Family. Three Registers.</h2>
+        <p class="section-desc">
+          Barlow Condensed is the single typeface of this system — at every breakpoint, in every context, across every product surface. Three registers each use a distinct weight. No italic cuts. No mixed families. Hierarchy through scale contrast alone.
+        </p>
+
+        <!-- Type Scale Table -->
+        <div style="overflow-x: auto;">
+          <!-- Display register -->
+          <div class="divider-with-label">Display Register</div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-4xl</span>
+              <span class="type-scale-size">4rem / 64px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-4xl); font-weight: var(--font-weight-black); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); text-transform: uppercase;">
+                ALFA
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Black / 900</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-3xl</span>
+              <span class="type-scale-size">2.5rem / 40px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-3xl); font-weight: var(--font-weight-black); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); text-transform: uppercase;">
+                Institutional Intelligence
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Black / 900</div>
+          </div>
+
+          <!-- Body register -->
+          <div class="divider-with-label">Body Register</div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-2xl</span>
+              <span class="type-scale-size">1.75rem / 28px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-2xl); font-weight: var(--font-weight-bold); line-height: var(--leading-snug); letter-spacing: var(--tracking-tight);">
+                Earnings Revision — Q3 2026
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Bold / 700</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-xl</span>
+              <span class="type-scale-size">1.375rem / 22px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-xl); font-weight: var(--font-weight-bold); line-height: var(--leading-snug); letter-spacing: var(--tracking-tight);">
+                Microsoft Cloud segment continues to outpace consensus estimates
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Bold / 700</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-lg</span>
+              <span class="type-scale-size">1.125rem / 18px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-lg); font-weight: var(--font-weight-regular); line-height: var(--leading-normal);">
+                The AI Infrastructure buildout entering Phase Two is creating a durable tailwind for hyperscalers through at least mid-2027.
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Regular / 400</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-base</span>
+              <span class="type-scale-size">1rem / 16px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-base); font-weight: var(--font-weight-regular); line-height: var(--leading-relaxed); max-width: var(--max-width-text);">
+                Analyst consensus for FY2026 revenue sits at $268.4B. Alfa's model sees a 73% probability of a beat, driven by Azure seat expansion in regulated industries and persistent enterprise demand for Copilot integrations that weren't priced into street estimates in January.
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Regular / 400</div>
+          </div>
+
+          <!-- Data/Label register -->
+          <div class="divider-with-label">Data and Label Register</div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-sm</span>
+              <span class="type-scale-size">0.75rem / 12px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-sm); font-weight: var(--font-weight-medium); line-height: var(--leading-tight); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">
+                Price Target — Conviction Signal — Earnings Revision — Sector: Technology
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Medium / 500</div>
+          </div>
+
+          <div class="type-scale-row">
+            <div class="type-scale-meta">
+              <span class="type-scale-token">--text-xs</span>
+              <span class="type-scale-size">0.625rem / 10px</span>
+            </div>
+            <div>
+              <div class="type-scale-sample" style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); line-height: var(--leading-tight); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">
+                Alfa Signal — Updated Aug 2, 2026 — Model: Pro v3.2 — Confidence: High
+              </div>
+            </div>
+            <div class="type-scale-weight-label">Medium / 500</div>
+          </div>
+        </div>
+
+        <!-- Weight demonstrations -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Weight Variations — Barlow Condensed</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6);">
+            <div style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-6); align-items: baseline; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-4);">
+              <span style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Light 300</span>
+              <span style="font-family: var(--font-sans); font-weight: 300; font-size: var(--text-xl); color: var(--text-secondary);">The market does not reward effort. It rewards accuracy.</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-6); align-items: baseline; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-4);">
+              <span style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Regular 400</span>
+              <span style="font-family: var(--font-sans); font-weight: 400; font-size: var(--text-xl); color: var(--text-secondary);">The market does not reward effort. It rewards accuracy.</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-6); align-items: baseline; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-4);">
+              <span style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Medium 500</span>
+              <span style="font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xl); color: var(--text-secondary);">The market does not reward effort. It rewards accuracy.</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-6); align-items: baseline; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-4);">
+              <span style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Bold 700</span>
+              <span style="font-family: var(--font-sans); font-weight: 700; font-size: var(--text-xl); color: var(--text-primary);">The market does not reward effort. It rewards accuracy.</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-6); align-items: baseline;">
+              <span style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Black 900</span>
+              <span style="font-family: var(--font-sans); font-weight: 900; font-size: var(--text-xl); color: var(--text-primary);">The market does not reward effort. It rewards accuracy.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letter spacing demos -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Letter Spacing System</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-6);">
+            <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4); align-items: baseline;">
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--tracking-tight</code>
+              <span style="font-family: var(--font-sans); font-weight: 900; font-size: var(--text-2xl); letter-spacing: -0.02em; color: var(--text-primary);">DISPLAY HEADING</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4); align-items: baseline;">
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--tracking-normal</code>
+              <span style="font-family: var(--font-sans); font-weight: 400; font-size: var(--text-xl); letter-spacing: 0; color: var(--text-secondary);">Body prose and running content</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4); align-items: baseline;">
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--tracking-wide</code>
+              <span style="font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Button Labels and CTAs</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4); align-items: baseline;">
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--tracking-wider</code>
+              <span style="font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);">FIELD LABELS, STAMP HEADERS, COLUMN NAMES</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           SECTION 3: BRAND MARK
+      ============================= -->
+      <section class="section" id="brandmark">
+        <span class="section-label">03 — Brand Mark</span>
+        <h2 class="section-title">The Logotype Is the Mark</h2>
+        <p class="section-desc">
+          "ALFA" set in Barlow Condensed Black, fully uppercase, letter-spaced at 0.04em. There is no logomark. There is no symbol. The typographic treatment is the mark — not a placeholder pending symbol design, but the final decision. The brand's authority comes from the word, not from an abstract form associated with it.
+        </p>
+
+        <div class="brand-mark-grid">
+          <!-- On page background -->
+          <div class="brand-mark-cell">
+            <div class="brand-mark-field" style="background: var(--surface-page);">
+              <span class="logotype" style="font-size: 3rem; letter-spacing: 0.04em;">ALFA</span>
+            </div>
+            <div class="brand-mark-caption">On page background — --surface-page</div>
+          </div>
+
+          <!-- On card surface -->
+          <div class="brand-mark-cell">
+            <div class="brand-mark-field" style="background: var(--surface-card);">
+              <span class="logotype" style="font-size: 3rem; letter-spacing: 0.04em;">ALFA</span>
+            </div>
+            <div class="brand-mark-caption">On card surface — --surface-card</div>
+          </div>
+
+          <!-- On brand -->
+          <div class="brand-mark-cell">
+            <div class="brand-mark-field" style="background: var(--brand);">
+              <span class="logotype logotype-on-brand" style="font-size: 3rem; letter-spacing: 0.04em;">ALFA</span>
+            </div>
+            <div class="brand-mark-caption">On brand violet — --text-on-brand</div>
+          </div>
+
+          <!-- On dark -->
+          <div class="brand-mark-cell">
+            <div class="brand-mark-field" style="background: #1A1510;">
+              <span class="logotype" style="font-size: 3rem; letter-spacing: 0.04em; color: var(--text-on-dark);">ALFA</span>
+            </div>
+            <div class="brand-mark-caption">On near-black — --text-on-dark</div>
+          </div>
+
+          <!-- Fill / architectural scale -->
+          <div class="brand-mark-cell" style="grid-column: span 2;">
+            <div class="brand-mark-field-fill" style="background: var(--surface-page); align-items: flex-end;">
+              <span class="logotype logotype-fill" style="color: var(--text-primary); width: 100%; display: block; text-align: left;">ALFA</span>
+            </div>
+            <div class="brand-mark-caption">Architectural fill — edge-to-edge presence at hero scale</div>
+          </div>
+
+          <!-- Small nav scale -->
+          <div class="brand-mark-cell">
+            <div class="brand-mark-field" style="background: var(--surface-card);">
+              <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                <span class="logotype" style="font-size: var(--text-xl); letter-spacing: 0.04em;">ALFA</span>
+                <span class="logotype" style="font-size: var(--text-lg); letter-spacing: 0.04em;">ALFA</span>
+                <span class="logotype" style="font-size: var(--text-base); letter-spacing: 0.04em;">ALFA</span>
+                <span class="logotype" style="font-size: var(--text-sm); letter-spacing: 0.04em;">ALFA</span>
+              </div>
+            </div>
+            <div class="brand-mark-caption">UI scales — nav, footer, email</div>
+          </div>
+        </div>
+
+        <!-- Product names -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Product Name Architecture</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-6); margin-top: var(--space-8);">
+            <div style="padding: var(--space-6); background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+              <div style="display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6); align-items: start;">
+                <span class="logotype" style="font-size: var(--text-3xl); letter-spacing: 0.04em; line-height: var(--leading-tight);">ALFA</span>
+                <div>
+                  <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2);">Master Brand — Consumer Flagship</div>
+                  <div style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary);">The unmodified name. The flagship consumer product carries the parent name directly. This is the strategic signal: consumer is the company's primary future.</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: var(--space-6); background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+              <div style="display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6); align-items: start;">
+                <span class="logotype" style="font-size: var(--text-3xl); letter-spacing: 0.04em; line-height: var(--leading-tight);">ALFA PRO</span>
+                <div>
+                  <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2);">Institutional — PM and Analyst Research Tool</div>
+                  <div style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary);">For portfolio managers and analysts at hedge funds and asset managers. Suffix targets the institutional buyer without diluting the parent brand.</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: var(--space-6); background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+              <div style="display: grid; grid-template-columns: 200px 1fr; gap: var(--space-6); align-items: start;">
+                <div>
+                  <span class="logotype" style="font-size: var(--text-3xl); letter-spacing: 0.04em; line-height: var(--leading-tight);">ALFA</span>
+                  <br>
+                  <span class="logotype" style="font-size: var(--text-3xl); letter-spacing: 0.04em; line-height: var(--leading-tight);">PLATFORM</span>
+                </div>
+                <div>
+                  <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2);">API and MCP Infrastructure — Quants and Engineers</div>
+                  <div style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary);">Developer infrastructure layer serving quants and engineers building financial AI at institutions. The modular API and MCP layer for the technical tier.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- App icons -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Favicon and App Icon</div>
+          <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-relaxed); margin-top: var(--space-4); margin-bottom: var(--space-8); max-width: 60ch;">
+            The letterform "A" from Barlow Condensed Black in a 1:1 parchment square field. No border radius on the app icon. Set at approximately 72% of icon height, centered, in --text-primary. Reads as a document, not an app.
+          </p>
+          <div style="display: flex; align-items: flex-end; gap: var(--space-8);">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 16px; height: 16px; background: #E8E0CE; display: flex; align-items: center; justify-content: center;">
+                <span style="font-family: var(--font-sans); font-weight: 900; font-size: 11px; color: #0C0906; text-transform: uppercase; line-height: 1;">A</span>
+              </div>
+              <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">16px</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 32px; height: 32px; background: #E8E0CE; display: flex; align-items: center; justify-content: center;">
+                <span style="font-family: var(--font-sans); font-weight: 900; font-size: 22px; color: #0C0906; text-transform: uppercase; line-height: 1;">A</span>
+              </div>
+              <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">32px</span>
+            </div>
+            <div class="app-icon" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <span class="app-icon-letter">A</span>
+            </div>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); align-self: flex-end; padding-bottom: 4px;">64px</span>
+            <div class="app-icon app-icon-lg" style="display: flex; align-items: center; justify-content: center;">
+              <span class="app-icon-letter" style="font-size: 4.25rem;">A</span>
+            </div>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); align-self: flex-end; padding-bottom: 4px;">96px</span>
+            <div style="width: 128px; height: 128px; background: #E8E0CE; display: flex; align-items: center; justify-content: center;">
+              <span style="font-family: var(--font-sans); font-weight: 900; font-size: 5.75rem; color: #0C0906; text-transform: uppercase; line-height: 1; margin-top: 4px;">A</span>
+            </div>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); align-self: flex-end; padding-bottom: 4px;">128px</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           SECTION 4: SPACING
+      ============================= -->
+      <section class="section" id="spacing">
+        <span class="section-label">04 — Spacing Reference</span>
+        <h2 class="section-title">4px Base Unit</h2>
+        <p class="section-desc">
+          All spatial decisions derive from the 4px base unit. The scale is consistent with standard 8pt grid systems and maps cleanly to CSS rem values at default 16px root font size.
+        </p>
+
+        <div style="max-width: 600px;">
+          <div class="space-row">
+            <span class="space-token">--space-1</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(0.25rem * 16);"></div></div>
+            <span class="space-value">0.25rem / 4px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-2</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(0.5rem * 16);"></div></div>
+            <span class="space-value">0.5rem / 8px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-3</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(0.75rem * 16);"></div></div>
+            <span class="space-value">0.75rem / 12px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-4</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(1rem * 16);"></div></div>
+            <span class="space-value">1rem / 16px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-5</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(1.25rem * 16);"></div></div>
+            <span class="space-value">1.25rem / 20px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-6</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(1.5rem * 16);"></div></div>
+            <span class="space-value">1.5rem / 24px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-8</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(2rem * 16);"></div></div>
+            <span class="space-value">2rem / 32px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-10</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(2.5rem * 16);"></div></div>
+            <span class="space-value">2.5rem / 40px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-12</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(3rem * 16);"></div></div>
+            <span class="space-value">3rem / 48px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-16</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(4rem * 16);"></div></div>
+            <span class="space-value">4rem / 64px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-20</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(5rem * 16);"></div></div>
+            <span class="space-value">5rem / 80px</span>
+          </div>
+          <div class="space-row">
+            <span class="space-token">--space-24</span>
+            <div class="space-bar-container"><div class="space-bar" style="width: calc(6rem * 16);"></div></div>
+            <span class="space-value">6rem / 96px</span>
+          </div>
+        </div>
+
+        <!-- Border radius -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Border Radius — Rectilinear System</div>
+          <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-relaxed); margin-top: var(--space-4); margin-bottom: var(--space-8); max-width: 56ch;">
+            The Official Record is rectilinear. Minimal rounding for usability only. No pill shapes. No decorative curves. Even the --radius-full token is 2px — badge elements stay nearly square.
+          </p>
+          <div style="display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 64px; height: 64px; background: var(--surface-card); border: 1.5px solid var(--border-strong); border-radius: 1px;"></div>
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--radius-sm</code>
+              <span style="font-size: var(--text-xs); color: var(--text-muted);">1px</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 64px; height: 64px; background: var(--surface-card); border: 1.5px solid var(--border-strong); border-radius: 2px;"></div>
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--radius-md</code>
+              <span style="font-size: var(--text-xs); color: var(--text-muted);">2px</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 64px; height: 64px; background: var(--surface-card); border: 1.5px solid var(--border-strong); border-radius: 2px;"></div>
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--radius-lg</code>
+              <span style="font-size: var(--text-xs); color: var(--text-muted);">2px</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 64px; height: 64px; background: var(--surface-card); border: 1.5px solid var(--border-strong); border-radius: 3px;"></div>
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--radius-xl</code>
+              <span style="font-size: var(--text-xs); color: var(--text-muted);">3px</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+              <div style="width: 64px; height: 64px; background: var(--surface-card); border: 1.5px solid var(--border-strong); border-radius: 2px;"></div>
+              <code style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--brand);">--radius-full</code>
+              <span style="font-size: var(--text-xs); color: var(--text-muted);">2px — no pill</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================
+           SECTION 5: COMPONENTS
+      ============================= -->
+      <section class="section" id="components">
+        <span class="section-label">05 — Components</span>
+        <h2 class="section-title">System Components</h2>
+        <p class="section-desc">
+          Every component derives exclusively from CSS custom properties. Components inherit the document's architectural character: rectilinear, declarative, typographically dense, violet only where the AI layer speaks.
+        </p>
+
+        <!-- Buttons -->
+        <div style="margin-bottom: var(--space-12);">
+          <div class="swatch-group-title">Buttons</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-8);">
+
+            <!-- Primary -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-4);">Primary — Sizes</div>
+              <div class="btn-group">
+                <button class="btn btn-primary btn-sm">Run Analysis</button>
+                <button class="btn btn-primary">Generate Signal</button>
+                <button class="btn btn-primary btn-lg">Start Free Trial</button>
+              </div>
+            </div>
+
+            <!-- Secondary -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-4);">Secondary</div>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm">Export Report</button>
+                <button class="btn btn-secondary">View All Signals</button>
+                <button class="btn btn-secondary btn-lg">Request Demo</button>
+              </div>
+            </div>
+
+            <!-- Ghost -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-4);">Ghost</div>
+              <div class="btn-group">
+                <button class="btn btn-ghost btn-sm">Learn More</button>
+                <button class="btn btn-ghost">View Documentation</button>
+                <button class="btn btn-ghost btn-lg">Skip for Now</button>
+              </div>
+            </div>
+
+            <!-- Destructive -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-4);">Destructive</div>
+              <div class="btn-group">
+                <button class="btn btn-destructive btn-sm">Delete Model</button>
+                <button class="btn btn-destructive">Remove Position</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Inputs -->
+        <div style="margin-bottom: var(--space-12);">
+          <div class="swatch-group-title">Form Inputs</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-8);">
+
+            <div class="input-group">
+              <label class="input-label">Ticker Symbol</label>
+              <input class="input" type="text" placeholder="e.g. MSFT, AAPL, NVDA">
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Target Conviction</label>
+              <input class="input" type="text" value="HIGH" />
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Portfolio Name</label>
+              <input class="input" type="text" placeholder="e.g. Tech Long Book">
+              <span class="input-hint">Visible only to you and your team members.</span>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Email Address</label>
+              <input class="input input-error" type="email" value="invalid-email">
+              <span class="input-hint input-hint-error">Enter a valid institutional email address.</span>
+            </div>
+
+            <div class="input-group" style="grid-column: span 2;">
+              <label class="input-label">Research Thesis</label>
+              <textarea class="input" rows="4" placeholder="Describe your investment thesis. Alfa will identify corroborating and contradicting signals across filings, transcripts, and macro data..."></textarea>
+              <span class="input-hint">Minimum 50 characters for meaningful signal generation.</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div style="margin-bottom: var(--space-12);">
+          <div class="swatch-group-title">Badges</div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4);">
+            <span class="badge badge-default">New</span>
+            <span class="badge badge-default">Beta</span>
+            <span class="badge badge-brand">Alfa Signal</span>
+            <span class="badge badge-brand">AI Generated</span>
+            <span class="badge badge-success">Buy</span>
+            <span class="badge badge-success">Outperform</span>
+            <span class="badge badge-warning">Hold</span>
+            <span class="badge badge-warning">Neutral</span>
+            <span class="badge badge-error">Sell</span>
+            <span class="badge badge-error">Underperform</span>
+            <span class="badge badge-filled">Pro</span>
+          </div>
+        </div>
+
+        <!-- Dividers -->
+        <div style="margin-bottom: var(--space-12);">
+          <div class="swatch-group-title">Dividers</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-6); margin-top: var(--space-6); max-width: 500px;">
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">--border-subtle</div>
+              <hr class="divider divider-subtle">
+            </div>
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">--border (standard)</div>
+              <hr class="divider">
+            </div>
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">--border-strong</div>
+              <hr class="divider divider-strong">
+            </div>
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">With label</div>
+              <div class="divider-with-label">Alfa Analysis</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div style="margin-bottom: var(--space-12);">
+          <div class="swatch-group-title">Cards</div>
+          <div class="grid-3" style="margin-top: var(--space-6);">
+
+            <div class="card">
+              <div class="card-header">Research Report</div>
+              <div class="card-title">NVIDIA AI Cluster Demand — Structural or Cyclical?</div>
+              <div class="card-body">The debate around NVDA's forward multiple hinges on whether enterprise AI capex is a one-time catch-up cycle or a structural infrastructure reallocation.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">Macro Signal</div>
+              <div class="card-title">Fed Terminal Rate Probability Distribution</div>
+              <div class="card-body">Market-implied odds of 2026 rate cuts have compressed to 34%. Alfa's macro model sees the distribution as bi-modal, not consensus-skewed.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">Portfolio Intelligence</div>
+              <div class="card-title">Concentration Risk — Technology Sector</div>
+              <div class="card-body">Current portfolio has 43% allocation to AI-adjacent names. Historical drawdown distribution at this concentration level suggests tail hedging consideration.</div>
+            </div>
+
+          </div>
+        </div>
+
+        
+Note: This is a continuation. Concatenate this directly after the previous output's last line (`        <!-- Research card`), replacing that incomplete comment, through to the closing `</html>` tag.
+
+---
+
+```html
+        <!-- Research cards full demo -->
+        <div>
+          <div class="swatch-group-title" style="margin-top: var(--space-8);">Research Cards — Full Pattern</div>
+          <div class="grid-2" style="margin-top: var(--space-6);">
+
+            <div class="research-card">
+              <div class="research-card-header">
+                <span class="research-card-label">Earnings Intelligence</span>
+                <span class="badge badge-success">Outperform</span>
+              </div>
+              <div class="research-card-body">
+                <div class="research-card-meta">
+                  <span class="research-card-author">Alfa Pro</span>
+                  <span class="research-card-author" style="color: var(--text-disabled);">Aug 2, 2026</span>
+                </div>
+                <div class="research-card-title">Microsoft Azure Beat Probability — 73%</div>
+                <div class="research-card-excerpt">
+                  Cloud segment gross margins are expanding 140bps faster than consensus models. Enterprise seat growth in regulated verticals — healthcare, financial services, government — is underweight in street estimates for Q4.
+                </div>
+                <div style="display: flex; gap: var(--space-3);">
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Price Target</span>
+                    <span class="stamp-value stamp-value-lg">$512</span>
+                  </div>
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Conviction</span>
+                    <span class="stamp-value stamp-value-lg">HIGH</span>
+                  </div>
+                </div>
+              </div>
+              <div class="research-card-footer">
+                <span style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">MSFT — NASDAQ</span>
+                <button class="btn btn-primary btn-sm">Open Report</button>
+              </div>
+            </div>
+
+            <div class="research-card">
+              <div class="research-card-header">
+                <span class="research-card-label">Macro Thesis</span>
+                <span class="badge badge-warning">Neutral</span>
+              </div>
+              <div class="research-card-body">
+                <div class="research-card-meta">
+                  <span class="research-card-author">Alfa Pro</span>
+                  <span class="research-card-author" style="color: var(--text-disabled);">Aug 1, 2026</span>
+                </div>
+                <div class="research-card-title">Fed Terminal Rate — Bi-Modal Distribution</div>
+                <div class="research-card-excerpt">
+                  Market-implied 2026 cut odds have compressed to 34%, but Alfa's macro model detects a bi-modal probability distribution that consensus single-scenario models are not pricing. The tails are fatter than indicated.
+                </div>
+                <div style="display: flex; gap: var(--space-3);">
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Cut Probability</span>
+                    <span class="stamp-value stamp-value-lg">34%</span>
+                  </div>
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Signal</span>
+                    <span class="stamp-value stamp-value-lg">WATCH</span>
+                  </div>
+                </div>
+              </div>
+              <div class="research-card-footer">
+                <span style="font-size: var(--text-xs); color: var(--text-muted); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Macro — Rates</span>
+                <button class="btn btn-secondary btn-sm">View Model</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================
+           SECTION 6: STAMP GESTURE
+      ============================= -->
+      <section class="section" id="stamp">
+        <span class="section-label">06 — Signature Visual Gesture</span>
+        <h2 class="section-title">The Stamp</h2>
+        <p class="section-desc">
+          The stamp is the brand's unmistakable element. A rectangular block defined by a 1.5px solid border in Electric Violet (#4718DC). It appears exclusively when Alfa has generated a specific output. The visual rule is categorical: violet border means the model said this. Everything else has no violet border. The stamp solves a genuine product design problem — visually segregating AI-generated output from editorial context — through brand language rather than UI chrome.
+        </p>
+
+        <!-- Full-width signal block -->
+        <div class="signal-block">
+          <div>
+            <div class="signal-header">Alfa Signal — High Conviction</div>
+            <div class="signal-ticker">NVDA</div>
+            <div class="signal-name">NVIDIA Corporation — Semiconductors</div>
+            <p class="signal-summary">
+              Data center revenue guidance for FY2027 embeds 38% growth assumptions that Alfa's supply chain model considers conservative by approximately 15 percentage points. Hopper-to-Blackwell transition accelerates ASP expansion in a way that street models are not capturing. This is a structural story masquerading as a cycle story.
+            </p>
+          </div>
+          <div class="signal-stamps">
+            <div class="stamp-inline">
+              <span class="stamp-label">Alfa Price Target</span>
+              <span class="stamp-value" style="font-size: var(--text-3xl); font-weight: var(--font-weight-black);">$1,240</span>
+            </div>
+            <div class="stamp-inline">
+              <span class="stamp-label">Conviction Score</span>
+              <span class="stamp-value stamp-value-lg">9.1 / 10</span>
+            </div>
+            <div class="stamp-inline">
+              <span class="stamp-label">Signal Type</span>
+              <span class="stamp-value stamp-value-lg">BUY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stamp variants -->
+        <div style="margin-top: var(--space-12);">
+          <div class="swatch-group-title">Stamp Variants</div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: flex-start; margin-top: var(--space-8);">
+
+            <!-- Standard stamp -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">Standard</div>
+              <div class="stamp">
+                <span class="stamp-label">Alfa Signal</span>
+                <span class="stamp-value stamp-value-lg">STRONG BUY</span>
+              </div>
+            </div>
+
+            <!-- With extra context -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">With Subvalue</div>
+              <div class="stamp" style="padding: var(--space-4) var(--space-5);">
+                <span class="stamp-label">12-Month Target</span>
+                <span class="stamp-value" style="font-size: var(--text-3xl); font-weight: var(--font-weight-black); letter-spacing: var(--tracking-tight);">$512</span>
+                <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; display: block; margin-top: var(--space-1);">+28.4% Upside</span>
+              </div>
+            </div>
+
+            <!-- Conviction gauge -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">Conviction Score</div>
+              <div class="stamp" style="padding: var(--space-4) var(--space-5);">
+                <span class="stamp-label">Conviction</span>
+                <span class="stamp-value" style="font-size: var(--text-3xl); font-weight: var(--font-weight-black); letter-spacing: var(--tracking-tight);">HIGH</span>
+                <div style="margin-top: var(--space-2); display: flex; gap: 3px;">
+                  <div style="width: 18px; height: 4px; background: var(--brand); border-radius: var(--radius-sm);"></div>
+                  <div style="width: 18px; height: 4px; background: var(--brand); border-radius: var(--radius-sm);"></div>
+                  <div style="width: 18px; height: 4px; background: var(--brand); border-radius: var(--radius-sm);"></div>
+                  <div style="width: 18px; height: 4px; background: var(--brand-border); border-radius: var(--radius-sm);"></div>
+                  <div style="width: 18px; height: 4px; background: var(--border); border-radius: var(--radius-sm);"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filled stamp (CTA) -->
+            <div>
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">Filled (max once per view)</div>
+              <div class="stamp stamp-filled" style="padding: var(--space-5) var(--space-8);">
+                <span class="stamp-label">Alfa Recommendation</span>
+                <span class="stamp-value" style="font-size: var(--text-2xl); font-weight: var(--font-weight-black); letter-spacing: var(--tracking-tight);">INITIATE LONG</span>
+              </div>
+            </div>
+
+            <!-- Multiple inline stamps in context -->
+            <div style="flex-basis: 100%;">
+              <div style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-bottom: var(--space-3);">In Editorial Context</div>
+              <div style="background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-6); max-width: 680px;">
+                <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--border);">Research Note — Technology</div>
+                <p style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary); margin-bottom: var(--space-6);">
+                  Microsoft's Azure division has reported eight consecutive quarters of beat-and-raise on cloud revenue. The consistency of the outperformance is itself signal: it indicates that analyst estimates are structurally anchored too low, likely because sell-side models underweight enterprise renewal cycles in regulated verticals.
+                </p>
+                <!-- Stamps appear here — violet border marks the AI layer -->
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-6);">
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Alfa Target</span>
+                    <span class="stamp-value stamp-value-lg">$512</span>
+                  </div>
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Street Median</span>
+                    <span class="stamp-value stamp-value-lg" style="color: var(--text-secondary); font-weight: var(--font-weight-bold);">$478</span>
+                  </div>
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Upside vs Consensus</span>
+                    <span class="stamp-value stamp-value-lg" style="color: var(--success);">+7.1%</span>
+                  </div>
+                  <div class="stamp-inline">
+                    <span class="stamp-label">Revision Trend</span>
+                    <span class="stamp-value stamp-value-lg">UP</span>
+                  </div>
+                </div>
+                <p style="font-size: var(--text-sm); color: var(--text-muted); line-height: var(--leading-normal);">
+                  Bordered elements above are Alfa-generated outputs. Unbounded text is editorial. The violet border is the categorical separator.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- The rule, stated explicitly -->
+        <div style="margin-top: var(--space-12); padding: var(--space-6); background: var(--surface-raised); border-left: 3px solid var(--border-stamp); border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+          <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--brand); margin-bottom: var(--space-3);">The Categorical Rule</div>
+          <p style="font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-secondary); max-width: 68ch;">
+            Violet border means the model said this. Everything else has no violet border. The stamp is never decorative. It does not appear on editorial content, user-generated context, third-party data citations, or navigational elements. Violation of this rule does not produce a slightly off-brand result — it destroys the trust signal that the entire visual system is built to create.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ============================
+           SECTION 7: DATA TABLES
+      ============================= -->
+      <section class="section" id="datatables">
+        <span class="section-label">07 — Data Tables</span>
+        <h2 class="section-title">Tabular Intelligence</h2>
+        <p class="section-desc">
+          Data tables are the primary surface for institutional output. Column headers use the data/label register. Stamp cells carry the violet inset shadow. Hover states activate brand-subtle fill, not border change — the hover tint is subordinate to the stamp's categorical claim.
+        </p>
+
+        <div style="overflow-x: auto; background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Name</th>
+                <th>Sector</th>
+                <th>Last Price</th>
+                <th>Chg %</th>
+                <th>Alfa Target</th>
+                <th>Upside</th>
+                <th>Conviction</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-primary">NVDA</td>
+                <td>NVIDIA Corporation</td>
+                <td>Semiconductors</td>
+                <td>$968.00</td>
+                <td class="td-pos">+2.4%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$1,240</span>
+                  </div>
+                </td>
+                <td class="td-pos">+28.1%</td>
+                <td><span class="badge badge-brand" style="font-size: 8px;">High</span></td>
+                <td><span class="badge badge-success" style="font-size: 8px;">Buy</span></td>
+              </tr>
+              <tr>
+                <td class="td-primary">MSFT</td>
+                <td>Microsoft Corporation</td>
+                <td>Software</td>
+                <td>$399.12</td>
+                <td class="td-pos">+0.8%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$512</span>
+                  </div>
+                </td>
+                <td class="td-pos">+28.4%</td>
+                <td><span class="badge badge-brand" style="font-size: 8px;">High</span></td>
+                <td><span class="badge badge-success" style="font-size: 8px;">Buy</span></td>
+              </tr>
+              <tr>
+                <td class="td-primary">META</td>
+                <td>Meta Platforms</td>
+                <td>Internet</td>
+                <td>$542.30</td>
+                <td class="td-pos">+1.2%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$618</span>
+                  </div>
+                </td>
+                <td class="td-pos">+14.0%</td>
+                <td><span class="badge badge-brand" style="font-size: 8px;">Med</span></td>
+                <td><span class="badge badge-success" style="font-size: 8px;">Buy</span></td>
+              </tr>
+              <tr>
+                <td class="td-primary">INTC</td>
+                <td>Intel Corporation</td>
+                <td>Semiconductors</td>
+                <td>$31.40</td>
+                <td class="td-neg">-0.6%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$28</span>
+                  </div>
+                </td>
+                <td class="td-neg">-10.8%</td>
+                <td><span class="badge badge-default" style="font-size: 8px;">Low</span></td>
+                <td><span class="badge badge-error" style="font-size: 8px;">Sell</span></td>
+              </tr>
+              <tr>
+                <td class="td-primary">AMZN</td>
+                <td>Amazon.com</td>
+                <td>E-Commerce / Cloud</td>
+                <td>$194.50</td>
+                <td class="td-neg">-0.3%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$220</span>
+                  </div>
+                </td>
+                <td class="td-pos">+13.1%</td>
+                <td><span class="badge badge-brand" style="font-size: 8px;">Med</span></td>
+                <td><span class="badge badge-warning" style="font-size: 8px;">Hold</span></td>
+              </tr>
+              <tr>
+                <td class="td-primary">TSLA</td>
+                <td>Tesla</td>
+                <td>Automotive / AI</td>
+                <td>$218.80</td>
+                <td class="td-neg">-1.9%</td>
+                <td class="td-stamp-cell">
+                  <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+                    <span class="stamp-label" style="font-size: 8px;">Alfa</span>
+                    <span class="stamp-value" style="font-size: var(--text-base);">$190</span>
+                  </div>
+                </td>
+                <td class="td-neg">-13.1%</td>
+                <td><span class="badge badge-default" style="font-size: 8px;">Low</span></td>
+                <td><span class="badge badge-error" style="font-size: 8px;">Sell</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- ============================
+           SECTION 8: APP PREVIEWS
+      ============================= -->
+      <section class="section" id="previews">
+        <span class="section-label">08 — Application Previews</span>
+        <h2 class="section-title">The System In Context</h2>
+        <p class="section-desc">
+          Three surfaces: mobile consumer product, institutional print collateral, and a board-level presentation. One visual system. The stamp gesture, the condensed single-face typographic architecture, and the parchment ground hold across all three.
+        </p>
+
+        <div class="previews-row">
+
+          <!-- MOBILE SCREEN -->
+          <div>
+            <div class="preview-mobile">
+              <div class="mobile-statusbar">
+                <span class="mobile-statusbar-text">9:41</span>
+                <span class="mobile-statusbar-text">●●●</span>
+              </div>
+              <div class="mobile-nav">
+                <span class="mobile-nav-logo">Alfa</span>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <div style="width: 20px; height: 2px; background: var(--border-strong);"></div>
+                  <div style="width: 14px; height: 2px; background: var(--border-strong);"></div>
+                  <div style="width: 17px; height: 2px; background: var(--border-strong);"></div>
+                </div>
+              </div>
+              <div class="mobile-content">
+                <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">Today's Signals</div>
+                <div class="mobile-feed-item">
+                  <div class="mobile-feed-item-label">Earnings — Beat Signal</div>
+                  <div class="mobile-feed-item-headline">NVDA Q2 Earnings — Beat Probability 81%</div>
+                  <div class="mobile-feed-item-stamp">
+                    <span class="mobile-stamp-label">Alfa Target</span>
+                    <span class="mobile-stamp-value">$1,240</span>
+                  </div>
+                </div>
+                <div class="mobile-feed-item">
+                  <div class="mobile-feed-item-label">Macro — Fed Watch</div>
+                  <div class="mobile-feed-item-headline">September Cut Odds Compress to 34%</div>
+                  <div style="display: flex; gap: 6px;">
+                    <div class="mobile-feed-item-stamp">
+                      <span class="mobile-stamp-label">Signal</span>
+                      <span class="mobile-stamp-value">WATCH</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mobile-feed-item">
+                  <div class="mobile-feed-item-label">Portfolio — Risk Flag</div>
+                  <div class="mobile-feed-item-headline">Tech Concentration at 43% — Review Hedges</div>
+                  <div class="mobile-feed-item-stamp" style="background: var(--warning-subtle); box-shadow: inset 0 0 0 1.5px var(--warning);">
+                    <span class="mobile-stamp-label" style="color: var(--warning);">Risk Score</span>
+                    <span class="mobile-stamp-value" style="color: var(--warning);">MED</span>
+                  </div>
+                </div>
+                <div style="flex: 1;"></div>
+              </div>
+              <div class="mobile-tab-bar">
+                <div class="mobile-tab">
+                  <div class="mobile-tab-dot active"></div>
+                  <span class="mobile-tab-label active">Feed</span>
+                </div>
+                <div class="mobile-tab">
+                  <div class="mobile-tab-dot"></div>
+                  <span class="mobile-tab-label">Search</span>
+                </div>
+                <div class="mobile-tab">
+                  <div class="mobile-tab-dot"></div>
+                  <span class="mobile-tab-label">Portfolio</span>
+                </div>
+                <div class="mobile-tab">
+                  <div class="mobile-tab-dot"></div>
+                  <span class="mobile-tab-label">Settings</span>
+                </div>
+              </div>
+            </div>
+            <div class="preview-label">Mobile — Consumer Product</div>
+          </div>
+
+          <!-- PRINT AD -->
+          <div>
+            <div class="preview-print">
+              <div class="print-border-frame"></div>
+              <div>
+                <div class="print-eyebrow">Alfa Pro — Institutional Research</div>
+                <div class="print-headline">The Record<br>Speaks First.</div>
+                <div class="print-body">
+                  Eight years of institutional research signals, now with AI-generated conviction scoring and real-time earnings revision detection.
+                </div>
+                <div class="print-stamp-block">
+                  <div class="print-stamp-label">Alfa Signal — NVDA</div>
+                  <div class="print-stamp-value">BUY — $1,240 TARGET</div>
+                </div>
+              </div>
+              <div class="print-footer">
+                <div class="print-logo">Alfa</div>
+                <div class="print-url">ALFA.AI / PRO</div>
+              </div>
+            </div>
+            <div class="preview-label">Print — Institutional Ad</div>
+          </div>
+
+          <!-- PRESENTATION SLIDE -->
+          <div>
+            <div class="preview-slide">
+              <div class="slide-left">
+                <div class="slide-left-label">Q3 2026 — Fund Update</div>
+                <div class="slide-left-headline">Portfolio<br>Intelligence<br>Report</div>
+                <div class="slide-left-logo">Alfa Pro</div>
+              </div>
+              <div class="slide-right">
+                <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2);">Alfa Signals — Q3</div>
+                <div class="slide-stat">
+                  <div class="slide-stat-label">Signals Generated</div>
+                  <div class="slide-stat-value">1,847</div>
+                  <div class="slide-stat-change">+12% vs Q2</div>
+                </div>
+                <div class="slide-stat">
+                  <div class="slide-stat-label">Beat Accuracy</div>
+                  <div class="slide-stat-value">73.4%</div>
+                  <div class="slide-stat-change">+4.1pp vs Street</div>
+                </div>
+                <div class="slide-stat">
+                  <div class="slide-stat-label">Avg Upside Captured</div>
+                  <div class="slide-stat-value">18.2%</div>
+                  <div class="slide-stat-change">High conviction only</div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-label">Presentation — Board Slide</div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ============================
+           SECTION 9: TOKEN REFERENCE
+      ============================= -->
+      <section class="section" id="tokens">
+        <span class="section-label">09 — Token Reference</span>
+        <h2 class="section-title">Complete CSS Custom Properties</h2>
+        <p class="section-desc">
+          All tokens defined in :root. Copy any token name for use in component CSS. Dark mode overrides are available via prefers-color-scheme media query and [data-theme] attribute.
+        </p>
+
+        <div style="overflow-x: auto; background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+          <table class="data-table" style="font-family: var(--font-mono);">
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Light Value</th>
+                <th>Dark Value</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-primary">--surface-page</td><td>#E8E0CE</td><td>#1A1510</td><td><span class="badge badge-default">Surface</span></td></tr>
+              <tr><td class="td-primary">--surface-card</td><td>#DDD4BC</td><td>#221D17</td><td><span class="badge badge-default">Surface</span></td></tr>
+              <tr><td class="td-primary">--surface-raised</td><td>#EDE6D5</td><td>#2A2318</td><td><span class="badge badge-default">Surface</span></td></tr>
+              <tr><td class="td-primary">--surface-stamp</td><td>#D8CEBC</td><td>#201A13</td><td><span class="badge badge-default">Surface</span></td></tr>
+              <tr><td class="td-primary">--text-primary</td><td>#0C0906</td><td>#E8E0CE</td><td><span class="badge badge-default">Text</span></td></tr>
+              <tr><td class="td-primary">--text-secondary</td><td>#3A3028</td><td>#C4B89E</td><td><span class="badge badge-default">Text</span></td></tr>
+              <tr><td class="td-primary">--text-muted</td><td>#6B5D52</td><td>#8A7B6A</td><td><span class="badge badge-default">Text</span></td></tr>
+              <tr><td class="td-primary">--text-disabled</td><td>#A0918A</td><td>#57493D</td><td><span class="badge badge-default">Text</span></td></tr>
+              <tr><td class="td-primary">--brand</td><td>#4718DC</td><td>#6B40FF</td><td><span class="badge badge-brand">Brand</span></td></tr>
+              <tr><td class="td-primary">--brand-hover</td><td>#3910B8</td><td>#7B55FF</td><td><span class="badge badge-brand">Brand</span></td></tr>
+              <tr><td class="td-primary">--brand-active</td><td>#2D0A96</td><td>#5530E0</td><td><span class="badge badge-brand">Brand</span></td></tr>
+              <tr><td class="td-primary">--brand-subtle</td><td>rgba(71,24,220,.07)</td><td>rgba(107,64,255,.12)</td><td><span class="badge badge-brand">Brand</span></td></tr>
+              <tr><td class="td-primary">--brand-border</td><td>rgba(71,24,220,.38)</td><td>rgba(107,64,255,.42)</td><td><span class="badge badge-brand">Brand</span></td></tr>
+              <tr><td class="td-primary">--success</td><td>#1A6B3A</td><td>#3DA05A</td><td><span class="badge badge-success">Semantic</span></td></tr>
+              <tr><td class="td-primary">--warning</td><td>#7A4800</td><td>#C4873A</td><td><span class="badge badge-warning">Semantic</span></td></tr>
+              <tr><td class="td-primary">--error</td><td>#8C1F2E</td><td>#C44058</td><td><span class="badge badge-error">Semantic</span></td></tr>
+              <tr><td class="td-primary">--border</td><td>rgba(12,9,6,.16)</td><td>rgba(232,224,206,.13)</td><td><span class="badge badge-default">Border</span></td></tr>
+              <tr><td class="td-primary">--border-stamp</td><td>#4718DC</td><td>#6B40FF</td><td><span class="badge badge-brand">Border</span></td></tr>
+              <tr><td class="td-primary">--font-sans</td><td colspan="2">'Barlow Condensed', 'Arial Narrow', sans-serif</td><td><span class="badge badge-default">Type</span></td></tr>
+              <tr><td class="td-primary">--font-mono</td><td colspan="2">'IBM Plex Mono', 'Courier New', monospace</td><td><span class="badge badge-default">Type</span></td></tr>
+              <tr><td class="td-primary">--text-xs</td><td colspan="2">0.625rem / 10px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-sm</td><td colspan="2">0.75rem / 12px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-base</td><td colspan="2">1rem / 16px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-lg</td><td colspan="2">1.125rem / 18px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-xl</td><td colspan="2">1.375rem / 22px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-2xl</td><td colspan="2">1.75rem / 28px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-3xl</td><td colspan="2">2.5rem / 40px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--text-4xl</td><td colspan="2">4rem / 64px</td><td><span class="badge badge-default">Scale</span></td></tr>
+              <tr><td class="td-primary">--shadow-stamp</td><td colspan="2">inset 0 0 0 1.5px var(--brand)</td><td><span class="badge badge-brand">Shadow</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </main>
+  </div><!-- end page-layout -->
+</div><!-- end container -->
+
+<!-- PAGE FOOTER -->
+<footer style="margin-top: var(--space-20); border-top: 1.5px solid var(--border-strong); background: var(--surface-card);">
+  <div class="container" style="padding-top: var(--space-12); padding-bottom: var(--space-12);">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-12);">
+      <div>
+        <div style="font-family: var(--font-sans); font-weight: var(--font-weight-black); font-size: var(--text-2xl); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-primary); margin-bottom: var(--space-4);">Alfa</div>
+        <p style="font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--text-muted); max-width: 30ch;">
+          Institutional-grade research intelligence. Every output marked. Every signal owned.
+        </p>
+      </div>
+      <div>
+        <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-4);">Products</div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Alfa — Consumer</span>
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Alfa Pro — Institutional</span>
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Alfa Platform — API</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-4);">Visual Identity</div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Territory: The Official Record</span>
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Typeface: Barlow Condensed</span>
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Accent: Electric Violet #4718DC</span>
+          <span style="font-size: var(--text-sm); color: var(--text-secondary);">Ground: Parchment #E8E0CE</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: var(--space-10); padding-top: var(--space-6); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+      <span style="font-size: var(--text-xs); color: var(--text-disabled); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Visual Identity Reference v1.0 — August 2026 — Gradient Boosted Investments</span>
+      <div style="display: flex; gap: var(--space-3);">
+        <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+          <span class="stamp-label" style="font-size: 7px;">Score</span>
+          <span class="stamp-value" style="font-size: var(--text-sm);">9/10</span>
+        </div>
+        <div class="stamp-inline" style="padding: var(--space-1) var(--space-3);">
+          <span class="stamp-label" style="font-size: 7px;">Territory</span>
+          <span class="stamp-value" style="font-size: var(--text-sm);">3 Selected</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme');
+    if (current === 'dark') {
+      root.setAttribute('data-theme', 'light');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+    }
+  }
+</script>
+
+</body>
+</html>

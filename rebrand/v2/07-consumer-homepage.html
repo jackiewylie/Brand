@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa — The Record, Officially</title>
+<meta name="description" content="Alfa: institutional-grade financial research for PMs, analysts, and serious investors. Earnings prep: 40 hours to 20 minutes. The record, officially.">
+<style>
+  /* ============================================================
+     CSS CUSTOM PROPERTIES — THE OFFICIAL RECORD BRAND SYSTEM
+  ============================================================ */
+  :root {
+    --surface-page:        #E8E0CE;
+    --surface-card:        #DDD4BC;
+    --surface-raised:      #EDE6D5;
+    --surface-overlay:     rgba(12, 9, 6, 0.55);
+    --surface-stamp:       #D8CEBC;
+    --surface-on-brand:    #F0EBE0;
+
+    --text-primary:        #0C0906;
+    --text-secondary:      #3A3028;
+    --text-muted:          #6B5D52;
+    --text-disabled:       #A0918A;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+
+    --brand:               #4718DC;
+    --brand-hover:         #3910B8;
+    --brand-active:        #2D0A96;
+    --brand-subtle:        rgba(71, 24, 220, 0.07);
+    --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+    --brand-border:        rgba(71, 24, 220, 0.38);
+
+    --success:             #1A6B3A;
+    --success-subtle:      rgba(26, 107, 58, 0.09);
+    --warning:             #7A4800;
+    --warning-subtle:      rgba(122, 72, 0, 0.09);
+    --error:               #8C1F2E;
+    --error-subtle:        rgba(140, 31, 46, 0.09);
+
+    --border:              rgba(12, 9, 6, 0.16);
+    --border-subtle:       rgba(12, 9, 6, 0.08);
+    --border-strong:       rgba(12, 9, 6, 0.32);
+    --border-stamp:        #4718DC;
+
+    --font-sans:           'Barlow Condensed', 'Aktiv Grotesk Condensed',
+                           'Helvetica Neue Condensed', 'Arial Narrow',
+                           'Liberation Sans Narrow', sans-serif;
+    --font-mono:           'IBM Plex Mono', 'Fira Code',
+                           'Cascadia Code', 'Courier New', monospace;
+
+    --font-weight-light:   300;
+    --font-weight-regular: 400;
+    --font-weight-medium:  500;
+    --font-weight-bold:    700;
+    --font-weight-black:   900;
+
+    --text-xs:             0.625rem;
+    --text-sm:             0.75rem;
+    --text-base:           1rem;
+    --text-lg:             1.125rem;
+    --text-xl:             1.375rem;
+    --text-2xl:            1.75rem;
+    --text-3xl:            2.5rem;
+    --text-4xl:            4rem;
+
+    --leading-tight:       0.95;
+    --leading-snug:        1.1;
+    --leading-normal:      1.4;
+    --leading-relaxed:     1.65;
+
+    --tracking-tight:      -0.02em;
+    --tracking-normal:     0em;
+    --tracking-wide:       0.06em;
+    --tracking-wider:      0.12em;
+
+    --space-1:             0.25rem;
+    --space-2:             0.5rem;
+    --space-3:             0.75rem;
+    --space-4:             1rem;
+    --space-5:             1.25rem;
+    --space-6:             1.5rem;
+    --space-8:             2rem;
+    --space-10:            2.5rem;
+    --space-12:            3rem;
+    --space-16:            4rem;
+    --space-20:            5rem;
+    --space-24:            6rem;
+
+    --radius-sm:           1px;
+    --radius-md:           2px;
+    --radius-lg:           2px;
+    --radius-xl:           3px;
+    --radius-full:         2px;
+
+    --max-width:           1280px;
+    --max-width-text:      72ch;
+    --container-padding:   clamp(1rem, 4vw, 4rem);
+    --column-gap:          var(--space-8);
+
+    --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+    --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09),
+                           0 1px 2px rgba(12, 9, 6, 0.07);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+
+    --transition-fast:     100ms ease;
+    --transition-base:     180ms ease;
+    --transition-slow:     280ms ease;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-page:        #1A1510;
+      --surface-card:        #221D17;
+      --surface-raised:      #2A2318;
+      --surface-overlay:     rgba(232, 224, 206, 0.08);
+      --surface-stamp:       #201A13;
+      --surface-on-brand:    #F0EBE0;
+      --text-primary:        #E8E0CE;
+      --text-secondary:      #C4B89E;
+      --text-muted:          #8A7B6A;
+      --text-disabled:       #57493D;
+      --text-on-brand:       #F0EBE0;
+      --text-on-dark:        #E8E0CE;
+      --brand:               #6B40FF;
+      --brand-hover:         #7B55FF;
+      --brand-active:        #5530E0;
+      --brand-subtle:        rgba(107, 64, 255, 0.12);
+      --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+      --brand-border:        rgba(107, 64, 255, 0.42);
+      --success:             #3DA05A;
+      --success-subtle:      rgba(61, 160, 90, 0.12);
+      --warning:             #C4873A;
+      --warning-subtle:      rgba(196, 135, 58, 0.12);
+      --error:               #C44058;
+      --error-subtle:        rgba(196, 64, 88, 0.12);
+      --border:              rgba(232, 224, 206, 0.13);
+      --border-subtle:       rgba(232, 224, 206, 0.06);
+      --border-strong:       rgba(232, 224, 206, 0.26);
+      --border-stamp:        #6B40FF;
+      --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+      --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30),
+                             0 1px 2px rgba(0, 0, 0, 0.22);
+      --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --surface-page:        #1A1510;
+    --surface-card:        #221D17;
+    --surface-raised:      #2A2318;
+    --surface-overlay:     rgba(232, 224, 206, 0.08);
+    --surface-stamp:       #201A13;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #E8E0CE;
+    --text-secondary:      #C4B89E;
+    --text-muted:          #8A7B6A;
+    --text-disabled:       #57493D;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #6B40FF;
+    --brand-hover:         #7B55FF;
+    --brand-active:        #5530E0;
+    --brand-subtle:        rgba(107, 64, 255, 0.12);
+    --brand-subtle-hover:  rgba(107, 64, 255, 0.20);
+    --brand-border:        rgba(107, 64, 255, 0.42);
+    --success:             #3DA05A;
+    --success-subtle:      rgba(61, 160, 90, 0.12);
+    --warning:             #C4873A;
+    --warning-subtle:      rgba(196, 135, 58, 0.12);
+    --error:               #C44058;
+    --error-subtle:        rgba(196, 64, 88, 0.12);
+    --border:              rgba(232, 224, 206, 0.13);
+    --border-subtle:       rgba(232, 224, 206, 0.06);
+    --border-strong:       rgba(232, 224, 206, 0.26);
+    --border-stamp:        #6B40FF;
+    --shadow-sm:           0 1px 2px rgba(0, 0, 0, 0.32);
+    --shadow-md:           0 2px 8px rgba(0, 0, 0, 0.30),
+                           0 1px 2px rgba(0, 0, 0, 0.22);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+  }
+
+  :root[data-theme="light"] {
+    --surface-page:        #E8E0CE;
+    --surface-card:        #DDD4BC;
+    --surface-raised:      #EDE6D5;
+    --surface-overlay:     rgba(12, 9, 6, 0.55);
+    --surface-stamp:       #D8CEBC;
+    --surface-on-brand:    #F0EBE0;
+    --text-primary:        #0C0906;
+    --text-secondary:      #3A3028;
+    --text-muted:          #6B5D52;
+    --text-disabled:       #A0918A;
+    --text-on-brand:       #F0EBE0;
+    --text-on-dark:        #E8E0CE;
+    --brand:               #4718DC;
+    --brand-hover:         #3910B8;
+    --brand-active:        #2D0A96;
+    --brand-subtle:        rgba(71, 24, 220, 0.07);
+    --brand-subtle-hover:  rgba(71, 24, 220, 0.13);
+    --brand-border:        rgba(71, 24, 220, 0.38);
+    --success:             #1A6B3A;
+    --success-subtle:      rgba(26, 107, 58, 0.09);
+    --warning:             #7A4800;
+    --warning-subtle:      rgba(122, 72, 0, 0.09);
+    --error:               #8C1F2E;
+    --error-subtle:        rgba(140, 31, 46, 0.09);
+    --border:              rgba(12, 9, 6, 0.16);
+    --border-subtle:       rgba(12, 9, 6, 0.08);
+    --border-strong:       rgba(12, 9, 6, 0.32);
+    --border-stamp:        #4718DC;
+    --shadow-sm:           0 1px 2px rgba(12, 9, 6, 0.10);
+    --shadow-md:           0 2px 8px rgba(12, 9, 6, 0.09),
+                           0 1px 2px rgba(12, 9, 6, 0.07);
+    --shadow-stamp:        inset 0 0 0 1.5px var(--brand);
+  }
+
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--surface-page);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: var(--font-sans); }
+
+  /* ============================================================
+     CONTAINER
+  ============================================================ */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  /* ============================================================
+     STAMP UTILITY — VIOLET BORDER = ALFA GENERATED THIS
+  ============================================================ */
+  .stamp {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+  }
+
+  .stamp-label {
+    font-size: var(
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: var(--leading-tight);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .stamp-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    color: var(--text-primary);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  /* ============================================================
+     BUTTONS
+  ============================================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+    white-space: nowrap;
+    height: 40px;
+    padding: 0 var(--space-6);
+    text-decoration: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background: var(--brand);
+    color: var(--text-on-brand);
+    border: none;
+  }
+
+  .btn-primary:hover { background: var(--brand-hover); }
+  .btn-primary:active { background: var(--brand-active); }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid var(--brand);
+    color: var(--brand);
+  }
+
+  .btn-secondary:hover { background: var(--brand-subtle); }
+  .btn-secondary:active { background: var(--brand-subtle-hover); }
+
+  .btn-hero {
+    height: 48px;
+    padding: 0 var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  /* ============================================================
+     SECTION LABEL
+  ============================================================ */
+  .section-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 32px;
+    background: var(--border-strong);
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     NAV
+  ============================================================ */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-page);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: var(--space-8);
+  }
+
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-black);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-links a:hover { color: var(--text-primary); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+    height: 28px;
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--border-strong);
+    color: var(--text-secondary);
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--brand);
+    flex-shrink: 0;
+    border-radius: 0;
+  }
+
+  .hero-headline {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-black);
+    font-size: clamp(2.5rem, 5.5vw, 5.25rem);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-subhead {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: 52ch;
+    margin-bottom: var(--space-10);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-5);
+  }
+
+  .hero-caveat {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  /* Hero visual: Alfa signal card mockup */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .signal-card {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-5);
+  }
+
+  .signal-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .signal-ticker {
+    font-weight: var(--font-weight-black);
+    font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .signal-meta {
+    text-align: right;
+  }
+
+  .signal-date {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .signal-live {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .signal-field-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  .signal-field-value {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .signal-field-value.up { color: var(--success); }
+  .signal-field-value.down { color: var(--error); }
+
+  .signal-conviction {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--brand-subtle);
+    border-left: 2px solid var(--brand);
+    margin-bottom: var(--space-4);
+  }
+
+  .signal-conviction-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .signal-conviction-value {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+
+  .signal-drivers {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+  }
+
+  .signal-drivers-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .signal-targets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .signal-footer {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .signal-footer-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--brand);
+    flex-shrink: 0;
+    border-radius: 0;
+  }
+
+  .hero-annotation {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .annotation-mark {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--brand);
+    border-radius: 0;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .annotation-mark svg {
+    width: 8px;
+    height: 8px;
+    fill: var(--brand);
+  }
+
+  .annotation-text {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .annotation-text strong {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ============================================================
+     PROOF STRIP
+  ============================================================ */
+  .proof-strip {
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-3) 0;
+    overflow: hidden;
+  }
+
+  .proof-strip-track {
+    display: flex;
+    gap: var(--space-10);
+    white-space: nowrap;
+    animation: marquee-scroll 36s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes marquee-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .proof-strip-item {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .proof-strip-sep {
+    color: var(--brand);
+    font-weight: var(--font-weight-black);
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     PROBLEM SECTION
+  ============================================================ */
+  .problem {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .two-col-intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-16);
+    margin-bottom: var(--space-16);
+    align-items: start;
+  }
+
+  .section-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(var(--text-3xl), 4vw, 3.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+  }
+
+  .section-body {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: var(--max-width-text);
+  }
+
+  .section-body p + p { margin-top: var(--space-5); }
+
+  .problem-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .problem-item {
+    padding: var(--space-8) var(--space-6) var(--space-8) 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .problem-item:last-child { border-right: none; }
+  .problem-item:not(:first-child) { padding-left: var(--space-6); }
+
+  .problem-number {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1;
+    color: var(--text-disabled);
+    margin-bottom: var(--space-5);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .problem-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .problem-body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  /* ============================================================
+     PRODUCT SECTION
+  ============================================================ */
+  .product {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .capability-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition-base), border-width var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .capability-card:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .capability-card-top {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .capability-card-top-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .capability-card-body {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    flex: 1;
+  }
+
+  .capability-name {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    line-height: var(--leading-snug);
+  }
+
+  .capability-desc {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .capability-stamp {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+  }
+
+  .capability-stamp-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .capability-stamp-value {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    line-height: var(--leading-snug);
+  }
+
+  .capability-stamp-sub {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    margin-top: var(--space-2);
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .feature-list li::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--brand);
+    flex-shrink: 0;
+    margin-top: 7px;
+    border-radius: 0;
+  }
+
+  /* ============================================================
+     PROOF SECTION
+  ============================================================ */
+  .proof {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .proof-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-10);
+  }
+
+  .proof-stat {
+    background: var(--surface-page);
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .proof-stat-number {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    line-height: 1;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .proof-stat-number .accent { color: var(--brand); }
+
+  .proof-stat-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .proof-stat-desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 34ch;
+  }
+
+  .institutions-panel {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin-bottom: var(--space-10);
+  }
+
+  .institutions-header {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-5);
+  }
+
+  .institutions-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .inst-tag {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-secondary);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+  }
+
+  .proof-quote-block {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-8);
+    margin-bottom: var(--space-10);
+  }
+
+  .proof-quote-text {
+    font-size: clamp(var(--text-xl), 2.5vw, var(--text-2xl));
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+    max-width: 60ch;
+  }
+
+  .proof-quote-attribution {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .proof-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+
+  .proof-badge {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-5) var(--space-4);
+    text-align: center;
+  }
+
+  .proof-badge-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .proof-badge-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  /* ============================================================
+     HOW IT WORKS
+  ============================================================ */
+  .how {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .how-step {
+    background: var(--surface-page);
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .how-step-num {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-disabled);
+    line-height: 1;
+  }
+
+  .how-step-time {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .how-step-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    line-height: var(--leading-snug);
+  }
+
+  .how-step-body {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .how-step-stamp {
+    background: var(--surface-stamp);
+    box-shadow: var(--shadow-stamp);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .how-step-stamp-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .how-step-stamp-value {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: var(--leading-snug);
+  }
+
+  /* ============================================================
+     TESTIMONIALS
+  ============================================================ */
+  .testimonials {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .testimonial {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    transition: border-color var(--transition-base);
+  }
+
+  .testimonial:hover {
+    border: 1.5px solid var(--border-stamp);
+  }
+
+  .testimonial-meta {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .testimonial-quote {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .testimonial-attribution {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .testimonial-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .testimonial-role {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ============================================================
+     WAITLIST / CTA
+  ============================================================ */
+  .cta-section {
+    padding: var(--space-24) 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-card);
+  }
+
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    font-weight: var(--font-weight-black);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-subhead {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-10);
+  }
+
+  .cta-form {
+    display: flex;
+    gap: var(--space-3);
+    max-width: 480px;
+    margin: 0 auto var(--space-5);
+  }
+
+  .cta-input {
+    flex: 1;
+    height: 48px;
+    padding: 0 var(--space-4);
+    background: var(--surface-page);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color var(--transition-fast);
+  }
+
+  .cta-input::placeholder {
+    color: var(--text-disabled);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+  }
+
+  .cta-input:focus { border-color: var(--brand); }
+  .cta-input.error { border-color: var(--error); }
+
+  .cta-disclaimer {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: var(--leading-relaxed);
+  }
+
+  .form-success-msg {
+    display: none;
+    padding: var(--space-4) var(--space-6);
+    background: var(--success-subtle);
+    border: 1px solid var(--success);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--success);
+    text-align: center;
+    margin: 0 auto var(--space-5);
+    max-width: 480px;
+  }
+
+  .form-success-msg.visible { display: block; }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  .footer {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: var(--space-16);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-8);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-black);
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--space-4);
+    line-height: 1;
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 22ch;
+  }
+
+  .footer-nav-groups {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+  }
+
+  .footer-group-title {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer-links a {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: var(--tracking-wide);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover { color: var(--text-primary); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .footer-legal {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 74ch;
+  }
+
+  .footer-copy {
+    font-size: var(--text-xs);
+    color: var(--text-disabled);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+    .two-col-intro { grid-template-columns: 1fr; gap: var(--space-6); }
+    .problem-items { grid-template-columns: 1fr; }
+    .problem-item {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-8) 0;
+    }
+    .problem-item:last-child { border-bottom: none; }
+    .problem-item:not(:first-child) { padding-left: 0; }
+    .capabilities-grid { grid-template-columns: 1fr; }
+    .proof-stats-row { grid-template-columns: 1fr; }
+    .proof-badges { grid-template-columns: repeat(2, 1fr); }
+    .how-steps { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: var(--space-8); }
+    .footer-nav-groups { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .cta-form { flex-direction: column; }
+    .signal-grid { grid-template-columns: 1fr 1fr; }
+    .signal-targets { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .proof-badges { grid-template-columns: repeat(2, 1fr); }
+    .footer-nav-groups { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Alfa — home">ALFA</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#product">Product</a></li>
+        <li><a href="#proof">Proof</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#testimonials">From Investors</a></li>
+        <li><a href="#waitlist">Get Access</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">Dark</button>
+        <a href="#waitlist" class="btn btn-primary">Request Access</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Left: copy -->
+      <div>
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Institutional-grade financial intelligence
+        </div>
+        <h1 class="hero-headline" id="hero-headline">
+          YOUR THESIS.<br>
+          THE RECORD,<br>
+          OFFICIALLY.
+        </h1>
+        <p class="hero-subhead">
+          Forty hours of earnings preparation. Twenty minutes of Alfa. The institutional research infrastructure that hedge fund analysts have always used — now available without the institutional address.
+        </p>
+        <div class="hero-actions">
+          <a href="#waitlist" class="btn btn-primary btn-hero">Request Access</a>
+          <a href="#product" class="btn btn-secondary btn-hero">See the Record</a>
+        </div>
+        <p class="hero-caveat">No Bloomberg subscription. No analyst team. No institutional address required.</p>
+      </div>
+
+      <!-- Right: Alfa signal card mockup (not a chart) -->
+      <div class="hero-visual" aria-label="Example Alfa earnings signal output for NVDA">
+        <div class="signal-card">
+          <div class="signal-card-head">
+            <div>
+              <div class="signal-date">Earnings Signal — Aug 2, 2026 · 06:47 EST</div>
+              <div class="signal-ticker">NVDA</div>
+            </div>
+            <div class="signal-meta">
+              <div class="signal-date">Q2 FY2027 · Pre-Market</div>
+              <div class="signal-live">&#9679; Stamped</div>
+            </div>
+          </div>
+
+          <div class="signal-grid">
+            <div>
+              <span class="signal-field-label">Revenue Est.</span>
+              <span class="signal-field-value">$44.2B</span>
+            </div>
+            <div>
+              <span class="signal-field-label">Revision</span>
+              <span class="signal-field-value up">+3.1%</span>
+            </div>
+            <div>
+              <span class="signal-field-label">EPS Signal</span>
+              <span class="signal-field-value">$0.92</span>
+            </div>
+          </div>
+
+          <div class="signal-conviction">
+            <span class="signal-conviction-label">Alfa Signal</span>
+            <span class="signal-conviction-value">Conviction: High</span>
+          </div>
+
+          <div style="margin-bottom: var(--space-4);">
+            <span class="signal-drivers-label">Key Drivers</span>
+            <p class="signal-drivers">Data center demand acceleration ahead of consensus. Sovereign AI infrastructure spend underprice by street. CUDA ecosystem lock-in deepening. Supply constraints easing Q3 FY2027.</p>
+          </div>
+
+          <div class="signal-targets">
+            <div>
+              <span class="signal-field-label">Price Target</span>
+              <span class="signal-field-value up">$186</span>
+            </div>
+            <div>
+              <span class="signal-field-label">vs. Consensus</span>
+              <span class="signal-field-value up">+$12.50</span>
+            </div>
+          </div>
+
+          <div class="signal-footer">
+            <span class="signal-footer-dot" aria-hidden="true"></span>
+            Alfa Signal &middot; Stamped Aug 2, 2026 &middot; 300+ Institutional Inputs
+          </div>
+        </div>
+
+        <div class="hero-annotation" role="note">
+          <div class="annotation-mark" aria-hidden="true">
+            <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="6" height="6"/>
+            </svg>
+          </div>
+          <p class="annotation-text">
+            <strong>Violet border = Alfa generated this.</strong> Every output is stamped: marked, traceable, and clearly separated from editorial context. You always know what the model said and what came from the record. This is not a feature. It is an obligation.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROOF STRIP — INSTITUTIONAL CLIENTS MARQUEE
+============================================================ -->
+<div class="proof-strip" aria-label="Partial list of institutional clients">
+  <div class="proof-strip-track" aria-hidden="true">
+    <span class="proof-strip-item">HSBC</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">RBC Capital Markets</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">BMO Capital Markets</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Janus Henderson</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Ameriprise Financial</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Invesco</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Barrow Hanley</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Raymond James</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Wells Fargo Advisors</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Manulife</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">KeyBank</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">CIBC</span><span class="proof-strip-sep">&middot;</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="proof-strip-item">HSBC</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">RBC Capital Markets</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">BMO Capital Markets</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Janus Henderson</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Ameriprise Financial</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Invesco</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Barrow Hanley</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Raymond James</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Wells Fargo Advisors</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">Manulife</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">KeyBank</span><span class="proof-strip-sep">&middot;</span>
+    <span class="proof-strip-item">CIBC</span><span class="proof-strip-sep">&middot;</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     THE PROBLEM
+============================================================ -->
+<section class="problem" id="problem" aria-labelledby="problem-headline">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <div class="two-col-intro">
+      <div>
+        <h2 class="section-headline" id="problem-headline">THE TOOLS NEVER MATCHED THE SERIOUSNESS.</h2>
+      </div>
+      <div class="section-body">
+        <p>You follow earnings. You read the filings. You track consensus revisions before the quarter closes, and you know the difference between a beat-and-raise and a beat-and-guide-down. You have always been capable of institutional-quality analysis.</p>
+        <p>The tools available to you have consistently underestimated what you can do with them. The research infrastructure that professional investors use to make consequential decisions — the infrastructure that compresses forty hours of preparation into the precision required to act with conviction — has never been available to the people those decisions most affect.</p>
+        <p>That was a distribution problem. It was never a capability problem. Alfa solves the distribution problem.</p>
+      </div>
+    </div>
+
+    <div class="problem-items">
+      <div class="problem-item">
+        <div class="problem-number">01</div>
+        <h3 class="problem-title">Bloomberg Costs $28,000 Per Year</h3>
+        <p class="problem-body">The terminal that professional investors use to track earnings revisions, consensus movement, and sector positioning is priced for institutions — not because it requires an institution to operate it, but because institutions were historically the only ones who could pay. That is a pricing decision, not a capability boundary. Alfa delivers the research output Bloomberg exists to enable at a price that does not require a trading desk to justify.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-number">02</div>
+        <h3 class="problem-title">ChatGPT Generates Text. Not Signals.</h3>
+        <p class="problem-body">General-purpose AI is capable of financial questions. It is not built for financial truth. A model trained on the internet generates plausible-sounding analysis. Alfa generates stamped signals: model-derived, traceable, clearly separated from editorial context. Eight in ten investment professionals prefer Alfa over ChatGPT, Perplexity, and Claude for financial research tasks in a blind test. The two who do not have not used it through a real earnings season yet.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-number">03</div>
+        <h3 class="problem-title">Forty Hours You Do Not Have</h3>
+        <p class="problem-body">A PM or analyst at a major asset manager spends three days preparing for a single earnings call: transcript analysis, consensus revision tracking, sector comparable movement, supply chain signal parsing. All of it work that precedes the judgment — the actual analysis — that only a human can make. Alfa completes the preparation in twenty minutes. Not a summary. The full preparation. The forty hours were never the analysis. They were the cost of inadequate tooling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE PRODUCT — 3 CORE CAPABILITIES
+============================================================ -->
+<section class="product" id="product" aria-labelledby="product-headline">
+  <div class="container">
+    <div class="section-label">The Product</div>
+    <div class="two-col-intro" style="margin-bottom: var(--space-10);">
+      <div>
+        <h2 class="section-headline" id="product-headline">THREE THINGS ALFA DOES THAT NOTHING ELSE DOES.</h2>
+      </div>
+      <div class="section-body">
+        <p>Alfa is not a financial news reader. It is not a screener. It is not a chatbot with a data subscription. It is research infrastructure — the same category of tool institutional analysts use to prepare for earnings, construct thesis positions, and act with conviction. Three capabilities. One system. Every output stamped.</p>
+      </div>
+    </div>
+
+    <div class="capabilities-grid">
+
+      <!-- Capability 1 -->
+      <div class="capability-card">
+        <div class="capability-card-top">
+          <span class="capability-card-top-label">Capability 01</span>
+          <span class="capability-card-top-label">Earnings Intelligence</span>
+        </div>
+        <div class="capability-card-body">
+          <h3 class="capability-name">Earnings Intelligence</h3>
+          <p class="capability-desc">The full preparation a PM takes three days to complete — transcript analysis, consensus revision tracking, supply chain signals, sector comparable movement — delivered in twenty minutes. Before the open. Every morning you need it.</p>
+          <div class="capability-stamp">
+            <span class="capability-stamp-label">Alfa Signal — Q2 Earnings Prep</span>
+            <div class="capability-stamp-value">Consensus Beat Probability: 73%</div>
+            <div class="capability-stamp-sub">847 Earnings Signals &middot; Revision Trend +2.3% &middot; Stamped 06:31</div>
+          </div>
+          <ul class="feature-list">
+            <li>Full transcript analysis before the earnings call</li>
+            <li>Analyst consensus revision tracking with directional signal</li>
+            <li>Supply chain and sector comparable read-through</li>
+            <li>Stamped beat/miss probability with driving factors visible</li>
+            <li>Historical pattern match against prior quarters</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Capability 2 -->
+      <div class="capability-card">
+        <div class="capability-card-top">
+          <span class="capability-card-top-label">Capability 02</span>
+          <span class="capability-card-top-label">Thesis Construction</span>
+        </div>
+        <div class="capability-card-body">
+          <h3 class="capability-name">Thesis Construction</h3>
+          <p class="capability-desc">Alfa does not tell you what to buy. It gives you the structured framework that institutions use to stress-test a thesis before committing capital: revenue model assumptions, competitive moat assessment, valuation sensitivity, bear case articulation. The infrastructure for conviction — not the conviction itself.</p>
+          <div class="capability-stamp">
+            <span class="capability-stamp-label">Alfa Thesis Assessment</span>
+            <div class="capability-stamp-value">Bull Case: 3 of 4 Assumptions Valid</div>
+            <div class="capability-stamp-sub">Bear Risk: Margin compression, FX headwinds &middot; Stamped</div>
+          </div>
+          <ul class="feature-list">
+            <li>Revenue model assumption validation against consensus</li>
+            <li>Competitive moat assessment with peer benchmarking</li>
+            <li>Valuation sensitivity: bull, base, and bear case outputs</li>
+            <li>Thesis stress-test against historical analogues</li>
+            <li>Contra-indicator identification with source tracing</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Capability 3 -->
+      <div class="capability-card">
+        <div class="capability-card-top">
+          <span class="capability-card-top-label">Capability 03</span>
+          <span class="capability-card-top-label">Signal Feed</span>
+        </div>
+        <div class="capability-card-body">
+          <h3 class="capability-name">Signal Feed</h3>
+          <p class="capability-desc">A daily intelligence feed calibrated to your positions and watchlist — not a news feed, not a sentiment aggregator. Alfa watches for the signals that matter: revision inflections, sector rotation indicators, guidance changes, and event-driven triggers. Every signal stamped. Every source traceable.</p>
+          <div class="capability-stamp">
+            <span class="capability-stamp-label">Alfa Signal — Today, 06:31</span>
+            <div class="capability-stamp-value">TSMC: Guidance Revision +4.2%</div>
+            <div class="capability-stamp-sub">NVDA, AMD Supply Chain Read-Through &middot; Conviction: High</div>
+          </div>
+          <ul class="feature-list">
+            <li>Position-calibrated signal delivery before market open</li>
+            <li>Earnings revision inflection detection ahead of consensus</li>
+            <li>Management guidance change classification with context</li>
+            <li>Sector rotation and macro read-through signals</li>
+            <li>Event-driven trigger monitoring for names you hold</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROOF
+============================================================ -->
+<section class="proof" id="proof" aria-labelledby="proof-headline">
+  <div class="container">
+    <div class="section-label">The Proof</div>
+    <div style="margin-bottom: var(--space-12);">
+      <h2 class="section-headline" id="proof-headline" style="max-width: 22ch; margin-bottom: var(--space-5);">THE NUMBERS ARE NOT MARKETING. THEY ARE THE RECORD.</h2>
+      <p class="section-body" style="max-width: 62ch;">If Alfa is good enough for the PM at HSBC preparing a $400M position in semiconductors, it is more than adequate for the investor who follows the same names with the same seriousness. The intelligence is the same. The price is not.</p>
+    </div>
+
+    <div class="proof-stats-row">
+      <div class="proof-stat">
+        <div class="proof-stat-number">8<span class="accent">/10</span></div>
+        <div class="proof-stat-label">Institutional Preference</div>
+        <p class="proof-stat-desc">Investment professionals prefer Alfa over ChatGPT, Perplexity, and Claude for financial research tasks — blind test, after a live earnings cycle. The other two haven't used it yet.</p>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">40<span class="accent">&#8594;20</span></div>
+        <div class="proof-stat-label">Hours to Minutes</div>
+        <p class="proof-stat-desc">Earnings preparation reduced from forty hours to twenty minutes. Not a summary — the full preparation: transcript analysis, consensus movement, supply chain signals, and a stamped conviction output.</p>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">$5<span class="accent">T+</span></div>
+        <div class="proof-stat-label">Assets Under Management</div>
+        <p class="proof-stat-desc">300+ institutional clients representing over five trillion dollars in AUM trust Alfa for earnings research infrastructure. They did not switch for the price. They switched for the signal quality.</p>
+      </div>
+    </div>
+
+    <div class="institutions-panel">
+      <div class="institutions-header">300+ Institutional Clients — Partial List</div>
+      <div class="institutions-tags">
+        <span class="inst-tag">HSBC</span>
+        <span class="inst-tag">RBC Capital Markets</span>
+        <span class="inst-tag">BMO Capital Markets</span>
+        <span class="inst-tag">CIBC</span>
+        <span class="inst-tag">Janus Henderson</span>
+        <span class="inst-tag">Ameriprise Financial</span>
+        <span class="inst-tag">Invesco</span>
+        <span class="inst-tag">Barrow Hanley</span>
+        <span class="inst-tag">Raymond James</span>
+        <span class="inst-tag">Wells Fargo Advisors</span>
+        <span class="inst-tag">Manulife</span>
+        <span class="inst-tag">KeyBank</span>
+      </div>
+    </div>
+
+    <div class="proof-quote-block">
+      <p class="proof-quote-text">"If it's good enough for the PM at HSBC preparing a $400 million semiconductor position, it's more than adequate for the investor who follows the same names with the same seriousness. The intelligence is the same. The price is not."</p>
+      <p class="proof-quote-attribution">Alfa &mdash; The Record, Officially</p>
+    </div>
+
+    <div class="proof-badges">
+      <div class="proof-badge">
+        <span class="proof-badge-label">Patents</span>
+        <span class="proof-badge-value">15</span>
+      </div>
+      <div class="proof-badge">
+        <span class="proof-badge-label">Certification</span>
+        <span class="proof-badge-value" style="font-size: var(--text-xl);">SOC 2</span>
+      </div>
+      <div class="proof-badge">
+        <span class="proof-badge-label">Years Finance AI</span>
+        <span class="proof-badge-value">8</span>
+      </div>
+      <div class="proof-badge">
+        <span class="proof-badge-label">Compliance</span>
+        <span class="proof-badge-value" style="font-size: var(--text-lg);">FINRA-Aware</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+============================================================ -->
+<section class="how" id="how" aria-labelledby="how-headline">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <div class="two-col-intro">
+      <div>
+        <h2 class="section-headline" id="how-headline">OPEN.<br>BRIEF.<br>DECIDE.</h2>
+      </div>
+      <div class="section-body" style="padding-top: var(--space-2);">
+        <p>The DRI opens Alfa the way they open their brokerage account — first thing, every trading day. Three steps. The preparation that used to take three days is already done by the time you wake up. What remains is the part that has always been yours: the judgment.</p>
+      </div>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <div class="how-step-time">6:30 AM &middot; Pre-Market</div>
+        <h3 class="how-step-title">Your Morning Brief Is Already Stamped</h3>
+        <p class="how-step-body">Alfa runs overnight. Before you open the app, the earnings prep for every name you hold or watch is already complete — transcript analysis, consensus revision movement, sector signals. All of it waiting, stamped, with every Alfa-generated output marked and traceable before the open.</p>
+        <div class="how-step-stamp">
+          <span class="how-step-stamp-label">Alfa Signal — Ready at Open</span>
+          <span class="how-step-stamp-value">12 names briefed &middot; 3 high-conviction signals &middot; 1 earnings call today &middot; 2 revision inflections detected</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <div class="how-step-time">7:15 AM &middot; Before the Open</div>
+        <h3 class="how-step-title">Dig Into the Signal That Matters</h3>
+        <p class="how-step-body">You look at the name with the high-conviction signal. Alfa shows you what drove the assessment: which inputs changed, how the revision compares to prior-quarter patterns, what the supply chain read-through implies, and what the bull and bear cases require to hold. You know what the model said and what you are deciding.</p>
+        <div class="how-step-stamp">
+          <span class="how-step-stamp-label">Alfa Thesis Assessment</span>
+          <span class="how-step-stamp-value">Revision inflection +3.1% above prior quarter trend. Supply chain data confirms demand acceleration. Bear case requires margin compression exceeding current guidance by 200 bps.</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <div class="how-step-time">9:30 AM &middot; The Open</div>
+        <h3 class="how-step-title">The Thesis Is Yours. The Infrastructure Is Ours.</h3>
+        <p class="how-step-body">The market opens and you act — or you wait. Either way, the decision comes from your judgment applied to the best available intelligence. The preparation is done. The conviction belongs to you. Alfa does not take credit for the call. It only makes the call worth making.</p>
+        <div class="how-step-stamp">
+          <span class="how-step-stamp-label">What Alfa Does Not Do</span>
+          <span class="how-step-stamp-value">Alfa does not tell you to buy or sell. Conviction is not included. That part is still yours — and it always will be.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="testimonials" id="testimonials" aria-labelledby="testimonials-headline">
+  <div class="container">
+    <div class="section-label">From the Record</div>
+    <div style="margin-bottom: var(--space-10);">
+      <h2 class="section-headline" id="testimonials-headline" style="margin-bottom: var(--space-3);">WHAT SERIOUS INVESTORS SAY.</h2>
+      <p style="font-size: var(--text-xs); font-weight: var(--font-weight-medium); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted);">Not endorsements. Reports from people who open the app every trading day.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial">
+        <div class="testimonial-meta">Daily Reliant Investor &middot; Semiconductors</div>
+        <blockquote class="testimonial-quote">
+          "I've followed semiconductors seriously for nine years. I knew what I was looking for — I just didn't have the infrastructure to find it before anyone else did. Alfa runs the earnings prep I used to do manually across an entire weekend. Now I cover twelve names in the time it used to take me to read one transcript. The stamp matters to me: I know exactly what came from the model versus what I'm bringing to the trade. That separation is the whole thing."
+        </blockquote>
+        <div class="testimonial-attribution">
+          <div class="testimonial-name">Marcus T.</div>
+          <div class="testimonial-role">Software Engineer &middot; 14-year active investor &middot; NVDA, AMD, TSMC positions</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-meta">Daily Reliant Investor &middot; Healthcare</div>
+        <blockquote class="testimonial-quote">
+          "I was skeptical. I've seen AI finance tools that generate text that sounds like analysis but isn't. What Alfa does differently is show its work. Every output tells you which inputs drove it and what would have to change to invalidate the signal. That's not journalism, it's not sentiment — it's how an analyst thinks. I don't use it to decide. I use it to know whether my decision holds up against what the model found."
+        </blockquote>
+        <div class="testimonial-attribution">
+          <div class="testimonial-name">Priya S.</div>
+          <div class="testimonial-role">Physician &middot; 8-year active investor &middot; Healthcare and biotech portfolio</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="testimonial-meta">Daily Reliant Investor &middot; Multi-Sector</div>
+        <blockquote class="testimonial-quote">
+          "I track eighteen names across four sectors. Before Alfa, earnings season meant taking time off work to stay on top of it. Now I spend twenty minutes before the open and I know more than I used to know after a full day of research. The signal feed catches revision inflections before the analyst community moves. I haven't opened a financial news app since I started using this. I didn't know how much noise I was tolerating until I stopped."
+        </blockquote>
+        <div class="testimonial-attribution">
+          <div class="testimonial-name">David K.</div>
+          <div class="testimonial-role">Operations Director &middot; 11-year active investor &middot; 18 positions across four sectors</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WAITLIST / CTA
+============================================================ -->
+<section class="cta-section" id="waitlist" aria-labelledby="cta-headline">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="cta-eyebrow">Early Access &mdash; Individual Investors</p>
+      <h2 class="cta-headline" id="cta-headline">THE RECORD.<br>IT'S YOURS.</h2>
+      <p class="cta-subhead">Your research has always been this sharp. The time it took was the variable we fixed. Join the waitlist for individual investor access to Alfa.</p>
+      <form class="cta-form" id="waitlistForm" novalidate aria-label="Waitlist signup form">
+        <input
+          type="email"
+          class="cta-input"
+          id="emailInput"
+          placeholder="Your Email Address"
+          autocomplete="email"
+          required
+          aria-label="Email address"
+          aria-describedby="formDisclaimer"
+        />
+        <button type="submit" class="btn btn-primary btn-hero" style="flex-shrink: 0;">
+          Request Access
+        </button>
+      </form>
+      <div class="form-success-msg" id="formSuccess" role="alert" aria-live="polite">
+        You are on the record. We will be in touch before the open.
+      </div>
+      <p class="cta-disclaimer" id="formDisclaimer">
+        No commitment required. Alfa is currently available to individual investors by invitation.<br>
+        Institutional inquiries: pro@alfa.com
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="/" class="footer-brand-name" aria-label="Alfa — home">ALFA</a>
+        <p class="footer-tagline">The record, officially. Institutional-grade financial intelligence for the investor who takes the work seriously.</p>
+      </div>
+      <div class="footer-nav-groups">
+        <div>
+          <div class="footer-group-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="#">Alfa (Individual)</a></li>
+            <li><a href="#">Alfa Pro</a></li>
+            <li><a href="#">Alfa Platform</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-group-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About Alfa</a></li>
+            <li><a href="#">Research</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-group-title">Institutional</div>
+          <ul class="footer-links">
+            <li><a href="#">Alfa Pro Overview</a></li>
+            <li><a href="#">Alfa Platform API</a></li>
+            <li><a href="#">Security &amp; Compliance</a></li>
+            <li><a href="#">SOC 2 Documentation</a></li>
+            <li><a href="#">Request a Demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-group-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Disclosures</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">FINRA Information</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        Alfa is not a registered investment adviser and does not provide personalized investment advice. All outputs generated by Alfa are for informational purposes only and should not be construed as a recommendation to buy, sell, or hold any security. Investing involves risk, including the possible loss of principal. Past performance is not indicative of future results. Alfa outputs are stamped to indicate model-generated content; this designation reflects traceability, not an accuracy guarantee. Please consult a qualified financial professional before making investment decisions. Alfa maintains SOC 2 certification and is FINRA-aware from inception. &copy; 2026 Alfa Technologies Inc. All rights reserved.
+      </p>
+      <p class="footer-copy">&copy; 2026 Alfa</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Theme toggle
+    var root = document.documentElement;
+    var btn  = document.getElementById('themeToggle');
+
+    function getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    var current = getSystemTheme();
+
+    function applyTheme(t) {
+      root.setAttribute('data-theme', t);
+      btn.textContent = t === 'dark' ? 'Light' : 'Dark';
+      current = t;
+    }
+
+    applyTheme(current);
+
+    btn.addEventListener('click', function () {
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Smooth-scroll anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (id === '#') return;
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Waitlist form
+    var form    = document.getElementById('waitlistForm');
+    var input   = document.getElementById('emailInput');
+    var success = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      input.classList.remove('error');
+
+      if (!input.value || !input.validity.valid) {
+        input.classList.add('error');
+        input.focus();
+        setTimeout(function () { input.classList.remove('error'); }, 1800);
+        return;
+      }
+
+      form.style.display = 'none';
+      success.classList.add('visible');
+    });
+  })();
+</script>
+
+</body>
+</html>
