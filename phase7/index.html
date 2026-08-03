@@ -1,0 +1,1129 @@
+<title>Vigil by Lede · Partner Brand Standards — Phase 7 Enterprise Co-Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Token system: lede-tokens.json v2.1.0 — brand light register ─── */
+:root {
+  /* Surfaces */
+  --sp: #F7F5EF;   /* surface-primary */
+  --ss: #EFECE2;   /* surface-secondary */
+  --st: #E6E3D5;   /* surface-tertiary */
+  --sh: #DEDACA;   /* surface-hover */
+  --so: #F2F0E7;   /* surface-overlay */
+
+  /* Text */
+  --t1: #131210;   /* text-primary */
+  --t2: #2A2925;   /* text-secondary */
+  --tm: #55534A;   /* text-muted */
+  --td: #8B897D;   /* text-disabled */
+
+  /* Accent */
+  --brand: #FF4B00;       /* Flare — decorative only in light register */
+  --brand-hover: #E64300;
+  --brand-text: #C93A00;  /* brand-text — ≥4.73:1 on sp only */
+
+  /* Rules */
+  --rule1: #E3E0D4;  /* border-primary */
+  --rule2: #D2CFC0;  /* border-secondary */
+
+  /* Semantic */
+  --ok: #1E7D4F;
+  --err: #C33B2E;
+  --warn: #B07C1E;
+
+  /* Product dark (for tier previews only) */
+  --pd-bg0: #131210; --pd-bg1: #1B1A16; --pd-bg2: #242320;
+  --pd-ink: #F7F5EF; --pd-ink2: #E8E6DC; --pd-ink3: #C6C4B6;
+  --pd-accent: #FF5A14;
+
+  --max-w: 860px;
+  --section-gap: 72px;
+}
+
+html { font-size: 15px; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--sp);
+  color: var(--t1);
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 120px;
+}
+
+.mono { font-family: "IBM Plex Mono", monospace; }
+
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute; top: -100%; left: 8px; z-index: 9999;
+  font-family: "IBM Plex Mono", monospace; font-size: 12px;
+  background: var(--sp); color: var(--t1); border: 1px solid var(--rule2);
+  padding: 6px 14px; text-decoration: none;
+}
+.skip-link:focus { top: 8px; outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* ─── Document header ─── */
+.doc-header {
+  border-bottom: 1px solid var(--rule1);
+  padding: 20px 0;
+  margin-bottom: var(--section-gap);
+}
+.doc-header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.doc-wordmark {
+  display: flex; align-items: center; gap: 10px;
+}
+.doc-logo-mark { display: flex; align-items: center; }
+.doc-vigil-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--t1);
+}
+.doc-by {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 400;
+  color: var(--tm); margin-left: 2px;
+}
+.doc-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm);
+  text-align: right; line-height: 1.8;
+}
+
+/* ─── Page body ─── */
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ─── Section ─── */
+.section {
+  margin-bottom: var(--section-gap);
+}
+.section-eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::after {
+  content: ""; flex: 1; height: 1px; background: var(--rule1);
+}
+.section-heading {
+  font-family: "Schibsted Grotesk", sans-serif; font-size: 28px; font-weight: 700;
+  color: var(--t1); line-height: 1.2; text-wrap: balance;
+  margin-bottom: 12px;
+}
+.section-body {
+  font-size: 15px; color: var(--t2); line-height: 1.70; max-width: 640px;
+  margin-bottom: 36px;
+}
+
+/* ─── Cover ─── */
+.cover {
+  padding: 64px 0 72px;
+  border-bottom: 1px solid var(--rule1);
+  margin-bottom: var(--section-gap);
+}
+.cover-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 24px;
+}
+.cover-title {
+  font-family: "Schibsted Grotesk", sans-serif; font-size: 44px; font-weight: 700;
+  color: var(--t1); line-height: 1.10; text-wrap: balance;
+  margin-bottom: 20px; max-width: 620px;
+}
+.cover-title em {
+  font-style: italic; font-weight: 400;
+  font-family: "Schibsted Grotesk", sans-serif;
+}
+.cover-sub {
+  font-size: 17px; color: var(--t2); line-height: 1.65; max-width: 560px;
+  margin-bottom: 40px;
+}
+.cover-meta-strip {
+  display: flex; gap: 40px;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 400;
+  color: var(--tm); letter-spacing: 0.06em;
+  border-top: 1px solid var(--rule1); padding-top: 20px;
+}
+.cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.cover-meta-label {
+  font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--td);
+}
+
+/* ─── Confidential badge ─── */
+.conf-badge {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--ss); color: var(--tm);
+  padding: 3px 10px; border-radius: 100px;
+  border: 1px solid var(--rule1);
+  margin-bottom: 20px;
+}
+
+/* ─── Architecture diagram ─── */
+.arch-diagram {
+  background: var(--ss);
+  border-radius: 4px;
+  padding: 40px;
+  margin-bottom: 20px;
+}
+.arch-row {
+  display: flex; align-items: flex-start; gap: 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+.arch-row:last-child { margin-bottom: 0; }
+.arch-label-col {
+  width: 120px; flex-shrink: 0;
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--td);
+  padding-top: 12px;
+}
+.arch-cards { display: flex; gap: 10px; flex: 1; flex-wrap: wrap; }
+.arch-card {
+  background: var(--sp); border: 1px solid var(--rule1);
+  border-radius: 4px; padding: 12px 16px;
+  flex: 1; min-width: 120px;
+}
+.arch-card-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+  color: var(--t1); margin-bottom: 2px;
+}
+.arch-card-desc {
+  font-size: 11px; color: var(--tm); line-height: 1.45;
+}
+.arch-card.brand-card {
+  background: var(--t1); border-color: var(--t1);
+}
+.arch-card.brand-card .arch-card-name { color: var(--sp); }
+.arch-card.brand-card .arch-card-desc { color: var(--pd-ink3); }
+.arch-card.product-card {
+  background: var(--pd-bg0); border-color: var(--pd-bg2);
+}
+.arch-card.product-card .arch-card-name { color: var(--pd-ink); }
+.arch-card.product-card .arch-card-desc { color: var(--pd-ink3); }
+.arch-card.pending-card {
+  background: var(--so); border: 1px dashed var(--rule2);
+}
+.arch-card.pending-card .arch-card-name { color: var(--td); }
+.arch-card.pending-card .arch-card-desc { color: var(--td); }
+.arch-connector {
+  width: 1px; height: 20px; background: var(--rule2);
+  margin-left: 160px; margin-bottom: 0;
+}
+
+/* ─── Tier table ─── */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.tier-card {
+  border-radius: 4px; padding: 20px 16px;
+  border: 1px solid var(--rule1);
+  background: var(--sp);
+}
+.tier-card.tier-active { background: var(--ss); }
+.tier-card.tier-pending { background: var(--so); border-style: dashed; }
+.tier-number {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--td);
+  margin-bottom: 10px;
+}
+.tier-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500;
+  color: var(--t1); margin-bottom: 6px; letter-spacing: -0.01em;
+}
+.tier-name.pending-name { color: var(--td); }
+.tier-tag {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 12px;
+}
+.tier-desc { font-size: 11px; color: var(--tm); line-height: 1.50; }
+.tier-cobrand {
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px solid var(--rule1);
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--ok);
+}
+.tier-cobrand.no-cobrand { color: var(--td); }
+.tier-cobrand.pending-cobrand { color: var(--td); }
+
+/* ─── Co-brand lockup standards ─── */
+.lockup-spec {
+  background: var(--ss); border-radius: 4px; padding: 32px 36px;
+  margin-bottom: 12px;
+}
+.lockup-spec-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 20px;
+}
+.lockup-row {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 20px;
+}
+.lockup-row:last-child { margin-bottom: 0; }
+
+/* Lockup visual */
+.lockup-visual {
+  flex: 1; display: flex; align-items: center; gap: 0;
+}
+.lockup-partner-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 500;
+  color: var(--t1); letter-spacing: -0.01em; white-space: nowrap;
+}
+.lockup-sep {
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 400;
+  color: var(--tm); margin: 0 14px;
+}
+.lockup-vigil-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 500;
+  color: var(--t1); letter-spacing: -0.01em; white-space: nowrap;
+}
+.lockup-vigil-by {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 400;
+  color: var(--tm); margin-left: 2px;
+}
+.lockup-powered {
+  display: flex; align-items: baseline; gap: 0; flex-direction: column;
+}
+.lockup-powered-partner {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
+  color: var(--t1); letter-spacing: -0.02em;
+}
+.lockup-powered-sub {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--tm);
+}
+.lockup-spec-note {
+  width: 220px; flex-shrink: 0;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.02em; color: var(--tm); line-height: 1.6;
+  padding-left: 20px;
+  border-left: 1px solid var(--rule1);
+}
+
+/* Clearspace diagram */
+.clearspace-wrap {
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: var(--st); border-radius: 4px;
+  margin-bottom: 12px;
+}
+.clearspace-inner {
+  position: relative; display: inline-flex; align-items: center;
+}
+.clearspace-box {
+  position: relative;
+  outline: 1px dashed var(--rule2);
+  padding: 12px 16px;
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500;
+  color: var(--t1);
+}
+.clearspace-dim {
+  position: absolute;
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  color: var(--tm); white-space: nowrap;
+}
+.clearspace-dim.top { top: -16px; left: 50%; transform: translateX(-50%); }
+.clearspace-dim.bottom { bottom: -16px; left: 50%; transform: translateX(-50%); }
+.clearspace-dim.left { left: -28px; top: 50%; transform: translateY(-50%); }
+.clearspace-dim.right { right: -28px; top: 50%; transform: translateY(-50%); }
+
+/* ─── Enterprise case study card ─── */
+.case-card {
+  border: 1px solid var(--rule1); border-radius: 4px; overflow: hidden;
+  margin-bottom: 12px;
+}
+.case-header {
+  background: var(--ss); padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--rule1);
+}
+.case-header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.case-tier-chip {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--sp); color: var(--tm);
+  padding: 3px 10px; border-radius: 100px; border: 1px solid var(--rule1);
+}
+.case-partner-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 700;
+  color: var(--t1); letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.case-partner-desc { font-size: 13px; color: var(--tm); }
+
+.case-body { padding: 28px; }
+.case-section-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--td);
+  margin-bottom: 16px;
+}
+.case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+/* Lockup preview inside case card */
+.lockup-preview {
+  background: var(--sp); border: 1px solid var(--rule1);
+  border-radius: 4px; padding: 24px 28px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 80px;
+}
+.lockup-preview.dark-preview {
+  background: var(--pd-bg0);
+  border-color: var(--pd-bg2);
+}
+
+/* Platform tier lockup */
+.lk-platform {
+  display: flex; align-items: center; gap: 0;
+}
+.lk-p-partner {
+  font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 500;
+  color: var(--t1); letter-spacing: -0.01em;
+}
+.lk-p-sep {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 400;
+  color: var(--rule2); margin: 0 12px;
+}
+.lk-p-vigil {
+  font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 500;
+  color: var(--t1); letter-spacing: -0.01em;
+}
+.lk-p-vigil-by {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 400;
+  color: var(--tm); margin-left: 2px; vertical-align: middle;
+}
+
+/* Powered tier lockup (dark) */
+.lk-powered {
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.lk-pw-partner {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
+  color: var(--pd-ink); letter-spacing: -0.02em; line-height: 1.1;
+}
+.lk-pw-badge {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--pd-ink3);
+  margin-top: 3px;
+}
+.lk-pw-node {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--pd-accent); margin-right: 6px; vertical-align: middle;
+}
+
+/* White-label */
+.lk-white-label {
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.lk-wl-partner {
+  font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 700;
+  color: var(--t1); letter-spacing: -0.02em; line-height: 1.1;
+}
+.lk-wl-sub {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm); margin-top: 3px;
+}
+
+/* ─── Spec table ─── */
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table th {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--td);
+  border-bottom: 1px solid var(--rule1); padding: 8px 12px 8px 0;
+  text-align: left;
+}
+.spec-table td {
+  font-size: 13px; color: var(--t2);
+  border-bottom: 1px solid var(--rule1); padding: 10px 12px 10px 0;
+  vertical-align: top;
+}
+.spec-table td:first-child {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--tm);
+  width: 160px;
+}
+.spec-table tr:last-child td { border-bottom: none; }
+
+/* ─── Usage rules list ─── */
+.rules-list { display: flex; flex-direction: column; gap: 10px; }
+.rule-item { display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; }
+.rule-marker {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--tm); padding-top: 1px;
+}
+.rule-text { font-size: 13px; color: var(--t2); line-height: 1.55; }
+
+/* ─── Notice box ─── */
+.notice-box {
+  background: var(--so); border: 1px solid var(--rule1);
+  border-radius: 4px; padding: 16px 20px;
+  margin-bottom: 12px;
+}
+.notice-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--warn);
+  margin-bottom: 6px;
+}
+.notice-text { font-size: 13px; color: var(--t2); line-height: 1.55; }
+
+/* ─── Divider ─── */
+.divider { height: 1px; background: var(--rule1); margin-bottom: 28px; }
+
+/* ─── Governance section ─── */
+.gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gov-card {
+  background: var(--ss); border-radius: 4px; padding: 20px;
+  border: 1px solid var(--rule1);
+}
+.gov-card-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--td);
+  margin-bottom: 8px;
+}
+.gov-card-title { font-size: 14px; font-weight: 500; color: var(--t1); margin-bottom: 6px; }
+.gov-card-text { font-size: 12px; color: var(--tm); line-height: 1.55; }
+
+/* ─── Footer ─── */
+footer {
+  max-width: var(--max-w); margin: 0 auto; padding: 40px 40px 0;
+  border-top: 1px solid var(--rule1);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-top: var(--section-gap);
+}
+.footer-brand {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+  color: var(--t1);
+}
+.footer-brand-sub {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  color: var(--tm); margin-top: 2px;
+}
+.footer-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  color: var(--tm); text-align: right; line-height: 1.8;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 720px) {
+  :root { --max-w: 100%; }
+  .page { padding: 0 20px; }
+  .doc-header-inner { padding: 0 20px; }
+  .tier-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-grid { grid-template-columns: 1fr; }
+  .gov-grid { grid-template-columns: 1fr; }
+  .cover-title { font-size: 32px; }
+  footer { padding: 30px 20px 0; flex-direction: column; gap: 16px; }
+}
+</style>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ── Document header ── -->
+<header class="doc-header" role="banner">
+  <div class="doc-header-inner">
+    <div class="doc-wordmark">
+      <div class="doc-logo-mark" aria-label="Vigil logo" aria-hidden="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2,9 L14,9 L14,15" stroke="#55534A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14" cy="15" r="3.5" fill="#FF4B00"/>
+        </svg>
+      </div>
+      <span class="doc-vigil-name">VIGIL</span>
+      <span class="doc-by">/ Lede</span>
+    </div>
+    <div class="doc-meta">
+      Partner Brand Standards<br>
+      Confidential · v1.0 · Aug 2026
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+<div class="page">
+
+  <!-- ── Cover ── -->
+  <section class="cover" aria-labelledby="cover-heading">
+    <div class="conf-badge" aria-label="Confidential document">Confidential</div>
+    <p class="cover-label">Vigil by Lede · Enterprise Co-Brand & White-Label</p>
+    <h1 class="cover-title" id="cover-heading">Partner Brand<br><em>Standards Guide</em></h1>
+    <p class="cover-sub">
+      This document defines the Endorsed House brand architecture, co-brand lockup system,
+      and white-label configuration for enterprise and partner deployments of Vigil by Lede.
+      It governs all partner-facing brand expressions from Platform tier through the Powered partner program.
+    </p>
+    <div class="cover-meta-strip">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Version</span>
+        <span>v1.0 · Phase 7</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Document</span>
+        <span>Partner Brand Standards</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Status</span>
+        <span>Internal · Confidential</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Issued</span>
+        <span>August 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 1: Brand Architecture ── -->
+  <section class="section" aria-labelledby="arch-heading">
+    <div class="section-eyebrow">Brand Architecture</div>
+    <h2 class="section-heading" id="arch-heading">The Endorsed House Model</h2>
+    <p class="section-body">
+      Vigil by Lede operates as an Endorsed House. Lede is the parent entity; Vigil is the
+      named product. All partner deployments are anchored in this hierarchy. The endorsement
+      line flows from Lede through Vigil to each partner tier — no deployment operates outside it.
+    </p>
+
+    <div class="arch-diagram" role="img" aria-label="Endorsed House brand architecture: Lede parent, Vigil product, five deployment tiers">
+
+      <!-- Parent brand -->
+      <div class="arch-row">
+        <div class="arch-label-col">Parent</div>
+        <div class="arch-cards">
+          <div class="arch-card brand-card">
+            <div class="arch-card-name">Lede</div>
+            <div class="arch-card-desc">Brand entity and legal entity. All licenses and agreements originate here.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector" aria-hidden="true"></div>
+
+      <!-- Product -->
+      <div class="arch-row">
+        <div class="arch-label-col">Product</div>
+        <div class="arch-cards">
+          <div class="arch-card product-card">
+            <div class="arch-card-name">Vigil</div>
+            <div class="arch-card-desc">SEC filing intelligence platform. The named product in all commercial contexts.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector" aria-hidden="true"></div>
+
+      <!-- Tiers -->
+      <div class="arch-row">
+        <div class="arch-label-col">Tiers</div>
+        <div class="arch-cards">
+          <div class="arch-card">
+            <div class="arch-card-name">Pro</div>
+            <div class="arch-card-desc">Individual. No co-brand.</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-card-name">Prime</div>
+            <div class="arch-card-desc">Team. No co-brand.</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-card-name">Platform</div>
+            <div class="arch-card-desc">Institutional. Co-brand lockup permitted.</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-card-name">Powered</div>
+            <div class="arch-card-desc">Embedded API. Endorsed attribution required.</div>
+          </div>
+          <div class="arch-card pending-card">
+            <div class="arch-card-name">Powered+</div>
+            <div class="arch-card-desc">Full white-label. Pending brand owner resolution — see §7.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="notice-box">
+      <div class="notice-label">Architecture constraint</div>
+      <div class="notice-text">
+        All partner deployments must remain traceable to the Vigil product and the Lede parent entity
+        through at minimum a documented audit trail, regardless of whether the Lede name appears on the
+        partner-facing surface. No co-brand lockup, API integration, or white-label configuration may
+        misrepresent the origin or nature of the underlying intelligence platform.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 2: Tier Reference ── -->
+  <section class="section" aria-labelledby="tier-heading">
+    <div class="section-eyebrow">Tier Reference</div>
+    <h2 class="section-heading" id="tier-heading">Deployment Tiers at Launch</h2>
+    <p class="section-body">
+      Four tiers are active at launch. A fifth partner tier (Powered+) is defined in the architecture
+      but its commercial terms remain subject to brand owner resolution. The co-brand status of each
+      tier is fixed — it may only be changed by formal amendment.
+    </p>
+
+    <div class="tier-grid" role="list" aria-label="Vigil deployment tiers">
+
+      <div class="tier-card" role="listitem">
+        <div class="tier-number">Tier 01</div>
+        <div class="tier-name">Vigil Pro</div>
+        <div class="tier-tag">Individual</div>
+        <div class="tier-desc">Single-analyst subscription. Named-user license. 15-day evaluation period.</div>
+        <div class="tier-cobrand no-cobrand">No co-brand permitted</div>
+      </div>
+
+      <div class="tier-card tier-active" role="listitem">
+        <div class="tier-number">Tier 02</div>
+        <div class="tier-name">Vigil Prime</div>
+        <div class="tier-tag">Team</div>
+        <div class="tier-desc">2–15 seat deployment. Shared coverage universe. Admin console access.</div>
+        <div class="tier-cobrand no-cobrand">No co-brand permitted</div>
+      </div>
+
+      <div class="tier-card tier-active" role="listitem">
+        <div class="tier-number">Tier 03</div>
+        <div class="tier-name">Vigil Platform</div>
+        <div class="tier-tag">Institutional</div>
+        <div class="tier-desc">Seat license with white-glove onboarding. Full EDGAR taxonomy access. Compliance pack.</div>
+        <div class="tier-cobrand">Co-brand lockup — see §4</div>
+      </div>
+
+      <div class="tier-card" role="listitem">
+        <div class="tier-number">Tier 04</div>
+        <div class="tier-name">Vigil Powered</div>
+        <div class="tier-tag">API embedded</div>
+        <div class="tier-desc">Embedded intelligence via REST API. "Powered by Vigil" attribution required in product UI.</div>
+        <div class="tier-cobrand">Endorsed lockup — see §5</div>
+      </div>
+
+      <div class="tier-card tier-pending" role="listitem" aria-label="Fifth partner tier — pending brand owner resolution">
+        <div class="tier-number">Tier 05</div>
+        <div class="tier-name pending-name">Partner Tier</div>
+        <div class="tier-tag">Pending resolution</div>
+        <div class="tier-desc" style="color:var(--td);">Full white-label configuration. Attribution terms subject to brand owner and legal review. See §7.</div>
+        <div class="tier-cobrand pending-cobrand">White-label — pending</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Section 3: Co-Brand Lockup Standards ── -->
+  <section class="section" aria-labelledby="lockup-heading">
+    <div class="section-eyebrow">Brand Standards</div>
+    <h2 class="section-heading" id="lockup-heading">Co-Brand Lockup System</h2>
+    <p class="section-body">
+      Two lockup patterns are authorized: the Platform lockup (side-by-side endorsed wordmarks)
+      and the Powered lockup (partner-lead with attributed endorsement line). Each pattern has
+      fixed clearspace, type, and weight specifications.
+    </p>
+
+    <!-- Platform lockup -->
+    <div class="lockup-spec">
+      <div class="lockup-spec-label">Pattern A — Platform Tier (Vigil Platform)</div>
+
+      <div class="lockup-row">
+        <div class="lockup-visual">
+          <div class="lk-platform">
+            <span class="lk-p-partner">[Partner]</span>
+            <span class="lk-p-sep">|</span>
+            <span class="lk-p-vigil">Vigil<span class="lk-p-vigil-by">/ Lede</span></span>
+          </div>
+        </div>
+        <div class="lockup-spec-note">
+          IBM Plex Mono 500, 14–18px.<br>
+          Separator: pipe character, text-muted color.<br>
+          Partner name precedes Vigil name.<br>
+          "/ Lede" endorsement line at 10px 400.
+        </div>
+      </div>
+    </div>
+
+    <!-- Powered lockup -->
+    <div class="lockup-spec">
+      <div class="lockup-spec-label">Pattern B — Powered Tier (Vigil Powered, product dark register)</div>
+
+      <div class="lockup-row">
+        <div class="lockup-visual">
+          <div class="lockup-powered">
+            <div class="lockup-powered-partner">[Partner]</div>
+            <div class="lockup-powered-sub">Powered by Vigil · Lede</div>
+          </div>
+        </div>
+        <div class="lockup-spec-note">
+          Partner name: IBM Plex Mono 700, 18–24px.<br>
+          Attribution line: IBM Plex Mono 400, 9px, 0.10em tracking, uppercase.<br>
+          Node: 6px Flare circle (one focal point).<br>
+          Dark register only. Never on light surfaces.
+        </div>
+      </div>
+    </div>
+
+    <!-- Clearspace spec -->
+    <div style="margin-bottom:20px;">
+      <div class="case-section-label" style="margin-bottom:16px;">Clearspace — minimum protected zone around all lockups</div>
+      <div class="clearspace-wrap" role="img" aria-label="Clearspace diagram: 1.5× cap-height on all sides of the lockup">
+        <div class="clearspace-inner">
+          <div style="position:relative; padding: 18px;">
+            <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--tm);">1.5× cap-height</div>
+            <div style="position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--tm);">1.5× cap-height</div>
+            <div style="position:absolute;left:-32px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--tm);">1.5×</div>
+            <div style="position:absolute;right:-32px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--tm);">1.5×</div>
+            <div style="outline:1px dashed var(--rule2); padding:12px 20px; font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:var(--t1);">
+              [Partner] | Vigil
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules -->
+    <div class="lockup-spec">
+      <div class="lockup-spec-label">Usage rules — applies to all co-brand patterns</div>
+      <div class="rules-list">
+        <div class="rule-item">
+          <span class="rule-marker">—</span>
+          <span class="rule-text">Partner name must use IBM Plex Mono. No substitution of partner's proprietary typeface in the lockup element.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-marker">—</span>
+          <span class="rule-text">The Vigil name must appear in its authorized form. "Vigil" alone is permitted at Platform tier; "Powered by Vigil" is the required form at Powered tier.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-marker">—</span>
+          <span class="rule-text">Flare (#FF5A14 product dark / #FF4B00 brand light) may not be used in the partner name. It is reserved for the Vigil brand element or endorsed node only.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-marker">—</span>
+          <span class="rule-text">Lockups must not be modified, recolored, stretched, condensed, or rearranged. Submit proposed variations to brand@lede.co for written approval.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-marker">—</span>
+          <span class="rule-text">The "/ Lede" endorsement line must appear in the Platform lockup and may not be suppressed, scaled below 9px, or rendered below 4.5:1 contrast on its surface.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 4: Case Study A — Platform ── -->
+  <section class="section" aria-labelledby="case-a-heading">
+    <div class="section-eyebrow">Enterprise Reference — Tier 03</div>
+    <h2 class="section-heading" id="case-a-heading">Vigil Platform: Meridian Capital Management</h2>
+    <p class="section-body">
+      A hypothetical Tier 03 deployment illustrating the Platform co-brand lockup, surface application,
+      and document-header treatment for an institutional asset manager.
+      <em>All company names, personnel, and figures are illustrative.</em>
+    </p>
+
+    <div class="notice-box" style="margin-bottom:20px;">
+      <div class="notice-label">Illustrative — requires human verification</div>
+      <div class="notice-text">
+        "Meridian Capital Management" is a hypothetical enterprise partner created for this standards
+        illustration. Named partners and confidential contract details may inform the work but may not
+        appear in public-facing artifacts without approval. REQUIRES HUMAN VERIFICATION before any
+        client-facing application of this template.
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-header-top">
+          <div>
+            <div class="case-partner-name">Meridian Capital</div>
+            <div class="case-partner-desc">$12B AUM · Long/short equity · 23 analysts<span class="mono" style="font-size:9px;color:var(--warn);"> REQUIRES HUMAN VERIFICATION</span></div>
+          </div>
+          <span class="case-tier-chip" aria-label="Vigil Platform tier">Platform Tier</span>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-grid">
+          <div>
+            <div class="case-section-label">Lockup — Light register (external comms)</div>
+            <div class="lockup-preview">
+              <div class="lk-platform">
+                <span class="lk-p-partner">MERIDIAN</span>
+                <span class="lk-p-sep">|</span>
+                <span class="lk-p-vigil">VIGIL<span class="lk-p-vigil-by">/ Lede</span></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="case-section-label">Lockup — Dark register (product UI)</div>
+            <div class="lockup-preview dark-preview">
+              <div style="display:flex;align-items:center;gap:0;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--pd-ink);letter-spacing:-0.01em;">MERIDIAN</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:400;color:var(--pd-ink3);margin:0 12px;">|</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:var(--pd-ink);letter-spacing:-0.01em;">VIGIL<span style="font-size:10px;font-weight:400;color:var(--pd-ink3);margin-left:2px;">/ Lede</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;">
+          <div class="case-section-label">Brand terms — Vigil Platform</div>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Lockup pattern</td><td>Pattern A — side-by-side endorsed</td></tr>
+              <tr><td>Partner name style</td><td>IBM Plex Mono 500 · 14px minimum · UPPERCASE</td></tr>
+              <tr><td>Vigil name style</td><td>IBM Plex Mono 500 · 14px minimum · UPPERCASE</td></tr>
+              <tr><td>Endorsement line</td><td>"/ Lede" · IBM Plex Mono 400 · 10px · text-muted</td></tr>
+              <tr><td>Permitted surfaces</td><td>Platform header, product UI header, external PDF cover</td></tr>
+              <tr><td>Attribution requirement</td><td>Vigil name must be visible at ≥4.5:1 contrast</td></tr>
+              <tr><td>Lede endorsement</td><td>Required · May not be suppressed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 5: Case Study B — Powered ── -->
+  <section class="section" aria-labelledby="case-b-heading">
+    <div class="section-eyebrow">Enterprise Reference — Tier 04</div>
+    <h2 class="section-heading" id="case-b-heading">Vigil Powered: Aldgate Asset Management</h2>
+    <p class="section-body">
+      A hypothetical Tier 04 deployment illustrating the Powered endorsed lockup and in-product
+      attribution treatment for a technology-forward asset manager embedding Vigil intelligence
+      via API into their proprietary research platform.
+      <em>All company names, personnel, and figures are illustrative.</em>
+    </p>
+
+    <div class="notice-box" style="margin-bottom:20px;">
+      <div class="notice-label">Illustrative — requires human verification</div>
+      <div class="notice-text">
+        "Aldgate Asset Management" is a hypothetical enterprise partner for this standards illustration.
+        The attribution pattern shown here is the required minimum for Vigil Powered deployments.
+        Suppression or modification of the "Powered by Vigil" attribution is a contract violation.
+        REQUIRES HUMAN VERIFICATION before any client-facing application.
+      </div>
+    </div>
+
+    <div class="case-card">
+      <div class="case-header">
+        <div class="case-header-top">
+          <div>
+            <div class="case-partner-name">Aldgate Intelligence</div>
+            <div class="case-partner-desc">Proprietary research platform · API embedded deployment</div>
+          </div>
+          <span class="case-tier-chip" aria-label="Vigil Powered tier">Powered Tier</span>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-grid">
+          <div>
+            <div class="case-section-label">In-product attribution lockup (dark register)</div>
+            <div class="lockup-preview dark-preview">
+              <div class="lk-powered">
+                <div class="lk-pw-partner">ALDGATE</div>
+                <div class="lk-pw-badge">
+                  <span class="lk-pw-node" aria-hidden="true"></span>Powered by Vigil · Lede
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="case-section-label">About / Settings page treatment (dark register)</div>
+            <div class="lockup-preview dark-preview" style="flex-direction:column;align-items:flex-start;padding:16px 20px;gap:10px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--pd-ink3);">Intelligence Layer</div>
+              <div style="font-size:12px;color:var(--pd-ink2);line-height:1.5;">Governance monitoring and SEC filing intelligence is provided by Vigil, a product of Lede.</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--pd-ink3);">vigil.lede.co · Lede v2.1</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;">
+          <div class="case-section-label">Brand terms — Vigil Powered</div>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Lockup pattern</td><td>Pattern B — partner-lead with endorsed attribution</td></tr>
+              <tr><td>Partner name style</td><td>IBM Plex Mono 700 · ≥18px · UPPERCASE (P4-01)</td></tr>
+              <tr><td>Attribution line</td><td>"Powered by Vigil · Lede" · IBM Plex Mono 400 · 9px · uppercase</td></tr>
+              <tr><td>Attribution placement</td><td>Product header, About page, Settings, API documentation</td></tr>
+              <tr><td>Minimum contrast</td><td>Attribution text ≥4.5:1 against its surface (WCAG AA)</td></tr>
+              <tr><td>Suppression</td><td>Prohibited. Contract termination clause applies.</td></tr>
+              <tr><td>Lede endorsement</td><td>Required as "· Lede" in attribution line</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 6: White-Label Reference ── -->
+  <section class="section" aria-labelledby="wl-heading">
+    <div class="section-eyebrow">Reference Configuration — Tier 05</div>
+    <h2 class="section-heading" id="wl-heading">White-Label: Vertex Intelligence</h2>
+    <p class="section-body">
+      A reference configuration illustrating the full white-label pattern (Tier 05 / Powered+),
+      where no Vigil or Lede attribution appears on partner-facing surfaces. This configuration
+      is architecturally defined but its commercial terms remain subject to brand owner resolution.
+      It is documented here for completeness — it is not currently offered.
+    </p>
+
+    <div class="notice-box" style="background:#FDFCF8; border-color:var(--warn);">
+      <div class="notice-label" style="color:var(--err);">Open Condition — Brand Owner Resolution Required</div>
+      <div class="notice-text">
+        The fifth partner tier (full white-label, no Vigil or Lede attribution) involves an unresolved
+        conflict between the Phase 1 D2 decision ("full white-label, no attribution") and a subsequent
+        architectural decision ("co-brand lockup required"). This configuration must not be offered to
+        any partner without formal written resolution by brand ownership and legal review.<br><br>
+        The illustration below shows the <em>technical form</em> of this configuration only.
+        It is not a commercial offer. Named partners and confidential contract details may not appear
+        in public-facing materials pending this resolution. REQUIRES HUMAN VERIFICATION.
+      </div>
+    </div>
+
+    <div class="case-card" style="margin-top:20px; opacity:0.75;" aria-label="White-label reference — illustrative, pending brand owner resolution">
+      <div class="case-header" style="background:var(--st);">
+        <div class="case-header-top">
+          <div>
+            <div class="case-partner-name">Vertex Intelligence</div>
+            <div class="case-partner-desc">Illustrative technology partner · Full white-label configuration</div>
+          </div>
+          <span class="case-tier-chip" style="background:var(--so); border-style:dashed; color:var(--td);" aria-label="Partner tier — pending resolution">Partner Tier — Pending</span>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-grid">
+          <div>
+            <div class="case-section-label">Partner-facing surface — Light register</div>
+            <div class="lockup-preview">
+              <div class="lk-white-label">
+                <div class="lk-wl-partner">VERTEX</div>
+                <div class="lk-wl-sub">Intelligence Platform</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="case-section-label">Partner-facing surface — Dark register</div>
+            <div class="lockup-preview dark-preview">
+              <div style="display:flex;flex-direction:column;align-items:flex-start;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--pd-ink);letter-spacing:-0.02em;">VERTEX</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--pd-ink3);margin-top:3px;">Intelligence Platform</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;">
+          <div class="case-section-label">White-label configuration — reference only, not currently offered</div>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Vigil attribution</td><td>Suppressed — no "Vigil" name on partner surfaces</td></tr>
+              <tr><td>Lede attribution</td><td>Suppressed — no "Lede" name on partner surfaces</td></tr>
+              <tr><td>Internal audit trail</td><td>Lede/Vigil origin must be documented in internal MSA</td></tr>
+              <tr><td>Brand approval</td><td><strong>REQUIRES HUMAN VERIFICATION — brand owner resolution pending</strong></td></tr>
+              <tr><td>Legal review</td><td><strong>REQUIRES HUMAN VERIFICATION — trademark clearance pending</strong></td></tr>
+              <tr><td>Availability</td><td>Not currently offered. Configuration defined for readiness only.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 7: Governance ── -->
+  <section class="section" aria-labelledby="gov-heading">
+    <div class="section-eyebrow">Governance</div>
+    <h2 class="section-heading" id="gov-heading">Approval Process & Open Conditions</h2>
+    <p class="section-body">
+      All co-brand applications, lockup modifications, and partner-tier activations require
+      written approval from Lede Brand before launch. The following open conditions must be
+      resolved before the relevant configurations may be activated.
+    </p>
+
+    <div class="gov-grid">
+      <div class="gov-card">
+        <div class="gov-card-label">Open Condition · OC-01</div>
+        <div class="gov-card-title">Powered+ commercial terms</div>
+        <div class="gov-card-text">
+          Phase 1 D2 binding decision ("full white-label, no attribution") conflicts with
+          a co-brand lockup requirement in the Phase 3 architecture. Brand owner and legal
+          must issue a written resolution before Tier 05 may be offered commercially.
+          Responsible: Brand Owner + General Counsel. <strong>REQUIRES HUMAN VERIFICATION.</strong>
+        </div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-label">Open Condition · OC-02</div>
+        <div class="gov-card-title">Trademark clearance — Vigil</div>
+        <div class="gov-card-text">
+          The "Vigil" product name must be cleared by counsel in the relevant jurisdictions
+          (class 36/42, US/UK/EU minimum) before public launch. No partner co-brand lockup
+          featuring "Vigil" may be published or distributed until clearance is confirmed.
+          Responsible: General Counsel. <strong>REQUIRES HUMAN VERIFICATION.</strong>
+        </div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-label">Approval Process · AP-01</div>
+        <div class="gov-card-title">Co-brand activation</div>
+        <div class="gov-card-text">
+          Any new partner co-brand configuration requires: (1) tier confirmation in writing,
+          (2) lockup artwork approved by Lede Brand, (3) MSA with attribution clause signed.
+          Platform tier: 10 business days. Powered tier: 15 business days. Allow additional
+          time for non-standard requests.
+        </div>
+      </div>
+      <div class="gov-card">
+        <div class="gov-card-label">Approval Process · AP-02</div>
+        <div class="gov-card-title">FM-04 institutional credibility</div>
+        <div class="gov-card-text">
+          Before any Platform or Powered partner launch, the IBM Plex Mono editorial
+          identity (FM-04 gate) must have been formally tested and documented as PASS
+          by a qualified external evaluator. This gate is currently open.
+          <strong>REQUIRES HUMAN VERIFICATION.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div>
+    <div class="footer-brand">Vigil by Lede</div>
+    <div class="footer-brand-sub">Partner Brand Standards · v1.0 · Phase 7</div>
+  </div>
+  <div class="footer-meta">
+    Internal · Confidential<br>
+    Issued August 2026<br>
+    © Lede. All rights reserved.
+  </div>
+</footer>
