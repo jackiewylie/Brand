@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 2: Four Creative Territories — Lede Professional Rebrand</title>
+<style>
+/* === Same frame token system as Phase 0 and Phase 1 === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #F2F1ED;
+  --bg-alt:   #ECEAE4;
+  --bg-card:  #E8E6DF;
+  --ink:      #1C1A18;
+  --muted:    #5A5856;
+  --faint:    #96938E;
+  --rule:     #D0CEC8;
+  --rule2:    #B8B5AE;
+  --accent:   #1B3461;
+  --accent-l: #2A4E92;
+  --crit:     #9B2A1A;
+  --warn:     #7A5A15;
+  --ok:       #1E5E38;
+  --decision: #2A4520;
+  --decision-bg: rgba(42,69,32,0.08);
+  --deferred: #2A3D5A;
+  --deferred-bg: rgba(27,52,97,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:       #0F0E0D;
+    --bg-alt:   #161513;
+    --bg-card:  #1C1B19;
+    --ink:      #EDEAE4;
+    --muted:    #8C8A86;
+    --faint:    #5A5856;
+    --rule:     #282624;
+    --rule2:    #343230;
+    --accent:   #5A80C4;
+    --accent-l: #7BA0E0;
+    --crit:     #D45A44;
+    --warn:     #C49830;
+    --ok:       #4CA870;
+    --decision: #6AAA56;
+    --decision-bg: rgba(106,170,86,0.1);
+    --deferred: #7BA0E0;
+    --deferred-bg: rgba(90,128,196,0.1);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:       #0F0E0D; --bg-alt:   #161513; --bg-card:  #1C1B19; --ink:      #EDEAE4;
+  --muted:    #8C8A86; --faint:    #5A5856; --rule:     #282624; --rule2:    #343230;
+  --accent:   #5A80C4; --accent-l: #7BA0E0; --crit:     #D45A44; --warn:     #C49830;
+  --ok:       #4CA870; --decision: #6AAA56; --decision-bg: rgba(106,170,86,0.1);
+  --deferred: #7BA0E0; --deferred-bg: rgba(90,128,196,0.1);
+}
+:root[data-theme="light"] {
+  --bg:       #F2F1ED; --bg-alt:   #ECEAE4; --bg-card:  #E8E6DF; --ink:      #1C1A18;
+  --muted:    #5A5856; --faint:    #96938E; --rule:     #D0CEC8; --rule2:    #B8B5AE;
+  --accent:   #1B3461; --accent-l: #2A4E92; --crit:     #9B2A1A; --warn:     #7A5A15;
+  --ok:       #1E5E38; --decision: #2A4520; --decision-bg: rgba(42,69,32,0.08);
+  --deferred: #2A3D5A; --deferred-bg: rgba(27,52,97,0.08);
+}
+
+/* Layout */
+body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.shell { display: grid; grid-template-columns: 220px 1fr; grid-template-rows: auto 1fr; min-height: 100vh; }
+.site-header { grid-column: 1 / -1; border-bottom: 1px solid var(--rule2); padding: 16px 32px; display: flex; justify-content: space-between; align-items: baseline; background: var(--bg); }
+.site-header h1 { font-family: Georgia, serif; font-size: 20px; font-weight: normal; letter-spacing: -0.01em; }
+.meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.7; }
+.eyebrow { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+
+/* Sidebar */
+.sidebar { border-right: 1px solid var(--rule); padding: 24px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.sidebar-section { padding: 0 20px 20px; border-bottom: 1px solid var(--rule); margin-bottom: 12px; }
+.sidebar-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 8px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+.sidebar nav a { font-size: 12px; color: var(--muted); text-decoration: none; padding: 4px 8px; border-radius: 3px; }
+.sidebar nav a:hover { color: var(--ink); background: var(--bg-alt); }
+.sidebar nav a.active { color: var(--accent); background: var(--decision-bg); }
+
+/* Territory links */
+.territory-nav { display: flex; flex-direction: column; gap: 4px; padding: 0 20px; }
+.territory-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  background: var(--bg-alt);
+  transition: background 0.1s;
+}
+.territory-link:hover { background: var(--bg-card); border-color: var(--rule2); }
+.tl-dot { width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0; }
+.tl-dot-a { background: #1C1A18; }
+.tl-dot-b { background: #1A3158; }
+.tl-dot-c { background: #2A4E92; }
+.tl-dot-d { background: #C4A560; }
+.tl-label { font-size: 11px; color: var(--ink); font-weight: 600; }
+.tl-name { font-size: 10px; color: var(--muted); }
+
+/* Main */
+main { padding: 40px 48px 80px; max-width: 900px; }
+.section { padding: 40px 0; border-top: 1px solid var(--rule); }
+.section:first-child { border-top: none; padding-top: 0; }
+.section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+.section-num { font-family: "Courier New", monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--faint); }
+h2 { font-family: Georgia, serif; font-size: 22px; font-weight: normal; }
+.section-sub { font-size: 12px; color: var(--muted); margin-bottom: 20px; max-width: 600px; line-height: 1.65; }
+.sub { font-family: Georgia, serif; font-size: 15px; font-weight: normal; color: var(--muted); margin: 24px 0 12px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+
+/* Callout */
+.callout { background: var(--bg-alt); border-left: 3px solid var(--rule2); padding: 12px 16px; margin: 16px 0; font-size: 13px; line-height: 1.7; }
+.callout.ok { border-left-color: var(--ok); }
+.callout.crit { border-left-color: var(--crit); }
+.callout.warn { border-left-color: var(--warn); }
+.callout.accent { border-left-color: var(--accent); }
+
+/* Finding / decision */
+.finding { background: var(--bg-alt); border: 1px solid var(--rule); border-radius: 2px; padding: 16px 20px; margin: 12px 0; }
+.finding h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.finding p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.f-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); margin-bottom: 6px; }
+
+/* Territory card (overview) */
+.territory-card {
+  border: 1px solid var(--rule2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.tc-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tc-dot { width: 12px; height: 12px; border-radius: 999px; flex-shrink: 0; }
+.tc-id { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
+.tc-title { font-size: 16px; font-weight: 600; color: var(--ink); }
+.tc-body { padding: 16px 20px; }
+.tc-concept { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+.tc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.tc-attr { }
+.tc-attr-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 2px; }
+.tc-attr-val { font-size: 12px; color: var(--ink); }
+.tc-footer {
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tc-link { font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; }
+.tc-link:hover { text-decoration: underline; }
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.badge-ok { border-color: var(--ok); color: var(--ok); }
+.badge-warn { border-color: var(--warn); color: var(--warn); }
+.badge-crit { border-color: var(--crit); color: var(--crit); }
+
+/* Naming funnel */
+.name-finalist {
+  background: var(--bg-alt);
+  border: 1px solid var(--rule2);
+  border-radius: 2px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.nf-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.nf-name { font-family: Georgia, serif; font-size: 24px; font-weight: normal; color: var(--ink); }
+.nf-rank { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+.nf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 12px 0;
+}
+@media (max-width: 700px) { .nf-grid { grid-template-columns: 1fr; } }
+.nf-attr-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+.nf-attr-val { font-size: 12px; color: var(--ink); line-height: 1.55; }
+.nf-score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 16px 0 8px;
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+}
+.nfs-cell { }
+.nfs-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 2px; }
+.nfs-val { font-size: 11px; color: var(--ink); }
+.nfs-val.strong { color: var(--ok); font-weight: 600; }
+.nfs-val.ok { color: var(--ok); }
+.nfs-val.warn { color: var(--warn); }
+.nfs-val.crit { color: var(--crit); }
+
+/* Handoff table */
+.handoff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 700px) { .handoff-row { grid-template-columns: 1fr; } }
+.handoff-col { }
+.hc-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+.handoff-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.handoff-col li { font-size: 12px; line-height: 1.6; color: var(--ink); padding-left: 14px; position: relative; }
+.handoff-col li::before { content: "–"; position: absolute; left: 0; color: var(--faint); }
+
+/* Cross-territory comparison */
+.comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 16px 0; }
+.comparison-table th { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule2); }
+.comparison-table td { font-size: 12px; color: var(--muted); padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.55; }
+.comparison-table td:first-child { color: var(--ink); font-weight: 600; }
+.ct-strong { color: var(--ok); font-weight: 600; }
+.ct-weak { color: var(--warn); }
+.ct-crit { color: var(--crit); }
+.mono { font-family: "Courier New", monospace; font-size: 11px; }
+
+/* Lists */
+.ls { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; margin: 12px 0; }
+.ls li { font-size: 13px; line-height: 1.65; padding-left: 14px; position: relative; }
+.ls li::before { content: "–"; position: absolute; left: 0; color: var(--faint); }
+
+/* Table wrap */
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+.table-wrap table { width: 100%; border-collapse: collapse; min-width: 500px; }
+.table-wrap th { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule2); }
+.table-wrap td { font-size: 12px; color: var(--muted); padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.6; }
+.table-wrap td:first-child { color: var(--ink); }
+
+/* Theme toggle */
+.theme-btn { position: fixed; bottom: 20px; right: 20px; padding: 6px 14px; font-size: 11px; letter-spacing: 0.1em; border: 1px solid var(--rule2); background: var(--bg); color: var(--muted); border-radius: 999px; cursor: pointer; }
+.theme-btn:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<header class="site-header">
+  <div>
+    <div class="eyebrow">Lede · Professional Rebrand Gauntlet</div>
+    <h1>Phase 2 — Four Creative Territories &amp; Naming Funnel</h1>
+  </div>
+  <div class="meta">
+    Brand Director<br>
+    Aug 3, 2026 · Inputs: Phase 1 (MC-P1-01 PASSED 7.80/10)<br>
+    Gate: Phase 1 cleared · Awaiting MC-P2-01<br>
+    Confidential
+  </div>
+</header>
+
+<aside class="sidebar">
+  <div class="sidebar-section">
+    <span class="sidebar-label">Sections</span>
+    <nav>
+      <a href="#summary">00 Summary &amp; Gate</a>
+      <a href="#territories">01 Territories Overview</a>
+      <a href="#naming">02 Naming Funnel</a>
+      <a href="#analysis">03 Cross-Territory Analysis</a>
+      <a href="#handoff">04 Phase 2→3 Handoff</a>
+      <a href="#verdict">05 Verdict &amp; Gate</a>
+    </nav>
+  </div>
+  <div class="sidebar-section">
+    <span class="sidebar-label">Territory Pages</span>
+    <div class="territory-nav" style="padding:0;">
+      <a class="territory-link" href="territory-a/index.html">
+        <div class="tl-dot tl-dot-a"></div>
+        <div>
+          <div class="tl-label">A: The Instrument</div>
+          <div class="tl-name">Dark precision · mono-primary</div>
+        </div>
+      </a>
+      <a class="territory-link" href="territory-b/index.html">
+        <div class="tl-dot tl-dot-b"></div>
+        <div>
+          <div class="tl-label">B: The Record</div>
+          <div class="tl-name">Light provenance · serif-first</div>
+        </div>
+      </a>
+      <a class="territory-link" href="territory-c/index.html">
+        <div class="tl-dot tl-dot-c"></div>
+        <div>
+          <div class="tl-label">C: Coverage Matrix</div>
+          <div class="tl-name">Dark grid · data-visual</div>
+        </div>
+      </a>
+      <a class="territory-link" href="territory-d/index.html">
+        <div class="tl-dot tl-dot-d"></div>
+        <div>
+          <div class="tl-label">D: First Light</div>
+          <div class="tl-name">Pre-dawn gradient · temporal</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-section" style="margin-top:12px;">
+    <span class="sidebar-label">Status</span>
+    <nav>
+      <a href="#verdict">Phase 2: Awaiting MC-P2-01</a>
+    </nav>
+  </div>
+</aside>
+
+<main>
+
+<!-- 00 SUMMARY -->
+<div class="section" id="summary" style="padding-top:0; border-top:none;">
+  <div class="callout ok">
+    <strong>Phase 1 gate cleared.</strong> MC-P1-01 scored Phase 1 at 7.80/10 (PASS). All four hard gates cleared. This document is Phase 2: four independent creative territories and a three-finalist naming funnel for Phase 3 blind selection. No territory is recommended here — the Phase 3 blind gauntlet selects.
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:24px 0;">
+    <div style="background:var(--bg-alt); border:1px solid var(--rule); padding:14px 16px;">
+      <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:4px;">Territories</div>
+      <div style="font-size:28px; font-family:Georgia,serif;">4</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:2px;">A, B, C, D — fully independent</div>
+    </div>
+    <div style="background:var(--bg-alt); border:1px solid var(--rule); padding:14px 16px;">
+      <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:4px;">Name Finalists</div>
+      <div style="font-size:28px; font-family:Georgia,serif;">3</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:2px;">Standfirst · Bellwether · Bearing</div>
+    </div>
+    <div style="background:var(--bg-alt); border:1px solid var(--rule); padding:14px 16px;">
+      <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:4px;">FM-04 Clear</div>
+      <div style="font-size:28px; font-family:Georgia,serif;">3/4</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:2px;">A, B, C clear. D: conditional.</div>
+    </div>
+    <div style="background:var(--bg-alt); border:1px solid var(--rule); padding:14px 16px;">
+      <div style="font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:4px;">Naming source</div>
+      <div style="font-size:28px; font-family:Georgia,serif;">D5</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:2px;">All 3 finalists meet D5 criteria</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 TERRITORIES OVERVIEW -->
+<div class="section" id="territories">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>Creative Territories — Overview</h2>
+  </div>
+  <p class="section-sub">Four independent directions. Each occupies a distinct visual register, metaphor, and institutional argument. No territory is a variation of another. Each page is designed in its own aesthetic — open each to evaluate. The Phase 3 blind gauntlet selects one.</p>
+
+  <!-- Territory A -->
+  <div class="territory-card">
+    <div class="tc-header">
+      <div class="tc-dot" style="background:#1C1A18;"></div>
+      <div>
+        <div class="tc-id">Territory A</div>
+        <div class="tc-title">The Instrument</div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px;">
+        <span class="badge badge-ok">FM-04: Pass</span>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-concept">The brand as a precision measurement tool. IBM Plex Mono is the primary face — not just the data face. Near-black surfaces. Flare orange appears only where an event registered. The type IS the instrument readout. No display serif; the editorial identity from consumer Lede is fully retired.</div>
+      <div class="tc-grid">
+        <div class="tc-attr">
+          <div class="tc-attr-label">Register</div>
+          <div class="tc-attr-val">Dark product</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Primary type</div>
+          <div class="tc-attr-val">IBM Plex Mono dominant</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Accent</div>
+          <div class="tc-attr-val">Flare orange (event-signal only)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Consumer continuity</div>
+          <div class="tc-attr-val">Minimal (Step + Flare)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">FM-04 verdict</div>
+          <div class="tc-attr-val" style="color:var(--ok);">Pass — high confidence</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Strongest audience</div>
+          <div class="tc-attr-val">CTO, CCO, Procurement</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer">
+      <a class="tc-link" href="territory-a/index.html">Open Territory A →</a>
+      <span style="font-size:11px; color:var(--muted);">Naming fit: Bearing (strongest) · Standfirst · Bellwether</span>
+    </div>
+  </div>
+
+  <!-- Territory B -->
+  <div class="territory-card">
+    <div class="tc-header">
+      <div class="tc-dot" style="background:#1A3158;"></div>
+      <div>
+        <div class="tc-id">Territory B</div>
+        <div class="tc-title">The Record</div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px;">
+        <span class="badge badge-ok">FM-04: Pass (highest confidence)</span>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-concept">The brand as institutional documentation. Warm paper ground (#F4F2E8). Newsreader serif for body. Compressed Schibsted Grotesk all-caps for headings. Navy structural accent. No Flare orange on brand surfaces — reserved for product UI dark register. The output looks like something a compliance officer would sign. Because it does.</div>
+      <div class="tc-grid">
+        <div class="tc-attr">
+          <div class="tc-attr-label">Register</div>
+          <div class="tc-attr-val">Light brand (warm paper)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Primary type</div>
+          <div class="tc-attr-val">Newsreader serif body</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Accent</div>
+          <div class="tc-attr-val">Navy (#1A3158)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Consumer continuity</div>
+          <div class="tc-attr-val">Moderate (Newsreader in token system)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">FM-04 verdict</div>
+          <div class="tc-attr-val" style="color:var(--ok);">Pass — strongest of any territory</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Strongest audience</div>
+          <div class="tc-attr-val">CCO, Procurement</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer">
+      <a class="tc-link" href="territory-b/index.html">Open Territory B →</a>
+      <span style="font-size:11px; color:var(--muted);">Naming fit: Standfirst (strongest) · Bearing · Bellwether</span>
+    </div>
+  </div>
+
+  <!-- Territory C -->
+  <div class="territory-card">
+    <div class="tc-header">
+      <div class="tc-dot" style="background:#2A4E92;"></div>
+      <div>
+        <div class="tc-id">Territory C</div>
+        <div class="tc-title">Coverage Matrix</div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px;">
+        <span class="badge badge-ok">FM-04: Pass (strongest)</span>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-concept">The brand as data visualization system. Blue-on-dark-navy grid. IBM Plex Mono dominant. Every portfolio name is a cell; every gap is flagged. The brand is the completeness of the system, and the system is always visible. "Coverage without gaps" is not a phrase — it is the visual structure.</div>
+      <div class="tc-grid">
+        <div class="tc-attr">
+          <div class="tc-attr-label">Register</div>
+          <div class="tc-attr-val">Dark (blue-black base)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Primary type</div>
+          <div class="tc-attr-val">IBM Plex Mono + coverage grid</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Accent</div>
+          <div class="tc-attr-val">Professional blue (#2A4E92) structural</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Consumer continuity</div>
+          <div class="tc-attr-val">Near-zero (most "endorsed house")</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">FM-04 verdict</div>
+          <div class="tc-attr-val" style="color:var(--ok);">Pass — no editorial identity present</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Strongest audience</div>
+          <div class="tc-attr-val">CIO, CTO, Procurement</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer">
+      <a class="tc-link" href="territory-c/index.html">Open Territory C →</a>
+      <span style="font-size:11px; color:var(--muted);">Naming fit: Bearing (strongest) · Bellwether · Standfirst</span>
+    </div>
+  </div>
+
+  <!-- Territory D -->
+  <div class="territory-card">
+    <div class="tc-header">
+      <div class="tc-dot" style="background:#C4A560;"></div>
+      <div>
+        <div class="tc-id">Territory D</div>
+        <div class="tc-title">First Light</div>
+      </div>
+      <div style="margin-left:auto; display:flex; gap:8px;">
+        <span class="badge badge-warn">FM-04: Conditional</span>
+        <span class="badge badge-warn">D7: Amendment needed</span>
+      </div>
+    </div>
+    <div class="tc-body">
+      <div class="tc-concept">The brand as temporal advantage. Pre-dawn blue-black gradient fading to first warmth. Instrument Serif for display (explicit consumer-brand continuity). Flare orange at the horizon node — the first event of the morning. "Before the open" as a visual argument, not just a tagline.</div>
+      <div class="tc-grid">
+        <div class="tc-attr">
+          <div class="tc-attr-label">Register</div>
+          <div class="tc-attr-val">Dark (blue-black + gradient)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Primary type</div>
+          <div class="tc-attr-val">Instrument Serif display + Schibsted body</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Accent</div>
+          <div class="tc-attr-val">Dawn amber (#C4A560) + Flare at node</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Consumer continuity</div>
+          <div class="tc-attr-val">High (serif, gradient, Step node)</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">FM-04 verdict</div>
+          <div class="tc-attr-val" style="color:var(--warn);">Conditional — Phase 4 test required</div>
+        </div>
+        <div class="tc-attr">
+          <div class="tc-attr-label">Strongest audience</div>
+          <div class="tc-attr-val">PM/Head of Research</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer">
+      <a class="tc-link" href="territory-d/index.html">Open Territory D →</a>
+      <span style="font-size:11px; color:var(--muted);">Naming fit: Standfirst (strongest) · Bearing · Bellwether</span>
+    </div>
+  </div>
+</div>
+
+<!-- 02 NAMING FUNNEL -->
+<div class="section" id="naming">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Naming Funnel — Three Finalists</h2>
+  </div>
+  <p class="section-sub">Phase 2 produces three post-Alfa professional product name finalists meeting all seven D5 criteria. Phase 3 blind gauntlet selects one. All three are unencumbered by existing professional-brand-gauntlet commitments — none has been recommended or pre-selected. The Phase 3 evaluator chooses blind.</p>
+
+  <div class="callout">
+    <strong>D5 criteria reminder (from Phase 1):</strong> (1) distinct from LedeAI in class 42; (2) legible to US institutional buyers without explanation; (3) no sanctions or controversial-entity association; (4) entity-clean in class 36 and class 42 (requires legal vetting — all candidates flagged as conditional on counsel); (5) carries the professional intelligence/coverage promise; (6) works as master brand for all five tiers; (7) domain available (.com or .ai preferred).
+  </div>
+
+  <!-- Finalist 1: Standfirst -->
+  <div class="name-finalist">
+    <div class="nf-header">
+      <div class="nf-name">Standfirst</div>
+      <div class="nf-rank">Finalist #1 · Bench candidate #1 (red-team document)</div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:16px;">The standfirst is the introductory paragraph that follows a headline in quality journalism — a brief, dense summary that captures the story's essence before the full account. In professional investment intelligence: the standfirst is what arrived before the market opened, the ranked-material read that precedes everything else. It is the product's action in a word.</p>
+
+    <div class="nf-grid">
+      <div>
+        <div class="nf-attr-label">Pronunciation</div>
+        <div class="nf-attr-val">STAND-first (two syllables)</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Meaning tax</div>
+        <div class="nf-attr-val">UK newsroom jargon. "Bury the lede" is common American idiom; "standfirst" is not. US professional buyers may not recognize the term — requires the "by Lede" endorsement to carry context.</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Product lexicon</div>
+        <div class="nf-attr-val">Weak. "A standfirst" means nothing to US users outside media. The morning brief can be "your standfirst" but it requires training.</div>
+      </div>
+    </div>
+
+    <div class="nf-score-grid">
+      <div class="nfs-cell">
+        <div class="nfs-label">Distinct from LedeAI</div>
+        <div class="nfs-val strong">Strong — different word, different class</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Institutional legibility</div>
+        <div class="nfs-val warn">Moderate — UK term unfamiliar to US buyers</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Sanctions risk</div>
+        <div class="nfs-val ok">None identified</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">D5 criteria</div>
+        <div class="nfs-val ok">Meets 5/7 — legibility and lexicon are the gaps</div>
+      </div>
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); border-top:1px solid var(--rule); padding-top:10px; margin-top:4px; line-height:1.65;">
+      <strong>Master brand test:</strong> Standfirst Pro / Standfirst Prime / Standfirst Platform / Standfirst Powered / Standfirst Powered+ — all clear. "Standfirst by Lede" — clear. <strong>Territory fit:</strong> strongest in Territory D (temporal, editorial serif); strong in Territory B (document, formal). <strong>Conditional:</strong> trademark clearance in class 36 and class 42 required before use.
+    </div>
+  </div>
+
+  <!-- Finalist 2: Bellwether -->
+  <div class="name-finalist">
+    <div class="nf-header">
+      <div class="nf-name">Bellwether</div>
+      <div class="nf-rank">Finalist #2 · Bench candidate #2 (red-team document)</div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:16px;">The bellwether is the stock that signals the market's direction — the investment community's native term for the first indicator. It is the analyst's word, used in earnings calls and research notes, familiar without explanation to every buy-side professional. The product monitors the bellwether readings in every name before anyone else does.</p>
+
+    <div class="nf-grid">
+      <div>
+        <div class="nf-attr-label">Pronunciation</div>
+        <div class="nf-attr-val">BELL-weth-er (three syllables)</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Spelling tax</div>
+        <div class="nf-attr-val">Chronic misspelling as "bellweather" — the animal origin ("wether" = castrated male sheep) is invisible to most users, making the correct spelling counterintuitive. Larger than Standfirst's pronunciation tax because users type it.</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Product lexicon</div>
+        <div class="nf-attr-val">None. "A bellwether" = the stock that signals the market, not the product's output. The product can't produce "a bellwether" — the word means the stock, not the alert.</div>
+      </div>
+    </div>
+
+    <div class="nf-score-grid">
+      <div class="nfs-cell">
+        <div class="nfs-label">Distinct from LedeAI</div>
+        <div class="nfs-val strong">Strong — completely different register</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Institutional legibility</div>
+        <div class="nfs-val strong">Strong — finance-native term, no explanation needed</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Sanctions risk</div>
+        <div class="nfs-val ok">None identified</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">D5 criteria</div>
+        <div class="nfs-val ok">Meets 5/7 — lexicon and spelling are the gaps</div>
+      </div>
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); border-top:1px solid var(--rule); padding-top:10px; margin-top:4px; line-height:1.65;">
+      <strong>Master brand test:</strong> Bellwether Pro / Bellwether Prime / Bellwether Platform / Bellwether Powered / Bellwether Powered+ — all clear (three-syllable master brand reads long in lockups). "Bellwether by Lede" — clear, professional. <strong>Territory fit:</strong> strongest in Territory A (instrument) and C (matrix — flagged cell = bellwether stock); good in B and D. <strong>Conditional:</strong> trademark clearance in class 36 and class 42 required; domain availability (.com likely taken; .ai to verify).
+    </div>
+  </div>
+
+  <!-- Finalist 3: Bearing -->
+  <div class="name-finalist">
+    <div class="nf-header">
+      <div class="nf-name">Bearing</div>
+      <div class="nf-rank">Finalist #3 · New candidate from Phase 2 naming work</div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:16px;">A bearing is a navigator's term for one's directional orientation — the precise angle between a reference point and a target. "Get your bearing" = determine your position and direction. For a professional investor: Bearing surfaces the orientation reading on what matters in your portfolio before you ask for it. The word is short, common, institutional, and carries both "orientation" and "enduring" (to bear witness) as secondary meanings.</p>
+
+    <div class="nf-grid">
+      <div>
+        <div class="nf-attr-label">Pronunciation</div>
+        <div class="nf-attr-val">BEAR-ing (two syllables). No ambiguity.</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Taxes</div>
+        <div class="nf-attr-val">Primary "bearing" meanings: (1) navigation direction — intended; (2) mechanical bearing (ball bearing) — industrial connotation; (3) "bearing" as comportment — archaic. The mechanical association is the only tax; in a professional financial context, the navigation meaning dominates.</div>
+      </div>
+      <div>
+        <div class="nf-attr-label">Product lexicon</div>
+        <div class="nf-attr-val">Strong. "Get your Bearing" = orientation briefing. "A Bearing on TSLA" = the platform's coverage reading on a name. "The Morning Bearing" = the pre-market briefing product name. Builds naturally.</div>
+      </div>
+    </div>
+
+    <div class="nf-score-grid">
+      <div class="nfs-cell">
+        <div class="nfs-label">Distinct from LedeAI</div>
+        <div class="nfs-val strong">Strong — completely different class and metaphor</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Institutional legibility</div>
+        <div class="nfs-val strong">Strong — common English word, universally legible</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">Sanctions risk</div>
+        <div class="nfs-val ok">None identified</div>
+      </div>
+      <div class="nfs-cell">
+        <div class="nfs-label">D5 criteria</div>
+        <div class="nfs-val strong">Meets 6/7 — trademark clearance pending</div>
+      </div>
+    </div>
+
+    <div style="font-size:12px; color:var(--muted); border-top:1px solid var(--rule); padding-top:10px; margin-top:4px; line-height:1.65;">
+      <strong>Master brand test:</strong> Bearing Pro / Bearing Prime / Bearing Platform / Bearing Powered / Bearing Powered+ — all clear. Short master brand works well in all lockup sizes. "Bearing by Lede" — clean, professional, directional. <strong>Territory fit:</strong> strongest in Territory A (instrument navigation) and Territory C (bearing as the grid's output). <strong>Conditional:</strong> trademark clearance in class 36 and class 42 required before use. Domain: bearing.com likely taken; bearing.ai or getbearing.com to verify. This is the strongest D5 scorer among the three finalists on the criteria that are already checkable.
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Naming funnel note for Phase 3 evaluator:</strong> All three finalists are conditional on trademark clearance. None has been cleared. The Phase 3 evaluator selects a preferred name subject to that clearance; if the preferred name is cleared, it advances to Phase 4. If cleared with high opposition risk, the bench activates (Standfirst and Bellwether for each other; a clear alternative to both is required if all three fail — a Phase 3 contingency plan, not a Phase 2 deliverable).
+  </div>
+</div>
+
+<!-- 03 CROSS-TERRITORY ANALYSIS -->
+<div class="section" id="analysis">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Cross-Territory Analysis</h2>
+  </div>
+  <p class="section-sub">Comparative assessment across the four territories. This is not a recommendation — it is a structured view of the tradeoffs to inform Phase 3 blind selection.</p>
+
+  <div class="table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>A: Instrument</th>
+          <th>B: Record</th>
+          <th>C: Matrix</th>
+          <th>D: First Light</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FM-04 verdict</td>
+          <td class="ct-strong">Pass (high confidence)</td>
+          <td class="ct-strong">Pass (strongest)</td>
+          <td class="ct-strong">Pass (strongest)</td>
+          <td class="ct-weak">Conditional — serif test required</td>
+        </tr>
+        <tr>
+          <td>Bloomberg visual differentiation</td>
+          <td>Semantic (use-of-orange), not palette</td>
+          <td class="ct-strong">Register difference (light vs. dark amber)</td>
+          <td class="ct-strong">Palette difference (blue-navy, not amber)</td>
+          <td>Temporal (gradient vs. static chrome)</td>
+        </tr>
+        <tr>
+          <td>PM/Head of Research</td>
+          <td>Technical, cold — may underserve emotional resonance</td>
+          <td>Credible but cool — compliance-first</td>
+          <td>Systematic — CIO-first</td>
+          <td class="ct-strong">Strongest — temporal claim is the PM's primary value</td>
+        </tr>
+        <tr>
+          <td>CTO audience</td>
+          <td class="ct-strong">Strongest — Stripe-like documentation aesthetic</td>
+          <td>Credible — document-serious</td>
+          <td class="ct-strong">Strong — interface IS the identity</td>
+          <td>Weakest — gradient may feel consumer-facing to CTOs</td>
+        </tr>
+        <tr>
+          <td>CCO audience</td>
+          <td class="ct-strong">Strong — output classification taxonomy visible</td>
+          <td class="ct-strong">Strongest — document = auditable</td>
+          <td>Strong — coverage state is auditable</td>
+          <td>Good — output classification in footer</td>
+        </tr>
+        <tr>
+          <td>Consumer Lede continuity</td>
+          <td>Minimal (Step + Flare only)</td>
+          <td>Moderate (Newsreader in token system)</td>
+          <td class="ct-weak">Near-zero</td>
+          <td class="ct-strong">High (serif, gradient, Step, Flare)</td>
+        </tr>
+        <tr>
+          <td>Distinctiveness in market</td>
+          <td>High — no mono-primary institutional brand</td>
+          <td class="ct-strong">Highest — no document-aesthetic brand</td>
+          <td>High — no coverage-grid brand</td>
+          <td>High — no temporal-gradient brand</td>
+        </tr>
+        <tr>
+          <td>Co-branding simplicity</td>
+          <td class="ct-strong">Strongest — mono type doesn't compete for attention</td>
+          <td>Strong — document framework accommodates partners</td>
+          <td>Strong — grid works at scale</td>
+          <td>Moderate — gradient requires careful partner integration</td>
+        </tr>
+        <tr>
+          <td>Open conditions</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td class="ct-weak">FM-04 test + D7 amendment</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout accent">
+    <strong>What the comparison shows:</strong> No territory dominates all dimensions. Territory D has the highest emotional resonance with the PM audience and the highest consumer continuity, but carries the only open conditions. Territories A and C are strongest for CTO and systematic-buyer audiences. Territory B has the highest FM-04 confidence and the most counter-intuitive market position (document aesthetic in a tech-brand category). The Phase 3 evaluator must choose between: (a) maximum emotional claim with conditions (D), (b) maximum institutional credibility without conditions (A, B, C), and (c) maximum visual differentiation from Bloomberg (B — register difference, not just hue difference).
+  </div>
+</div>
+
+<!-- 04 HANDOFF -->
+<div class="section" id="handoff">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Phase 2 → Phase 3 Handoff</h2>
+  </div>
+  <p class="section-sub">What Phase 3 receives as confirmed inputs vs. what it decides.</p>
+
+  <div class="handoff-row">
+    <div class="handoff-col">
+      <div class="hc-label">Confirmed — Phase 3 inherits as inputs</div>
+      <ul>
+        <li>Four complete creative territories (A, B, C, D), each with visual specification, FM-04 verdict, Bloomberg answer, and logomark direction</li>
+        <li>Three naming finalists (Standfirst, Bellwether, Bearing), each evaluated against D5 criteria with explicit condition notes</li>
+        <li>FM-04 clear on A, B, C. D is conditional on Phase 4 test.</li>
+        <li>Territory D carries two open conditions: FM-04 test and D7 amendment for dawn amber</li>
+        <li>All Phase 1 decisions (D1–D7) remain confirmed — Phase 3 does not relitigate them</li>
+        <li>The Powered/Powered+ naming syntax three-way fork (Phase 1 issue #2) is a Phase 3 decision — see naming funnel format below</li>
+      </ul>
+    </div>
+    <div class="handoff-col">
+      <div class="hc-label">Phase 3 decides</div>
+      <ul>
+        <li><strong>One creative territory selected</strong> — from the four, blind to Phase 2 recommendation. The selection is the Phase 3 deliverable. If Territory D is selected, the selection must include explicit acceptance of FM-04 conditional.</li>
+        <li><strong>One name finalist selected</strong> — from the three, subject to trademark clearance. The selection is provisional until counsel clears it.</li>
+        <li><strong>Powered/Powered+ attribution syntax</strong> — the three-way fork ("Powered by [Name]" / "Powered by [New Name]" / "Powered by Lede") requires a decision rule for which formulation a partner uses when. Phase 3 must make this decision or explicitly defer it to Phase 4 with a stated reason.</li>
+        <li><strong>Transition-period co-presence answer</strong> — Phase 3 confirms which territory's direction handles the Boosted.ai + Alfa + Lede simultaneous-in-market scenario, and whether the selected territory requires a Phase 4 amendment to the co-presence rules</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub">Phase 3 Blind Selection Format</h3>
+  <p style="font-size:13px; color:var(--muted); line-height:1.65; margin-bottom:12px;">The Phase 3 evaluator reviews the four territory pages in isolation — each page is designed in its own aesthetic, so the evaluation is visual as well as strategic. The format for Phase 3 output:</p>
+
+  <ul class="ls">
+    <li>Selected territory (A / B / C / D) with explicit rationale against Phase 1 D1–D7 decisions</li>
+    <li>Selected name finalist (Standfirst / Bellwether / Bearing) with explicit rationale against D5 criteria</li>
+    <li>If Territory D selected: explicit acceptance of FM-04 conditional and D7 amendment requirement</li>
+    <li>Powered/Powered+ syntax decision: which formulation, and when</li>
+    <li>Phase 3→4 handoff: one page of inputs Phase 4 inherits as confirmed</li>
+  </ul>
+</div>
+
+<!-- 05 VERDICT -->
+<div class="section" id="verdict">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2>Verdict &amp; Gate</h2>
+  </div>
+
+  <div class="callout ok">
+    <strong>Phase 2 deliverables complete.</strong> Four independent creative territories delivered. Three naming finalists in the funnel, each meeting ≥5/7 D5 criteria (pending trademark clearance). Cross-territory analysis complete. Phase 2→3 handoff specified. All Phase 1 decisions honored — no relitigating. Ready for MC-P2-01 critic review.
+  </div>
+
+  <h3 class="sub">Phase 3 Gate Conditions</h3>
+  <ul class="ls">
+    <li>Phase 3 selection must choose exactly one territory and one name finalist — no hybrid selections or conditional ties</li>
+    <li>If Territory D is selected, the FM-04 conditional and D7 amendment requirement must be explicitly accepted in the selection record</li>
+    <li>The selected name must advance to trademark counsel immediately after Phase 3; Phase 4 cannot begin logo execution without at least a preliminary clearance opinion</li>
+    <li>The Powered/Powered+ attribution syntax must be resolved in Phase 3, not deferred to Phase 4</li>
+    <li>Phase 4 begins only after MC-P3-01 clears Phase 3 at ≥7.0/10</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Proceeding to:</strong> Phase 2 Mean Critic Review (MC-P2-01). A fresh context will score this document and the four territory pages using the gauntlet rubric. The builder may not serve as critic. After critic review, proceed to Phase 3 (Blind Gauntlet) only if Phase 2 clears 7.0.
+  </div>
+</div>
+
+</main>
+</div>
+
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">Toggle theme</button>
+
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  const isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+}
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

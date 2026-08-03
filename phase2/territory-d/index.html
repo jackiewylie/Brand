@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territory D: First Light — Phase 2 Creative Territory</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Territory D — temporal / epistemic / pre-dawn */
+:root {
+  --bg0: #0D1520;
+  --bg1: #121E2E;
+  --bg2: #192840;
+  --bg3: #213254;
+  --bg-warm: #16202E;
+  --ink: #EEF1F8;
+  --ink2: #CDD4E8;
+  --ink3: #8A96B5;
+  --ink4: #4A5570;
+  --dawn-start: #1A2B45;
+  --dawn-mid: #2C3F62;
+  --dawn-warm: #3D3010;
+  --dawn-amber: #7A5E20;
+  --dawn-light: #C4A560;
+  --dawn-horizon: #E8C97A;
+  --dawn-edge: #F5E4B0;
+  --flare: #FF5A14;
+  --up: #3FA971;
+  --down: #E05A47;
+  --warn-clr: #C4A560;
+  --rule: rgba(200,210,232,0.1);
+  --rule2: rgba(200,210,232,0.18);
+  --mono: "Courier New", "Courier", monospace;
+  --sans: system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --serif: Georgia, "Times New Roman", "Palatino Linotype", serif;
+}
+
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero gradient backdrop */
+.dawn-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 320px;
+  background: linear-gradient(180deg, var(--dawn-warm) 0%, var(--bg0) 100%);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header */
+.td-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,21,32,0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 40px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.td-logo {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--dawn-light);
+  flex-shrink: 0;
+}
+.td-nav { display: flex; gap: 0; margin-left: auto; }
+.td-nav a {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-decoration: none;
+  padding: 0 18px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--rule);
+}
+.td-nav a:hover { color: var(--dawn-light); }
+
+/* Main */
+.td-main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Territory ID strip */
+.territory-strip {
+  border: 1px solid var(--rule2);
+  background: rgba(255,255,255,0.03);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ts-id { font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--ink4); margin-bottom: 4px; }
+.ts-name { font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--dawn-light); }
+.ts-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-family: var(--sans);
+}
+.tag-cond { border-color: var(--warn-clr); color: var(--warn-clr); }
+.tag-d { border-color: var(--dawn-light); color: var(--dawn-light); }
+
+/* Sections */
+.td-section { padding: 56px 0; border-top: 1px solid var(--rule); }
+.td-section:first-child { border-top: none; padding-top: 0; }
+
+/* Typography */
+.td-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dawn-amber); margin-bottom: 12px; font-family: var(--sans); }
+.td-h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 620px;
+  text-wrap: balance;
+}
+.td-h1 em { font-style: italic; color: var(--dawn-light); }
+.td-h2 {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 8px;
+}
+.td-concept { font-family: var(--serif); font-size: 18px; line-height: 1.6; color: var(--ink2); max-width: 600px; margin-bottom: 24px; }
+.td-body { font-family: var(--sans); font-size: 13px; line-height: 1.75; color: var(--ink3); max-width: 560px; }
+
+/* Gradient / horizon demo */
+.horizon-demo {
+  width: 100%;
+  height: 160px;
+  border-radius: 2px;
+  background: linear-gradient(
+    180deg,
+    #2A1E08 0%,
+    #1F2535 30%,
+    #0D1520 70%,
+    #0D1520 100%
+  );
+  position: relative;
+  overflow: hidden;
+  margin: 24px 0;
+  border: 1px solid var(--rule2);
+}
+.horizon-line {
+  position: absolute;
+  bottom: 50px;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--dawn-horizon) 40%, var(--dawn-edge) 60%, transparent 100%);
+}
+.horizon-node {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: var(--flare);
+  box-shadow: 0 0 16px rgba(255,90,20,0.6);
+}
+.horizon-text {
+  position: absolute;
+  bottom: 16px;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dawn-amber);
+}
+.horizon-time {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(200,210,232,0.3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Palette */
+.palette-row { display: flex; gap: 2px; margin: 24px 0; height: 36px; overflow: hidden; border-radius: 2px; }
+.swatch { flex: 1; }
+
+/* Type spec */
+.type-spec { background: var(--bg1); border: 1px solid var(--rule2); padding: 28px 32px; margin: 20px 0; }
+.ts-row { border-bottom: 1px solid var(--rule); padding: 16px 0; display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: baseline; }
+.ts-row:last-child { border-bottom: none; }
+.ts-row-label { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4); align-self: start; padding-top: 4px; }
+.ts-display-serif { font-family: var(--serif); font-size: 38px; font-weight: 400; font-style: italic; color: var(--ink); line-height: 1.1; }
+.ts-display-serif em { color: var(--dawn-light); font-style: italic; }
+.ts-headline { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+.ts-body-s { font-family: var(--sans); font-size: 13px; color: var(--ink3); line-height: 1.7; }
+.ts-mono { font-family: var(--mono); font-size: 11px; color: var(--ink4); font-variant-numeric: tabular-nums; }
+
+/* Application sample — morning brief */
+.app-sample {
+  background: var(--bg1);
+  border: 1px solid var(--rule2);
+  border-top: none;
+  margin: 24px 0;
+  overflow: hidden;
+}
+.app-hero {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(180deg, #251A08 0%, #131E2E 60%, var(--bg1) 100%);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+.app-hero-line {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(200,165,90,0.6) 40%, rgba(200,165,90,0.9) 60%, transparent 90%);
+}
+.app-hero-node {
+  position: absolute;
+  bottom: -4px;
+  left: 30%;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--flare);
+}
+.app-hero-text {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+}
+.aht-time { font-family: var(--mono); font-size: 11px; color: var(--dawn-amber); font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.aht-title { font-family: var(--serif); font-size: 18px; color: var(--ink); font-style: italic; }
+.app-content { padding: 20px 24px; }
+.brief-event {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.brief-event:last-child { border-bottom: none; }
+.be-main { }
+.be-ticker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; font-weight: 700; color: var(--dawn-light); margin-bottom: 4px; }
+.be-desc { font-family: var(--sans); font-size: 12px; color: var(--ink3); line-height: 1.55; }
+.be-meta { text-align: right; }
+.be-time { font-family: var(--mono); font-size: 10px; color: var(--ink4); font-variant-numeric: tabular-nums; display: block; margin-bottom: 4px; }
+.be-source { font-family: var(--sans); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4); }
+.app-footer {
+  padding: 10px 24px;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink4);
+  letter-spacing: 0.08em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Callout */
+.callout {
+  background: rgba(255,255,255,0.03);
+  border-left: 2px solid var(--rule2);
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+.callout strong { color: var(--ink); }
+.callout.ok { border-left-color: var(--up); }
+.callout.warn { border-left-color: var(--warn-clr); }
+
+/* Spec table */
+.spec-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 20px 0; }
+.spec-table th { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); text-align: left; padding: 8px 16px 8px 0; border-bottom: 1px solid var(--rule2); }
+.spec-table td { font-family: var(--sans); font-size: 12px; color: var(--ink3); padding: 12px 16px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.65; }
+.spec-table td:first-child { color: var(--ink2); font-weight: 700; min-width: 140px; }
+.verdict-cond { color: var(--warn-clr); }
+
+/* Logo demo */
+.logo-demo { background: var(--bg1); border: 1px solid var(--rule2); padding: 48px 40px; text-align: center; margin: 20px 0; position: relative; overflow: hidden; }
+.logo-demo-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(40,25,8,0.5) 0%, transparent 100%);
+}
+.logo-content { position: relative; z-index: 1; }
+.logo-horizon-line {
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dawn-light), transparent);
+  margin: 0 auto 12px;
+}
+.logo-node {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--flare);
+  margin-bottom: 8px;
+  box-shadow: 0 0 12px rgba(255,90,20,0.5);
+}
+.logo-wordmark-serif { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--ink); margin-bottom: 6px; }
+.logo-wordmark-sans { font-family: var(--sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink4); }
+
+/* Name cards */
+.name-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.name-card { background: var(--bg2); border: 1px solid var(--rule2); padding: 14px 18px; min-width: 150px; }
+.nc-name { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--dawn-light); margin-bottom: 4px; }
+.nc-fit { font-family: var(--sans); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; }
+.nc-fit.strong { color: var(--up); }
+.nc-fit.good { color: var(--ink3); }
+.nc-fit.weaker { color: var(--warn-clr); }
+.nc-reason { font-family: var(--sans); font-size: 11px; color: var(--ink4); margin-top: 6px; line-height: 1.5; }
+
+.dm-note { border-top: 1px solid var(--rule); padding: 20px 0 0; font-family: var(--sans); font-size: 10px; color: var(--ink4); margin-top: 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+
+<div class="dawn-bg"></div>
+
+<header class="td-header">
+  <div class="td-logo">Lede · Professional Rebrand Gauntlet</div>
+  <nav class="td-nav">
+    <a href="../index.html">← Phase 2</a>
+    <a href="../territory-a/index.html">Territory A</a>
+    <a href="../territory-b/index.html">Territory B</a>
+    <a href="../territory-c/index.html">Territory C</a>
+  </nav>
+</header>
+
+<main class="td-main">
+
+  <div class="territory-strip">
+    <div>
+      <div class="ts-id">Territory D · Phase 2 Creative Direction</div>
+      <div class="ts-name">First Light</div>
+    </div>
+    <div class="ts-tags">
+      <span class="tag tag-cond">FM-04: Conditional — Phase 4 test required</span>
+      <span class="tag tag-d">Visual register: Temporal / pre-dawn</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <div class="td-section">
+    <div class="td-eyebrow">Concept</div>
+    <h1 class="td-h1">Before the open.<br><em>You already know.</em></h1>
+    <p class="td-concept">First Light names the moment the product exists for: 6:12 AM, pre-market, the first signal of the morning. The brand is temporal advantage — the discipline of knowing before others, documented before anyone checks. The visual language is the gradient from dark to first light: a deep blue-black that bleeds into the warmth of an early morning horizon.</p>
+    <p class="td-body">Where Territories A, B, and C argue from what the product IS, Territory D argues from when the product matters. "Before the open, not accelerate your workflow" — the PM audience's forbidden phrase becomes the brand's claim. The pre-dawn metaphor is not decorative: it is the precise emotional state of an analyst who needs to be ready at the market open and knows they are, because the system was watching all night.</p>
+  </div>
+
+  <!-- HORIZON DEMO -->
+  <div class="td-section">
+    <div class="td-h2">The Horizon — Territory D's Signature Visual Element</div>
+    <p class="td-body" style="margin-bottom:16px;">The gradient horizon — dark blue fading to the first warmth of morning — is the brand's central visual element. The Flare orange node appears at the horizon line: the first event of the morning, the moment something material registered while everyone was still asleep.</p>
+
+    <div class="horizon-demo">
+      <div class="horizon-line"></div>
+      <div class="horizon-node"></div>
+      <div class="horizon-time">06:14 ET</div>
+      <div class="horizon-text">Material event detected · 3 signals before the open</div>
+    </div>
+
+    <p class="td-body">The node on the horizon is the Step logomark in its most literal form: a point where the line registers an event. The gradient is ambient on brand surfaces — a slow shift that communicates the passing of night — and is still on product UI surfaces (motion constraint: ambient on brand, static in product). The horizon can be a thin horizontal rule across the top of any surface, with the node marking the most recent event.</p>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="td-section">
+    <div class="td-h2">Color System</div>
+    <p class="td-body" style="margin-bottom:16px;">Deep blue-black base with a warm golden horizon accent. Flare orange at the first-event node. The palette carries the pre-dawn gradient — cold navy fading to warm amber at the edge. This is the most emotionally differentiated palette of any territory, and the furthest from the neutral institutional registers of competitors.</p>
+
+    <div class="palette-row">
+      <div class="swatch" style="background:#0D1520;"></div>
+      <div class="swatch" style="background:#121E2E;"></div>
+      <div class="swatch" style="background:#192840;"></div>
+      <div class="swatch" style="background:#213254;"></div>
+      <div class="swatch" style="background:#EEF1F8;"></div>
+      <div class="swatch" style="background:#8A96B5;"></div>
+      <div class="swatch" style="background:#4A5570;"></div>
+      <div class="swatch" style="background:#C4A560;" title="Dawn amber — endorsement and horizon accent"></div>
+      <div class="swatch" style="background:#E8C97A;" title="Dawn horizon — gradient terminus"></div>
+      <div class="swatch" style="background:#FF5A14;" title="Flare — first event node only"></div>
+      <div class="swatch" style="background:#3FA971;"></div>
+      <div class="swatch" style="background:#E05A47;"></div>
+    </div>
+
+    <div class="callout">
+      <strong>Bloomberg differentiation:</strong> Bloomberg Terminal uses warm amber on near-black — a terminal aesthetic built for all-day use. First Light uses cold blue-black fading to warm gold — a temporal aesthetic built for the pre-dawn moment. The warmth arrives at the edge (the horizon), not as persistent interface chrome. The shift from cold base to warm horizon is the brand's motion in time, not Bloomberg's static amber grid.
+    </div>
+
+    <div class="callout warn">
+      <strong>Color constraint note (D7 compliance):</strong> The dawn amber (#C4A560) is in the yellow-gold range. Phase 1 D7 notes that the v1 identity yellow was "retired" — the v2 identity replaced it with Flare orange. Territory D's dawn amber is not yellow in the sense of the retired v1 accent; it is a warm neutralized gold used as a gradient endpoint, not as a signal or interactive color. The Phase 4 color decision must confirm whether this reintroduction of warm gold is within the D7 constraint, or whether it requires an amendment to D7.
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="td-section">
+    <div class="td-h2">Typography</div>
+    <p class="td-body" style="margin-bottom:8px;">Instrument Serif (interim: Georgia italic) for display and brand-register headlines — the explicit connection to the consumer Lede brand. Schibsted Grotesk for body and UI text. IBM Plex Mono for data. This is the only territory that uses the Instrument Serif on professional surfaces — the brand-register connection to Lede is carried through the display type, while the body type stays institutional.</p>
+
+    <div class="type-spec">
+      <div class="ts-row">
+        <div class="ts-row-label">Display</div>
+        <div>
+          <div class="ts-display-serif">Before the open.<br><em>You already know.</em></div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:8px; font-family:var(--sans); letter-spacing:.1em; text-transform:uppercase;">Instrument Serif 400 italic · 38/44 · intended: Instrument Serif (consumer font system)</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Headline</div>
+        <div><div class="ts-headline">Pre-Market Intelligence — 3 signals before the open</div></div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Body</div>
+        <div><div class="ts-body-s">The platform monitored 47 names through the night. Three events registered before the market opened. You are reading the record of what happened between last night's close and this morning's open — documented, sourced, auditable.</div></div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Label</div>
+        <div><div class="ts-mono">06:14 ET · Mon 03 Aug 2026 · 47/47 covered · 3 flagged</div></div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>FM-04 flag — Instrument Serif on professional surfaces:</strong> This territory explicitly uses Instrument Serif on professional surfaces. This is the editorial identity question that FM-04 gates. The Phase 4 test must include: (a) rendering this territory's display typography in a bank procurement portal context; (b) testing it against a compliance officer's document aesthetic expectations; (c) confirming that an italic serif display face reads as credible-professional, not as editorial-consumer. This territory cannot advance to Phase 4 without that test.
+    </div>
+  </div>
+
+  <!-- APPLICATION -->
+  <div class="td-section">
+    <div class="td-h2">Application Sample — Morning Intelligence Brief</div>
+    <p class="td-body" style="margin-bottom:16px;">The same pre-market content in Territory D. The horizon gradient is the hero; the event node marks the first signal. Evaluate: does this read as a professional intelligence product, or as a consumer morning news product?</p>
+
+    <div class="app-sample">
+      <div class="app-hero">
+        <div class="app-hero-line"></div>
+        <div class="app-hero-node"></div>
+        <div class="app-hero-text">
+          <div class="aht-time">Mon 03 Aug 2026 · 06:14 ET</div>
+          <div class="aht-title">The Morning Brief</div>
+        </div>
+      </div>
+      <div class="app-content">
+        <div class="brief-event">
+          <div class="be-main">
+            <div class="be-ticker">TSLA · Flagged</div>
+            <div class="be-desc">10-K/A filed — guidance language revision. "Approximately" removed from FY revenue forecast. Interpretable as incremental confidence signal or narrowing of downside protection.</div>
+          </div>
+          <div class="be-meta">
+            <span class="be-time">06:22 ET</span>
+            <span class="be-source">SEC EDGAR</span>
+          </div>
+        </div>
+        <div class="brief-event">
+          <div class="be-main">
+            <div class="be-ticker">TSLA · Flagged</div>
+            <div class="be-desc">Unusual put activity: 3.2σ vs. 30-day average. Sep expiry. No news catalyst identified at detection time.</div>
+          </div>
+          <div class="be-meta">
+            <span class="be-time">05:47 ET</span>
+            <span class="be-source">CBOE</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span>Material fact · AI synthesis (labeled) · Monitored alert</span>
+        <span>Alfa by Lede · 47/47 names</span>
+      </div>
+    </div>
+
+    <p class="td-body">The horizon gradient is the ambient brand presence. The brief itself uses Schibsted Grotesk (not the display serif) — the serif appears only in "The Morning Brief" header, which is the brand-register display moment. The rest reads as a professional document. The evaluator must decide: does the gradient make this feel like a consumer product, or does it communicate temporal advantage to a professional buyer?</p>
+  </div>
+
+  <!-- LOGOMARK -->
+  <div class="td-section">
+    <div class="td-h2">Logomark Direction</div>
+    <p class="td-body" style="margin-bottom:16px;">The Step logomark is the horizon node — the first event of the morning, the point where the line registers a reading. The wordmark uses Instrument Serif italic. The Flare orange node glows softly above a thin golden horizon line.</p>
+
+    <div class="logo-demo">
+      <div class="logo-demo-bg"></div>
+      <div class="logo-content">
+        <div class="logo-horizon-line"></div>
+        <div><span class="logo-node"></span></div>
+        <div class="logo-wordmark-serif">[Name]<span style="font-size:20px; color:var(--ink4); font-weight:400;"> by Lede</span></div>
+        <div class="logo-wordmark-sans" style="margin-top:8px;">Professional Intelligence</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Step at 16px on partner colors:</strong> The horizon-node logomark at 16px is challenging — the thin horizon line disappears below ~24px. A simplified version for small-scale use: the node only (Flare orange circle), identical to Territory A's Step treatment. The horizon line is a brand-surface element, not a mark element. This means the logomark has two registered states: (a) full — node + horizon line + wordmark, used at ≥40px height; (b) compact — node only + wordmark, used at 16–40px. Phase 4 must specify both states.
+    </div>
+  </div>
+
+  <!-- TECHNICAL SPEC -->
+  <div class="td-section">
+    <div class="td-h2">Technical Specification</div>
+    <table class="spec-table">
+      <thead><tr><th>Attribute</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Register</td><td>Dark brand register — blue-black base, not the warm-paper brand register of Territory B or the exact product-register values of Territory A. The gradient horizon requires a dark ground to be visible. Print and light-mode variants must be specified in Phase 4 — they are not defined in this territory proposal.</td></tr>
+        <tr><td>Primary type</td><td>Instrument Serif (interim: Georgia Italic) for display and hero headings on brand surfaces only. Schibsted Grotesk for all body, UI, and sub-display headings. IBM Plex Mono for all data values. The Instrument Serif appears only on brand-register surfaces — product UI inherits the token system's Schibsted Grotesk + IBM Plex Mono stack.</td></tr>
+        <tr><td>Signal color</td><td>Flare orange (#FF5A14) at the horizon event node — ≤2% of any surface, appearance-earned. Dawn amber (#C4A560) for endorsement text, gradient terminus, and small-scale brand accent — this is a new color not in lede-tokens.json v2.0.0; requires D7 amendment or Phase 4 decision. Data-up and data-down use the existing token values.</td></tr>
+        <tr><td>Motion</td><td>The horizon gradient shifts slowly on brand surfaces — ambient, not looping, a 12-second ease across the gradient range. The event node (Step) draws from the left with a 550ms line, node appearing 200ms at the horizon point. On brand surfaces: ambient horizon motion is permitted. On product UI: static. prefers-reduced-motion: all final states rendered immediately.</td></tr>
+        <tr><td>Buttons</td><td>Pill geometry (border-radius: 999px). Schibsted Grotesk. Primary: dawn-amber-tinted surface, ink text. Alternatively: Flare orange fill (as event-trigger action only). The button should feel like it was designed for a dark blue-black ground — light pill buttons on dark navy do not work; amber or orange fill pills do.</td></tr>
+        <tr><td>WCAG 2.2 AA</td><td>Ink (#EEF1F8) on bg0 (#0D1520): ratio 15.8:1 — AAA. ink2 (#CDD4E8) on bg0: 10.4:1 — AAA. ink3 (#8A96B5) on bg0: 4.9:1 — AA. Dawn amber (#C4A560) on bg0: 6.2:1 — AA (passes as accent text ≥14px). The gradient introduces variable contrast — any text placed on the gradient section must be tested at the warmest (least-contrast) point of the gradient. This is the highest WCAG risk of any territory.</td></tr>
+        <tr><td>D7 compliance</td><td>Dawn amber (#C4A560) is a new color not defined in Phase 1's D7 color constraint table. D7 prohibits the v1 yellow accent but does not specifically address a warm gold gradient endpoint. Phase 4 must make a D7 amendment decision: approve dawn amber as a brand-register gradient accent (limited to brand-surface use, not signal use) or reject it and specify an alternative gradient. This is a conditional approval pending Phase 4 review.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FM-04 -->
+  <div class="td-section">
+    <div class="td-h2">FM-04 Resolution — Editorial Identity Institutional Compatibility</div>
+
+    <div class="callout warn">
+      <strong class="verdict-cond">VERDICT: CONDITIONAL — Phase 4 test required before commitment</strong>
+    </div>
+
+    <p class="td-body" style="margin-bottom:12px;">Territory D is the only territory where FM-04 is a live risk rather than a cleared gate. The reason: Instrument Serif italic appears on professional brand surfaces. This is the editorial identity question that FM-04 specifically flags.</p>
+
+    <p class="td-body" style="margin-bottom:12px;">Two possible outcomes of the Phase 4 FM-04 test:</p>
+
+    <table class="spec-table">
+      <thead><tr><th>Test outcome</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>Instrument Serif passes institutional review</td><td>Territory D advances with Instrument Serif on brand surfaces. The editorial-to-professional register question is resolved in favor of the serif's adaptability. This would be the strongest brand continuity outcome — maximum visual connection between consumer Lede and professional brand.</td></tr>
+        <tr><td>Instrument Serif fails institutional review</td><td>Territory D requires modification: Schibsted Grotesk replaces Instrument Serif as the display face. The gradient horizon and temporal concept survive; only the typography changes. The result is a brand that argues from temporal advantage in a sans-serif register — still distinctive, but with lower consumer-brand continuity. This is the conditional advancement path.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>The gauntlet position:</strong> Territory D cannot be selected by Phase 3 without explicitly accepting the FM-04 conditional. A Phase 3 selection of Territory D must include: "this selection is conditional on FM-04 passing in Phase 4; if Instrument Serif fails institutional review, Phase 4 replaces it with Schibsted Grotesk at the display role." The territory concept (temporal, gradient, pre-dawn) is not dependent on the serif; the serif is a bonus that may or may not survive institutional testing.
+    </div>
+  </div>
+
+  <!-- NAMING COMPATIBILITY -->
+  <div class="td-section">
+    <div class="td-h2">Naming Compatibility</div>
+    <p class="td-body" style="margin-bottom:16px;">First Light's naming needs a word that sounds right as a pre-dawn moment — something with temporal weight and epistemic connotation.</p>
+
+    <div class="name-row">
+      <div class="name-card">
+        <div class="nc-name">Standfirst</div>
+        <div class="nc-fit strong">Strongest fit</div>
+        <div class="nc-reason">The standfirst is the first thing that precedes the story — the pre-dawn intelligence layer. "Standfirst by Lede" in Instrument Serif italic is the most visually coherent pairing of any territory/name combination. The journalism metaphor is not editorial here — it is temporal. The standfirst comes before everything else.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bearing</div>
+        <div class="nc-fit good">Good fit</div>
+        <div class="nc-reason">A bearing is taken at a specific moment — the pre-dawn observation. "Bearing by Lede" in the italic serif still works, though the navigation metaphor is less temporal than the journalism one.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bellwether</div>
+        <div class="nc-fit weaker">Weaker fit</div>
+        <div class="nc-reason">Bellwether is a signal, not a moment. The temporal brand concept needs a word about when, not just what. "Bellwether by Lede" in italic serif is plausible but doesn't reinforce the pre-dawn claim. Works; not the strongest.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 NOTES -->
+  <div class="td-section">
+    <div class="td-h2">Notes for Phase 3 Evaluator</div>
+    <table class="spec-table">
+      <thead><tr><th>Dimension</th><th>Observation</th></tr></thead>
+      <tbody>
+        <tr><td>Risk (FM-04)</td><td>This is the only territory with a conditional FM-04 verdict. Selecting this territory means accepting a contingent creative direction. The temporal concept and gradient system survive FM-04 either way; the serif is the conditional element. A Phase 3 selector who loves the temporal concept but is uncertain about the serif should read this as: "select Territory D, accept the sans-serif fallback as the contingency."</td></tr>
+        <tr><td>Risk (D7)</td><td>Dawn amber (#C4A560) requires a D7 amendment. The v1 yellow was retired. The amber is different in hue and usage, but requires explicit approval. A Phase 3 selection of Territory D must include a note that the Phase 4 team needs a D7 amendment decision before executing the palette.</td></tr>
+        <tr><td>Distinctiveness</td><td>No major institutional fintech brand uses a pre-dawn gradient as its visual identity (as of August 2026). The temporal brand concept ("before the open") is the most differentiated positioning approach in Phase 2 — it argues from when rather than from what, which is a genuinely distinct angle. The risk is whether institutional buyers find the gradient atmospheric/consumer-facing or evocative/professional.</td></tr>
+        <tr><td>PM audience</td><td>Territory D is the strongest territory for the PM audience — "before the open" is the PM's primary claim, and the gradient makes that claim environmental. The CIO and CCO audiences may find the atmospheric treatment less credible than Territories A, B, or C.</td></tr>
+        <tr><td>Consumer brand continuity</td><td>Territory D has the highest visual continuity with the consumer Lede brand — Instrument Serif, the Step node, the Flare orange event marker, and the dark aesthetic are all shared. This is the "visual house" interpretation of the Endorsed House architecture, even though the brand architecture is endorsed-house-by-definition. The Phase 3 selector must decide whether this continuity is desirable or whether the professional brand needs more separation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dm-note">
+    <span>Territory D — First Light · Phase 2 · Lede Professional Rebrand Gauntlet · Aug 3, 2026</span>
+    <span>FM-04 conditional · D7 amendment required · Phase 4 executes after conditional resolution.</span>
+  </div>
+
+</main>
+</body>
+</html>

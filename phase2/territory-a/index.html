@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territory A: The Instrument — Phase 2 Creative Territory</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Territory A token system */
+:root {
+  --bg0: #131210;
+  --bg1: #1B1A16;
+  --bg2: #242320;
+  --bg3: #2C2B26;
+  --ink: #F7F5EF;
+  --ink2: #E8E6DC;
+  --ink3: #C6C4B6;
+  --ink4: #6C6A5E;
+  --flare: #FF5A14;
+  --flare2: #FF7A42;
+  --up: #3FA971;
+  --down: #E05A47;
+  --warn-clr: #E2A93B;
+  --border: #2C2B26;
+  --border2: #383630;
+  --mono: "Courier New", "Courier", monospace;
+  --sans: system-ui, -apple-system, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;
+}
+
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header / nav */
+.ta-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--border2);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.ta-logo {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+}
+.ta-logo span {
+  color: var(--flare);
+}
+.ta-nav {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+.ta-nav a {
+  color: var(--ink4);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ta-nav a:hover { color: var(--ink3); }
+
+/* Main content */
+.ta-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 32px;
+}
+
+/* Section spacing */
+.ta-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.ta-section:first-child { border-top: none; padding-top: 0; }
+
+/* Typography */
+.ta-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 12px;
+}
+.ta-h1 {
+  font-family: var(--mono);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.ta-h1 em { color: var(--flare); font-style: normal; }
+.ta-h2 {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 20px;
+}
+.ta-concept {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink2);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.ta-body {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink3);
+  max-width: 560px;
+}
+
+/* Palette strip */
+.palette-row {
+  display: flex;
+  gap: 2px;
+  margin: 32px 0;
+  height: 40px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.swatch { flex: 1; }
+
+/* Typography specimen */
+.type-spec {
+  background: var(--bg1);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 32px;
+  margin: 24px 0;
+}
+.ts-row {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+.ts-row:last-child { border-bottom: none; }
+.ts-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.ts-sample { flex: 1; }
+.ts-display { font-family: var(--mono); font-size: 36px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.ts-headline { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--ink); }
+.ts-body-s { font-family: var(--mono); font-size: 13px; color: var(--ink2); }
+.ts-caption { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4); }
+.ts-data { font-family: var(--mono); font-size: 15px; color: var(--flare); font-variant-numeric: tabular-nums; }
+
+/* Application sample: pre-market brief */
+.app-sample {
+  background: var(--bg1);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 0;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.app-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-bar-left {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+}
+.app-bar-right {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink4);
+  font-variant-numeric: tabular-nums;
+}
+.app-body { padding: 24px 20px; }
+.app-ticker-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.app-ticker {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.app-event-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--flare);
+  padding: 2px 8px;
+  border: 1px solid var(--flare);
+  border-radius: 999px;
+}
+.app-events { display: flex; flex-direction: column; gap: 10px; }
+.event-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  gap: 16px;
+  align-items: start;
+  padding: 10px 12px;
+  background: var(--bg3);
+}
+.event-time {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink4);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+.event-desc {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.event-source {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-align: right;
+  align-self: center;
+}
+.event-flagged .event-desc { color: var(--flare); }
+.app-footer {
+  border-top: 1px solid var(--border);
+  padding: 10px 12px 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink4);
+  letter-spacing: 0.1em;
+}
+
+/* Spec table */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 24px 0;
+}
+.spec-table th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  padding: 8px 16px 8px 0;
+  border-bottom: 1px solid var(--border2);
+}
+.spec-table td {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink3);
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.spec-table td:first-child { color: var(--ink2); font-weight: 700; min-width: 140px; }
+.verdict-pass { color: var(--up); }
+.verdict-cond { color: var(--warn-clr); }
+.verdict-note { color: var(--flare); }
+
+/* Tag */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.tag-pass { border-color: var(--up); color: var(--up); }
+.tag-cond { border-color: var(--warn-clr); color: var(--warn-clr); }
+.tag-a { border-color: var(--flare2); color: var(--flare2); }
+
+/* Naming compat */
+.name-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.name-card {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 12px 16px;
+  min-width: 140px;
+}
+.nc-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.nc-fit { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+.nc-fit.strong { color: var(--up); }
+.nc-fit.good { color: var(--ink3); }
+.nc-fit.weaker { color: var(--warn-clr); }
+.nc-reason { font-size: 11px; color: var(--ink4); margin-top: 4px; line-height: 1.4; }
+
+/* Callout */
+.callout {
+  background: var(--bg2);
+  border-left: 2px solid var(--flare);
+  padding: 14px 16px;
+  margin: 20px 0;
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+.callout strong { color: var(--ink); }
+.callout.ok { border-color: var(--up); }
+.callout.warn { border-color: var(--warn-clr); }
+
+/* Identity marker */
+.identity-mark {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border-radius: 999px;
+  background: var(--flare);
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+}
+
+/* Logo treatment desc */
+.logo-demo {
+  background: var(--bg1);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 40px;
+  text-align: center;
+  margin: 24px 0;
+}
+.logo-wordmark {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.logo-step {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border-radius: 999px;
+  background: var(--flare);
+}
+.logo-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-top: 12px;
+}
+
+/* Territory ID strip */
+.territory-strip {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.ts-id { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4); }
+.ts-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+.ts-gates { display: flex; gap: 8px; }
+
+/* Two-col */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+/* Dark mode note */
+.dm-note {
+  border-top: 1px solid var(--border);
+  padding: 20px 0 0;
+  font-size: 11px;
+  color: var(--ink4);
+  margin-top: 40px;
+}
+
+/* Phase marker */
+.phase-back {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink4);
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 4px 12px;
+  letter-spacing: 0.1em;
+}
+.phase-back:hover { color: var(--ink3); }
+</style>
+</head>
+<body>
+
+<header class="ta-header">
+  <div class="ta-logo">
+    <span>◦</span> Lede Professional Rebrand Gauntlet
+  </div>
+  <nav>
+    <ul class="ta-nav">
+      <li><a href="../index.html">← Phase 2 Overview</a></li>
+      <li><a href="../territory-b/index.html">Territory B</a></li>
+      <li><a href="../territory-c/index.html">Territory C</a></li>
+      <li><a href="../territory-d/index.html">Territory D</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="ta-main">
+
+  <div class="territory-strip">
+    <div>
+      <div class="ts-id">Territory A · Phase 2 Creative Direction</div>
+      <div class="ts-name">The Instrument</div>
+    </div>
+    <div class="ts-gates">
+      <span class="tag tag-pass">FM-04: Pass</span>
+      <span class="tag tag-a">Visual register: Dark precision</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <div class="ta-section">
+    <div class="ta-eyebrow">Concept</div>
+    <h1 class="ta-h1">A precision instrument<br>doesn't editorialize.<br>It <em>reads</em>.</h1>
+    <p class="ta-concept">The Instrument territory treats the professional brand as a calibrated measurement tool — the opposite of a news product. Every output is a reading: sourced, timestamped, auditable. The visual language is the readout of an oscilloscope or a flight recorder: monochromatic precision, IBM Plex Mono as the dominant face, Flare orange appearing only where something registered.</p>
+    <p class="ta-body">The consumer Lede brand lives in the editorial world — proofreader's marks, the STET stamp, the journalist's instinct. The Instrument territory borrows only the instrument metaphor (the flight recorder, the tape) and retires the editorial markers entirely. The professional context demands instrument logic: the reading either happened or it didn't; the source is either cited or the claim doesn't exist. This is an identity that would survive a compliance audit of the brand itself.</p>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="ta-section">
+    <div class="ta-h2">Color System</div>
+    <p class="ta-body" style="margin-bottom:16px;">Two roles only: surface hierarchy and one signal. Flare orange (international orange) appears at ≤2% of any surface, only where an event occurred. The full palette is token-compatible with lede-tokens.json v2.0.0 product register — a drop-in.</p>
+
+    <div class="palette-row">
+      <div class="swatch" style="background:#131210;" title="#131210 Surface primary"></div>
+      <div class="swatch" style="background:#1B1A16;" title="#1B1A16 Surface secondary"></div>
+      <div class="swatch" style="background:#242320;" title="#242320 Surface tertiary"></div>
+      <div class="swatch" style="background:#2C2B26;" title="#2C2B26 Surface hover"></div>
+      <div class="swatch" style="background:#F7F5EF;" title="#F7F5EF Text primary"></div>
+      <div class="swatch" style="background:#C6C4B6;" title="#C6C4B6 Text muted"></div>
+      <div class="swatch" style="background:#6C6A5E;" title="#6C6A5E Text disabled"></div>
+      <div class="swatch" style="background:#FF5A14;" title="#FF5A14 Flare — event signal only"></div>
+      <div class="swatch" style="background:#3FA971;" title="#3FA971 Data up"></div>
+      <div class="swatch" style="background:#E05A47;" title="#E05A47 Data down"></div>
+    </div>
+
+    <div class="spec-table" style="margin-top:8px;">
+      <table class="spec-table" style="display:table; width:100%;">
+        <tr><td style="font-size:10px; color:var(--ink4); letter-spacing:.1em; padding:4px 0;">#131210 bg-primary</td><td style="font-size:10px; color:var(--ink4); letter-spacing:.1em; padding:4px 0;">#1B1A16 bg-secondary</td><td style="font-size:10px; color:var(--ink4); letter-spacing:.1em; padding:4px 0;">#FF5A14 Flare · event signal only · ≤2%</td></tr>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Bloomberg differentiation:</strong> Bloomberg orange is interface chrome — the Terminal's navigation state, its data chrome, its control affordances. It appears at high frequency (>30% of the interface) as a brand application. Flare orange in The Instrument territory is a semantic event signal — it appears once per event detected, at the endpoint of a completed action, at a material reading. A Bloomberg user encountering this product recognizes two different uses of a similar hue. This differentiation must be made explicit in any professional context where the signal color appears: a Flare orange element is never decoration; it always documents something that happened.
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="ta-section">
+    <div class="ta-h2">Typography</div>
+    <p class="ta-body" style="margin-bottom:8px;">IBM Plex Mono is the primary face — not just the data face. In The Instrument territory, the type IS the instrument. Schibsted Grotesk used only for interface navigation and UI labels. No display serif: the Instrument Serif from the consumer brand does not appear on professional surfaces in this territory.</p>
+
+    <div class="type-spec">
+      <div class="ts-row">
+        <div class="ts-label">Display</div>
+        <div class="ts-sample">
+          <div class="ts-display">Coverage without gaps.</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--mono); letter-spacing:.1em;">IBM PLEX MONO 700 · 48/52 · LS -0.01em</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Headline</div>
+        <div class="ts-sample">
+          <div class="ts-headline">Alfa surfaces what's portfolio-material before you know to ask.</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--mono); letter-spacing:.1em;">IBM PLEX MONO 700 · 18/26</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Body</div>
+        <div class="ts-sample">
+          <div class="ts-body-s">Every monitoring signal has a source. Every synthesis is labeled. Every alert is triggered by a defined condition — not editorial judgment, not algorithmic opacity. The platform's output chain is auditable from the primary source through to your morning brief.</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--mono); letter-spacing:.1em;">IBM PLEX MONO 400 · 13/22</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Label</div>
+        <div class="ts-sample">
+          <div class="ts-caption">Pre-market briefing · 06:12 ET · 14 names monitored · 3 events flagged</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Data</div>
+        <div class="ts-sample">
+          <div class="ts-data">+2.47%  ▲  TSLA  ◦  Event detected 06:22 ET</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--mono); letter-spacing:.1em;">IBM PLEX MONO 500 · tabular-nums · Flare orange = event signal</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Font note:</strong> IBM Plex Mono and Schibsted Grotesk are specified — this HTML preview uses system monospace and system-ui as fallbacks. Phase 4 full type stack requires these faces licensed and loaded. The mono-primary approach is the key differentiator: most institutional fintech brands use a sans for primary type and mono for data only. The Instrument territory inverts this — the brand IS the readout.
+    </div>
+  </div>
+
+  <!-- APPLICATION SAMPLE -->
+  <div class="ta-section">
+    <div class="ta-h2">Application Sample — Pre-Market Intelligence Brief</div>
+    <p class="ta-body" style="margin-bottom:16px;">The same content rendered in Territory A's register. Evaluate against: does this read as credible to a CIO at 6:15 AM? Does the Flare signal communicate without decoration?</p>
+
+    <div class="app-sample">
+      <div class="app-bar">
+        <div class="app-bar-left">Alfa by Lede · Pre-market brief</div>
+        <div class="app-bar-right">Mon 03 Aug 2026 · 06:14 ET</div>
+      </div>
+      <div class="app-body">
+        <div class="app-ticker-row">
+          <div class="app-ticker">TSLA</div>
+          <div class="app-event-count">2 events</div>
+        </div>
+        <div class="app-events">
+          <div class="event-row event-flagged">
+            <div class="event-time">06:22 ET</div>
+            <div class="event-desc">10-K/A filed. Guidance language revision: "approximately" removed from FY revenue forecast. Interpretable as incremental confidence signal or as narrowing of downside protection. Source: SEC EDGAR.</div>
+            <div class="event-source">SEC EDGAR</div>
+          </div>
+          <div class="event-row">
+            <div class="event-time">05:47 ET</div>
+            <div class="event-desc">Unusual put activity: 3.2σ vs. 30-day average. Concentrated in Sep expiry. No news catalyst identified at time of detection.</div>
+            <div class="event-source">CBOE</div>
+          </div>
+        </div>
+        <div class="app-footer" style="margin-top:16px; padding-top:10px;">
+          Material fact (cited primary source) · AI-generated synthesis (labeled) · Monitored alert (triggered by defined conditions) — Coverage: 47/47 names · Sources verified
+        </div>
+      </div>
+    </div>
+
+    <p class="ta-body">The brief renders in near-black (#131210 base). The 10-K/A event triggers Flare orange text — this is the only non-neutral color on the surface. The output classification taxonomy (material fact / AI synthesis / monitored alert) appears verbatim as the footer — compliance-legible by design. No decorative elements, no charts, no gradients. The instrument read the market. Here is what it found.</p>
+  </div>
+
+  <!-- LOGOMARK -->
+  <div class="ta-section">
+    <div class="ta-h2">Logomark Direction</div>
+    <p class="ta-body" style="margin-bottom:16px;">The Step logomark (the node from the Instrument Line, v2.0.0) is recontextualized as a precision readout endpoint — not an editorial proofreader's mark, but the terminus of a signal: the moment a measurement completes. The wordmark is IBM Plex Mono Bold. The endorsement reads "by Lede" in IBM Plex Mono Regular at 60% scale.</p>
+
+    <div class="logo-demo">
+      <div class="logo-wordmark">
+        [Name]
+        <span class="logo-step"></span>
+        by Lede
+      </div>
+      <div class="logo-sub">The orange circle is the Step logomark — event endpoint, not decoration</div>
+    </div>
+
+    <div class="callout">
+      <strong>Step at 16px on partner colors:</strong> The Step (Flare orange circle) must survive grayscale rendering at 16px for Powered-tier co-branding. In monochrome, the orange renders as a mid-gray circle — readable as a distinct element against both light and dark partner brand backgrounds. The geometric simplicity (pure circle) ensures it holds at small scale. Phase 2 specification includes: 16px minimum, 24px preferred, 1px clearspace minimum on all sides. A grayscale knockdown variant (Step in #C6C4B6) is available for contexts where orange is prohibited by partner brand standards.
+    </div>
+  </div>
+
+  <!-- TECHNICAL SPEC -->
+  <div class="ta-section">
+    <div class="ta-h2">Technical Specification</div>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Register</td>
+          <td>Dark product register only. No light-register variant in Territory A — the instrument does not change color based on ambient light. Light-mode accessibility must be confirmed in Phase 4 if a light version is required for print or partner contexts.</td>
+        </tr>
+        <tr>
+          <td>Primary type</td>
+          <td>IBM Plex Mono (400, 500, 700). Schibsted Grotesk for navigation and UI labels only. No display serif anywhere in the professional system.</td>
+        </tr>
+        <tr>
+          <td>Signal color</td>
+          <td>Flare orange (#FF5A14 product register) at ≤2% of any surface. Event-triggered only — never decorative. Brand-text variant (#FF7A42) for small-type legibility on dark backgrounds per token spec.</td>
+        </tr>
+        <tr>
+          <td>Motion</td>
+          <td>The tape: numbers tick left-to-right on update. Lines draw left-to-right 550ms, node appears 200ms at terminus. Once per event — never looping in product context. Ambient line permitted on brand surfaces only. prefers-reduced-motion renders final state directly.</td>
+        </tr>
+        <tr>
+          <td>Buttons</td>
+          <td>Pill geometry (border-radius: 999px). IBM Plex Mono. Primary: Flare orange background, #131210 text — used sparingly per signal color rule. Secondary: bg3 background, ink3 text. Ghost: transparent, border2, ink3 text.</td>
+        </tr>
+        <tr>
+          <td>Surface elevation</td>
+          <td>bg0 → bg1 → bg2 → bg3. No drop shadows. No card borders. Elevation communicated by surface-color step only. All four values must be visually distinct at normal viewing distance.</td>
+        </tr>
+        <tr>
+          <td>WCAG 2.2 AA</td>
+          <td>ink (#F7F5EF) on bg0 (#131210): contrast ratio 17.5:1 — passes AAA. ink3 (#C6C4B6) on bg0: ratio 8.9:1 — passes AA large text, passes AA normal text. ink4 (#6C6A5E) on bg0: ratio 3.6:1 — passes AA large text only; use only for decorative labels ≥18px or bold ≥14px. All data values use ink2 minimum on product surfaces.</td>
+        </tr>
+        <tr>
+          <td>Numeric display</td>
+          <td>font-variant-numeric: tabular-nums on all ticker, percentage, and timestamp values. IBM Plex Mono 500 for positive data reads, 400 for neutral, unchanged value display. Flare orange for flagged readings only.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FM-04 -->
+  <div class="ta-section">
+    <div class="ta-h2">FM-04 Resolution — Editorial Identity Institutional Compatibility</div>
+
+    <div class="callout ok">
+      <strong class="verdict-pass">VERDICT: PASS</strong> — The Instrument territory requires no adaptation for institutional contexts because it was built for them. The editorial markers from the consumer Lede identity (the STET stamp, the proofreader's mark, the broadsheet column aesthetic) are fully retired. The instrument metaphor — precision measurement, calibrated output, documented readings — is the native language of institutional due diligence. A bank procurement portal, a compliance audit, an LP data room: The Instrument reads identically in all of them.
+    </div>
+
+    <p class="ta-body">FM-04 risk profile: the Instrument territory has no editorial residue that could misread as news product in a professional context. The CTO who reads Stripe's API documentation sees a visual register they recognize. The CCO who reviews an audit log finds the same mono typography in the interface as in the compliance report — this is not an accident; it is the argument that the output and the audit trail are one system.</p>
+
+    <p class="ta-body" style="margin-top:12px;">The Phase 4 test required by FM-04 (bank procurement portal simulation) is the confirmation step — not an exploratory test. This territory's FM-04 verdict is high-confidence.</p>
+  </div>
+
+  <!-- NAMING COMPATIBILITY -->
+  <div class="ta-section">
+    <div class="ta-h2">Naming Compatibility</div>
+    <p class="ta-body" style="margin-bottom:16px;">Each Phase 2 naming finalist evaluated against Territory A's visual register. Do the lockups work? Does the name fit the instrument metaphor?</p>
+
+    <div class="name-row">
+      <div class="name-card">
+        <div class="nc-name">Standfirst</div>
+        <div class="nc-fit strong">Strong fit</div>
+        <div class="nc-reason">Journalism's precision distillation metaphor. "Standfirst by Lede" in IBM Plex Mono Bold — the word carries institutional weight. The lockup reads: the point before the detail.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bellwether</div>
+        <div class="nc-fit good">Good fit</div>
+        <div class="nc-reason">Finance-native signal term. The Instrument readout IS a bellwether reading. "Bellwether by Lede" — three syllables read clearly in mono. The animal origin is invisible in professional context.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bearing</div>
+        <div class="nc-fit strong">Strong fit</div>
+        <div class="nc-reason">Navigation instrument term. "Take a bearing" is the instrument's primary action. "Bearing by Lede" in mono — short, clean, directional. The instrument takes bearings. This name arrives at the metaphor directly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRELIMINARY NOTES FOR PHASE 3 -->
+  <div class="ta-section">
+    <div class="ta-h2">Notes for Phase 3 Evaluator</div>
+    <p class="ta-body" style="margin-bottom:12px;">These are observations, not self-advocacy. The Phase 3 evaluator should test these claims independently.</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Observation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Risk</td>
+          <td>The all-mono aesthetic is unconventional for professional brand marketing. It will read immediately as "technical" — which is correct for the CTO and CCO audiences, and more challenging for the PM audience ("Alfa surfaces your portfolio-material") where emotional resonance matters. The territory's coldness is also its distinctiveness — this is a judgment call about the positioning.</td>
+        </tr>
+        <tr>
+          <td>Distinctiveness</td>
+          <td>No major institutional financial brand uses IBM Plex Mono as its primary face (as of August 2026). The territory is visually differentiated from all six named competitors in the Phase 1 competitive table.</td>
+        </tr>
+        <tr>
+          <td>Relationship to consumer Lede</td>
+          <td>Minimal visual continuity with the consumer brand — the Flare orange signal and the Step are the only shared elements. This is intentional (endorsed house, not visual house), but brand team and agency partners should confirm this level of visual separation is the intended relationship.</td>
+        </tr>
+        <tr>
+          <td>Partner co-branding</td>
+          <td>The mono-primary aesthetic co-brands cleanly with most institutional partner brands — it doesn't compete for display attention. Phase 7 co-presence scenarios are well-served by a typographically minimal base.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dm-note">
+    Territory A — The Instrument · Phase 2 · Lede Professional Rebrand Gauntlet · Aug 3, 2026
+    <span style="float:right;">This document is a creative territory proposal, not a final identity system. Phase 4 executes the selected territory.</span>
+  </div>
+
+</main>
+
+</body>
+</html>

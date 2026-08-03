@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territory B: The Record — Phase 2 Creative Territory</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Territory B token system — archival / provenance */
+:root {
+  --bg0: #F4F2E8;
+  --bg1: #EDE9DA;
+  --bg2: #E4E0CE;
+  --bg3: #D8D3BE;
+  --bg-overlay: #EFECE0;
+  --ink: #13110C;
+  --ink2: #292519;
+  --ink3: #524E41;
+  --ink4: #8A8574;
+  --navy: #1A3158;
+  --navy-l: #2A4E7A;
+  --navy-rule: rgba(26,49,88,0.15);
+  --navy-bg: rgba(26,49,88,0.06);
+  --flare: #FF4B00;
+  --up: #1E7D4F;
+  --down: #C33B2E;
+  --warn-clr: #B07C1E;
+  --rule: #D5D0BD;
+  --rule2: #C2BB9E;
+  --mono: "Courier New", "Courier", monospace;
+  --sans: system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --serif: Georgia, "Times New Roman", "Palatino Linotype", serif;
+}
+
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Navigation header — restrained, document-like */
+.tb-header {
+  background: var(--bg1);
+  border-bottom: 2px solid var(--navy);
+  padding: 0 40px;
+  display: flex;
+  align-items: stretch;
+  height: 48px;
+  gap: 0;
+}
+.tb-logo {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-right: 32px;
+  border-right: 1px solid var(--rule2);
+}
+.tb-nav {
+  display: flex;
+  list-style: none;
+  margin-left: auto;
+  gap: 0;
+}
+.tb-nav li a {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  border-left: 1px solid var(--rule);
+}
+.tb-nav li a:hover { color: var(--navy); background: var(--navy-bg); }
+
+/* Main */
+.tb-main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 64px 40px 80px;
+}
+
+/* Document filing strip */
+.filing-strip {
+  border: 1px solid var(--navy-rule);
+  border-left: 4px solid var(--navy);
+  background: var(--navy-bg);
+  padding: 14px 20px;
+  margin-bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.fs-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+}
+.fs-title {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-top: 2px;
+}
+.fs-tags { display: flex; gap: 8px; }
+.fs-tag {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  padding: 2px 10px;
+  color: var(--navy);
+}
+.fs-tag.ok { border-color: var(--up); color: var(--up); }
+
+/* Sections */
+.tb-section {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule2);
+}
+.tb-section:first-child { border-top: none; padding-top: 0; }
+
+/* Typography hierarchy */
+.tb-eyebrow {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.tb-h1 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 24px;
+  max-width: 580px;
+  text-wrap: balance;
+}
+.tb-h1 em { color: var(--navy); font-style: italic; }
+.tb-h2 {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--rule2);
+  padding-bottom: 8px;
+}
+.tb-concept {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink2);
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+.tb-body {
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink3);
+  max-width: 560px;
+}
+
+/* Palette */
+.palette-row {
+  display: flex;
+  gap: 2px;
+  margin: 24px 0;
+  height: 36px;
+  overflow: hidden;
+}
+.swatch { flex: 1; }
+
+/* Type specimen */
+.type-spec {
+  background: var(--bg1);
+  border: 1px solid var(--rule2);
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.ts-row {
+  border-bottom: 1px solid var(--rule);
+  padding: 16px 0;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: baseline;
+}
+.ts-row:last-child { border-bottom: none; }
+.ts-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  align-self: start;
+  padding-top: 4px;
+}
+.ts-display { font-family: var(--serif); font-size: 38px; font-weight: 400; line-height: 1.1; color: var(--ink); }
+.ts-headline { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); line-height: 1.4; }
+.ts-body-s { font-family: var(--serif); font-size: 14px; color: var(--ink3); line-height: 1.7; }
+.ts-caption { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); }
+.ts-mono { font-family: var(--mono); font-size: 12px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+
+/* Application sample: coverage brief */
+.app-sample {
+  background: #FDFCF6;
+  border: 1px solid var(--rule2);
+  border-top: 3px solid var(--navy);
+  margin: 24px 0;
+}
+.app-doc-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--rule2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+.adh-filing {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.adh-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.adh-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink4);
+  line-height: 1.8;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.app-doc-body { padding: 20px 28px; }
+.finding-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.finding-row:last-child { border-bottom: none; }
+.finding-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+.finding-body {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+.finding-body strong { color: var(--ink); font-weight: 700; }
+.finding-source {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink4);
+  text-align: right;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.app-doc-footer {
+  padding: 12px 28px;
+  background: var(--bg1);
+  border-top: 1px solid var(--rule2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.adf-left {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--ink4);
+}
+.adf-right {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+/* Spec table */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 20px 0;
+}
+.spec-table th {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-align: left;
+  padding: 8px 16px 8px 0;
+  border-bottom: 1px solid var(--rule2);
+  font-weight: 700;
+}
+.spec-table td {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink3);
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.65;
+}
+.spec-table td:first-child { color: var(--ink2); font-family: var(--sans); font-size: 11px; letter-spacing: 0.06em; font-weight: 700; text-transform: uppercase; min-width: 140px; }
+.verdict-pass { color: var(--up); }
+
+/* Callout */
+.callout {
+  border-left: 3px solid var(--navy-rule);
+  background: var(--navy-bg);
+  padding: 14px 20px;
+  margin: 20px 0;
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+.callout strong { color: var(--ink); }
+.callout.ok { border-left-color: var(--up); background: rgba(30,125,79,0.04); }
+
+/* Logo demo */
+.logo-demo {
+  background: var(--bg1);
+  border: 1px solid var(--rule2);
+  padding: 40px;
+  text-align: center;
+  margin: 24px 0;
+}
+.logo-wordmark {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.logo-wordmark-serif {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.logo-rule {
+  width: 120px;
+  height: 1px;
+  background: var(--navy);
+  margin: 8px auto 8px;
+}
+.logo-sub {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink4);
+}
+
+/* Name cards */
+.name-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.name-card {
+  background: var(--bg1);
+  border: 1px solid var(--rule2);
+  padding: 14px 18px;
+  min-width: 150px;
+}
+.nc-name { font-family: var(--serif); font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+.nc-fit { font-family: var(--sans); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; }
+.nc-fit.strong { color: var(--up); }
+.nc-fit.good { color: var(--ink4); }
+.nc-fit.weaker { color: var(--warn-clr); }
+.nc-reason { font-family: var(--serif); font-size: 12px; color: var(--ink4); margin-top: 6px; line-height: 1.5; }
+
+.dm-note {
+  border-top: 1px solid var(--rule2);
+  padding: 20px 0 0;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--ink4);
+  letter-spacing: 0.06em;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<header class="tb-header">
+  <div class="tb-logo">Lede Professional Rebrand Gauntlet</div>
+  <nav>
+    <ul class="tb-nav">
+      <li><a href="../index.html">← Phase 2 Overview</a></li>
+      <li><a href="../territory-a/index.html">Territory A</a></li>
+      <li><a href="../territory-c/index.html">Territory C</a></li>
+      <li><a href="../territory-d/index.html">Territory D</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="tb-main">
+
+  <div class="filing-strip">
+    <div>
+      <div class="fs-label">Territory B · Phase 2 Creative Direction</div>
+      <div class="fs-title">The Record</div>
+    </div>
+    <div class="fs-tags">
+      <span class="fs-tag ok">FM-04: Pass</span>
+      <span class="fs-tag">Visual register: Light provenance</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <div class="tb-section">
+    <div class="tb-eyebrow">Concept</div>
+    <h1 class="tb-h1">Every reading has a provenance.<br><em>The record proves it.</em></h1>
+    <p class="tb-concept">The Record treats the professional brand as institutional documentation — not a product, not a platform, but a body of evidence. The visual language is the official document: warm paper ground, Newsreader body type, compressed sans headings, navy rule. Every output looks like something a compliance officer would sign. Because it is.</p>
+    <p class="tb-body">The boldest claim in the Phase 1 positioning is "verifiable by design." The Record territory makes that claim the visual argument: if the brand looks like an auditable document, it is making the trust case before the copy begins. The aesthetic is deliberately counter-intuitive for a technology brand — closer to a legal brief than a product landing page — which is exactly why it differentiates. Institutional buyers recognize the document register as credible. No competitor occupies it.</p>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="tb-section">
+    <div class="tb-h2">Color System</div>
+    <p class="tb-body" style="margin-bottom:16px;">Brand register (light). The primary hue is warm paper — not white, not gray, but the specific off-white of an archival document. Navy as the single structural accent. Flare orange retired from the brand register; it appears only in product UI (data signals) and is not used as a brand color in the document aesthetic.</p>
+
+    <div class="palette-row">
+      <div class="swatch" style="background:#F4F2E8;" title="#F4F2E8 Surface primary — warm paper"></div>
+      <div class="swatch" style="background:#EDE9DA;" title="#EDE9DA Surface secondary"></div>
+      <div class="swatch" style="background:#E4E0CE;" title="#E4E0CE Surface tertiary"></div>
+      <div class="swatch" style="background:#D8D3BE;" title="#D8D3BE Surface hover"></div>
+      <div class="swatch" style="background:#13110C;" title="#13110C Text primary"></div>
+      <div class="swatch" style="background:#524E41;" title="#524E41 Text muted"></div>
+      <div class="swatch" style="background:#8A8574;" title="#8A8574 Text disabled"></div>
+      <div class="swatch" style="background:#1A3158;" title="#1A3158 Navy — structural accent"></div>
+      <div class="swatch" style="background:#1E7D4F;" title="#1E7D4F Data up"></div>
+      <div class="swatch" style="background:#C33B2E;" title="#C33B2E Data down"></div>
+    </div>
+
+    <div class="callout">
+      <strong>Bloomberg differentiation:</strong> Bloomberg Terminal is a dark interface — the near-black with amber/orange chrome is the institutional terminal aesthetic. The Record territory occupies the opposite register: light, archival, document-like. A Bloomberg Terminal printout and a brief generated by The Record territory are visually distinct from 15 feet. The brand does not compete in the terminal's visual register — it competes in the filing cabinet. This is a fundamental register difference, not a hue difference.
+    </div>
+
+    <div class="callout">
+      <strong>Flare orange in The Record:</strong> Flare orange does not appear as a brand color in this territory. It is reserved for product UI (data event signals in the dark product register). On brand-register surfaces (marketing, documents, presentations), the structural color is navy. This is the most conservative interpretation of the Phase 1 color constraint — appearance-earned orange means zero appearances on static brand documents.
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="tb-section">
+    <div class="tb-h2">Typography</div>
+    <p class="tb-body" style="margin-bottom:8px;">Newsreader is the primary body face — a reading-optimized serif designed for long-form comprehension. Compressed Schibsted Grotesk (Bold, All-Caps, tracked) for structural headings and section labels. IBM Plex Mono for all data values. The combination reads as: a document that was designed to be read carefully, not skimmed.</p>
+
+    <div class="type-spec">
+      <div class="ts-row">
+        <div class="ts-label">Display</div>
+        <div class="ts-sample">
+          <div class="ts-display">The record proves it.</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--sans); letter-spacing:.1em; text-transform:uppercase;">Newsreader 400 · 38/44 · intended: Newsreader (Instrument Serif alternate)</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Heading</div>
+        <div class="ts-sample">
+          <div class="ts-headline">Coverage Without Gaps — Pre-Market Intelligence Brief</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--sans); letter-spacing:.1em; text-transform:uppercase;">Schibsted Grotesk 700 · compressed · 13/18 · all-caps · tracked</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Body</div>
+        <div class="ts-sample">
+          <div class="ts-body-s">The filing cites three primary sources, each linked. The synthesis is labeled. The monitoring condition that triggered this alert is documented. You are reading a record of what the platform found — not a recommendation, not an inference, not a summary of a summary.</div>
+          <div style="font-size:10px; color:var(--ink4); margin-top:4px; font-family:var(--sans); letter-spacing:.1em; text-transform:uppercase;">Newsreader 400 · 14/23</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Caption</div>
+        <div class="ts-sample">
+          <div class="ts-caption">Filing ref.: PRE-2026-08-03-TSLA · Coverage: 47/47 names monitored · Generated 06:14 ET</div>
+        </div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-label">Data</div>
+        <div class="ts-sample">
+          <div class="ts-mono" style="color:var(--navy);">2 material events · Guid. language shift (10-K/A, SEC EDGAR) · Vol. anomaly (CBOE, 3.2σ)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Font note:</strong> Newsreader and Schibsted Grotesk are specified; this preview uses Georgia serif and system-ui as fallbacks. IBM Plex Mono is correct in this preview (system mono). Phase 4 full type execution requires Newsreader licensed (Google Fonts, SIL Open Font License — free) and Schibsted Grotesk licensed (Google Fonts, SIL Open Font License — free). No custom font license required.
+    </div>
+  </div>
+
+  <!-- APPLICATION -->
+  <div class="tb-section">
+    <div class="tb-h2">Application Sample — Intelligence Filing</div>
+    <p class="tb-body" style="margin-bottom:16px;">The same pre-market brief content rendered in Territory B. The document reads like a regulatory filing — structured, sourced, stamped. Evaluate: does this read as credible to a CCO? Does the document aesthetic communicate trust before the copy is read?</p>
+
+    <div class="app-sample">
+      <div class="app-doc-header">
+        <div>
+          <div class="adh-filing">Intelligence Filing · Pre-Market Brief</div>
+          <div class="adh-title">TSLA — Material Events<br>Detected Since Last Close</div>
+        </div>
+        <div class="adh-meta">
+          Filing ref. PRE-2026-08-03-0014<br>
+          Generated: 06:14 ET Mon 03 Aug 2026<br>
+          Coverage universe: 47/47 names<br>
+          Events this brief: 2<br>
+          Classification: Portfolio-material
+        </div>
+      </div>
+      <div class="app-doc-body">
+        <div class="finding-row">
+          <div class="finding-num">01</div>
+          <div class="finding-body">
+            <strong>10-K/A filed — Guidance language revision.</strong> The phrase "approximately" has been removed from the FY revenue forecast in Tesla's amended annual report. This is a material change in forward guidance framing — interpretable as a narrowing of downside protection or incremental management confidence. This is a monitored condition, not editorial judgment.
+          </div>
+          <div class="finding-source">SEC EDGAR<br>06:22 ET</div>
+        </div>
+        <div class="finding-row">
+          <div class="finding-num">02</div>
+          <div class="finding-body">
+            <strong>Unusual options activity — 3.2σ put volume.</strong> Put volume is 3.2 standard deviations above the 30-day average, concentrated in the September expiry. No news catalyst identified at time of detection. Flagged per monitoring condition: options anomaly threshold &gt;2.5σ.
+          </div>
+          <div class="finding-source">CBOE<br>05:47 ET</div>
+        </div>
+      </div>
+      <div class="app-doc-footer">
+        <div class="adf-left">Material fact (cited primary source) · AI-generated synthesis (labeled) · Monitored alert (triggered by defined conditions)</div>
+        <div class="adf-right">Alfa by Lede</div>
+      </div>
+    </div>
+
+    <p class="tb-body">The document reads as a filing, not a feed. The serial number and timestamp in the header communicate that every brief is an official record — archived, retrievable, auditable. The output classification taxonomy appears verbatim in the footer. The visual language argues the trust claim before the user reads a word.</p>
+  </div>
+
+  <!-- LOGOMARK -->
+  <div class="tb-section">
+    <div class="tb-h2">Logomark Direction</div>
+    <p class="tb-body" style="margin-bottom:16px;">The Step logomark is recontextualized as a document section mark — the break between entries in an official record, the pagination node in a legal brief. The wordmark uses a serif baseline with a compressed sans endorsement line. The lockup is deliberately document-like: not a startup bug, a filing stamp.</p>
+
+    <div class="logo-demo">
+      <div class="logo-wordmark">[Name]</div>
+      <div class="logo-rule"></div>
+      <div class="logo-wordmark" style="font-size:9px; letter-spacing:0.28em;">by Lede · Professional Intelligence</div>
+      <div class="logo-sub" style="margin-top:16px;">Wordmark: Schibsted Grotesk 700 All-Caps · Rule: 1px navy · Endorsement: Schibsted Grotesk 400</div>
+    </div>
+
+    <div class="callout">
+      <strong>Step at 16px on partner colors:</strong> In Territory B, the Step appears as a section break mark — a short horizontal rule with a mid-point node — rather than as a standalone circle. At 16px, this renders as a hairline rule with a circular terminus. On light partner brand backgrounds, the navy-colored Step (recolored for the light register) is legible. Phase 7 co-branding specification includes navy → partner-brand-neutral recolorings, and a simplified pure-circle version for contexts requiring a pure icon.
+    </div>
+  </div>
+
+  <!-- TECHNICAL SPEC -->
+  <div class="tb-section">
+    <div class="tb-h2">Technical Specification</div>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Register</td>
+          <td>Light brand register. A dark product register (for UI contexts) uses the existing lede-tokens.json product register values. The brand document aesthetic is light only — this territory does not produce a dark brand variant.</td>
+        </tr>
+        <tr>
+          <td>Primary type</td>
+          <td>Newsreader 400 for body and display. Schibsted Grotesk 700 All-Caps for structural headings and section labels. IBM Plex Mono 400/500 for all data, timestamps, and filing references. No Instrument Serif — this territory uses Newsreader as its primary serif, which is already in the token system as the reading face for long-form content.</td>
+        </tr>
+        <tr>
+          <td>Signal color</td>
+          <td>Flare orange (#FF4B00 brand register) appears only in the product UI dark register — not on brand document surfaces. Navy (#1A3158) is the structural accent on all brand surfaces. Data-up (#1E7D4F) and data-down (#C33B2E) are used in the product register for data signals only.</td>
+        </tr>
+        <tr>
+          <td>Motion</td>
+          <td>Minimal. Documents are still. The only motion is document transition (a page turn or a slide in). No ambient animation on brand surfaces. Product UI inherits the Instrument Line motion spec (tape tick, line draw, node pop) — brand documents do not animate.</td>
+        </tr>
+        <tr>
+          <td>Buttons</td>
+          <td>Pill geometry (border-radius: 999px). Schibsted Grotesk All-Caps tracking. Primary: navy background, warm-paper text. Secondary: border-only, navy border, navy text. Both on warm-paper ground only.</td>
+        </tr>
+        <tr>
+          <td>Surface elevation</td>
+          <td>bg0 (#F4F2E8) → bg1 (#EDE9DA) → bg2 (#E4E0CE) → bg3 (#D8D3BE). No drop shadows. No card borders. Elevation by surface-color step. The warm-paper spectrum communicates document stratigraphy — each level is a layer of the filing.</td>
+        </tr>
+        <tr>
+          <td>WCAG 2.2 AA</td>
+          <td>Ink (#13110C) on bg0 (#F4F2E8): ratio 17.1:1 — passes AAA. ink3 (#524E41) on bg0: ratio 7.4:1 — passes AA. Navy (#1A3158) on bg0: ratio 9.2:1 — passes AA. All body text passes AA. ink4 (#8A8574) on bg0: ratio 3.7:1 — passes AA large text; use only for captions ≥18px or bold ≥14px.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FM-04 -->
+  <div class="tb-section">
+    <div class="tb-h2">FM-04 Resolution — Editorial Identity Institutional Compatibility</div>
+
+    <div class="callout ok">
+      <strong class="verdict-pass">VERDICT: PASS (highest confidence of any territory)</strong> — The Record territory has no editorial identity at all. It is a document identity — closer to a law firm's filing system than to a newsroom. The Instrument Serif, the STET stamp, the broadsheet column aesthetic from the consumer Lede brand are entirely absent. The brand register that procurement committees, compliance officers, and legal teams encounter is warm paper with navy structure — the native visual language of institutional documentation. There is no FM-04 risk to test; the territory was designed from the institutional document outward, not from the consumer brand inward.
+    </div>
+
+    <p class="tb-body">The Phase 4 FM-04 test for this territory is a formality. A bank procurement portal simulation will confirm what the visual logic already argues: a brand that looks like a regulatory filing does not need to "adapt" to the institutional context. It already lives there.</p>
+  </div>
+
+  <!-- NAMING COMPATIBILITY -->
+  <div class="tb-section">
+    <div class="tb-h2">Naming Compatibility</div>
+    <p class="tb-body" style="margin-bottom:16px;">The Record's naming requires a word that sounds right in an official document header — the kind of word that precedes a filing number.</p>
+
+    <div class="name-row">
+      <div class="name-card">
+        <div class="nc-name">Standfirst</div>
+        <div class="nc-fit strong">Strongest fit</div>
+        <div class="nc-reason">The journalism term for the paragraph that precedes the story and captures its essence. In document form: the standfirst is the précis that precedes the record. "Standfirst by Lede" in Schibsted Grotesk All-Caps reads as a filing header. The word feels institutional in this register.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bearing</div>
+        <div class="nc-fit strong">Strong fit</div>
+        <div class="nc-reason">Navigation's term for documented orientation — "get your bearing" = "read the record." In a document, a bearing is a finding. "Bearing by Lede" in the document header reads clearly and professionally.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bellwether</div>
+        <div class="nc-fit good">Good fit</div>
+        <div class="nc-reason">Finance-native; fits the institutional register. "Bellwether by Lede" in the filing header is plausible but slightly informal for this aesthetic — the word suggests a market signal, not a document. Works; not the strongest pairing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES FOR PHASE 3 -->
+  <div class="tb-section">
+    <div class="tb-h2">Notes for Phase 3 Evaluator</div>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Observation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Risk</td>
+          <td>The document aesthetic may test as "boring" with PM and CTO audiences, who are accustomed to product-led brand aesthetics. A compliance officer will love this territory; an analyst may find it cold. This is a tradeoff between institutional credibility (highest in this territory) and product excitement (lowest in this territory).</td>
+        </tr>
+        <tr>
+          <td>Distinctiveness</td>
+          <td>No major institutional fintech brand uses a warm-paper document aesthetic as its brand register (as of August 2026). FactSet and Bloomberg are both dark or neutral. Morningstar uses color blocks. The Record territory occupies an unoccupied visual position — the risk is whether "unoccupied" means "distinctive" or "avoided for good reason."</td>
+        </tr>
+        <tr>
+          <td>Relationship to consumer Lede</td>
+          <td>Moderate visual separation. The warm-paper ground shares palette DNA with the consumer brand's brand register (#F7F5EF / #EFECE2), but the architectural treatment is completely different. Newsreader as the body face is in the consumer token system (already licensed as a reading face). There is more continuity here than in Territory A — this may or may not be desirable depending on the Phase 4 architecture decision.</td>
+        </tr>
+        <tr>
+          <td>Marketing surfaces</td>
+          <td>The document aesthetic on a conference-room screen, a Bloomberg ad unit, or a LinkedIn carousel is distinctive and unusual. The risk is whether it reads as "premium" or "stodgy." Phase 4 should test this territory on those specific surfaces before final selection.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dm-note">
+    <span>Territory B — The Record · Phase 2 · Lede Professional Rebrand Gauntlet · Aug 3, 2026</span>
+    <span>This document is a creative territory proposal, not a final identity system. Phase 4 executes the selected territory.</span>
+  </div>
+
+</main>
+</body>
+</html>

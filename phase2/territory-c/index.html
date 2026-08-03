@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territory C: Coverage Matrix — Phase 2 Creative Territory</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Territory C — systematic / quantitative / grid */
+:root {
+  --bg0: #0C0D10;
+  --bg1: #131419;
+  --bg2: #1A1C23;
+  --bg3: #23252E;
+  --bg4: #2D3040;
+  --ink: #E8EBF5;
+  --ink2: #C8CDE0;
+  --ink3: #8C91AB;
+  --ink4: #525875;
+  --blue: #2A4E92;
+  --blue-l: #4472C9;
+  --blue-bg: rgba(42,78,146,0.12);
+  --blue-border: rgba(42,78,146,0.30);
+  --flare: #FF5A14;
+  --flare2: #FF7A42;
+  --up: #3FA971;
+  --down: #E05A47;
+  --warn-clr: #E2A93B;
+  --gap-clr: rgba(224,90,71,0.25);
+  --covered-clr: rgba(63,169,113,0.15);
+  --flagged-clr: rgba(255,90,20,0.20);
+  --mono: "Courier New", "Courier", monospace;
+  --sans: system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --grid-size: 28px;
+}
+
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header — grid-aligned */
+.tc-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--blue-border);
+  padding: 0 40px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.tc-logo {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-right: auto;
+}
+.tc-logo span { color: var(--blue-l); }
+.tc-nav { display: flex; gap: 0; }
+.tc-nav a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-decoration: none;
+  padding: 0 20px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--blue-border);
+}
+.tc-nav a:hover { color: var(--blue-l); background: var(--blue-bg); }
+
+/* Main */
+.tc-main {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+/* Territory ID */
+.territory-strip {
+  background: var(--bg1);
+  border: 1px solid var(--blue-border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 56px;
+}
+.ts-id { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4); margin-bottom: 4px; }
+.ts-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+.ts-tags { display: flex; gap: 8px; }
+.tag {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+.tag-pass { border-color: var(--up); color: var(--up); }
+.tag-c { border-color: var(--blue-l); color: var(--blue-l); }
+
+/* Sections */
+.tc-section { padding: 56px 0; border-top: 1px solid var(--blue-border); }
+.tc-section:first-child { border-top: none; padding-top: 0; }
+
+/* Typography */
+.tc-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-l); margin-bottom: 12px; }
+.tc-h1 {
+  font-family: var(--mono);
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  max-width: 580px;
+}
+.tc-h1 em { color: var(--blue-l); font-style: normal; }
+.tc-h2 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--blue-l);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--blue-border);
+  padding-bottom: 8px;
+}
+.tc-concept { font-size: 16px; line-height: 1.65; color: var(--ink2); max-width: 600px; margin-bottom: 20px; }
+.tc-body { font-size: 12px; line-height: 1.75; color: var(--ink3); max-width: 560px; }
+
+/* Coverage grid visual */
+.coverage-grid {
+  margin: 32px 0;
+  overflow-x: auto;
+}
+.cg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.cg-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); }
+.cg-legend { display: flex; gap: 16px; }
+.cg-leg-item { display: flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4); }
+.cg-dot { width: 8px; height: 8px; border-radius: 999px; }
+.grid-wrap {
+  display: grid;
+  grid-template-columns: 80px repeat(12, var(--grid-size));
+  gap: 2px;
+}
+.grid-row-label {
+  font-size: 10px;
+  color: var(--ink4);
+  display: flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+}
+.grid-cell {
+  width: var(--grid-size);
+  height: var(--grid-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  letter-spacing: 0.06em;
+}
+.gc-covered { background: var(--covered-clr); border: 1px solid rgba(63,169,113,0.3); color: var(--up); }
+.gc-flagged { background: var(--flagged-clr); border: 1px solid rgba(255,90,20,0.4); color: var(--flare); }
+.gc-gap { background: var(--gap-clr); border: 1px solid rgba(224,90,71,0.4); color: var(--down); }
+.gc-empty { background: var(--bg2); border: 1px solid var(--bg3); color: var(--bg4); }
+.grid-col-headers {
+  display: grid;
+  grid-template-columns: 80px repeat(12, var(--grid-size));
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.gch { font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink4); text-align: center; }
+
+/* Palette */
+.palette-row { display: flex; gap: 2px; margin: 24px 0; height: 36px; overflow: hidden; }
+.swatch { flex: 1; }
+
+/* Type spec */
+.type-spec {
+  background: var(--bg1);
+  border: 1px solid var(--blue-border);
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+.ts-row {
+  border-bottom: 1px solid var(--bg3);
+  padding: 14px 0;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: baseline;
+}
+.ts-row:last-child { border-bottom: none; }
+.ts-row-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); align-self: start; padding-top: 3px; }
+.ts-display { font-family: var(--mono); font-size: 36px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+.ts-headline { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--blue-l); letter-spacing: 0.04em; text-transform: uppercase; }
+.ts-body-s { font-family: var(--mono); font-size: 12px; color: var(--ink3); line-height: 1.65; }
+.ts-data-row { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--ink2); }
+.ts-data-row .flagged { color: var(--flare); }
+.ts-data-row .covered { color: var(--up); }
+.ts-data-row .gap { color: var(--down); }
+
+/* App sample: coverage dashboard */
+.app-sample {
+  background: var(--bg1);
+  border: 1px solid var(--blue-border);
+  overflow: hidden;
+  margin: 24px 0;
+}
+.app-topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--blue-border);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.atb-l { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); }
+.atb-r { font-size: 11px; color: var(--ink4); font-variant-numeric: tabular-nums; }
+.app-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--blue-border);
+}
+.stat-cell {
+  padding: 16px 20px;
+  border-right: 1px solid var(--blue-border);
+}
+.stat-cell:last-child { border-right: none; }
+.sc-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); margin-bottom: 4px; }
+.sc-value { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+.sc-value.flagged { color: var(--flare); }
+.sc-value.up { color: var(--up); }
+.app-events-grid { padding: 16px 20px; }
+.event-grid-row {
+  display: grid;
+  grid-template-columns: 44px 80px 1fr 80px 72px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg3);
+  font-size: 11px;
+}
+.event-grid-row:last-child { border-bottom: none; }
+.eg-status { width: 6px; height: 6px; border-radius: 999px; margin: 0 auto; }
+.eg-status.flagged { background: var(--flare); }
+.eg-status.covered { background: var(--up); }
+.eg-ticker { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.eg-desc { color: var(--ink3); }
+.eg-time { color: var(--ink4); font-variant-numeric: tabular-nums; text-align: right; }
+.eg-source { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink4); text-align: right; }
+
+/* Spec table */
+.spec-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 20px 0; }
+.spec-table th {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-l);
+  text-align: left;
+  padding: 8px 16px 8px 0;
+  border-bottom: 1px solid var(--blue-border);
+}
+.spec-table td {
+  font-size: 12px;
+  color: var(--ink3);
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--bg3);
+  vertical-align: top;
+  line-height: 1.65;
+}
+.spec-table td:first-child { color: var(--ink2); font-weight: 700; min-width: 140px; }
+.verdict-pass { color: var(--up); }
+
+/* Callout */
+.callout {
+  background: var(--bg2);
+  border-left: 2px solid var(--blue-border);
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.7;
+}
+.callout strong { color: var(--ink); }
+.callout.ok { border-left-color: var(--up); }
+
+/* Logo demo */
+.logo-demo { background: var(--bg1); border: 1px solid var(--blue-border); padding: 40px; text-align: center; margin: 20px 0; }
+.logo-grid-mark {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 10px);
+  grid-template-rows: repeat(3, 10px);
+  gap: 2px;
+  margin-bottom: 16px;
+}
+.lgm-cell { background: var(--blue-l); border-radius: 1px; }
+.lgm-cell.lit { background: var(--flare); }
+.lgm-cell.dim { background: var(--bg4); }
+.logo-wordmark { font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.logo-sub { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink4); }
+
+/* Name cards */
+.name-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.name-card { background: var(--bg2); border: 1px solid var(--blue-border); padding: 12px 16px; min-width: 140px; }
+.nc-name { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.nc-fit { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; }
+.nc-fit.strong { color: var(--up); }
+.nc-fit.good { color: var(--ink3); }
+.nc-fit.weaker { color: var(--warn-clr); }
+.nc-reason { font-size: 11px; color: var(--ink4); margin-top: 4px; line-height: 1.4; }
+
+.dm-note { border-top: 1px solid var(--blue-border); padding: 20px 0 0; font-size: 10px; color: var(--ink4); letter-spacing: 0.06em; margin-top: 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+
+<header class="tc-header">
+  <div class="tc-logo"><span>◦</span> Lede Professional Rebrand Gauntlet</div>
+  <nav class="tc-nav">
+    <a href="../index.html">← Phase 2</a>
+    <a href="../territory-a/index.html">Territory A</a>
+    <a href="../territory-b/index.html">Territory B</a>
+    <a href="../territory-d/index.html">Territory D</a>
+  </nav>
+</header>
+
+<main class="tc-main">
+
+  <div class="territory-strip">
+    <div>
+      <div class="ts-id">Territory C · Phase 2 Creative Direction</div>
+      <div class="ts-name">Coverage Matrix</div>
+    </div>
+    <div class="ts-tags">
+      <span class="tag tag-pass">FM-04: Pass (strongest)</span>
+      <span class="tag tag-c">Visual register: Systematic / dark grid</span>
+    </div>
+  </div>
+
+  <!-- CONCEPT -->
+  <div class="tc-section">
+    <div class="tc-eyebrow">Concept</div>
+    <h1 class="tc-h1">Your portfolio universe<br>is a <em>matrix</em>.<br>Every gap is visible.</h1>
+    <p class="tc-concept">Coverage Matrix treats the professional brand as a data visualization system — the visual identity IS the interface. Every name in scope is a cell. Every gap is flagged. Every event is a state change. The brand is the completeness of the system, and the system is always visible.</p>
+    <p class="tc-body">Where Territory A argues from precision and Territory B argues from provenance, Territory C argues from completeness. The grid is the claim: "coverage without gaps" is not a phrase here — it is the visual structure of every surface the brand occupies. An institutional buyer who opens the platform and sees a coverage matrix has been given, before reading any copy, a literal representation of the product's value proposition.</p>
+  </div>
+
+  <!-- COVERAGE GRID DEMO -->
+  <div class="tc-section">
+    <div class="tc-h2">The Coverage Grid — Brand's Central Visual Element</div>
+    <p class="tc-body" style="margin-bottom:16px;">The grid is the identity. Every professional brand surface — the website hero, the conference backdrop, the enterprise deck — leads with a coverage matrix. Below: a simplified portfolio-universe visualization in Territory C's color system. Covered / flagged / gap states are the semantic vocabulary.</p>
+
+    <div class="coverage-grid">
+      <div class="cg-header">
+        <div class="cg-label">Coverage universe · 47 names · 3 flagged · 44 covered · 0 gaps</div>
+        <div class="cg-legend">
+          <div class="cg-leg-item"><div class="cg-dot" style="background:var(--up);"></div> Covered</div>
+          <div class="cg-leg-item"><div class="cg-dot" style="background:var(--flare);"></div> Flagged</div>
+          <div class="cg-leg-item"><div class="cg-dot" style="background:var(--down);"></div> Gap</div>
+        </div>
+      </div>
+      <div class="grid-col-headers">
+        <div></div>
+        <div class="gch">Mo</div><div class="gch">Tu</div><div class="gch">We</div><div class="gch">Th</div>
+        <div class="gch">Fr</div><div class="gch">Mo</div><div class="gch">Tu</div><div class="gch">We</div>
+        <div class="gch">Th</div><div class="gch">Fr</div><div class="gch">Mo</div><div class="gch">Tu</div>
+      </div>
+      <!-- Rows: each represents a portfolio name, columns = days -->
+      <div class="grid-wrap">
+        <div class="grid-row-label" style="font-size:9px;">TSLA</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-flagged">!</div>
+
+        <div class="grid-row-label" style="font-size:9px;">AAPL</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+
+        <div class="grid-row-label" style="font-size:9px;">MSFT</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-flagged">!</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+
+        <div class="grid-row-label" style="font-size:9px;">NVDA</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+
+        <div class="grid-row-label" style="font-size:9px;">META</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-flagged">!</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+
+        <div class="grid-row-label" style="font-size:9px;">AMZN</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+        <div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div><div class="grid-cell gc-covered">✓</div>
+      </div>
+    </div>
+
+    <p class="tc-body">The grid is not a decoration. It is data. Every surface where the Coverage Matrix grid appears is showing the actual state of coverage — or a representative sample of it. This connects the brand identity to the product's primary value claim at the pixel level.</p>
+  </div>
+
+  <!-- PALETTE -->
+  <div class="tc-section">
+    <div class="tc-h2">Color System</div>
+    <p class="tc-body" style="margin-bottom:16px;">Dark product register with a professional blue structural accent. Flare orange is reserved for flagged events — the ≤2% rule enforced by the semantic meaning of the color: if the entire coverage grid is orange, something catastrophic has happened. The blue-to-dark-navy range handles all structural and coverage elements. This is the furthest from Bloomberg's palette of any territory.</p>
+
+    <div class="palette-row">
+      <div class="swatch" style="background:#0C0D10;"></div>
+      <div class="swatch" style="background:#131419;"></div>
+      <div class="swatch" style="background:#1A1C23;"></div>
+      <div class="swatch" style="background:#2D3040;"></div>
+      <div class="swatch" style="background:#E8EBF5;"></div>
+      <div class="swatch" style="background:#8C91AB;"></div>
+      <div class="swatch" style="background:#525875;"></div>
+      <div class="swatch" style="background:#2A4E92;" title="#2A4E92 Coverage blue — structural accent"></div>
+      <div class="swatch" style="background:#4472C9;"></div>
+      <div class="swatch" style="background:#FF5A14;" title="Flare — flagged events only"></div>
+      <div class="swatch" style="background:#3FA971;"></div>
+      <div class="swatch" style="background:#E05A47;"></div>
+    </div>
+
+    <div class="callout">
+      <strong>Bloomberg differentiation:</strong> Bloomberg's signature is amber/orange on near-black. Territory C uses blue-on-dark-navy. The surface color is a cooler blue-black (#0C0D10) versus Bloomberg's warm near-black. The structural accent is institutional blue (#2A4E92) — the color of the coverage state, not of the brand chrome. Flare orange appears only on flagged events. A Bloomberg Terminal and a Coverage Matrix interface are visually distinct from across the room: the blue tone, the grid structure, and the absence of Bloomberg's amber chrome produce a recognizably different aesthetic.
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="tc-section">
+    <div class="tc-h2">Typography</div>
+    <p class="tc-body" style="margin-bottom:8px;">IBM Plex Mono is the primary face — the type of a system that processes data. Schibsted Grotesk in All-Caps Bold for section headings and labels. No display serif. The grid is the display element; type is information delivery.</p>
+
+    <div class="type-spec">
+      <div class="ts-row">
+        <div class="ts-row-label">Display</div>
+        <div><div class="ts-display">47/47</div><div style="font-size:10px; color:var(--ink4); margin-top:4px; letter-spacing:.1em; text-transform:uppercase;">The number IS the display headline</div></div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Heading</div>
+        <div><div class="ts-headline" style="font-family:var(--sans);">Coverage Status · Monday Pre-Market</div></div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Body</div>
+        <div><div class="ts-body-s">Every name in the monitored universe has a coverage state. Every event has a source. Every state change has a timestamp. The matrix is complete or it is not — and if it is not, you see exactly where the gap is.</div></div>
+      </div>
+      <div class="ts-row">
+        <div class="ts-row-label">Data</div>
+        <div>
+          <div class="ts-data-row"><span class="covered">✓ TSLA</span> · 47/47 names · <span class="flagged">3 flagged</span> · 06:14 ET</div>
+          <div class="ts-data-row" style="margin-top:4px;"><span class="gap">! META</span> · Guidance language revision · 10-K/A · SEC EDGAR · 06:22 ET</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION -->
+  <div class="tc-section">
+    <div class="tc-h2">Application Sample — Portfolio Coverage Dashboard</div>
+    <p class="tc-body" style="margin-bottom:16px;">The same brief content rendered in Territory C. The interface is the brand — the coverage state is visible before the events are read.</p>
+
+    <div class="app-sample">
+      <div class="app-topbar">
+        <div class="atb-l">Alfa by Lede · Portfolio Coverage</div>
+        <div class="atb-r">Mon 03 Aug 2026 · 06:14 ET · 47/47 names monitored</div>
+      </div>
+      <div class="app-stats">
+        <div class="stat-cell">
+          <div class="sc-label">Coverage</div>
+          <div class="sc-value up">47/47</div>
+        </div>
+        <div class="stat-cell">
+          <div class="sc-label">Flagged</div>
+          <div class="sc-value flagged">3</div>
+        </div>
+        <div class="stat-cell">
+          <div class="sc-label">Gaps</div>
+          <div class="sc-value">0</div>
+        </div>
+        <div class="stat-cell">
+          <div class="sc-label">Last sweep</div>
+          <div class="sc-value" style="font-size:14px;">06:12 ET</div>
+        </div>
+      </div>
+      <div class="app-events-grid">
+        <div style="font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue-l); margin-bottom:8px;">Flagged events this sweep</div>
+        <div class="event-grid-row">
+          <div><div class="eg-status flagged"></div></div>
+          <div class="eg-ticker">TSLA</div>
+          <div class="eg-desc">10-K/A filed. Guidance language revision: "approximately" removed from FY forecast. Interpretable as narrowing of downside protection.</div>
+          <div class="eg-time">06:22 ET</div>
+          <div class="eg-source">SEC EDGAR</div>
+        </div>
+        <div class="event-grid-row">
+          <div><div class="eg-status flagged"></div></div>
+          <div class="eg-ticker">TSLA</div>
+          <div class="eg-desc">Unusual put activity: 3.2σ vs. 30-day average. Sep expiry. No news catalyst at detection.</div>
+          <div class="eg-time">05:47 ET</div>
+          <div class="eg-source">CBOE</div>
+        </div>
+        <div class="event-grid-row">
+          <div><div class="eg-status flagged"></div></div>
+          <div class="eg-ticker">META</div>
+          <div class="eg-desc">Analyst note: consensus price target revised -4.2%. Basis: advertising revenue seasonality re-assessment.</div>
+          <div class="eg-time">05:31 ET</div>
+          <div class="eg-source">Sell-side</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="tc-body">The dashboard leads with the number (47/47 — zero gaps) before any event detail. The brand's primary claim is visible in the data: complete coverage is the product. The flagged events are color-coded by state, not by brand decoration. The "3 flagged" count in the stats bar is in Flare orange — the only orange on the surface, and it earned its presence by representing real events.</p>
+  </div>
+
+  <!-- LOGOMARK -->
+  <div class="tc-section">
+    <div class="tc-h2">Logomark Direction</div>
+    <p class="tc-body" style="margin-bottom:16px;">The Step logomark is recontextualized as the single illuminated cell in a coverage grid — the event node in a sea of covered cells. The wordmark uses IBM Plex Mono Bold. The logomark is a 3×3 grid with one Flare orange cell — the flagged event that proves the system is watching.</p>
+
+    <div class="logo-demo">
+      <div class="logo-grid-mark">
+        <div class="lgm-cell dim"></div><div class="lgm-cell"></div><div class="lgm-cell"></div>
+        <div class="lgm-cell"></div><div class="lgm-cell lit"></div><div class="lgm-cell"></div>
+        <div class="lgm-cell"></div><div class="lgm-cell"></div><div class="lgm-cell dim"></div>
+      </div>
+      <div class="logo-wordmark">[Name]<span style="color:var(--ink4); font-size:20px; font-weight:400;"> by Lede</span></div>
+      <div class="logo-sub">3×3 grid mark: the orange cell = the event the system detected. All else covered.</div>
+    </div>
+
+    <div class="callout">
+      <strong>Step at 16px on partner colors:</strong> The 3×3 grid mark at 16px is 5px per cell with 1px gaps. The Flare orange cell (center) is visible at this size as a distinct colored square. On light partner backgrounds, the grid mark uses blue coverage cells with an orange center. On dark backgrounds, same. The grid mark is the most scalable of any territory's logomark — at 16px it still communicates the coverage-grid concept. A monochrome version uses ink3 for coverage cells, and the flagged cell uses the highest-contrast ink available.
+    </div>
+  </div>
+
+  <!-- SPEC -->
+  <div class="tc-section">
+    <div class="tc-h2">Technical Specification</div>
+    <table class="spec-table">
+      <thead><tr><th>Attribute</th><th>Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Register</td><td>Dark product register only. The coverage grid is a dark-first visualization — inverted light states may be produced for print contexts. The brand register for marketing surfaces is also dark in this territory (unlike Territory B which is light-brand-register). All professional surfaces: dark.</td></tr>
+        <tr><td>Primary type</td><td>IBM Plex Mono (400, 500, 700). Schibsted Grotesk 700 All-Caps for section labels and column headers. No display serif on any surface.</td></tr>
+        <tr><td>Signal color</td><td>Flare orange (#FF5A14) for flagged events only — ≤2% of any surface, appearance-earned. Professional blue (#2A4E92) for coverage states and structural accents — can appear at higher frequency as a neutral structural color. Data-up (#3FA971) for covered state. Data-down (#E05A47) for gap state. The semantic color system is the brand's visual vocabulary.</td></tr>
+        <tr><td>Motion</td><td>Grid cells populate on load (staggered, fastest territory for animation). Coverage states update in real-time in product UI. Event flags animate in (the orange cell blinks once, then holds). The Instrument Line motion spec (550ms line draw, 200ms node) applies to individual event alerts. The grid sweep animation (cells filling from top-left) is the hero motion for brand surfaces.</td></tr>
+        <tr><td>Buttons</td><td>Pill geometry. IBM Plex Mono. Primary: blue (#2A4E92) background, ink text. Secondary: blue-border, transparent fill, blue-l text. No Flare orange as a button color — orange is reserved for data signals, not interactive controls.</td></tr>
+        <tr><td>Surface elevation</td><td>bg0 (#0C0D10) → bg1 (#131419) → bg2 (#1A1C23) → bg3 (#23252E). No shadows. No borders. Elevation by surface-color step. Grid cells within the coverage matrix use bg3 for covered cells, flagged-clr overlay for flagged, gap-clr overlay for gaps.</td></tr>
+        <tr><td>WCAG 2.2 AA</td><td>Ink (#E8EBF5) on bg0 (#0C0D10): ratio 17.8:1 — AAA. ink2 (#C8CDE0) on bg0: 12.4:1 — AAA. ink3 (#8C91AB) on bg0: 5.8:1 — AA. Coverage blue (#4472C9) on bg0: 5.2:1 — AA (passes as UI color). All body text passes AA. The blue-heavy palette shifts the contrast hierarchy from orange to blue, improving compliance screening for orange-restricted environments.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FM-04 -->
+  <div class="tc-section">
+    <div class="tc-h2">FM-04 Resolution — Editorial Identity Institutional Compatibility</div>
+
+    <div class="callout ok">
+      <strong class="verdict-pass">VERDICT: PASS (strongest of all territories)</strong> — Territory C has no editorial identity whatsoever. It has no consumer-brand continuity. It has no editorial metaphors, no proofreader's marks, no Instrument Serif, no STET stamp. The Coverage Matrix is pure data visualization — the native language of quantitative institutional analysis. A bank procurement portal, a CTO's technical review, a compliance audit: Coverage Matrix reads as a monitoring system, which is what it is. FM-04 is not a risk in this territory — it is the departure point.
+    </div>
+
+    <p class="tc-body">The tradeoff: Territory C has the strongest FM-04 clearance and the lowest visual continuity with the consumer Lede brand. The Endorsed House model tolerates this separation — professional and consumer are distinct brands. The question for Phase 3 is whether this much separation from the consumer brand is desirable, or whether the endorsement needs more visual weight than Territory C's IBM Plex Mono wordmark provides.</p>
+  </div>
+
+  <!-- NAMING COMPATIBILITY -->
+  <div class="tc-section">
+    <div class="tc-h2">Naming Compatibility</div>
+
+    <div class="name-row">
+      <div class="name-card">
+        <div class="nc-name">Bearing</div>
+        <div class="nc-fit strong">Strongest fit</div>
+        <div class="nc-reason">Navigation's orientation reading. "Bearing by Lede" in IBM Plex Mono — the bearing is the system's output, the matrix's conclusion. Technical, directional, exact. Pairs with the grid-as-coverage metaphor cleanly.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Bellwether</div>
+        <div class="nc-fit good">Good fit</div>
+        <div class="nc-reason">Finance-native signal. The bellwether cell in the coverage grid — the name that signals the sector. The metaphor deepens in Territory C: the flagged orange cell IS the bellwether. Strong semantic layering.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Standfirst</div>
+        <div class="nc-fit weaker">Weakest fit</div>
+        <div class="nc-reason">Journalism term reads as editorial — the opposite of the Coverage Matrix aesthetic. "Standfirst by Lede" in a mono-heavy grid interface creates a register conflict. Not disqualifying, but the least natural pairing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 NOTES -->
+  <div class="tc-section">
+    <div class="tc-h2">Notes for Phase 3 Evaluator</div>
+    <table class="spec-table">
+      <thead><tr><th>Dimension</th><th>Observation</th></tr></thead>
+      <tbody>
+        <tr><td>Risk</td><td>Territory C is the most product-forward and the least "brand" territory. The coverage grid hero could feel like a product screenshot, not a brand identity. The evaluator should assess: is the grid a distinctive brand asset, or is it a UI pattern that any competitor could replicate with a similar product? The answer determines whether this territory is "ownable" as a brand identity.</td></tr>
+        <tr><td>Distinctiveness</td><td>The blue-on-dark-navy grid system is visually distinct from all six named competitors. No major institutional fintech brand uses a coverage matrix as its brand hero (as of August 2026). However, if the product's coverage claim becomes a category claim (all competitors build coverage grids), the brand differentiation erodes.</td></tr>
+        <tr><td>Marketing surfaces</td><td>A conference backdrop that IS a live coverage matrix is a distinctive brand asset. A Bloomberg ad unit with a coverage grid is visually arresting and distinctive. The grid works at large scale better than any other territory's primary visual element.</td></tr>
+        <tr><td>Relationship to consumer Lede</td><td>Near-zero visual continuity. The endorsement "by Lede" is the only shared element. The coolest blue-dark palette diverges from the consumer brand's warm paper (#F7F5EF) and Flare orange system entirely. This is the most "endorsed house" interpretation — genuinely separate brand identities.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dm-note">
+    <span>Territory C — Coverage Matrix · Phase 2 · Lede Professional Rebrand Gauntlet · Aug 3, 2026</span>
+    <span>Creative territory proposal only. Phase 4 executes the selected direction.</span>
+  </div>
+
+</main>
+</body>
+</html>
