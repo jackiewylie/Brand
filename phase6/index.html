@@ -14,7 +14,7 @@
   --bg-overlay: #181713;
   --ink:  #F7F5EF;
   --ink2: #E8E6DC;
-  --ink3: #847D75;
+  --ink3: #C6C4B6;
   --ink4: #6C6A5E;
   --rule: #2C2B26;
   --rule2: #383630;
@@ -244,7 +244,7 @@ html, body {
   transition: background 60ms;
   position: relative;
 }
-.coverage-row:hover { background: var(--bg3); }
+.coverage-row:not(.selected):hover { background: var(--bg1); }
 .coverage-row.selected { background: var(--bg2); }
 .coverage-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
@@ -279,13 +279,13 @@ html, body {
   padding: 2px 7px; border-radius: 100px;
   display: inline-flex; align-items: center;
 }
-.priority-high { background: rgba(224,90,71,0.15); color: var(--err); }
+.priority-high { background: rgba(224,90,71,0.15); color: var(--ink2); }
 .priority-med  { background: rgba(226,169,59,0.12); color: var(--warn); }
 .priority-low  { background: var(--bg3); color: var(--ink3); }
 
 .signal-cell { display: flex; align-items: center; justify-content: center; }
 .signal-mark { display: flex; align-items: center; justify-content: center; }
-.no-signal { color: var(--ink4); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.no-signal { color: var(--ink3); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
 .signal-reviewed svg circle { fill: var(--ink3); }
 
 /* ═══════════ DETAIL PANE ═══════════ */
@@ -537,7 +537,7 @@ html, body {
     <div class="sidebar-logo" aria-label="Vigil by Lede">
       <div class="logo-mark" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M2,7 L12,7 L12,13" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2,7 L12,7 L12,13" stroke="#C6C4B6" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="12" cy="13" r="3" fill="#FF5A14"/>
         </svg>
       </div>
@@ -591,7 +591,7 @@ html, body {
     </nav>
 
     <div class="sidebar-footer">
-      <div class="workspace-badge" role="button" aria-label="Workspace: Gradient Boosted Investments, Role: PM/Research">
+      <div class="workspace-badge" role="button" tabindex="0" aria-label="Workspace: Gradient Boosted Investments, Role: PM/Research">
         <div class="workspace-avatar" aria-hidden="true">GBI</div>
         <div>
           <div class="workspace-name">GBI</div>
@@ -627,7 +627,7 @@ html, body {
       </div>
     </div>
 
-    <div class="table-wrap" role="region" aria-label="Coverage list">
+    <div class="table-wrap" role="grid" aria-label="Coverage list">
       <div class="table-header" role="row" aria-hidden="true">
         <div class="col-label">Company</div>
         <div class="col-label">Type</div>
@@ -657,7 +657,7 @@ html, body {
         <div class="signal-cell">
           <div class="signal-mark" aria-label="Active signal" title="Active signal">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M2,7 L10,7 L10,11.5" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2,7 L10,7 L10,11.5" stroke="#C6C4B6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
               <circle cx="10" cy="11.5" r="2.5" fill="#FF5A14"/>
             </svg>
           </div>
@@ -729,8 +729,8 @@ html, body {
         <div class="signal-cell">
           <div class="signal-mark signal-reviewed" aria-label="Reviewed signal" title="Reviewed">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M1,6 L8,6 L8,10" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="8" cy="10" r="2" fill="#847D75"/>
+              <path d="M1,6 L8,6 L8,10" stroke="#C6C4B6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="10" r="2" fill="#C6C4B6"/>
             </svg>
           </div>
         </div>
@@ -822,8 +822,8 @@ html, body {
         <div class="signal-cell">
           <div class="signal-mark signal-reviewed" aria-label="Reviewed signal" title="Reviewed">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M1,6 L8,6 L8,10" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="8" cy="10" r="2" fill="#847D75"/>
+              <path d="M1,6 L8,6 L8,10" stroke="#C6C4B6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="10" r="2" fill="#C6C4B6"/>
             </svg>
           </div>
         </div>
@@ -1289,17 +1289,36 @@ function selectRow(row) {
     });
   });
 
-  /* Tab bar — visual only for demo */
-  document.querySelectorAll('.tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.tab').forEach(function(t) {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-        t.setAttribute('tabindex', '-1');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      tab.setAttribute('tabindex', '0');
+  /* Tab bar */
+  var tabs = Array.from(document.querySelectorAll('.tab'));
+  function activateTab(tab) {
+    tabs.forEach(function(t) {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    tab.setAttribute('tabindex', '0');
+    tab.focus();
+  }
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() { activateTab(tab); });
+    tab.addEventListener('keydown', function(e) {
+      var idx = tabs.indexOf(tab);
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        activateTab(tabs[(idx + 1) % tabs.length]);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        activateTab(tabs[(idx - 1 + tabs.length) % tabs.length]);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        activateTab(tabs[0]);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        activateTab(tabs[tabs.length - 1]);
+      }
     });
   });
 
