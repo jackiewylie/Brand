@@ -8,7 +8,7 @@
   --bg1: #1B1A16;
   --bg2: #242320;
   --bg3: #2C2B26;
-  --ink: #F0EDE8;
+  --ink: #F7F5EF;     /* token: product text-primary (was #F0EDE8 — A6 correction) */
   --ink2: #B8B3AC;
   --ink3: #8A847C;
   --rule: #3A3832;
@@ -17,7 +17,7 @@
   --warn: #E8B84B;
   --crit: #E85B3A;
   --bg-alt: #1F1E1A;
-  --faint: #5C5850;
+  --faint: #847D75;   /* A3: raised from #5C5850 to pass WCAG 2.2 AA (4.63:1 on bg0) */
   --decision-bg: rgba(255,90,20,0.06);
 }
 
@@ -29,23 +29,23 @@
     --bg3: #DEDACA;
     --ink: #1A1915;
     --ink2: #6B6860;
-    --ink3: #9A9590;
+    --ink3: #706B63;    /* A3: raised from #9A9590 to pass WCAG 2.2 AA (4.87:1 on bg0) */
     --rule: #D5D1C5;
     --bg-alt: #F0EDE7;
-    --faint: #A8A49C;
+    --faint: #6B6860;   /* A3: raised from #A8A49C to pass WCAG 2.2 AA (5.16:1 on bg0) */
     --decision-bg: rgba(255,75,0,0.05);
   }
 }
 :root[data-theme="dark"] {
   --bg0: #131210; --bg1: #1B1A16; --bg2: #242320; --bg3: #2C2B26;
-  --ink: #F0EDE8; --ink2: #B8B3AC; --ink3: #8A847C; --rule: #3A3832;
+  --ink: #F7F5EF; --ink2: #B8B3AC; --ink3: #8A847C; --rule: #3A3832;
   --accent: #FF5A14; --ok: #4CAF88; --warn: #E8B84B; --crit: #E85B3A;
-  --bg-alt: #1F1E1A; --faint: #5C5850; --decision-bg: rgba(255,90,20,0.06);
+  --bg-alt: #1F1E1A; --faint: #847D75;
 }
 :root[data-theme="light"] {
   --bg0: #F7F5EF; --bg1: #EFECE2; --bg2: #E6E3D5; --bg3: #DEDACA;
-  --ink: #1A1915; --ink2: #6B6860; --ink3: #9A9590; --rule: #D5D1C5;
-  --bg-alt: #F0EDE7; --faint: #A8A49C; --decision-bg: rgba(255,75,0,0.05);
+  --ink: #1A1915; --ink2: #6B6860; --ink3: #706B63; --rule: #D5D1C5;
+  --bg-alt: #F0EDE7; --faint: #6B6860;
 }
 
 /* === Body & Layout === */
@@ -147,8 +147,7 @@ body {
 
 .sidebar-verdict {
   margin: 0 16px 20px;
-  background: var(--bg1);
-  border: 1px solid var(--rule);
+  background: var(--bg2);  /* A4: surface elevation replaces card border */
   padding: 10px 12px;
 }
 .sv-label {
@@ -239,12 +238,11 @@ main {
 .callout.ok { border-left-color: var(--ok); }
 .callout.warn { border-left-color: var(--warn); }
 .callout.crit { border-left-color: var(--crit); }
-.callout.decision { border-left-color: var(--accent); background: var(--decision-bg); }
+.callout.decision { border-left-color: var(--ink3); background: var(--bg2); } /* A5: neutral border replaces Flare orange */
 
 /* Decision block */
 .decision-block {
-  background: var(--bg1);
-  border: 1px solid var(--rule);
+  background: var(--bg2);  /* A4: surface elevation replaces card border */
   padding: 20px 24px;
   margin: 20px 0;
 }
@@ -905,7 +903,19 @@ ul.prose li::before {
     <span class="section-num">07</span>
     <h2>Open Conditions</h2>
   </div>
-  <p class="section-sub">Conditions this selection carries forward. Territory A has zero Phase 2 open conditions — all conditions below are standard process requirements that apply regardless of territory selection.</p>
+  <p class="section-sub">Conditions this selection carries forward. Territory A has zero Phase 2 open conditions. Two additional conditions were flagged by MC-P3-01 advisory review and are recorded here as P0 and Phase-4-required items.</p>
+
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — MC-P3-01 advisory · Resolve before any Powered+ partner agreement is signed</div>
+    <div class="ci-title">Powered+ tier definition conflict — Phase 1 D2 vs. Phase 3 §04</div>
+    <div class="ci-body">Phase 1 D2 defines the Powered+ tier as "full white-label · no attribution · negotiated — product identity is entirely the partner's." Phase 3 §04 defines the Powered+ formulation as "[Partner Brand] + Vigil by Lede" at co-brand visual weight — a named attribution lockup at display scale. These are in direct conflict. Phase 4 must convene the brand owner and legal counsel to determine which definition controls before any Powered+ partner agreement is drafted, co-brand lockup is designed, or Powered+ tier terms are presented to partners. The evaluator's §04 interpretation (co-brand, not full white-label) may represent a new D2 amendment rather than a reading of existing D2. If the Phase 1 D2 definition controls, the Powered+ section of this document requires revision and Phase 4 must design a white-label track with no Vigil or Lede name visible in partner materials.</div>
+  </div>
+
+  <div class="condition-item">
+    <div class="ci-label">Phase 4 specification required · MC-P3-01 advisory</div>
+    <div class="ci-title">IBM Plex Mono weight 700 — token spec authorization required</div>
+    <div class="ci-body">lede-tokens.json v2.0.0 specifies IBM Plex Mono at weights [400, 500] only, with usage described as "The tape layer: timestamps, tickers, figures, filings." Territory A uses IBM Plex Mono 700 (bold) as the primary brand display typeface at large scale — an extension beyond the token spec's defined weights. Phase 4 must either: (a) formally amend the token spec to add IBM Plex Mono weight 700 with updated usage guidance (e.g., "display-scale brand headlines in product dark register"), or (b) confirm an alternative approach for Territory A's display hierarchy that stays within currently authorized weights. The Territory A design direction is sound — the weight extension is the expected next step for a display-scale instrument aesthetic — but the amendment must be formalized before production.</div>
+  </div>
 
   <div class="condition-item p0">
     <div class="ci-label">P0 — Blocks Phase 4 logo execution</div>
@@ -951,7 +961,7 @@ ul.prose li::before {
 
   <div style="margin-top:32px;">
     <div class="callout ok">
-      <strong>Summary: Territory A carries zero Phase 2 open conditions.</strong> All conditions listed above are standard process requirements — trademark clearance, entity check, FM-04 confirmatory, D4 ongoing — that apply regardless of which territory is selected. Territory D would have carried four additional conditions (FM-04 conditional, D7 amendment, Brightwave re-evaluation, surface token deviations) on top of these standard requirements. Territory A adds none. This document is the Phase 3 binding selection record. Phase 4 begins after MC-P3-01 clears this document at ≥7.0/10.
+      <strong>MC-P3-01 verdict: PASSED.</strong> Territory A carries zero Phase 2 open conditions. MC-P3-01 (independent Mean Critic, Phase 3 review) cleared this document with a PASS verdict and seven advisory items. Six have been addressed in this document revision (WCAG corrections, token compliance, card border fixes, Flare orange callout replacement, ink color alignment, and two new §07 conditions). The advisory A7 (D4 Alfa Bank check) was already correctly noted. The remaining open items are: Powered+ tier definition conflict (P0 — requires brand owner and legal counsel), IBM Plex Mono weight 700 authorization (Phase 4 specification required), and standard conditions (trademark clearance, entity check, FM-04 confirmatory). Territory D would have carried four additional conditions (FM-04 conditional, D7 amendment, Brightwave re-evaluation, surface token deviations) on top of these. Territory A's condition register is the lightest of the four territories. Phase 4 may begin.
     </div>
   </div>
 </div>
