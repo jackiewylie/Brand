@@ -86,7 +86,7 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-brand {
   display: flex; align-items: center; gap: 10px;
-  font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 700;
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
   letter-spacing: -0.01em; color: var(--ink);
 }
 .nav-brand svg { flex-shrink: 0; }
@@ -245,14 +245,14 @@ h2.section-title {
   font-size: 14px; color: var(--ink3); line-height: 1.70; margin-bottom: 20px;
 }
 .pillar-detail {
-  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4);
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink3);
   line-height: 1.60;
 }
 .pillar-detail li {
   list-style: none; padding-left: 14px; position: relative; margin-bottom: 4px;
 }
 .pillar-detail li::before {
-  content: "—"; position: absolute; left: 0; color: var(--ink4);
+  content: "—"; position: absolute; left: 0; color: var(--ink3);
 }
 
 /* ─── Audience grid ─── */
@@ -266,7 +266,7 @@ h2.section-title {
 }
 .aud-role {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2);
   margin-bottom: 12px;
 }
 .aud-need {
@@ -275,7 +275,7 @@ h2.section-title {
   text-wrap: balance;
 }
 .aud-body {
-  font-size: 13px; color: var(--ink3); line-height: 1.65;
+  font-size: 13px; color: var(--ink2); line-height: 1.65;
 }
 
 /* ─── Quote / proof strip ─── */
@@ -302,7 +302,7 @@ h2.section-title {
   margin-bottom: 8px;
 }
 .proof-note {
-  font-size: 12px; color: var(--ink4); line-height: 1.5;
+  font-size: 12px; color: var(--ink3); line-height: 1.5;
 }
 .rvh { color: var(--warn); font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500; }
 
@@ -335,25 +335,25 @@ h2.section-title {
 .tier-card.featured { background: var(--bg2); }
 .tier-badge {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2);
 }
 .tier-name {
   font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700;
   letter-spacing: -0.02em; color: var(--ink);
 }
 .tier-tagline {
-  font-size: 13px; color: var(--ink3); line-height: 1.60;
+  font-size: 13px; color: var(--ink2); line-height: 1.60;
 }
 .tier-features {
   list-style: none; display: flex; flex-direction: column; gap: 6px;
   padding: 0; margin-top: auto;
 }
 .tier-features li {
-  font-size: 12px; color: var(--ink3); padding-left: 14px; position: relative;
+  font-size: 12px; color: var(--ink2); padding-left: 14px; position: relative;
   line-height: 1.55;
 }
 .tier-features li::before {
-  content: "—"; position: absolute; left: 0; color: var(--ink4);
+  content: "—"; position: absolute; left: 0; color: var(--ink3);
 }
 .tier-cta { margin-top: 8px; }
 
@@ -369,7 +369,7 @@ h2.section-title {
   padding: 6px 12px; background: var(--bg2);
   margin-bottom: 20px;
 }
-.pb-wordmark { color: var(--ink2); font-weight: 700; }
+.pb-wordmark { color: var(--ink2); font-weight: 500; }
 .partner-formulations {
   display: flex; flex-direction: column; gap: 1px;
   background: var(--rule); margin: 24px 0;
@@ -381,9 +381,9 @@ h2.section-title {
 }
 .pf-key {
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink4);
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink2);
 }
-.pf-val { color: var(--ink3); line-height: 1.55; }
+.pf-val { color: var(--ink2); line-height: 1.55; }
 
 /* ─── CTA band ─── */
 .cta-band {
@@ -412,12 +412,12 @@ h2.section-title {
   gap: 48px; margin-bottom: 48px;
 }
 .footer-brand .fb-name {
-  font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+  font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 500;
   color: var(--ink); display: flex; align-items: center; gap: 8px;
   margin-bottom: 12px;
 }
 .footer-brand .fb-sub {
-  font-size: 12px; color: var(--ink4); line-height: 1.65;
+  font-size: 12px; color: var(--ink3); line-height: 1.65;
 }
 .footer-col h4 {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
@@ -438,13 +438,21 @@ h2.section-title {
 }
 .footer-legal {
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
-  color: var(--ink4); line-height: 1.65; max-width: 640px;
+  color: var(--ink3); line-height: 1.65; max-width: 640px;
 }
-.footer-legal a { color: var(--ink4); text-decoration: underline; }
+.footer-legal a { color: var(--ink3); text-decoration: underline; }
 .footer-byline {
-  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4);
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink3);
   white-space: nowrap;
 }
+
+/* ─── bg1/bg2 contrast corrections ─── */
+/* ink3 on bg1 = 4.29:1 (fails AA); ink3 on bg2 = 3.87:1 (fails AA). Promote to ink2 in these contexts. */
+.audience-section .section-eyebrow,
+.audience-section .section-intro { color: var(--ink2); }
+
+.partner-section .section-eyebrow,
+.partner-section .section-intro { color: var(--ink2); }
 
 /* ─── Motion — the-line-steps ─── */
 @keyframes lineExtend {
@@ -531,7 +539,7 @@ h2.section-title {
   </div>
 </nav>
 
-<div class="page">
+<main class="page">
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" aria-label="Product hero">
@@ -625,7 +633,7 @@ h2.section-title {
 </section>
 
 <!-- ═══ PROOF STRIP ═══ -->
-<div class="proof-strip" aria-label="Key metrics">
+<section class="proof-strip" aria-label="Key metrics">
   <div class="proof-inner" role="list">
     <div class="proof-stat" role="listitem">
       <div class="proof-num">8-K</div>
@@ -643,7 +651,7 @@ h2.section-title {
       <p class="proof-note">The reasoning chain from source to signal is fully traceable. You see the logic, not just the answer.<br><span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══ AUDIENCES ═══ -->
 <section class="section audience-section" id="audiences" aria-label="Who Vigil is for">
@@ -708,7 +716,7 @@ h2.section-title {
       <div class="ent-item">
         <div class="ent-label">Compliance Posture</div>
         <div class="ent-title">Audit-grade reasoning logs</div>
-        <p class="ent-body">Every Vigil inference that reaches a user is logged: source document, reasoning chain, timestamp, user session. The log is exportable and designed to support regulatory and internal audit review.</p>
+        <p class="ent-body">Every Vigil inference that reaches a user is logged: source document, reasoning chain, timestamp, user session. <span class="rvh">REQUIRES HUMAN VERIFICATION</span> The log is exportable and designed to support regulatory and internal audit review. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
       </div>
       <div class="ent-item">
         <div class="ent-label">Integration</div>
@@ -734,7 +742,7 @@ h2.section-title {
   <div class="section-inner">
     <div class="section-eyebrow">Tiers</div>
     <h2 class="section-title">From individual analyst<br>to enterprise platform.</h2>
-    <p class="section-intro">Four tiers at launch (Vigil Powered+ pending brand owner resolution). Every tier delivers sourced, traceable intelligence — the scale of deployment changes, not the quality of the signal.</p>
+    <p class="section-intro">Four tiers at launch (fifth partner tier pending brand owner decision). Every tier delivers sourced, traceable intelligence — the scale of deployment changes, not the quality of the signal.</p>
 
     <div class="tiers-grid" role="list">
       <div class="tier-card" role="listitem">
@@ -798,7 +806,7 @@ h2.section-title {
       </div>
     </div>
 
-    <p style="margin-top:24px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink4);">
+    <p style="margin-top:24px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink3);">
       Pricing available on request. All tiers require a brief evaluation period for coverage list configuration. Vigil name conditional on trademark clearance (class 36/42, US/UK/EU). <span class="rvh">REQUIRES HUMAN VERIFICATION on all pricing claims before publication.</span>
     </p>
   </div>
@@ -920,7 +928,7 @@ h2.section-title {
   </div>
 </footer>
 
-</div><!-- .page -->
+</main><!-- .page -->
 
 <!-- ═══ SCRIPTS ═══ -->
 <script>
