@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 0: Brand Audit — Boosted.ai Professional Rebrand</title>
+<style>
+/* === TOKENS === */
+:root {
+  --bg:       #F2F1ED;
+  --bg-alt:   #ECEAE4;
+  --bg-card:  #E8E6DF;
+  --ink:      #1C1A18;
+  --muted:    #5A5856;
+  --faint:    #96938E;
+  --rule:     #D0CEC8;
+  --rule2:    #B8B5AE;
+  --accent:   #1B3461;
+  --accent-l: #2A4E92;
+  --crit:     #9B2A1A;
+  --warn:     #7A5A15;
+  --ok:       #1E5E38;
+  --score-bar-bg: rgba(27,52,97,0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:       #0F0E0D;
+    --bg-alt:   #161513;
+    --bg-card:  #1C1B19;
+    --ink:      #EDEAE4;
+    --muted:    #8C8A86;
+    --faint:    #5A5856;
+    --rule:     #282624;
+    --rule2:    #343230;
+    --accent:   #5A80C4;
+    --accent-l: #7BA0E0;
+    --crit:     #D45A44;
+    --warn:     #C49830;
+    --ok:       #4CA870;
+    --score-bar-bg: rgba(90,128,196,0.15);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:       #0F0E0D;
+  --bg-alt:   #161513;
+  --bg-card:  #1C1B19;
+  --ink:      #EDEAE4;
+  --muted:    #8C8A86;
+  --faint:    #5A5856;
+  --rule:     #282624;
+  --rule2:    #343230;
+  --accent:   #5A80C4;
+  --accent-l: #7BA0E0;
+  --crit:     #D45A44;
+  --warn:     #C49830;
+  --ok:       #4CA870;
+  --score-bar-bg: rgba(90,128,196,0.15);
+}
+
+:root[data-theme="light"] {
+  --bg:       #F2F1ED;
+  --bg-alt:   #ECEAE4;
+  --bg-card:  #E8E6DF;
+  --ink:      #1C1A18;
+  --muted:    #5A5856;
+  --faint:    #96938E;
+  --rule:     #D0CEC8;
+  --rule2:    #B8B5AE;
+  --accent:   #1B3461;
+  --accent-l: #2A4E92;
+  --crit:     #9B2A1A;
+  --warn:     #7A5A15;
+  --ok:       #1E5E38;
+  --score-bar-bg: rgba(27,52,97,0.12);
+}
+
+/* === RESET === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* === BASE === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+p { max-width: 68ch; margin-bottom: 1em; }
+p:last-child { margin-bottom: 0; }
+
+/* === MONO UTILITY === */
+.mono {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8em;
+  letter-spacing: 0.02em;
+}
+.tabnum { font-variant-numeric: tabular-nums; }
+
+/* === LAYOUT === */
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* === HEADER === */
+.site-header {
+  grid-column: 1 / -1;
+  background: var(--accent);
+  color: #fff;
+  padding: 20px 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.site-header .eyebrow {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.site-header h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: normal;
+  letter-spacing: -0.01em;
+}
+.site-header .meta {
+  margin-left: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+  background: var(--bg-alt);
+  border-right: 1px solid var(--rule);
+  padding: 32px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-section {
+  margin-bottom: 28px;
+}
+.sidebar-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0 20px 8px;
+  display: block;
+}
+.sidebar nav a {
+  display: block;
+  padding: 6px 20px;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.sidebar nav a:hover, .sidebar nav a.active {
+  color: var(--ink);
+  border-left-color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* === MAIN CONTENT === */
+main {
+  padding: 40px 48px 80px;
+  min-width: 0;
+}
+
+/* === SECTIONS === */
+.section {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+}
+.section:first-child { border-top: none; padding-top: 8px; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.section-num {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+.section-head h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: normal;
+  letter-spacing: -0.02em;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  max-width: 60ch;
+}
+
+h3.sub {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 32px 0 14px;
+}
+
+/* === CALLOUTS === */
+.callout {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 20px 0;
+  max-width: 72ch;
+  font-size: 14.5px;
+}
+.callout.crit { border-color: var(--crit); }
+.callout.warn { border-color: var(--warn); }
+.callout.ok   { border-color: var(--ok); }
+
+/* === TABLES === */
+.table-wrap { overflow-x: auto; margin: 16px 0 28px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+th {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: left;
+  padding: 0 20px 10px 0;
+  border-bottom: 1px solid var(--rule2);
+}
+td {
+  padding: 10px 20px 10px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.5;
+}
+td:first-child { color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+td strong { font-weight: 600; color: var(--ink); }
+tr:last-child td { border-bottom: none; }
+
+/* === STATUS BADGES === */
+.badge {
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.badge-ok   { background: rgba(30,94,56,0.12); color: var(--ok); }
+.badge-warn { background: rgba(122,90,21,0.12); color: var(--warn); }
+.badge-crit { background: rgba(155,42,26,0.12); color: var(--crit); }
+.badge-na   { background: var(--bg-card); color: var(--faint); }
+
+/* === SCORE BARS === */
+.score-grid {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 32px;
+}
+.score-row {
+  display: grid;
+  grid-template-columns: 260px 48px 1fr 80px;
+  gap: 12px;
+  align-items: center;
+}
+.score-label {
+  font-size: 13px;
+  color: var(--ink);
+}
+.score-weight {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  color: var(--faint);
+  text-align: right;
+}
+.score-bar-outer {
+  height: 6px;
+  background: var(--score-bar-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.score-bar-inner {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.score-bar-inner.low  { background: var(--crit); }
+.score-bar-inner.mid  { background: var(--warn); }
+.score-bar-inner.high { background: var(--ok); }
+
+.score-val {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.final-score {
+  background: var(--bg-card);
+  border: 1px solid var(--rule2);
+  padding: 24px 28px;
+  max-width: 440px;
+  margin: 24px 0;
+}
+.final-score .label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.final-score .number {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--crit);
+  font-variant-numeric: tabular-nums;
+}
+.final-score .denom {
+  font-size: 24px;
+  color: var(--faint);
+}
+.final-score .band {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* === COMPETITIVE MAP === */
+.cmap {
+  position: relative;
+  border: 1px solid var(--rule2);
+  max-width: 760px;
+  aspect-ratio: 4/3;
+  margin: 16px 0 28px;
+  background:
+    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 100% 25%,
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 25% 100%;
+}
+.cmap .axis {
+  position: absolute;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.cmap .axis.x-left  { left: 8px; bottom: 8px; }
+.cmap .axis.x-right { right: 8px; bottom: 8px; }
+.cmap .axis.y-top   { left: 8px; top: 8px; }
+.cmap .axis.y-bot   { left: 8px; bottom: 28px; }
+.cmap .dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  background: var(--bg);
+  border: 1px solid var(--rule2);
+  border-radius: 2px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.cmap .dot.us {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.cmap .dot.open-seat {
+  border: 1.5px dashed var(--ok);
+  color: var(--ok);
+  background: transparent;
+}
+
+/* === FINDING BLOCKS === */
+.finding {
+  border-left: 3px solid var(--rule2);
+  padding: 16px 20px;
+  margin: 16px 0;
+  max-width: 70ch;
+}
+.finding.p0 { border-color: var(--crit); }
+.finding .f-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+.finding h4 {
+  font-size: 14.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* === EQUITY TABLE === */
+.equity-row td:first-child { color: var(--ink); font-weight: 500; font-size: 13.5px; white-space: normal; }
+
+/* === THEME TOGGLE === */
+.theme-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule2);
+  color: var(--muted);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+  z-index: 100;
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--rule2); }
+
+/* === SUMMARY BOX === */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 20px 0 32px;
+}
+.summary-cell {
+  background: var(--bg);
+  padding: 18px 20px;
+}
+.summary-cell .sc-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.summary-cell .sc-val {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 22px;
+  color: var(--ink);
+}
+.summary-cell .sc-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* === LISTS === */
+ul.ls {
+  margin: 0 0 16px 20px;
+  max-width: 68ch;
+}
+ul.ls li { margin-bottom: 7px; font-size: 14px; }
+
+/* === CONTRACT TABLE === */
+.contract-table td:first-child {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: normal;
+  min-width: 180px;
+}
+.contract-table td:nth-child(2) { color: var(--muted); font-size: 13px; }
+
+/* === RESPONSIVE === */
+@media (max-width: 800px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  main { padding: 24px 20px 60px; }
+  .score-row { grid-template-columns: 1fr 36px; gap: 8px; }
+  .score-bar-outer { display: none; }
+  .site-header .meta { display: none; }
+  .cmap { aspect-ratio: 1/1; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div>
+    <div class="eyebrow">Boosted.ai · Professional Rebrand Gauntlet</div>
+    <h1>Phase 0 — Audit &amp; Access Ledger</h1>
+  </div>
+  <div class="meta">
+    Brand Director<br>
+    Aug 3, 2026<br>
+    Confidential
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-section">
+    <span class="sidebar-label">Sections</span>
+    <nav>
+      <a href="#access">01 Access Ledger</a>
+      <a href="#context">02 Context &amp; Scope</a>
+      <a href="#audit">03 Current Brand Audit</a>
+      <a href="#scorecard">04 Current Scorecard</a>
+      <a href="#competitive">05 Competitive Landscape</a>
+      <a href="#failures">06 Prior Failure Modes</a>
+      <a href="#equity">07 Existing Equity</a>
+      <a href="#retail">08 Retail Interface Contract</a>
+      <a href="#problems">09 Top Problems</a>
+      <a href="#verdict">10 Verdict &amp; Gate</a>
+    </nav>
+  </div>
+  <div class="sidebar-section">
+    <span class="sidebar-label">Status</span>
+    <nav>
+      <a href="#verdict">Phase 0: Awaiting Critic</a>
+    </nav>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- INTRO -->
+<div class="section" style="padding-top:0; border-top:none;">
+  <div class="callout">
+    <strong>Purpose of this document.</strong> Phase 0 of the Boosted.ai Professional Rebrand Gauntlet. Before any creative work begins, this audit establishes what exists, what cannot be accessed, what the prior attempts produced, what equity is worth preserving, and what the professional brand problem actually is. No creative territory is chosen here. This document is evidence, not advocacy.
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-cell">
+      <div class="sc-label">Company</div>
+      <div class="sc-val" style="font-size:18px;">Boosted.ai</div>
+      <div class="sc-sub">Legal: Gradient Boosted Investments</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Professional Product</div>
+      <div class="sc-val" style="font-size:18px;">Alfa</div>
+      <div class="sc-sub">8 yrs · $5T+ AUM · 10K+ agents</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Prior Rebrand (Consumer)</div>
+      <div class="sc-val" style="font-size:16px;">Lede</div>
+      <div class="sc-sub">Delivered Oct 2026 · retail-first</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Professional Brand Status</div>
+      <div class="sc-val" style="font-size:16px; color:var(--crit);">None</div>
+      <div class="sc-sub">Not addressed in prior engagement</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Agency Bid</div>
+      <div class="sc-val" style="font-size:16px;">$287K</div>
+      <div class="sc-sub">Studio Freight · 10–12 wks</div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 ACCESS LEDGER -->
+<div class="section" id="access">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>Access Ledger</h2>
+  </div>
+  <p class="section-sub">Every source inspected, unavailable, inferred, or requiring external verification. Fabricated access is worse than admitted absence.</p>
+
+  <h3 class="sub">Inspected</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Content</th>
+          <th>Reliability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mono">proposal/index.html</span></td>
+          <td>Fair Copy RFP response + phase-one brand audit. Three directions (Inheritance, Morning Paper, Two Houses). Full methodology, team, timeline, budget.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">delivery/index.html</span></td>
+          <td>Full 11-week engagement book: Discovery → Strategy → Naming (24 candidates → Lede) → Identity (Masthead &amp; the Mark → Instrument Line v2) → Rollout → Delivery.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">evaluation/studio-freight-assessment.md</span></td>
+          <td>Studio Freight proposal ($287,400) scored against RFP requirements. Gaps: no team names, no naming methodology, no brand architecture, no token handoff.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">evaluation/lede-red-team.md</span></td>
+          <td>Adversarial review of "Lede" naming decision. Homophone tax priced. LedeAI adjacency risk flagged as binary. Bench: Standfirst, Bellwether.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">identity/lede-tokens.json</span></td>
+          <td>Design token handoff v2.0.0. Two registers: product (dark) and brand (light). Typography: Schibsted Grotesk + IBM Plex Mono + Newsreader. Brand color: Flare orange #FF5A14.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">identity-v2/index.html</span></td>
+          <td>"The Instrument Line" — second cut of the visual identity. The Step logomark. International orange "Flare." Proofreader's marks iconography. STET stamp.</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+        <tr>
+          <td><span class="mono">launch/index.html</span></td>
+          <td>Lede.com concept homepage. Morning Lede demo. Doctrine of quiet. Lede Institutional strip (three lines). Consumer CTA: "Get early access / $25/month."</td>
+          <td><span class="badge badge-ok">Inspected</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Unavailable — Live Access Blocked</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Why Needed</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>boosted.ai live website</td>
+          <td>Current professional positioning, product pages, CTAs, navigation, actual professional UX at 4 widths</td>
+          <td><span class="badge badge-warn">403 Blocked</span></td>
+        </tr>
+        <tr>
+          <td>Production Alfa UI screenshots</td>
+          <td>Required for professional workflow comprehension audit; brand faithfulness scoring</td>
+          <td><span class="badge badge-crit">Not in repo</span></td>
+        </tr>
+        <tr>
+          <td>Security / compliance documentation</td>
+          <td>SOC 2, pen test results, encryption standards, SLA — needed for enterprise trust audit</td>
+          <td><span class="badge badge-crit">Not in repo</span></td>
+        </tr>
+        <tr>
+          <td>Sales deck / pitch materials</td>
+          <td>Professional sales motion, enterprise trust artifacts, co-branding examples</td>
+          <td><span class="badge badge-crit">Not in repo</span></td>
+        </tr>
+        <tr>
+          <td>Partner / embedded deployments</td>
+          <td>Co-branding, white-label, "Powered by" real examples</td>
+          <td><span class="badge badge-crit">Not in repo</span></td>
+        </tr>
+        <tr>
+          <td>RFP source PDF (SF_BoostedAI1_Proposal2.pdf)</td>
+          <td>Original RFP requirements; Studio Freight proposal cross-reference</td>
+          <td><span class="badge badge-warn">Referenced not present</span></td>
+        </tr>
+        <tr>
+          <td>Existing brand guidelines (pre-Lede)</td>
+          <td>Historical equity baseline; what the current Boosted.ai brand looks like in handbook form</td>
+          <td><span class="badge badge-warn">Not in repo</span></td>
+        </tr>
+        <tr>
+          <td>Customer evidence / testimonials</td>
+          <td>Institutional trust proof; named-partner relationships</td>
+          <td><span class="badge badge-warn">NDA-protected</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Inferred from Materials</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Inference</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Current palette: near-black (~#080808), bullion gold (#C19A6B), Hanken Grotesk light</td>
+          <td>Audit reconstruction in proposal; token file baseline</td>
+        </tr>
+        <tr>
+          <td>Hero copy: "The AI engine behind modern investing" · CTA: "Request access"</td>
+          <td>Proposal Part II §11 reconstruction</td>
+        </tr>
+        <tr>
+          <td>Consumer ad live in market: "You've got the investing instincts. Now get the tools."</td>
+          <td>Delivery book discovery findings F6</td>
+        </tr>
+        <tr>
+          <td>Institutional voice: codified, specific-over-vague, real banned-words list ("game-changing," "revolutionary")</td>
+          <td>Delivery book §02</td>
+        </tr>
+        <tr>
+          <td>No light/daylight mode in current system</td>
+          <td>Audit finding; token file dark-only before v2</td>
+        </tr>
+        <tr>
+          <td>No motion language, no iconography defined in pre-Lede system</td>
+          <td>Audit finding; Instrument Line critique §00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Requires Human Verification Before Public Use</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Claim</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"$5T+ AUM on platform"</td>
+          <td>Cited in all materials; not independently verified; must be current and correctly defined before any marketing use</td>
+        </tr>
+        <tr>
+          <td>"10,000+ agents in production"</td>
+          <td>Same sourcing concern; metric must be precisely defined (what counts as an agent?)</td>
+        </tr>
+        <tr>
+          <td>"8 years" operating history</td>
+          <td>Verifiable via founding records; confirm exact year before use in anniversary claims</td>
+        </tr>
+        <tr>
+          <td>Security certifications (SOC 2, ISO, pen test)</td>
+          <td>Not documented here; critical for enterprise trust materials; requires security team confirmation</td>
+        </tr>
+        <tr>
+          <td>Named partner relationships</td>
+          <td>Confidential contract details; require legal and executive approval before public attribution</td>
+        </tr>
+        <tr>
+          <td>LedeAI trademark conflict (class 42)</td>
+          <td>Requires counsel opinion; binary outcome per red-team review</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 02 CONTEXT -->
+<div class="section" id="context">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Context &amp; Critical Observation</h2>
+  </div>
+
+  <div class="callout crit">
+    <strong>The core finding of this audit in one sentence:</strong> The prior 11-week engagement was a consumer rebrand. The professional brand problem was not addressed. What follows is the first systematic examination of Boosted.ai's professional identity gap.
+  </div>
+
+  <p>The prior engagement (Fair Copy × Boosted.ai, Aug–Oct 2026) produced a complete consumer brand system under the name Lede: naming, visual identity, verbal identity, and a concept launch page for the Daily Reliant Investor (DRI). The institutional/professional side received exactly three lines on the concept launch page: <em>"Lede Institutional · formerly Boosted.ai. The engine behind your analysts' morning has run institutional research for eight years. The name is new. The audit trail isn't."</em></p>
+
+  <p>This is not a professional brand. This is a reassurance footer. The engagement was correctly scoped to its primary objective — the consumer brand — and it delivered. The professional brand system was explicitly deferred. This project fills that gap.</p>
+
+  <h3 class="sub">The Two Audiences and Their Different Brand Needs</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Consumer (Lede — solved)</th>
+          <th>Professional (Boosted.ai/Alfa — unsolved)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Primary buyer</td>
+          <td><strong>Daily Reliant Investor</strong> — individual, self-directed, 8–30 positions</td>
+          <td><strong>Heads of research, CIOs, CTOs, Compliance, Procurement</strong> — committee-led</td>
+        </tr>
+        <tr>
+          <td>Conversion motion</td>
+          <td>Open signup · $25/month · B2C acquisition</td>
+          <td>Request access → demo → security review → contract · 90–180 day sales cycle</td>
+        </tr>
+        <tr>
+          <td>Trust requirements</td>
+          <td>Verification story · "shows its work" · no engagement tricks</td>
+          <td>SOC 2 · data governance · audit logs · SLA · procurement paperwork · embedded deployment models</td>
+        </tr>
+        <tr>
+          <td>Product density</td>
+          <td>Morning Lede brief · 3 min read · one job</td>
+          <td>Dense research UI · 50-name coverage · thesis testing · pre-trade compliance checks · multi-user permissions</td>
+        </tr>
+        <tr>
+          <td>Naming needs</td>
+          <td>"Lede" — editorial, legible, disambiguates from Bloomberg</td>
+          <td>"Alfa" (institutional equity) — but needs architecture clarity for Pro/Prime/Platform tiers</td>
+        </tr>
+        <tr>
+          <td>Co-branding exposure</td>
+          <td>Minimal — consumer app is Boosted/Lede-only</td>
+          <td>High — embedded in bank portals, asset manager intranets, partner products</td>
+        </tr>
+        <tr>
+          <td>Visual context</td>
+          <td>Phone at 6:31 AM · app store · social ads · editorial</td>
+          <td>Workstation · Bloomberg-adjacent · compliance reports · enterprise procurement · print-to-digital</td>
+        </tr>
+        <tr>
+          <td>What was designed</td>
+          <td>Complete system — identity, voice, motion, website, product concept</td>
+          <td><strong>Nothing. This project starts here.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Scope Clarification: What This Project Owns</h3>
+  <p>This project owns the professional brand system: strategy, architecture, identity, website, product application, enterprise trust, co-branding, and white-label systems. It does not redesign the retail/consumer proposition, but it must define the <strong>Retail Interface Contract</strong> — the set of shared assets, naming conventions, trust patterns, and permitted variations the retail project inherits. The Lede consumer work is an approved prior output, not a competitor to this work.</p>
+</div>
+
+<!-- 03 CURRENT BRAND AUDIT -->
+<div class="section" id="audit">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Current Brand Audit</h2>
+  </div>
+  <p class="section-sub">Audit of the current Boosted.ai professional brand across all 10 gauntlet dimensions. Where live brand access was unavailable, scores are based on inferred and reconstructed materials — noted per dimension.</p>
+
+  <h3 class="sub">01 · Institutional Credibility &amp; Trust</h3>
+  <div class="finding p0">
+    <div class="f-label">Score: 5.5 / 10 &nbsp;·&nbsp; Weight: 1.50 &nbsp;·&nbsp; Weighted: 8.25</div>
+    <h4>The dark-gold costume signals insider status but cannot survive enterprise scrutiny</h4>
+    <p>The near-black / bullion-gold palette reads as "private banking" to institutional buyers who encounter it through human sales relationships — a legitimate initial trust signal. But the current brand provides zero enterprise trust artifacts: no visible SOC 2 compliance documentation, no governance or audit-log design, no data-processing terms presentation, no deployment-architecture visuals. Security, governance, and compliance exist in the product; they don't exist in the brand. A procurement team reviewing a vendor cannot find these signals without contacting sales. That gap is critical at the contract stage.</p>
+  </div>
+
+  <h3 class="sub">02 · Professional Workflow Comprehension &amp; Usefulness</h3>
+  <div class="finding p0">
+    <div class="f-label">Score: 3.5 / 10 &nbsp;·&nbsp; Weight: 1.25 &nbsp;·&nbsp; Weighted: 4.38</div>
+    <h4>No professional workflow has been designed or communicated in any brand artifact</h4>
+    <p>The headline "The AI engine behind modern investing" tells a buy-side analyst nothing about what Alfa does on a Tuesday morning before an earnings call. The brand assets produced to date (consumer launch page, identity system) show the DRI's 6:31 AM brief — not a team of analysts running pre-trade checks, not a head of research reviewing a 50-company watchlist, not a compliance officer approving a generated research report. The product's actual professional workflows — earnings review, thesis validation, pre-trade checks, portfolio monitoring, document analysis, agent governance — are entirely absent from any brand artifact.</p>
+  </div>
+
+  <h3 class="sub">03 · Distinctiveness &amp; Memorability</h3>
+  <div class="finding">
+    <div class="f-label">Score: 4.5 / 10 &nbsp;·&nbsp; Weight: 1.25 &nbsp;·&nbsp; Weighted: 5.63</div>
+    <h4>The current system has craft but no distinctive mark</h4>
+    <p>The surface-stepped, shadow-free, border-free discipline is genuinely rare and ownable. But it isn't visible to a buyer reviewing a pitch deck at 100% zoom. The current brand has no logomark that survives at 16px or in grayscale, no motion signature, and a typography choice (Hanken Grotesk) that is industry-generic. The dark-gold palette is "institutional" but so is Bloomberg, FactSet, and every legacy fintech UI. Dark + gold does not distinguish; it classifies. The Instrument Line (v2) introduces the Step as a mark with concept-native meaning — this is the most distinctive asset in the prior work — but it was built for the consumer brand, not tested in professional institutional contexts.</p>
+  </div>
+
+  <h3 class="sub">04 · Brand Architecture &amp; Naming Clarity</h3>
+  <div class="finding p0">
+    <div class="f-label">Score: 2.5 / 10 &nbsp;·&nbsp; Weight: 1.00 &nbsp;·&nbsp; Weighted: 2.50</div>
+    <h4>The naming system is a documented disaster — multiple names, no resolution</h4>
+    <p>Material reviewed confirms the following names in use or recently used for the same product: <strong>Alfa, Alpha, Alpha 3, Alpha Prime, AlphaHub, Ask Alpha, Intelligence</strong>. The company brand is Boosted.ai. A prior engagement renamed the company to Lede. The tiers Pro, Prime, Platform, Powered, and Retail appear in the brief but are never defined anywhere in the available materials as products vs. tiers vs. modes vs. internal vocabulary. A potential institutional client who has heard of "Alfa" from a conference, received a deck mentioning "Alpha Prime," and seen a LinkedIn ad for "Boosted.ai" cannot confirm they're being sold the same thing. This is not a brand perception problem — it is a commercial liability.</p>
+  </div>
+
+  <h3 class="sub">05 · Faithfulness to the Actual Product</h3>
+  <div class="finding">
+    <div class="f-label">Score: 5.0 / 10 &nbsp;·&nbsp; Weight: 1.00 &nbsp;·&nbsp; Weighted: 5.00</div>
+    <h4>The voice is faithful; the visuals don't show the product</h4>
+    <p>The institutional voice ("specific over vague," real banned words, outcome-led) accurately reflects the product's character. The consumer-facing materials (launch page, delivery book) show an accurate picture of the consumer product. But no professional brand artifact shows: the research home screen, the Ask Alfa interface, company deep-dive pages, agent activity monitors, source citation panels, thesis validation flows, or pre-trade check results. The professional product — which is the most sophisticated thing Boosted.ai has built — is invisible in its own brand materials.</p>
+  </div>
+
+  <h3 class="sub">06 · Visual Craft &amp; Coherence</h3>
+  <div class="finding">
+    <div class="f-label">Score: 5.5 / 10 &nbsp;·&nbsp; Weight: 1.00 &nbsp;·&nbsp; Weighted: 5.50</div>
+    <h4>The discipline is real; the application is consumer-only</h4>
+    <p>The v2 token system has genuine craft: the surface-stepping, the typographic hierarchy (Schibsted Grotesk body / IBM Plex Mono data / Newsreader long-form), the 90/8/2 color ration, the motion restraint. These are professional-grade design decisions. But the visual system was applied exclusively to consumer surfaces — the concept launch page, the Morning Lede UI. The dark product register has not been applied to institutional materials: research documents, enterprise security pages, partner portals, governance dashboards. The system exists; its professional applications do not.</p>
+  </div>
+
+  <h3 class="sub">07 · Verbal Craft &amp; Specificity</h3>
+  <div class="finding">
+    <div class="f-label">Score: 7.0 / 10 &nbsp;·&nbsp; Weight: 0.75 &nbsp;·&nbsp; Weighted: 5.25</div>
+    <h4>The institutional voice is genuinely strong and specific</h4>
+    <p>This is the brand's highest-performing dimension. The engagement produced real rules: "specific over vague," the banned-words list, "coverage without gaps" as a precise claim. The hero copy ("The AI engine behind modern investing") is direct and not generic. The consumer voice ("never be the last to know") is disciplined and correct. The gap is professional-side: no messaging hierarchy for CIOs, compliance officers, CTOs, enterprise platform buyers, or partner-primary deployments has been produced. Audience-specific professional messaging was not in scope for the prior engagement.</p>
+  </div>
+
+  <h3 class="sub">08 · Enterprise, Embedded &amp; Co-Branding Durability</h3>
+  <div class="finding p0">
+    <div class="f-label">Score: 1.5 / 10 &nbsp;·&nbsp; Weight: 0.75 &nbsp;·&nbsp; Weighted: 1.13</div>
+    <h4>Complete absence — this is the hardest zero in the entire audit</h4>
+    <p>No co-branding framework. No white-label specification. No "Powered by Boosted.ai" / "Powered by Alfa" design system. No partner-portal mockup. No Boosted.ai-led vs. Alfa-led vs. partner-primary vs. equal-weight lockup system. The delivery book defines "Powered by [NAME] Engine" as an architecture tier — and then produces no design system for it. When the Instrument Line is placed inside a Barclays-branded product, does the international orange survive alongside Barclays blue? When a bank's risk portal embeds Alfa, what attribution appears, in what size, in what position, on what surface? These questions have no answers in any brand artifact. This is the single most critical gap for enterprise sales.</p>
+  </div>
+
+  <h3 class="sub">09 · Operational Durability</h3>
+  <div class="finding">
+    <div class="f-label">Score: 4.5 / 10 &nbsp;·&nbsp; Weight: 0.75 &nbsp;·&nbsp; Weighted: 3.38</div>
+    <h4>Token system is solid; operational templates don't exist</h4>
+    <p>The design token file (v2.0.0) is machine-readable and well-organized — a real advantage over most early-stage brand systems. But the operational coverage is consumer-only. What does a sales deck look like in this system? An enterprise one-pager? A security review document? A conference booth? A LinkedIn ad for a fund manager audience? A customer story for an institutional buyer? None of these templates exist. A small in-house team receiving the Lede system tomorrow could not produce next week's institutional sales materials without inventing conventions from scratch.</p>
+  </div>
+
+  <h3 class="sub">10 · Accessibility, Technical Execution &amp; Conversion</h3>
+  <div class="finding">
+    <div class="f-label">Score: 4.5 / 10 &nbsp;·&nbsp; Weight: 0.75 &nbsp;·&nbsp; Weighted: 3.38</div>
+    <h4>Dark-only system has accessibility risk; no professional conversion path designed</h4>
+    <p>The pre-Lede dark system (near-black + bullion gold) was never audited for WCAG 2.2 AA. The v2 tokens introduce a light ("brand") register and explicitly specify brand-text variants for small-type contrast — evidence that the team recognized the accessibility gap. But neither register has been formally tested. The professional conversion path ("Request access" → demo → security review → procurement) has not been designed as a brand journey. There is no enterprise trust page, no request-demo flow, no security documentation template. A potential institutional buyer who wants to do diligence on Boosted.ai before a procurement decision cannot complete that diligence from any brand-owned surface.</p>
+  </div>
+</div>
+
+<!-- 04 SCORECARD -->
+<div class="section" id="scorecard">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Current Professional Brand Scorecard</h2>
+  </div>
+
+  <div class="score-grid">
+    <div class="score-row">
+      <span class="score-label">Institutional credibility &amp; trust</span>
+      <span class="score-weight tabnum">×1.50</span>
+      <div class="score-bar-outer"><div class="score-bar-inner mid" style="width:55%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">5.5 → 8.25</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Professional workflow comprehension</span>
+      <span class="score-weight tabnum">×1.25</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:35%"></div></div>
+      <span class="score-val tabnum" style="color:var(--crit);">3.5 → 4.38</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Distinctiveness &amp; memorability</span>
+      <span class="score-weight tabnum">×1.25</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:45%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">4.5 → 5.63</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Brand architecture &amp; naming clarity</span>
+      <span class="score-weight tabnum">×1.00</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:25%"></div></div>
+      <span class="score-val tabnum" style="color:var(--crit);">2.5 → 2.50</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Faithfulness to the actual product</span>
+      <span class="score-weight tabnum">×1.00</span>
+      <div class="score-bar-outer"><div class="score-bar-inner mid" style="width:50%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">5.0 → 5.00</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Visual craft &amp; coherence</span>
+      <span class="score-weight tabnum">×1.00</span>
+      <div class="score-bar-outer"><div class="score-bar-inner mid" style="width:55%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">5.5 → 5.50</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Verbal craft &amp; specificity</span>
+      <span class="score-weight tabnum">×0.75</span>
+      <div class="score-bar-outer"><div class="score-bar-inner high" style="width:70%"></div></div>
+      <span class="score-val tabnum" style="color:var(--ok);">7.0 → 5.25</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Enterprise, embedded &amp; co-branding durability</span>
+      <span class="score-weight tabnum">×0.75</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:15%"></div></div>
+      <span class="score-val tabnum" style="color:var(--crit);">1.5 → 1.13</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Operational durability for in-house team</span>
+      <span class="score-weight tabnum">×0.75</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:45%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">4.5 → 3.38</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Accessibility, technical execution &amp; conversion</span>
+      <span class="score-weight tabnum">×0.75</span>
+      <div class="score-bar-outer"><div class="score-bar-inner low" style="width:45%"></div></div>
+      <span class="score-val tabnum" style="color:var(--warn);">4.5 → 3.38</span>
+    </div>
+  </div>
+
+  <div class="final-score">
+    <div class="label">Weighted professional brand score (sum of weights = 10.00)</div>
+    <div class="number">4.4<span class="denom">/10</span></div>
+    <div class="band">Band: 3.0–4.9 · Generic or strategically thin</div>
+    <div class="band" style="margin-top:6px; color:var(--crit);">
+      Weighted total: 44.40 pts · 4 P0 defects · No professional system exists
+    </div>
+  </div>
+
+  <div class="callout crit">
+    <strong>Interpretation.</strong> A score of 4.4 does not mean the company has a mediocre brand. It means the professional brand system does not exist as a complete artifact. The consumer brand (Lede) is not scored here — it was assessed separately in the prior engagement. This score reflects only the professional side, which was explicitly left unbuilt.
+  </div>
+
+  <h3 class="sub">P0 Defects (No Score Above 6.5 While These Remain Open)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Defect</th>
+          <th>Dimension</th>
+          <th>Commercial consequence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--crit); font-weight:600;">P0 — No professional workflow communication</td>
+          <td>02</td>
+          <td>A buy-side analyst who visits the site cannot determine what Alfa does on a normal research day</td>
+        </tr>
+        <tr>
+          <td style="color:var(--crit); font-weight:600;">P0 — Naming architecture completely unresolved</td>
+          <td>04</td>
+          <td>Alfa / Alpha / Alpha Prime / AlphaHub / Ask Alpha in parallel; Pro / Prime / Platform / Powered undefined; institutional buyers cannot confirm they're buying the same product they researched</td>
+        </tr>
+        <tr>
+          <td style="color:var(--crit); font-weight:600;">P0 — Zero co-branding or white-label system</td>
+          <td>08</td>
+          <td>Enterprise platform sales cannot close without a partner-integration design specification; bank procurement requires attribution clarity</td>
+        </tr>
+        <tr>
+          <td style="color:var(--crit); font-weight:600;">P0 — No enterprise trust artifact</td>
+          <td>01</td>
+          <td>Procurement teams cannot complete diligence without a security/governance page; deals stall or require custom one-offs at sales cost</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 05 COMPETITIVE LANDSCAPE -->
+<div class="section" id="competitive">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2>Professional Competitive Landscape</h2>
+  </div>
+  <p class="section-sub">22 brands mapped. Two axes: Finance-native specificity (X) vs. Institutional-grade enterprise capability (Y).</p>
+
+  <!-- Competitive Map -->
+  <div class="cmap" aria-label="Competitive landscape map: Finance-native vs AI-first on X axis, Enterprise vs Individual on Y axis">
+    <span class="axis x-left">◄ Finance-native</span>
+    <span class="axis x-right">AI-first ►</span>
+    <span class="axis y-top">▲ Enterprise / institutional</span>
+
+    <!-- Incumbents — top left -->
+    <div class="dot" style="left:8%;top:12%;">Bloomberg Terminal</div>
+    <div class="dot" style="left:14%;top:22%;">FactSet</div>
+    <div class="dot" style="left:10%;top:32%;">Refinitiv/LSEG</div>
+    <div class="dot" style="left:22%;top:18%;">S&amp;P Capital IQ</div>
+    <div class="dot" style="left:18%;top:36%;">Visible Alpha</div>
+
+    <!-- AI-native enterprise — top right -->
+    <div class="dot" style="left:52%;top:14%;">AlphaSense</div>
+    <div class="dot" style="left:72%;top:18%;">Hebbia</div>
+    <div class="dot" style="left:80%;top:28%;">Rogo</div>
+    <div class="dot" style="left:64%;top:24%;">Brightwave</div>
+    <div class="dot" style="left:60%;top:36%;">Quill AI</div>
+
+    <!-- Expert data — mid left -->
+    <div class="dot" style="left:28%;top:28%;">Tegus / Canalyst</div>
+    <div class="dot" style="left:34%;top:38%;">Kensho (S&amp;P)</div>
+    <div class="dot" style="left:38%;top:48%;">YipitData</div>
+
+    <!-- Boosted / Alfa — current -->
+    <div class="dot us" style="left:40%;top:22%;">Alfa (today)</div>
+
+    <!-- Open seat -->
+    <div class="dot open-seat" style="left:56%;top:54%;">Open: Finance-AI<br>for individual PMs</div>
+
+    <!-- Individual-facing — bottom half -->
+    <div class="dot" style="left:28%;top:72%;">Koyfin</div>
+    <div class="dot" style="left:20%;top:80%;">Quartr</div>
+    <div class="dot" style="left:10%;top:85%;">Sentieo</div>
+    <div class="dot" style="left:74%;top:82%;">Perplexity</div>
+    <div class="dot" style="left:86%;top:78%;">ChatGPT / Claude</div>
+  </div>
+
+  <h3 class="sub">Reference Brand Analysis — Extracted Lessons, Not a Mood Board</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>What it proves</th>
+          <th>Specific lesson for Boosted.ai professional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>AlphaSense</strong></td>
+          <td>Finance-native AI search can have institutional credibility and still be modern</td>
+          <td>Their blue-on-dark system is clean but generic. The opportunity: be the one that shows its work, not the one that processed the most documents.</td>
+        </tr>
+        <tr>
+          <td><strong>Hebbia</strong></td>
+          <td>High-design AI can win enterprise trust with a premium look</td>
+          <td>Beautiful but not finance-specific — the visual language could work for any vertical. Boosted.ai can win by being visually native to finance workflows, not just premium-feeling.</td>
+        </tr>
+        <tr>
+          <td><strong>Bloomberg Terminal</strong></td>
+          <td>Dense data and orange monochrome can become the category signal for seriousness</td>
+          <td>The orange association is real and documented. "Flare" (international orange) requires explicit differentiation from Bloomberg's orange — similar color, completely different justification (flight recorder vs. terminal). A critic will raise this; a plan must exist.</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe</strong></td>
+          <td>B2B infrastructure can have the most trusted brand in its category</td>
+          <td>Stripe's trust comes from its documentation — not security theater, but actual technical precision. The Boosted.ai enterprise trust system should look like Stripe's developer docs: meticulous, not designed-to-impress.</td>
+        </tr>
+        <tr>
+          <td><strong>Vercel</strong></td>
+          <td>A single geometric mark (triangle) can own its meaning at every context</td>
+          <td>The Step as a mark follows this logic. But Vercel's mark works at 16px because it has no interior detail. Any mark for professional use must survive at 16, 24, 32, 40, 64px — and must be verified, not assumed.</td>
+        </tr>
+        <tr>
+          <td><strong>Anthropic</strong></td>
+          <td>An AI company can have a genuinely distinguished, human-feeling brand</td>
+          <td>Their illustrated world makes them distinct from every other AI brand. Boosted.ai's equivalent is real financial data — not illustration, but the genuine artifact of investment research as a visual language.</td>
+        </tr>
+        <tr>
+          <td><strong>Ramp</strong></td>
+          <td>Fintech B2B can have high visual energy without losing institutional credibility</td>
+          <td>Ramp's identity is a cautionary reference: the Instrument Line v1 was flagged as "Ramp-adjacent yellow." The v2 pivot to international orange was a correct response. The remaining risk: Ramp's kinetic precision aesthetic may overlap with The Instrument Line's motion language. Distinguish deliberately.</td>
+        </tr>
+        <tr>
+          <td><strong>Carta</strong></td>
+          <td>Legal/financial software can have a clean, institutional-grade brand that doesn't feel like enterprise legacy software</td>
+          <td>Carta succeeds by looking like the documents its users work with — clean, structured, data-forward. Alfa's brand can do the same with investment research artifacts.</td>
+        </tr>
+        <tr>
+          <td><strong>Linear</strong></td>
+          <td>A product tool can have high brand recognition through precision and restraint alone</td>
+          <td>Linear's mark works in one pixel weight, no color required. The professional brand must achieve the same result: a mark that reads in grayscale on a Bloomberg terminal color scheme and in color on a bank's enterprise portal.</td>
+        </tr>
+        <tr>
+          <td><strong>FactSet</strong></td>
+          <td>What the incumbent looks like</td>
+          <td>FactSet is the direct competitive alternative for institutional research. Their brand is 2010-era enterprise: functional but dated, intimidating to new users, with no concept of the analyst's workflow as a design surface. Beating FactSet on brand is achievable — the gap is visible.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Competitor Swap Test — Applied at Audit Stage</h3>
+  <div class="callout warn">
+    <strong>Observation.</strong> The current Boosted.ai professional brand — dark background, clean sans-serif, "AI engine for investing" copy — passes the competitor swap test. The hero copy "The AI engine behind modern investing" could plausibly belong to AlphaSense, Hebbia, or Rogo with minimal copy adjustment. This is not a defect in the voice (which is more specific than this implies) but a gap in the visual and architectural distinctiveness. The professional brand being built must fail the competitor swap test — the identity must be untransferable.
+  </div>
+</div>
+
+<!-- 06 PRIOR FAILURE MODES -->
+<div class="section" id="failures">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2>Prior Attempt Failure Modes</h2>
+  </div>
+  <p class="section-sub">Documented failures from prior in-house and engagement work. The gauntlet rules require that any repeat failure cap the score at 6.0. These must be tracked and explicitly resolved.</p>
+
+  <div class="finding p0">
+    <div class="f-label">FM-01 · P0 · Consumer-first, professional retrofit</div>
+    <h4>The professional brand was designed as an afterthought to a consumer engagement</h4>
+    <p>The Fair Copy engagement was scoped correctly to the consumer brand. The institutional/professional side received exactly three sentences on the concept homepage. This created a structural gap: no professional naming architecture, no institutional visual applications, no co-branding system, no enterprise trust design. Any new professional brand attempt must be built from the professional buyer's context — not adapted from a consumer system.</p>
+    <p><strong>Resolution required:</strong> Begin from institutional buying contexts (compliance review, procurement, demo-to-contract, embedded deployment) — not from the consumer product's morning ritual.</p>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">FM-02 · P0 · Naming architecture never resolved</div>
+    <h4>Seven names for one product; tier labels defined nowhere</h4>
+    <p>Alfa / Alpha / Alpha 3 / Alpha Prime / AlphaHub / Ask Alpha / Intelligence all appear in materials as names for the same or closely related product. Pro / Prime / Platform / Powered appear as tier/mode labels without definition. The prior engagement resolved the master brand name (Lede) but did not address the professional product architecture. No prior attempt produced a documented naming architecture with defined roles for each label.</p>
+    <p><strong>Resolution required:</strong> A complete naming architecture table — company brand, product brand, tier names, mode names, partner names — with a legacy migration plan and a decision rule for which names survive.</p>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">FM-03 · P0 · No co-branding or white-label system produced</div>
+    <h4>Enterprise sales cannot close without a partner-integration design specification</h4>
+    <p>Neither the Fair Copy engagement nor any prior internal work produced a co-branding specification, white-label design system, or "Powered by" attribution framework. This is documented as an architecture tier in the delivery book but was explicitly deferred. Bank and asset manager procurement requires this before any embedded or Platform-tier contract can be signed.</p>
+    <p><strong>Resolution required:</strong> A complete partner integration design system tested against at least six scenarios: Boosted.ai-led, Alfa-led, co-branded (equal weight), partner-primary (quiet attribution), partner-primary (silent attribution), fully white-labeled.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">FM-04 · Lede identity consumer-first — institutional durability untested</div>
+    <h4>Editorial visual language (paper, proofreader's marks, morning ritual) does not survive all professional contexts</h4>
+    <p>The Instrument Line's identity system is built around editorial/journalistic metaphors that work for consumer marketing. In institutional contexts — compliance reports, security documentation, bank procurement portals, enterprise onboarding — "proofreader's marks iconography" and "the STET stamp" read as designer choices, not institutional signals. Whether to adapt the Lede identity for professional use or build a distinct professional register must be an explicit decision, not an assumption.</p>
+    <p><strong>Resolution required:</strong> Test the Instrument Line against professional contexts explicitly. Either confirm it survives (with evidence) or build a distinct professional register that inherits only the token architecture.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">FM-05 · "Flare" orange proximity to Bloomberg orange</div>
+    <h4>International orange is documented as unclaimed in investing — but Bloomberg's association is real</h4>
+    <p>The Instrument Line v2 identifies international orange as "unclaimed in investing" — this is a strategic claim, not a verified fact. Bloomberg Terminal is institutionally associated with a vivid orange in professional investor vocabulary ("Bloomberg orange"). The color story is well-justified (flight recorder), but the association risk needs explicit resolution, not assumption. If a fund manager's compliance officer raises "that's Bloomberg's color" in a vendor evaluation, what is the answer?</p>
+    <p><strong>Resolution required:</strong> Compare the exact values, test the association explicitly with a professional investor sample, and pre-load the differentiation story into all brand materials.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">FM-06 · Studio Freight gaps inherited by any professional brand engagement</div>
+    <h4>The RFP's own gaps were repeated by both Fair Copy and Studio Freight</h4>
+    <p>The Studio Freight assessment notes they missed: naming methodology, brand architecture, token handoff, and the "don't touch product UI" constraint. The Fair Copy engagement addressed all four for the consumer side — but inherited the same gaps for the professional side. Any professional brand work that does not explicitly address naming architecture, institutional-grade design tokens, product-UI non-interference, and enterprise trust design will repeat this failure.</p>
+    <p><strong>Resolution required:</strong> Explicit section for each of these in the professional brand deliverable scope.</p>
+  </div>
+</div>
+
+<!-- 07 EXISTING EQUITY -->
+<div class="section" id="equity">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2>Existing Equity Assessment</h2>
+  </div>
+  <p class="section-sub">What survives any rebrand decision. Categorized by confidence level. Do not silently normalize or silently retire these — every decision must be explicit.</p>
+
+  <h3 class="sub">High-Confidence: Carry Forward</h3>
+  <div class="table-wrap">
+    <table class="equity-row">
+      <thead>
+        <tr>
+          <th>Equity</th>
+          <th>Why it survives</th>
+          <th>How to use it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Design token architecture<br><span style="font-size:11px; font-weight:400; color:var(--muted);">Surface-stepped elevation, shadow-free, border-free</span></td>
+          <td>Genuinely rare — produces excellent contrast management without visual complexity. The discipline is visible in the product and legible to sophisticated designers and engineers.</td>
+          <td>Map the professional token system to these same hard rules. Do not add shadows or card borders for "enterprise seriousness."</td>
+        </tr>
+        <tr>
+          <td>IBM Plex Mono for data, tickers, timestamps</td>
+          <td>Perfect for dense financial UI. Tabular-nums native. The right choice for any product that renders financial figures.</td>
+          <td>Non-negotiable in product UI. Extend to enterprise-facing documents and research report templates.</td>
+        </tr>
+        <tr>
+          <td>"Coverage without gaps" as the strategic frame</td>
+          <td>The most precise articulation of the institutional value proposition in any prior material. Analyst-legible, compliance-credible, CIO-relevant.</td>
+          <td>The lead claim for professional audiences. Carry it verbatim or improve it with evidence — do not replace it with vaguer language.</td>
+        </tr>
+        <tr>
+          <td>Verification story ("shows its work")</td>
+          <td>The product's deepest differentiator. Becomes a trust claim in institutional contexts and a consumer moat simultaneously. Cited outputs, traceable sources — this is concrete and defensible.</td>
+          <td>The lead enterprise trust claim. Build the entire security/governance section of the professional brand around this. Show, don't state.</td>
+        </tr>
+        <tr>
+          <td>The institutional voice standard</td>
+          <td>Codified, specific, outcome-led, with a real banned-words list. This is professional-grade verbal discipline that most competitors don't have.</td>
+          <td>The foundation of the professional verbal identity. Extend it with audience-specific messaging (CIO, compliance, procurement, partner) — don't replace it.</td>
+        </tr>
+        <tr>
+          <td>Dark product register</td>
+          <td>Institutional-friendly. Appropriate for workstation environments. Already implemented with discipline.</td>
+          <td>Keep as the primary product register. Add a complementary professional light register for printed materials, presentations, and partner portals.</td>
+        </tr>
+        <tr>
+          <td>The "Step" logomark concept</td>
+          <td>A mark built from the visual representation of new information arriving in a market — this is concept-native to the product in a way no other proposed mark achieves.</td>
+          <td>Test in professional contexts. Validate at 16px. Test in grayscale, embroidered, and on partner colors. Confirm or replace with evidence.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">At Risk: Evaluate, Don't Assume</h3>
+  <div class="table-wrap">
+    <table class="equity-row">
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th>Risk</th>
+          <th>Decision required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Flare" international orange (#FF5A14)</td>
+          <td>Bloomberg association. Semantic color interference in dense financial UI (competes with data-up green / data-down red). Co-branding survival on bank color schemes untested.</td>
+          <td>Keep if: competitor-swap test confirms it's differentiated from Bloomberg orange, and co-branding tests pass. Replace if: 3+ professional investor evaluators associate it with Bloomberg without prompting.</td>
+        </tr>
+        <tr>
+          <td>"Alfa" as product name</td>
+          <td>Eight years of institutional equity in-channel. But the consumer reads Alfa Romeo, Alfa Bank (sanctioned), or crypto "alpha." Naming inconsistency (Alfa / Alpha / Alpha Prime) unresolved.</td>
+          <td>Architecture decision required first. Then: does Alfa survive as the professional product brand under the new company architecture, or does it migrate to a new professional-specific name?</td>
+        </tr>
+        <tr>
+          <td>"Lede" as company master brand</td>
+          <td>Consumer-validated. Professional durability untested. "Lede Institutional" as a product name may not work in fund-manager procurement language.</td>
+          <td>Test specifically with institutional buyers: would they say "Lede" in a fund board meeting? Would "Lede Institutional" appear in a prime broker agreement?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Do Not Carry Forward</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Asset</th>
+          <th>Why retired</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hanken Grotesk (pre-v2 body font)</td>
+          <td>Generic. Unownable. Correctly retired in v2. Do not re-introduce under any "keep it familiar" rationale.</td>
+        </tr>
+        <tr>
+          <td>Bullion gold (#C19A6B — pre-v2 accent)</td>
+          <td>Elegant on black, muddy on white, invisible at small sizes. Retired in v2 in favor of Flare orange. Do not reintroduce.</td>
+        </tr>
+        <tr>
+          <td>Highlighter yellow (v1 mark gesture)</td>
+          <td>Ramp-adjacent. Correctly identified and retired. Do not reintroduce as a "lighter alternative to orange."</td>
+        </tr>
+        <tr>
+          <td>Editorial consumer metaphors in professional contexts</td>
+          <td>Masthead, Morning Lede, proofreader's marks, STET stamp — appropriate for consumer marketing, inappropriate for bank security documentation, compliance reports, or enterprise procurement.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 08 RETAIL INTERFACE CONTRACT -->
+<div class="section" id="retail">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2>Retail Interface Contract</h2>
+  </div>
+  <p class="section-sub">The professional project owns the recommended company and enterprise architecture. This section defines what the retail project inherits, what it may adapt, and what it controls independently. This contract governs the relationship between the professional system (this project) and the consumer system (Lede engagement, prior work).</p>
+
+  <div class="callout">
+    <strong>Status of this contract at Phase 0.</strong> This is a dependency list and boundary definition, not yet a specification. The contract will be expanded and formalized in Phase 1 (Brand Strategy &amp; Architecture) once the professional system's architecture is decided. These items are flagged here so the retail project team knows what decisions are pending.
+  </div>
+
+  <div class="table-wrap">
+    <table class="contract-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Parent endorsement pattern</td>
+          <td>How the company brand (Boosted.ai or Lede, depending on naming outcome) appears on the consumer product. Lockup rules, size, position, legal line.</td>
+          <td><span class="badge badge-warn">Pending Phase 1</span></td>
+        </tr>
+        <tr>
+          <td>Shared typography</td>
+          <td>IBM Plex Mono is shared (non-negotiable for financial data rendering). The display and body faces are register-specific — retail may use Schibsted Grotesk / Newsreader / Instrument Serif as decided; professional may use the same or a distinct register.</td>
+          <td><span class="badge badge-warn">Shared: IBM Plex Mono confirmed; others pending</span></td>
+        </tr>
+        <tr>
+          <td>Shared color architecture</td>
+          <td>The dark product register (#131210 surface-primary) is shared. Semantic colors (success, error, warning, data-up, data-down) must be identical in both registers — a user who switches between products must not encounter different semantic meanings. The brand accent may differ by register.</td>
+          <td><span class="badge badge-warn">Pending Phase 4</span></td>
+        </tr>
+        <tr>
+          <td>Protected trust patterns</td>
+          <td>Citation patterns (source attribution, computed-from language, data provenance), audit indicators, and verification badges must appear identically in both the professional and consumer products. These are legal and compliance signals — not design variations.</td>
+          <td><span class="badge badge-crit">Must not vary — design in Phase 6</span></td>
+        </tr>
+        <tr>
+          <td>Permitted visual variation for retail</td>
+          <td>Consumer-specific: marketing color register (Flare orange applied to consumer surfaces), editorial type treatments (Instrument Serif display face), Morning Lede visual identity, consumer-specific motion (ambient instrument line on brand surfaces). These are consumer-only and may not be applied to professional surfaces.</td>
+          <td><span class="badge badge-ok">Retail zone — defined</span></td>
+        </tr>
+        <tr>
+          <td>Naming syntax</td>
+          <td>The approved naming pattern for consumer products under the new architecture: [Company name] + [product descriptor] or [product name] + "by [company]". The exact pattern is determined by the naming architecture in Phase 1.</td>
+          <td><span class="badge badge-warn">Pending Phase 1</span></td>
+        </tr>
+        <tr>
+          <td>Navigation relationship</td>
+          <td>Whether and how the professional and consumer products link in navigation. The current model (consumer app ↔ institutional product) requires a clear boundary. The interface contract defines cross-links, upgrade paths, and shared login vs. separate authentication.</td>
+          <td><span class="badge badge-warn">Pending Phase 5</span></td>
+        </tr>
+        <tr>
+          <td>Independent retail decisions</td>
+          <td>Retail controls independently: consumer pricing presentation, open-signup CTA design, app store presence, consumer-specific feature marketing, consumer ad campaigns, and the Morning Lede visual ritual. These do not require professional brand approval.</td>
+          <td><span class="badge badge-ok">Retail zone — defined</span></td>
+        </tr>
+        <tr>
+          <td>Professional brand decisions retail may not override</td>
+          <td>Enterprise naming, security documentation design, co-branding framework, "Powered by" attribution, compliance footer standards, governance visual language. These are professional brand assets that flow downward — retail inherits, does not define.</td>
+          <td><span class="badge badge-crit">Professional-owned — enforce in Phase 7</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 09 TOP PROBLEMS -->
+<div class="section" id="problems">
+  <div class="section-head">
+    <span class="section-num">09</span>
+    <h2>Top Problems the Professional Brand Must Solve</h2>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">Problem 1 · Most critical</div>
+    <h4>The institutional buyer cannot complete diligence from any brand-owned surface</h4>
+    <p>A CTO evaluating Alfa for a 200-person investment firm cannot find: SOC 2 status, data processing terms, SLA, deployment architecture, audit log documentation, or a security overview — from the website. This is not a "nice to have" for institutional sales. It is a prerequisite for a procurement committee meeting. The professional brand must build a trust surface that answers these questions before the sales call, not after.</p>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">Problem 2 · Most urgent (revenue blocking)</div>
+    <h4>No enterprise/embedded product specification exists for sales to close</h4>
+    <p>Platform-tier and embedded partner deals require a co-branding specification, white-label option documentation, attribution requirements, and a design handoff specification. None of these exist. Sales teams are building these from scratch per deal, which is expensive and produces inconsistent partner implementations that don't reinforce the Boosted.ai brand.</p>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">Problem 3 · Most damaging to credibility</div>
+    <h4>Seven product names, no architecture — a buy-side analyst cannot track the brand</h4>
+    <p>The naming inconsistency across Alfa / Alpha / Alpha Prime / AlphaHub / Ask Alpha / Intelligence / the Pro/Prime/Platform tiers creates a legitimacy problem. An analyst who researched "Alfa" at a conference, received a deck about "Alpha Prime," and now sees "Boosted.ai" on LinkedIn cannot confirm they're tracking the same company. This is the kind of inconsistency that leads a fund manager to choose AlphaSense instead — not because AlphaSense is better, but because the brand is legible.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">Problem 4 · Most significant for long-term brand health</div>
+    <h4>The company has two brands and no treaty between them</h4>
+    <p>The consumer brand (Lede) and the professional brand (Boosted.ai / Alfa) are not designed in relationship to each other. An institutional client who encounters the Lede consumer brand — in a press mention, at a conference, from an employee's LinkedIn — must be able to understand the relationship immediately. If Boosted.ai becomes "Lede" for consumers but retains "Boosted.ai" or "Alfa" for institutions, the shared brand equity must flow in both directions. Currently, the consumer launch page says "formerly Boosted.ai" and the professional brand says nothing at all about the consumer product.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">Problem 5 · Most distinctive opportunity</div>
+    <h4>The product's actual work is more distinctive than the brand communicates</h4>
+    <p>The product reads and analyzes 8-K filings, earnings transcripts, guidance language, market data, research, and email. It surfaces material changes, tests theses, runs pre-trade checks, monitors portfolios, and converts ad hoc research into repeatable workflows. It does this continuously, cites primary sources, and produces auditable outputs. This is genuinely distinctive — and none of it is visible in any brand artifact except the consumer launch page's Morning Lede demo. The professional brand has the opportunity to make the actual work of research visible — not as a product demo, but as a brand gesture.</p>
+  </div>
+</div>
+
+<!-- 10 VERDICT -->
+<div class="section" id="verdict">
+  <div class="section-head">
+    <span class="section-num">10</span>
+    <h2>Verdict &amp; Gate</h2>
+  </div>
+
+  <div class="callout ok">
+    <strong>Gate status: Ready for independent critic review.</strong> This audit is complete, evidence-based, and does not advocate for a creative direction. It identifies four P0 defects, quantifies the current professional brand at 4.4/10, documents six prior failure modes, assesses existing equity, and defines the retail interface dependencies. It is ready for an independent Mean Critic assessment.
+  </div>
+
+  <h3 class="sub">What the Critic Should Verify</h3>
+  <ul class="ls">
+    <li>Whether the P0 defect identification is complete and accurately described</li>
+    <li>Whether the competitive landscape is materially accurate for the professional AI research category as of August 2026</li>
+    <li>Whether any prior failure mode was missed or understated</li>
+    <li>Whether the current brand scorecard arithmetic is correct and the dimension scores are defensible</li>
+    <li>Whether the retail interface contract captures the correct dependencies</li>
+    <li>Whether any access-ledger items are actually available and were missed</li>
+  </ul>
+
+  <h3 class="sub">What Must Not Change Before Critic Review</h3>
+  <ul class="ls">
+    <li>No creative direction may be developed until this audit clears 7.0</li>
+    <li>No naming recommendation may be made until Phase 1 (Brand Strategy) is complete</li>
+    <li>The score of 4.4 for the current professional brand is an input to Phase 1 — it is not a judgment of the company or its team</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Proceeding to:</strong> Phase 0 Mean Critic Review. A fresh context will score this document using the gauntlet rubric. The builder of this audit may not serve as its critic. After critic review, proceed to Phase 1 (Professional Brand Strategy) only if this audit clears 7.0.
+  </div>
+</div>
+
+</main>
+</div><!-- .shell -->
+
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">Toggle theme</button>
+
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  const isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+}
+
+// Sidebar active link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
