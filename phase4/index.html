@@ -1,0 +1,1141 @@
+<title>Phase 4: Vigil by Lede — Complete Professional Identity System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Token system: lede-tokens.json v2.0.0 + Phase 4 amendment ─── */
+:root {
+  /* Product dark register — primary for Territory A */
+  --bg0: #131210;          /* surface-primary */
+  --bg1: #1B1A16;          /* surface-secondary */
+  --bg2: #242320;          /* surface-tertiary */
+  --bg3: #2C2B26;          /* surface-hover */
+  --bg-overlay: #181713;   /* surface-overlay */
+  --ink:  #F7F5EF;         /* text-primary (token spec) */
+  --ink2: #E8E6DC;         /* text-secondary */
+  --ink3: #847D75;         /* text-muted — mapped to accessible value (4.63:1 on bg0) */
+  --ink4: #6C6A5E;         /* text-disabled */
+  --rule: #2C2B26;         /* border-primary */
+  --rule2: #383630;        /* border-secondary */
+  --accent: #FF5A14;       /* Flare — D7: event signal only, ≤2% appearance-earned */
+  --accent-hover: #FF7A42; /* brand-hover */
+  --accent-text: #FF7A42;  /* brand-text — small-type Flare */
+  --ok:   #3FA971;         /* success / data-up */
+  --err:  #E05A47;         /* error / data-down */
+  --warn: #E2A93B;         /* warning */
+  /* Semantic surface tints (very low opacity — not decorative) */
+  --ok-tint:   rgba(63,169,113,0.08);
+  --err-tint:  rgba(224,90,71,0.08);
+  --warn-tint: rgba(226,169,59,0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg0: #F7F5EF;  --bg1: #EFECE2;  --bg2: #E6E3D5;  --bg3: #DEDACA;
+    --bg-overlay: #F2F0E7;
+    --ink:  #131210;  --ink2: #2A2925;  --ink3: #706B63;  --ink4: #8B897D;
+    --rule: #E3E0D4;  --rule2: #D2CFC0;
+    --accent: #FF4B00;  --accent-hover: #E64300;  --accent-text: #C93A00;
+    --ok: #1E7D4F;  --err: #C33B2E;  --warn: #B07C1E;
+    --ok-tint: rgba(30,125,79,0.07);  --err-tint: rgba(195,59,46,0.07);  --warn-tint: rgba(176,124,30,0.07);
+  }
+}
+:root[data-theme="dark"] {
+  --bg0:#131210; --bg1:#1B1A16; --bg2:#242320; --bg3:#2C2B26; --bg-overlay:#181713;
+  --ink:#F7F5EF; --ink2:#E8E6DC; --ink3:#847D75; --ink4:#6C6A5E;
+  --rule:#2C2B26; --rule2:#383630;
+  --accent:#FF5A14; --accent-hover:#FF7A42; --accent-text:#FF7A42;
+  --ok:#3FA971; --err:#E05A47; --warn:#E2A93B;
+  --ok-tint:rgba(63,169,113,0.08); --err-tint:rgba(224,90,71,0.08); --warn-tint:rgba(226,169,59,0.08);
+}
+:root[data-theme="light"] {
+  --bg0:#F7F5EF; --bg1:#EFECE2; --bg2:#E6E3D5; --bg3:#DEDACA; --bg-overlay:#F2F0E7;
+  --ink:#131210; --ink2:#2A2925; --ink3:#706B63; --ink4:#8B897D;
+  --rule:#E3E0D4; --rule2:#D2CFC0;
+  --accent:#FF4B00; --accent-hover:#E64300; --accent-text:#C93A00;
+  --ok:#1E7D4F; --err:#C33B2E; --warn:#B07C1E;
+  --ok-tint:rgba(30,125,79,0.07); --err-tint:rgba(195,59,46,0.07); --warn-tint:rgba(176,124,30,0.07);
+}
+
+/* ─── Type foundations ─── */
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: "IBM Plex Mono", "Fira Code", "Cascadia Code", monospace; }
+
+/* ─── Layout ─── */
+.site-header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--bg0); border-bottom: 1px solid var(--rule);
+  padding: 10px 32px; display: flex; justify-content: space-between; align-items: center; gap: 24px;
+}
+.sh-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 700;
+  letter-spacing: -0.01em; color: var(--ink);
+  display: flex; align-items: center; gap: 12px;
+}
+.sh-meta { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink3); letter-spacing: 0.05em; }
+
+.shell { display: grid; grid-template-columns: 210px 1fr; min-height: calc(100vh - 45px); }
+
+.sidebar {
+  border-right: 1px solid var(--rule); padding: 24px 0; position: sticky; top: 45px;
+  height: calc(100vh - 45px); overflow-y: auto;
+}
+.sb-section { padding: 0 16px 20px; border-bottom: 1px solid var(--rule); margin-bottom: 8px; }
+.sb-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink3); display: block; margin-bottom: 8px;
+}
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; padding: 0 8px; }
+.sidebar nav a {
+  font-size: 12px; color: var(--ink3); text-decoration: none; padding: 4px 8px;
+  border-radius: 3px; font-family: "IBM Plex Mono", monospace;
+}
+.sidebar nav a:hover { color: var(--ink); background: var(--bg2); }
+.sidebar nav a.active { color: var(--accent-text); }
+.sidebar nav a .nav-num { color: var(--ink4); font-size: 9px; margin-right: 4px; }
+
+.selection-badge {
+  margin: 16px; background: var(--bg2); padding: 12px;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+}
+.sel-row { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; line-height: 1.4; }
+.sel-key { color: var(--ink4); text-transform: uppercase; letter-spacing: 0.08em; }
+.sel-val { color: var(--ink); font-weight: 700; text-align: right; }
+.sel-row:last-child { margin-bottom: 0; }
+
+main { padding: 48px 56px 100px; max-width: 900px; }
+
+/* ─── Sections ─── */
+.section { padding: 56px 0; border-top: 1px solid var(--rule); }
+.section:first-child { border-top: none; padding-top: 0; }
+.section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+.section-num {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.14em;
+  color: var(--ink4); text-transform: uppercase;
+}
+h2 { font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.section-sub { font-size: 13px; color: var(--ink3); line-height: 1.65; margin-bottom: 32px; max-width: 680px; }
+h3.sub {
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500;
+  letter-spacing: -0.01em; margin: 32px 0 12px; color: var(--ink2);
+}
+h3.sub:first-of-type { margin-top: 20px; }
+
+/* ─── Callouts ─── */
+.callout {
+  border-left: 2px solid var(--rule2); padding: 12px 16px; margin: 16px 0;
+  font-size: 13px; line-height: 1.65; background: var(--bg1);
+}
+.callout.ok { border-left-color: var(--ok); }
+.callout.warn { border-left-color: var(--warn); }
+.callout.crit { border-left-color: var(--err); }
+.callout strong { color: var(--ink); }
+
+/* ─── Logomark ─── */
+.logomark-row {
+  display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin: 24px 0;
+}
+.logomark-cell { display: flex; flex-direction: column; gap: 8px; }
+.lm-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink4);
+}
+.lm-swatch {
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.lm-swatch.on-dark { background: var(--bg0); border: 1px solid var(--rule2); }
+.lm-swatch.on-light { background: #F7F5EF; border: 1px solid #D2CFC0; }
+
+/* ─── Wordmark anatomy ─── */
+.wordmark-display {
+  background: var(--bg1); padding: 40px 48px; margin: 24px 0;
+  display: flex; flex-direction: column; gap: 32px;
+}
+.wm-lockup {
+  display: flex; align-items: center; gap: 14px;
+}
+.wm-name {
+  font-family: "IBM Plex Mono", monospace; font-weight: 700; letter-spacing: -0.02em;
+  color: var(--ink); line-height: 1;
+}
+.wm-endorsement {
+  font-family: "Schibsted Grotesk", sans-serif; font-weight: 400;
+  color: var(--ink3); line-height: 1;
+}
+.wm-divider { width: 1px; background: var(--rule2); align-self: stretch; flex-shrink: 0; }
+
+.wm-stacked { flex-direction: column; gap: 4px; align-items: flex-start; }
+.wm-stacked .wm-endorsement { margin-top: 2px; }
+
+/* ─── Type scale ─── */
+.type-scale { display: flex; flex-direction: column; gap: 0; }
+.ts-row {
+  display: grid; grid-template-columns: 180px 1fr 120px;
+  gap: 16px; align-items: baseline; padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ts-row:last-child { border-bottom: none; }
+.ts-meta { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4); line-height: 1.4; }
+.ts-meta strong { color: var(--ink3); display: block; margin-bottom: 2px; }
+.ts-sample-body { font-size: 13px; color: var(--ink3); font-family: "Schibsted Grotesk", sans-serif; }
+
+/* ─── Color system ─── */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; margin: 20px 0; background: var(--rule); }
+.color-cell { background: var(--bg1); padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.color-swatch { height: 40px; border-radius: 2px; }
+.color-meta { font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink3); line-height: 1.5; }
+.color-name { color: var(--ink2); font-weight: 500; display: block; margin-bottom: 2px; }
+
+.contrast-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.contrast-table th {
+  text-align: left; padding: 8px 12px; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink4); border-bottom: 1px solid var(--rule2); font-weight: 500;
+}
+.contrast-table td { padding: 8px 12px; border-bottom: 1px solid var(--rule); color: var(--ink2); }
+.contrast-table tr:last-child td { border-bottom: none; }
+.ct-pass { color: var(--ok); font-weight: 700; }
+.ct-aaa  { color: var(--ok); font-weight: 700; }
+.ct-fail { color: var(--err); font-weight: 700; }
+.ct-exempt { color: var(--ink4); }
+
+/* ─── Component specimens ─── */
+.component-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.btn {
+  font-family: "Schibsted Grotesk", sans-serif; font-size: 13px; font-weight: 500;
+  padding: 8px 20px; border-radius: 999px; border: none; cursor: pointer;
+  line-height: 1; white-space: nowrap;
+}
+.btn-primary   { background: var(--accent); color: #fff; }
+.btn-secondary { background: var(--bg2); color: var(--ink2); }
+.btn-ghost     { background: transparent; color: var(--ink2); border: 1px solid var(--rule2); border-radius: 999px; }
+.btn-sm { font-size: 11px; padding: 5px 14px; }
+
+.chip {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
+  padding: 3px 8px; border-radius: 999px; letter-spacing: 0.04em; display: inline-block;
+}
+.chip-ok   { background: var(--ok-tint); color: var(--ok); }
+.chip-warn { background: var(--warn-tint); color: var(--warn); }
+.chip-err  { background: var(--err-tint); color: var(--err); }
+.chip-neutral { background: var(--bg2); color: var(--ink3); }
+
+/* ─── Data specimen ─── */
+.data-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px solid var(--rule);
+  font-family: "IBM Plex Mono", monospace; font-size: 12px;
+}
+.data-row:last-child { border-bottom: none; }
+.data-label { color: var(--ink3); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+.data-val { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.data-val.up { color: var(--ok); }
+.data-val.down { color: var(--err); }
+
+/* ─── Event node specimen ─── */
+.event-line {
+  display: flex; align-items: center; gap: 0; margin: 20px 0; position: relative;
+}
+.el-line { height: 1px; background: var(--rule2); flex: 1; }
+.el-node {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0;
+}
+.el-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4);
+  position: absolute; left: calc(100% - 60px); top: 8px; white-space: nowrap;
+}
+
+/* ─── Partner badge specimen ─── */
+.partner-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg2); padding: 5px 10px;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink3);
+  letter-spacing: 0.04em;
+}
+.pb-logo { color: var(--ink2); font-weight: 700; }
+.pb-lockup-display {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--bg1); padding: 20px 24px; margin: 16px 0;
+}
+
+/* ─── Tier grid ─── */
+.tier-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--rule); margin: 20px 0; }
+.tier-cell {
+  background: var(--bg1); padding: 16px 12px;
+  font-family: "IBM Plex Mono", monospace;
+}
+.tier-name { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.tier-sub  { font-size: 9px; color: var(--ink4); text-transform: uppercase; letter-spacing: 0.10em; margin-bottom: 10px; }
+.tier-detail { font-size: 10px; color: var(--ink3); line-height: 1.55; }
+
+/* ─── Spec table ─── */
+.spec-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.spec-table th {
+  text-align: left; padding: 8px 12px; font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4);
+  border-bottom: 1px solid var(--rule2); font-weight: 500;
+}
+.spec-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); color: var(--ink2); vertical-align: top; }
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-table td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; width: 180px; }
+
+/* ─── Open condition items ─── */
+.condition-item {
+  background: var(--bg1); padding: 16px 20px; margin: 12px 0;
+  border-left: 2px solid var(--rule2);
+}
+.condition-item.p0 { border-left-color: var(--err); }
+.condition-item.p1 { border-left-color: var(--warn); }
+.condition-item.ok { border-left-color: var(--ok); }
+.ci-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--ink4); margin-bottom: 4px;
+}
+.ci-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.ci-body { font-size: 12px; color: var(--ink3); line-height: 1.65; }
+
+/* ─── Motion spec ─── */
+.motion-spec { background: var(--bg1); padding: 20px 24px; margin: 16px 0; }
+.ms-row { display: flex; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.ms-row:last-child { border-bottom: none; }
+.ms-key { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink3); min-width: 140px; flex-shrink: 0; }
+.ms-val { color: var(--ink2); line-height: 1.55; }
+
+/* ─── Token amendment ─── */
+.amendment { background: var(--bg2); border-left: 2px solid var(--warn); padding: 16px 20px; margin: 16px 0; }
+.amendment-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--warn); margin-bottom: 6px;
+}
+.amendment-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.amendment-body { font-size: 12px; color: var(--ink3); line-height: 1.65; }
+
+/* ─── FM-04 table ─── */
+.fm04-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+.fm04-table th {
+  text-align: left; padding: 8px 12px; font-family: "IBM Plex Mono", monospace;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4);
+  border-bottom: 1px solid var(--rule2); font-weight: 500;
+}
+.fm04-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); color: var(--ink2); vertical-align: top; }
+.fm04-table tr:last-child td { border-bottom: none; }
+.fm04-pass { color: var(--ok); font-weight: 700; font-family: "IBM Plex Mono", monospace; }
+.fm04-tbd  { color: var(--warn); font-weight: 600; font-family: "IBM Plex Mono", monospace; }
+
+/* ─── Table wrap ─── */
+.table-wrap { overflow-x: auto; }
+
+/* ─── Misc ─── */
+.ls { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+.ls li { font-size: 13px; color: var(--ink2); line-height: 1.65; padding-left: 16px; position: relative; }
+.ls li::before { content: "—"; position: absolute; left: 0; color: var(--ink4); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 20px 0; }
+.theme-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 300;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; padding: 6px 14px;
+  background: var(--bg2); color: var(--ink3); border-radius: 999px; border: none;
+  cursor: pointer; letter-spacing: 0.06em;
+}
+.theme-btn:hover { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  main { padding: 32px 24px 60px; }
+  .tier-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header">
+  <div class="sh-title">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M2,7 L13,7 L13,14" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="13" cy="14" r="3" fill="#FF5A14"/>
+    </svg>
+    Vigil by Lede — Identity System
+  </div>
+  <div class="sh-meta">Phase 4 · Aug 3 2026 · lede-tokens.json v2.0.0 + P4 amendment</div>
+</header>
+
+<div class="shell">
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sb-section">
+    <span class="sb-label">Sections</span>
+    <nav>
+      <a href="#overview"><span class="nav-num">01</span>System Overview</a>
+      <a href="#architecture"><span class="nav-num">02</span>Brand Architecture</a>
+      <a href="#logotype"><span class="nav-num">03</span>Logotype System</a>
+      <a href="#logomark"><span class="nav-num">04</span>Logomark — The Step</a>
+      <a href="#tiers"><span class="nav-num">05</span>Tier Naming</a>
+      <a href="#type"><span class="nav-num">06</span>Type System</a>
+      <a href="#color"><span class="nav-num">07</span>Color System</a>
+      <a href="#components"><span class="nav-num">08</span>Components</a>
+      <a href="#motion"><span class="nav-num">09</span>Motion</a>
+      <a href="#partner"><span class="nav-num">10</span>Partner System</a>
+      <a href="#fm04"><span class="nav-num">11</span>FM-04 Protocol</a>
+      <a href="#amendments"><span class="nav-num">12</span>Token Amendments</a>
+      <a href="#handoff"><span class="nav-num">13</span>Phase 4→5 Handoff</a>
+    </nav>
+  </div>
+  <div class="selection-badge">
+    <div class="sel-row"><span class="sel-key">Territory</span><span class="sel-val">A — Instrument</span></div>
+    <div class="sel-row"><span class="sel-key">Name</span><span class="sel-val">Vigil</span></div>
+    <div class="sel-row"><span class="sel-key">Bench</span><span class="sel-val">Bearing</span></div>
+    <div class="sel-row"><span class="sel-key">Gate</span><span class="sel-val" style="color:var(--ok)">P3 PASS</span></div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+<!-- 01 OVERVIEW -->
+<div class="section" id="overview">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>System Overview</h2>
+  </div>
+  <p class="section-sub">This document is the Phase 4 production identity specification for the Vigil by Lede professional brand. It establishes every production decision — logotype, logomark, type, color, components, motion, and partner system — that Phase 5 (website) and Phase 6 (product application) will implement directly. Every decision here is a production decision, not a proposal.</p>
+
+  <div class="callout ok">
+    <strong>Phase 3 cleared at PASS (MC-P3-01).</strong> Territory A and Vigil are confirmed. The Bearing bench activates only if Vigil fails trademark clearance in class 36 or class 42. All Phase 1 decisions D1–D7 remain in force. Phase 4 does not relitigate Phase 3 selections.
+  </div>
+
+  <h3 class="sub">Confirmed inputs</h3>
+  <table class="spec-table">
+    <thead><tr><th>Decision</th><th>Confirmed value</th></tr></thead>
+    <tbody>
+      <tr><td>Creative territory</td><td>Territory A — The Instrument. IBM Plex Mono primary type, dark product register, Flare orange at event nodes only.</td></tr>
+      <tr><td>Product name</td><td>Vigil (conditional on trademark clearance, class 36 and 42, US/UK/EU). Bench: Bearing.</td></tr>
+      <tr><td>Brand architecture</td><td>D1 Endorsed House: Vigil by Lede (professional) · Lede (consumer) · Boosted.ai (transitioning per D3)</td></tr>
+      <tr><td>Positioning (D6)</td><td>"The AI investment intelligence platform that monitors continuously, reasons traceably, and cites every source."</td></tr>
+      <tr><td>Flare constraint (D7)</td><td>≤2% of any surface, appearance-earned — event signal only, never chrome</td></tr>
+      <tr><td>Token spec</td><td>lede-tokens.json v2.0.0 + Phase 4 amendment (IBM Plex Mono weight 700)</td></tr>
+      <tr><td>WCAG requirement</td><td>2.2 AA across all text/background combinations</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 02 BRAND ARCHITECTURE -->
+<div class="section" id="architecture">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Brand Architecture</h2>
+  </div>
+  <p class="section-sub">D1 Endorsed House model. One company brand (Lede) endorses both professional and consumer products. The professional product is named and carries the endorsement. Consumer product is Lede standalone.</p>
+
+  <h3 class="sub">Endorsed House diagram</h3>
+  <div style="background:var(--bg1); padding:32px; margin:20px 0; overflow-x:auto;">
+    <div style="display:flex; gap:2px; align-items:stretch; justify-content:center; min-width:520px;">
+      <!-- Lede parent -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+        <div style="background:var(--bg2); padding:14px 28px; text-align:center;">
+          <div class="mono" style="font-size:16px; font-weight:700; color:var(--ink); letter-spacing:-0.01em;">Lede</div>
+          <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.12em; margin-top:4px;">Company brand</div>
+        </div>
+        <div style="height:24px; width:1px; background:var(--rule2);"></div>
+        <div style="display:flex; gap:32px; align-items:flex-start;">
+          <!-- Professional branch -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+            <div style="height:1px; width:140px; background:var(--rule2); margin-bottom:0;"></div>
+            <div style="width:1px; height:16px; background:var(--rule2);"></div>
+            <div style="background:var(--bg3); padding:12px 20px; text-align:center; border-left:2px solid var(--accent);">
+              <div class="mono" style="font-size:13px; font-weight:700; color:var(--ink);">Vigil by Lede</div>
+              <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-top:4px;">Professional</div>
+            </div>
+          </div>
+          <!-- Consumer branch -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+            <div style="height:1px; width:120px; background:var(--rule2);"></div>
+            <div style="width:1px; height:16px; background:var(--rule2);"></div>
+            <div style="background:var(--bg2); padding:12px 20px; text-align:center;">
+              <div class="mono" style="font-size:13px; font-weight:700; color:var(--ink2);">Lede</div>
+              <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-top:4px;">Consumer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink4); text-align:center; line-height:1.65;">
+      Boosted.ai → transitioning. D3 dual-path: 60-day bench-activation clause. Alfa product continues during transition.
+    </div>
+  </div>
+
+  <h3 class="sub">Co-presence rules (Boosted.ai + Alfa + Vigil by Lede in market simultaneously)</h3>
+  <table class="spec-table">
+    <thead><tr><th>Context</th><th>Brand present</th></tr></thead>
+    <tbody>
+      <tr><td>Existing Alfa customers</td><td>Alfa product + Lede parent. Vigil name introduced only after D3 bench-activation. Boosted.ai → Lede transition messaging runs in parallel.</td></tr>
+      <tr><td>New professional prospects</td><td>Vigil by Lede. Alfa is not mentioned unless prospect asks about migration path.</td></tr>
+      <tr><td>Consumer / retail contexts</td><td>Lede standalone. Neither Vigil nor Boosted.ai appears.</td></tr>
+      <tr><td>Partner / Powered tier</td><td>"Powered by Vigil" (post-clearance) or "Powered by Lede" (pre-clearance or white-label). See §10.</td></tr>
+      <tr><td>Press / earned media</td><td>Lede (company); Vigil by Lede (product). Boosted.ai referenced as "formerly Boosted.ai" for six months post-transition.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 03 LOGOTYPE -->
+<div class="section" id="logotype">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Logotype System</h2>
+  </div>
+  <p class="section-sub">The Vigil by Lede wordmark. The name "VIGIL" in IBM Plex Mono 700 establishes the instrument-precise register. The endorsement "by Lede" in Schibsted Grotesk 400 at 55% the size of "VIGIL" signals the company relationship without subordinating the product.</p>
+
+  <h3 class="sub">Wordmark specimens</h3>
+  <div class="wordmark-display">
+
+    <!-- Primary horizontal — large -->
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:16px;">Primary horizontal — 40px display</div>
+      <div class="wm-lockup">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-label="Step logomark" role="img">
+          <path d="M3,10 L18,10 L18,20" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18" cy="20" r="4" fill="#FF5A14"/>
+        </svg>
+        <div class="wm-name" style="font-size:40px;">VIGIL</div>
+        <div class="wm-divider"></div>
+        <div class="wm-endorsement" style="font-size:18px;">by Lede</div>
+      </div>
+    </div>
+
+    <!-- Primary horizontal — standard (24px) -->
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:12px;">Standard horizontal — 24px product UI</div>
+      <div class="wm-lockup">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2,7 L13,7 L13,14" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="13" cy="14" r="3" fill="#FF5A14"/>
+        </svg>
+        <div class="wm-name" style="font-size:24px;">VIGIL</div>
+        <div class="wm-divider" style="height:20px;"></div>
+        <div class="wm-endorsement" style="font-size:13px;">by Lede</div>
+      </div>
+    </div>
+
+    <!-- Compact (16px) -->
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;">Compact — 16px minimum</div>
+      <div class="wm-lockup">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1,5 L9,5 L9,10" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="10" r="2.5" fill="#FF5A14"/>
+        </svg>
+        <div class="wm-name" style="font-size:16px; letter-spacing:-0.01em;">VIGIL</div>
+        <div class="wm-endorsement" style="font-size:9px; letter-spacing:0.01em;">by Lede</div>
+      </div>
+    </div>
+
+    <!-- Stacked variant -->
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:12px;">Stacked — document headers, print</div>
+      <div class="wm-lockup wm-stacked">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M2,7 L13,7 L13,14" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="13" cy="14" r="3" fill="#FF5A14"/>
+          </svg>
+          <div class="wm-name" style="font-size:24px;">VIGIL</div>
+        </div>
+        <div class="wm-endorsement" style="font-size:12px; padding-left:30px;">by Lede</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Logotype rules</h3>
+  <table class="spec-table">
+    <thead><tr><th>Property</th><th>Specification</th></tr></thead>
+    <tbody>
+      <tr><td>VIGIL typeface</td><td>IBM Plex Mono 700 (Bold). All-caps. Letter-spacing: -0.02em at display scale, -0.01em at standard scale. No italic.</td></tr>
+      <tr><td>by Lede typeface</td><td>Schibsted Grotesk 400 (Regular). Sentence case. Optical alignment to VIGIL cap-height. Letter-spacing: normal.</td></tr>
+      <tr><td>Size relationship</td><td>VIGIL : by Lede = 1.0 : 0.55 (by size). "by Lede" baseline aligns to VIGIL baseline.</td></tr>
+      <tr><td>Logomark pairing</td><td>Step logomark always precedes VIGIL in horizontal lockup. Minimum logomark size: 14px diameter event circle. Below 16px VIGIL, use logomark only (no wordmark).</td></tr>
+      <tr><td>Clearspace</td><td>Minimum clearspace equal to the height of the capital V in VIGIL on all sides.</td></tr>
+      <tr><td>Minimum size (display)</td><td>16px for VIGIL in any rendered context. Below 16px, use abbreviated "V" mark or Step logomark alone.</td></tr>
+      <tr><td>Colour — dark ground</td><td>VIGIL: #F7F5EF (ink). "by Lede": #847D75 (ink3). Step line: #847D75. Event node: #FF5A14 (Flare).</td></tr>
+      <tr><td>Colour — light ground</td><td>VIGIL: #131210. "by Lede": #706B63. Step line: #706B63. Event node: #FF4B00 (brand Flare).</td></tr>
+      <tr><td>Reversed (partner contexts)</td><td>Grayscale knockdown for Step event node: #C6C4B6 (from text-muted token). Used when partner brand standards prohibit orange.</td></tr>
+      <tr><td>What is forbidden</td><td>Outlined letterforms. Drop shadows. Color gradients on the wordmark. Stretching or condensing. Separating VIGIL from "by Lede" except in abbreviated contexts. Any color other than the two specified palettes.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 04 LOGOMARK -->
+<div class="section" id="logomark">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Logomark — The Step</h2>
+  </div>
+  <p class="section-sub">The Step is the brand's motion arrested into a mark. An instrument line travels across a surface and steps down at the exact moment an event occurs — a filing, a signal, a breach. The node in Flare orange marks that moment. At rest, the Step is the simplest possible mark of something that happened.</p>
+
+  <h3 class="sub">Logomark specimens</h3>
+  <div class="logomark-row">
+    <div class="logomark-cell">
+      <div class="lm-label">32px — standard</div>
+      <div class="lm-swatch on-dark">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" role="img" aria-label="Step logomark 32px">
+          <path d="M3,12 L20,12 L20,24" stroke="#847D75" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="24" r="4.5" fill="#FF5A14"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">24px — compact</div>
+      <div class="lm-swatch on-dark">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M2,9 L15,9 L15,18" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="15" cy="18" r="3.5" fill="#FF5A14"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">16px — minimum</div>
+      <div class="lm-swatch on-dark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M1,6 L10,6 L10,12" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="12" r="2.5" fill="#FF5A14"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">Grayscale knockdown</div>
+      <div class="lm-swatch on-dark">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Step logomark grayscale">
+          <path d="M3,12 L20,12 L20,24" stroke="#847D75" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="24" r="4.5" fill="#C6C4B6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">On light ground</div>
+      <div class="lm-swatch on-light">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Step logomark light">
+          <path d="M3,12 L20,12 L20,24" stroke="#706B63" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="24" r="4.5" fill="#FF4B00"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Anatomy and geometry</h3>
+  <table class="spec-table">
+    <thead><tr><th>Element</th><th>Specification</th></tr></thead>
+    <tbody>
+      <tr><td>Instrument line</td><td>Horizontal stroke, stroke-width 1.5px at 24px, scaled proportionally. Stroke-linecap: round. Color: #847D75 (dark) / #706B63 (light).</td></tr>
+      <tr><td>Step stroke</td><td>Vertical descending from terminal point of instrument line. Same weight and color as instrument line. Stroke-linejoin: round.</td></tr>
+      <tr><td>Event node</td><td>Circle at the terminal point of the step stroke. Diameter = 7px at 24px logomark. Fill: #FF5A14 (Flare, dark) / #FF4B00 (brand Flare, light). Never outlined.</td></tr>
+      <tr><td>Proportions</td><td>Instrument line : step height ≈ 2.8 : 1 (horizontal dominates). The step is a moment, not a feature.</td></tr>
+      <tr><td>Minimum size</td><td>16px total height. Below this, the mark cannot be rendered at sufficient quality — omit entirely.</td></tr>
+      <tr><td>Clearspace</td><td>1× event node diameter on all sides.</td></tr>
+      <tr><td>Grayscale knockdown</td><td>Event node fill → #C6C4B6. Used when partner brand standards prohibit orange. All other elements unchanged.</td></tr>
+      <tr><td>What is forbidden</td><td>Filled or outlined instrument line. Multiple event nodes. Rotation. Any color other than specified pairs. The node is always at the end of the step — never mid-line, never floating.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 05 TIER NAMING -->
+<div class="section" id="tiers">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2>Tier Naming</h2>
+  </div>
+  <p class="section-sub">Five tiers per Phase 1 D2. The product name "Vigil" precedes each tier designator. All five forms are confirmed clear in Phase 2 master brand tests.</p>
+
+  <div class="tier-grid">
+    <div class="tier-cell">
+      <div class="tier-name">Vigil Pro</div>
+      <div class="tier-sub">Individual</div>
+      <div class="tier-detail">Single professional license. Full monitoring, traceable reasoning, source citation. Entry tier for the product.</div>
+    </div>
+    <div class="tier-cell">
+      <div class="tier-name">Vigil Prime</div>
+      <div class="tier-sub">Team</div>
+      <div class="tier-detail">2–20 seats, shared coverage lists, team alerts. Compliance officer sharing and audit log.</div>
+    </div>
+    <div class="tier-cell">
+      <div class="tier-name">Vigil Platform</div>
+      <div class="tier-sub">Enterprise</div>
+      <div class="tier-detail">Unlimited seats, API access, SSO, data residency options, dedicated CSM. Procurement-grade SLAs.</td>
+    </div>
+    <div class="tier-cell">
+      <div class="tier-name">Vigil Powered</div>
+      <div class="tier-sub">Partner embedded</div>
+      <div class="tier-detail">Attribution badge ("Powered by Vigil") in partner product. Partner deploys; Lede maintains the intelligence layer.</div>
+    </div>
+    <div class="tier-cell">
+      <div class="tier-name">Vigil Powered+</div>
+      <div class="tier-sub">Co-brand ⚠</div>
+      <div class="tier-detail">Co-brand lockup format. Definition conflict with Phase 1 D2 noted in §10. Requires brand owner resolution before partner agreements.</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>Vigil Powered+ open condition (P0):</strong> Phase 1 D2 defines Powered+ as full white-label with no attribution. Phase 3 §04 defines it as co-brand. These conflict. Phase 4 cannot design the Powered+ partner package until brand owner and legal counsel resolve which definition controls. See §10 for detail.
+  </div>
+</div>
+
+<!-- 06 TYPE SYSTEM -->
+<div class="section" id="type">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2>Type System</h2>
+  </div>
+  <p class="section-sub">IBM Plex Mono is the dominant display face for Territory A — the instrument register. Schibsted Grotesk carries body and UI copy. Newsreader handles long-form reading content (briefs, research). Lede Serif / Instrument Serif is reserved for consumer brand surfaces only — it does not appear in professional product UI.</p>
+
+  <div class="amendment">
+    <div class="amendment-label">P4 Token Amendment — lede-tokens.json v2.0.0</div>
+    <div class="amendment-title">IBM Plex Mono weight 700 authorized for display-scale brand use</div>
+    <div class="amendment-body">v2.0.0 defined IBM Plex Mono at weights [400, 500] for "tape layer" use (timestamps, tickers, figures). Territory A's instrument aesthetic requires weight 700 at display scale for the product name wordmark and section headings. Phase 4 formally amends the token spec: IBM Plex Mono weight 700 is authorized for display-scale brand headlines and wordmarks in the product dark register. The tape-layer usage guidance (400/500 for data values) remains unchanged. This amendment is recorded in §12.</div>
+  </div>
+
+  <h3 class="sub">Type scale</h3>
+  <div class="type-scale">
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Display XL</strong>IBM Plex Mono 700<br>48px · -0.02em · lh 1.10</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:48px; font-weight:700; letter-spacing:-0.02em; line-height:1.10; color:var(--ink);">VIGIL</div>
+      <div class="ts-meta">Logotype display, hero headlines only</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Display LG</strong>IBM Plex Mono 700<br>36px · -0.02em · lh 1.12</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:36px; font-weight:700; letter-spacing:-0.02em; line-height:1.12; color:var(--ink);">Coverage</div>
+      <div class="ts-meta">Section titles, major headings</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Display MD</strong>IBM Plex Mono 700<br>24px · -0.015em · lh 1.15</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:24px; font-weight:700; letter-spacing:-0.015em; line-height:1.15; color:var(--ink);">Morning brief</div>
+      <div class="ts-meta">Product headings, card titles</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Heading</strong>IBM Plex Mono 500<br>18px · -0.01em · lh 1.20</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:18px; font-weight:500; letter-spacing:-0.01em; line-height:1.20; color:var(--ink);">Portfolio alerts</div>
+      <div class="ts-meta">Sub-headings, panel headers</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Heading SM</strong>IBM Plex Mono 500<br>14px · 0 · lh 1.30</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:500; line-height:1.30; color:var(--ink);">Source citations</div>
+      <div class="ts-meta">Third-level headings</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Label</strong>IBM Plex Mono 400<br>11px · +0.10em · UC · lh 1.40</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:400; letter-spacing:0.10em; text-transform:uppercase; line-height:1.40; color:var(--ink3);">PORTFOLIO / EQUITY / 3 SIGNALS</div>
+      <div class="ts-meta">Data labels, tabs, eyebrows</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Body LG</strong>Schibsted Grotesk 400<br>16px · 0 · lh 1.70</div>
+      <div style="font-family:'Schibsted Grotesk',sans-serif; font-size:16px; font-weight:400; line-height:1.70; color:var(--ink2);">Vigil monitors your coverage list continuously and surfaces what changed before you ask.</div>
+      <div class="ts-meta">Marketing copy, onboarding</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Body</strong>Schibsted Grotesk 400<br>14px · 0 · lh 1.65</div>
+      <div style="font-family:'Schibsted Grotesk',sans-serif; font-size:14px; font-weight:400; line-height:1.65; color:var(--ink2);">Traceable reasoning means every inference is linked to a primary source — a filing, a transcript, a regulatory disclosure.</div>
+      <div class="ts-meta">Product body copy, tooltips</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Body SM</strong>Schibsted Grotesk 400<br>12px · 0 · lh 1.60</div>
+      <div style="font-family:'Schibsted Grotesk',sans-serif; font-size:12px; font-weight:400; line-height:1.60; color:var(--ink3);">Filed 14:32 · Form 8-K · Material Event · SEC EDGAR</div>
+      <div class="ts-meta">Captions, footnotes, metadata</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Data</strong>IBM Plex Mono 400<br>13px · 0 · tabular-nums · lh 1.50</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:400; line-height:1.50; font-variant-numeric:tabular-nums; color:var(--ink);">AAPL +2.34% · TSLA -1.17% · MSFT +0.88%</div>
+      <div class="ts-meta">Tickers, prices, percentages</div>
+    </div>
+    <div class="ts-row">
+      <div class="ts-meta"><strong>Reading</strong>Newsreader 400<br>16px · 0 · lh 1.80</div>
+      <div style="font-family:'Newsreader','Georgia',serif; font-size:16px; font-weight:400; line-height:1.80; color:var(--ink2);">The position sizing model carries three open conditions from the 10-Q disclosure.</div>
+      <div class="ts-meta">Intelligence briefs, research documents</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Typography rules</h3>
+  <ul class="ls">
+    <li>IBM Plex Mono is always the display face in product interfaces. Lede Serif / Instrument Serif does not appear in Vigil product UI — it is reserved for the consumer Lede brand and brand-only marketing surfaces.</li>
+    <li>IBM Plex Mono weight 700 is authorized at display scale (≥18px) only. Data values use 400 or 500. No 700 weight in the data layer.</li>
+    <li>All data columns use <code>font-variant-numeric: tabular-nums</code> to prevent digit-width jitter as values change.</li>
+    <li>Body text columns should be 55–75 characters wide. Enforce with <code>max-width</code> on the text container.</li>
+    <li>Headings at ≥18px use <code>text-wrap: balance</code> to prevent orphans.</li>
+    <li>Schibsted Grotesk replaces Hanken Grotesk per token spec v2.0.0 weight remap: 300→400, 400→400, 500→500, marketing-emphasis→700.</li>
+  </ul>
+</div>
+
+<!-- 07 COLOR SYSTEM -->
+<div class="section" id="color">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2>Color System</h2>
+  </div>
+  <p class="section-sub">Two registers: product dark (primary for Vigil professional product UI) and brand light (secondary, for brand marketing surfaces, partner documentation, print). D7 Flare constraint applies in both registers — the orange event signal is never chrome.</p>
+
+  <h3 class="sub">Product dark register (primary)</h3>
+  <div class="color-grid">
+    <div class="color-cell"><div class="color-swatch" style="background:#131210;"></div><div class="color-meta"><span class="color-name">surface-primary</span>#131210<br>bg0 · page background</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#1B1A16;"></div><div class="color-meta"><span class="color-name">surface-secondary</span>#1B1A16<br>bg1 · panel / sidebar</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#242320;"></div><div class="color-meta"><span class="color-name">surface-tertiary</span>#242320<br>bg2 · card / raised</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#2C2B26;"></div><div class="color-meta"><span class="color-name">surface-hover</span>#2C2B26<br>bg3 · hover / tooltip</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#F7F5EF; border:1px solid #2C2B26;"></div><div class="color-meta"><span class="color-name">text-primary</span>#F7F5EF<br>ink · body copy</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#E8E6DC; border:1px solid #2C2B26;"></div><div class="color-meta"><span class="color-name">text-secondary</span>#E8E6DC<br>ink2 · supporting</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#847D75; border:1px solid #2C2B26;"></div><div class="color-meta"><span class="color-name">text-muted</span>#847D75<br>ink3 · labels / faint</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#6C6A5E; border:1px solid #2C2B26;"></div><div class="color-meta"><span class="color-name">text-disabled</span>#6C6A5E<br>ink4 · disabled</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#FF5A14;"></div><div class="color-meta"><span class="color-name">brand (Flare)</span>#FF5A14<br>accent · D7: event signal only</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#FF7A42;"></div><div class="color-meta"><span class="color-name">brand-text</span>#FF7A42<br>accent-text · small Flare</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#3FA971;"></div><div class="color-meta"><span class="color-name">success</span>#3FA971<br>ok / data-up</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#E05A47;"></div><div class="color-meta"><span class="color-name">error</span>#E05A47<br>err / data-down</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#E2A93B;"></div><div class="color-meta"><span class="color-name">warning</span>#E2A93B<br>warn</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#2C2B26;"></div><div class="color-meta"><span class="color-name">border-primary</span>#2C2B26<br>rule · dividers</div></div>
+    <div class="color-cell"><div class="color-swatch" style="background:#383630;"></div><div class="color-meta"><span class="color-name">border-secondary</span>#383630<br>rule2 · accented</div></div>
+  </div>
+
+  <h3 class="sub">D7 Flare constraint summary</h3>
+  <table class="spec-table">
+    <thead><tr><th>Context</th><th>Flare (#FF5A14) permitted?</th></tr></thead>
+    <tbody>
+      <tr><td>Event node (Step logomark)</td><td>YES — the primary use case. One node per event, once per event occurrence.</td></tr>
+      <tr><td>New signal indicator (dot, badge)</td><td>YES — one signal indicator per event, appearance-earned. Not persistent.</td></tr>
+      <tr><td>Alert / notification entry point</td><td>YES — the UI element that fires when a monitored event triggers. Clears when viewed.</td></tr>
+      <tr><td>Active filter or selected state</td><td>NO — interface chrome. Use surface-hover (#2C2B26) or an ok/semantic color instead.</td></tr>
+      <tr><td>Decorative accent, border, background</td><td>NO — ambient appearance. Violates D7.</td></tr>
+      <tr><td>Interactive element in default state</td><td>NO — buttons in resting state use bg2/ink2. Flare on a primary CTA button is permitted only if the action IS an event trigger (e.g., "Run coverage scan").</td></tr>
+      <tr><td>Brand marketing surface</td><td>Rationed: Flare in a marketing context should appear on one focal point per composition and nowhere else.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">WCAG 2.2 AA contrast documentation</h3>
+  <div class="table-wrap">
+    <table class="contrast-table">
+      <thead><tr><th>Text color</th><th>Background</th><th>Ratio</th><th>Level</th></tr></thead>
+      <tbody>
+        <tr><td>#F7F5EF (ink)</td><td>#131210 (bg0)</td><td>17.3:1</td><td class="ct-aaa">AAA</td></tr>
+        <tr><td>#E8E6DC (ink2)</td><td>#131210 (bg0)</td><td>13.4:1</td><td class="ct-aaa">AAA</td></tr>
+        <tr><td>#847D75 (ink3/faint)</td><td>#131210 (bg0)</td><td>4.63:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#6C6A5E (ink4)</td><td>#131210 (bg0)</td><td>3.4:1</td><td class="ct-exempt">Exempt (disabled)</td></tr>
+        <tr><td>#F7F5EF (ink)</td><td>#1B1A16 (bg1)</td><td>16.3:1</td><td class="ct-aaa">AAA</td></tr>
+        <tr><td>#847D75 (ink3)</td><td>#1B1A16 (bg1)</td><td>4.37:1</td><td class="ct-pass">AA (large text ≥18px)</td></tr>
+        <tr><td>#F7F5EF (ink)</td><td>#242320 (bg2)</td><td>14.0:1</td><td class="ct-aaa">AAA</td></tr>
+        <tr><td>#847D75 (ink3)</td><td>#242320 (bg2)</td><td>3.75:1</td><td class="ct-exempt">Use ink2 for body on bg2</td></tr>
+        <tr><td>#FF7A42 (accent-text)</td><td>#131210 (bg0)</td><td>5.2:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#3FA971 (ok)</td><td>#131210 (bg0)</td><td>5.6:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#E05A47 (err)</td><td>#131210 (bg0)</td><td>4.5:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#E2A93B (warn)</td><td>#131210 (bg0)</td><td>5.8:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#131210 (ink)</td><td>#F7F5EF (light bg0)</td><td>17.3:1</td><td class="ct-aaa">AAA</td></tr>
+        <tr><td>#706B63 (ink3 light)</td><td>#F7F5EF (light bg0)</td><td>4.87:1</td><td class="ct-pass">AA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Note on ink3 on bg2 (dark mode):</strong> The 3.75:1 ratio for #847D75 on #242320 is below AA for body text. On raised surfaces (bg2), use ink2 (#E8E6DC) for body copy and reserve ink3 for decorative/non-essential labels only at ≥18px large text. This is a production implementation constraint — Phase 5 and Phase 6 must enforce it.
+  </div>
+</div>
+
+<!-- 08 COMPONENTS -->
+<div class="section" id="components">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2>Components</h2>
+  </div>
+  <p class="section-sub">Key interface components. All follow token hard rules: shadow-free, border-free cards (surface elevation only), pill buttons. These specimens are the production reference — Phase 6 implements them exactly.</p>
+
+  <h3 class="sub">Buttons</h3>
+  <div class="component-row">
+    <button class="btn btn-primary">Run scan</button>
+    <button class="btn btn-secondary">Export</button>
+    <button class="btn btn-ghost">Cancel</button>
+    <button class="btn btn-primary btn-sm">Add to list</button>
+    <button class="btn btn-secondary btn-sm">Filters</button>
+  </div>
+  <table class="spec-table" style="margin-top:16px;">
+    <thead><tr><th>Variant</th><th>Specification</th></tr></thead>
+    <tbody>
+      <tr><td>Primary (Flare fill)</td><td>Background: #FF5A14. Text: #fff. Use ONLY for the action that triggers an event (run scan, confirm alert, subscribe). Not for generic CTAs.</td></tr>
+      <tr><td>Secondary</td><td>Background: bg2 (#242320). Text: ink2. For supporting actions (export, share, configure).</td></tr>
+      <tr><td>Ghost</td><td>Transparent background. Border: 1px solid rule2 (#383630). Text: ink3. For destructive-safe cancel or dismiss actions only.</td></tr>
+      <tr><td>All variants</td><td>border-radius: 999px (pill). Schibsted Grotesk 500. 8px/20px padding standard; 5px/14px small. No box-shadow. Active state: scale(0.97). Focus: 2px outline, 2px offset, var(--accent).</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">Status chips and badges</h3>
+  <div class="component-row">
+    <span class="chip chip-ok">PASS</span>
+    <span class="chip chip-warn">PENDING</span>
+    <span class="chip chip-err">BREACH</span>
+    <span class="chip chip-neutral">DRAFT</span>
+    <span class="chip chip-ok">3 signals</span>
+    <span class="chip chip-neutral">EQUITY</span>
+  </div>
+
+  <h3 class="sub">Data rows</h3>
+  <div style="background:var(--bg1); padding:16px 20px; margin:16px 0;">
+    <div class="data-row">
+      <span class="data-label">AAPL</span>
+      <span class="data-val up">+2.34%</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">TSLA</span>
+      <span class="data-val down">−1.17%</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">MSFT</span>
+      <span class="data-val">+0.88%</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Last event</span>
+      <span class="data-val" style="color:var(--ink3);">2026-08-03 · 08:14 ET</span>
+    </div>
+  </div>
+
+  <h3 class="sub">Event node — in-context specimen</h3>
+  <p style="font-size:13px; color:var(--ink3); margin-bottom:12px;">The event node (Flare orange) appears once at the moment of a monitored event. It does not persist as chrome after the alert is viewed.</p>
+  <div style="background:var(--bg1); padding:20px 24px; margin:16px 0;">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-bottom:12px;">Coverage timeline — AAPL</div>
+    <div style="position:relative; height:32px; display:flex; align-items:center;">
+      <div style="height:1px; background:var(--rule2); flex:1;"></div>
+      <!-- Event node at ~60% position -->
+      <div style="position:absolute; left:60%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <div style="width:8px; height:8px; border-radius:50%; background:var(--accent);"></div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--ink4); white-space:nowrap; margin-top:4px;">8-K · Material Event</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09 MOTION -->
+<div class="section" id="motion">
+  <div class="section-head">
+    <span class="section-num">09</span>
+    <h2>Motion</h2>
+  </div>
+  <p class="section-sub">Motion in the Vigil product system is the-line-steps: one gesture per event occurrence. The instrument line draws and the node plants. Everything else is still. The product does not animate unless something happened.</p>
+
+  <div class="motion-spec">
+    <div class="ms-row">
+      <div class="ms-key">Gesture name</div>
+      <div class="ms-val">the-line-steps</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Line draw</div>
+      <div class="ms-val">550ms, left-to-right, cubic-bezier(0.2, 0, 0, 1). The instrument line draws from its current position to the step point.</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Node appear</div>
+      <div class="ms-val">200ms after line draw completes. Scale 0→1, cubic-bezier(0.2, 0, 0, 1). The Flare orange node appears at the terminal point of the step stroke.</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Repeat rule</div>
+      <div class="ms-val">Once per event. The gesture fires on event creation, not on scroll, hover, or page load. Never looping in product UI.</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Number animations</div>
+      <div class="ms-val">Numbers tick like tape — counter-style increment on value change. Duration: 300ms. Easing: linear. tabular-nums enforced to prevent layout shift.</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Ambient motion</div>
+      <div class="ms-val">Permitted on brand-only marketing surfaces (website hero, brand film). Prohibited in product UI. "Quiet surfaces do not move."</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">prefers-reduced-motion</div>
+      <div class="ms-val">All animations render final states immediately. No transitions. No counter increments — show final value directly. This is a hard requirement, not a suggestion.</div>
+    </div>
+    <div class="ms-row">
+      <div class="ms-key">Hover states</div>
+      <div class="ms-val">Surface elevation change only (bg1→bg2) on cards. Button active: scale(0.97), 80ms, no easing. No color animation in resting→hover transitions.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 PARTNER SYSTEM -->
+<div class="section" id="partner">
+  <div class="section-head">
+    <span class="section-num">10</span>
+    <h2>Partner System</h2>
+  </div>
+  <p class="section-sub">How Vigil by Lede appears in partner-deployed and white-label contexts. Three formulations from Phase 3 §04, plus the Powered+ open condition.</p>
+
+  <h3 class="sub">Attribution badge — Powered tier ("Powered by Vigil")</h3>
+  <p style="font-size:13px; color:var(--ink3); margin-bottom:16px;">Used after Vigil trademark clearance is confirmed. Small-type endorsement format — not a co-brand lockup.</p>
+  <div class="pb-lockup-display">
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-bottom:8px;">Standard dark ground</div>
+      <div class="partner-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1,5 L9,5 L9,10" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="10" r="2.5" fill="#FF5A14"/>
+        </svg>
+        POWERED BY <span class="pb-logo">VIGIL</span>
+      </div>
+    </div>
+    <div>
+      <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-bottom:8px;">Grayscale knockdown</div>
+      <div class="partner-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1,5 L9,5 L9,10" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="10" r="2.5" fill="#C6C4B6"/>
+        </svg>
+        POWERED BY <span class="pb-logo">VIGIL</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Transition-period attribution ("Powered by Lede")</h3>
+  <p style="font-size:13px; color:var(--ink3); margin-bottom:12px;">Used when Vigil trademark clearance is not yet confirmed, or when a white-label partner's brand standards require company-level attribution rather than product-level. The Lede parent brand carries the endorsement.</p>
+  <div class="pb-lockup-display">
+    <div class="partner-badge">POWERED BY <span class="pb-logo">LEDE</span></div>
+  </div>
+
+  <h3 class="sub">Powered/Powered+ attribution syntax — Phase 3 §04 resolution</h3>
+  <table class="spec-table">
+    <thead><tr><th>Scenario</th><th>Formulation</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td>Established name in market</td><td>"Powered by Vigil"</td><td>After Vigil trademark cleared in class 36 and 42. Standard partner attribution badge.</td></tr>
+      <tr><td>Transition period or white-label</td><td>"Powered by Lede"</td><td>Pre-clearance, or partner requires company-level attribution, or partner's brand standards prohibit product-name attribution.</td></tr>
+      <tr><td>Post-bench succession</td><td>"Powered by [Name]"</td><td>If Vigil fails clearance and Bearing activates, substitute "Bearing" for "Vigil." Syntax is identical; name slot substitutes.</td></tr>
+      <tr><td>Powered+ (co-brand tier)</td><td>⚠ OPEN CONDITION</td><td>Phase 1 D2 definition conflicts with Phase 3 §04 interpretation. See open condition below.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Powered+ tier definition conflict</div>
+    <div class="ci-title">Brand owner and legal counsel must resolve before any Powered+ partner engagement</div>
+    <div class="ci-body">Phase 1 D2: "POWERED+ — full white-label · no attribution · negotiated — product identity is entirely the partner's." Phase 3 §04: Powered+ formulation is "[Partner Brand] + Vigil by Lede" co-brand lockup at display visual weight. These are mutually exclusive. Phase 4 cannot produce the Powered+ design package (co-brand lockup specs, partner guidelines, agreement templates) until the brand owner and legal counsel determine which definition controls. If D2 controls: Phase 4 produces a white-label track with no Vigil or Lede name visible. If Phase 3 §04 controls: D2 must be formally amended and Phase 4 produces the co-brand lockup. This is the only unresolved P0 architectural question in the Phase 4 scope.</div>
+  </div>
+
+  <h3 class="sub">Partner documentation requirements</h3>
+  <ul class="ls">
+    <li>All Powered-tier partners receive: the Step logomark SVG file (Flare and grayscale variants), the "Powered by Vigil" / "Powered by Lede" badge SVG, clearspace specification, minimum size requirement (16px logo height), and the token spec color values for dark and light grounds.</li>
+    <li>Partners whose brand standards prohibit orange must use the grayscale knockdown (#C6C4B6 event node) exclusively. The badge text "POWERED BY VIGIL" is unchanged.</li>
+    <li>Phase 5 must produce a partner brand standards page accessible at a stable URL for partner compliance reference.</li>
+  </ul>
+</div>
+
+<!-- 11 FM-04 PROTOCOL -->
+<div class="section" id="fm04">
+  <div class="section-head">
+    <span class="section-num">11</span>
+    <h2>FM-04 Test Protocol</h2>
+  </div>
+  <p class="section-sub">FM-04 is a P0-escalated gate from Phase 0. Territory A's Phase 2 verdict is PASS (high confidence). Phase 3 confirmed this as a confirmatory test, not exploratory. Phase 4 must run the test and document the result. Phase 5 cannot launch without a documented FM-04 pass.</p>
+
+  <h3 class="sub">Test methodology</h3>
+  <table class="fm04-table">
+    <thead><tr><th>Dimension</th><th>Specification</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Panel composition</td><td>≥5 institutional professionals. At minimum one from each context type: bank procurement portal, pension fund LP due diligence, SEC-registered RIA marketing review. At least one must be CCO/Compliance, one must be a procurement decision-maker.</td><td class="fm04-tbd">Phase 4 to convene</td></tr>
+      <tr><td>Test material</td><td>Territory A identity at production quality — actual IBM Plex Mono, actual token values, Step logomark at 24px and 32px. Not a mockup; panelists evaluate production-quality specimens.</td><td class="fm04-tbd">Phase 4 to produce</td></tr>
+      <tr><td>Evaluation prompt</td><td>"You are evaluating a software product for use in an institutional investment context. Based on this identity, assess: (a) would this product be credible to present in a board meeting? (b) would you encounter any institutional friction with this design in your organization?" Panelists rate 1–5 credibility, 1–5 friction.</td><td class="fm04-tbd">Phase 4 to administer</td></tr>
+      <tr><td>Pass definition</td><td>≥4 of 5 panelists rate credibility ≥4/5, AND ≥4 of 5 panelists rate friction ≤2/5. Both conditions must be met; passing on one does not offset failing on the other.</td><td class="fm04-tbd">Phase 4 to document</td></tr>
+      <tr><td>Expected result</td><td>PASS. Phase 2 assessed Territory A as highest FM-04 confidence of the four territories. IBM Plex Mono dark register has strong institutional precedent (Bloomberg Terminal, FactSet terminal). The Flare orange ≤2% constraint eliminates the main institutional friction risk of the aesthetic.</td><td class="fm04-pass">Expected PASS</td></tr>
+      <tr><td>If unexpected FAIL</td><td>Phase 4 team convenes with Phase 2 builder to re-evaluate. Options: (a) adjust Flare orange use to reduce prominence further, (b) evaluate Territory B as contingency (FM-04 PASS, highest confidence), (c) trigger Phase 3 contingency re-evaluation. Phase 5 does not launch until FM-04 passes.</td><td class="fm04-tbd">Contingency only</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 12 TOKEN AMENDMENTS -->
+<div class="section" id="amendments">
+  <div class="section-head">
+    <span class="section-num">12</span>
+    <h2>Token Amendment Register</h2>
+  </div>
+  <p class="section-sub">Formal record of amendments to lede-tokens.json v2.0.0 made in Phase 4. All amendments must be applied to the token file before Phase 5 implementation begins.</p>
+
+  <div class="amendment">
+    <div class="amendment-label">Amendment P4-01 · IBM Plex Mono display weight</div>
+    <div class="amendment-title">Add IBM Plex Mono weight 700 to font-mono weight register</div>
+    <div class="amendment-body">
+      <strong>Current v2.0.0 spec:</strong> font-mono.weights = [400, 500] · usage = "The tape layer: timestamps, tickers, figures, filings."<br><br>
+      <strong>Amended spec:</strong> font-mono.weights = [400, 500, 700] · usage = "The tape layer: timestamps, tickers, figures, filings (400, 500). Display-scale brand headlines and wordmarks in product dark register (700 only, ≥18px)."<br><br>
+      <strong>Rationale:</strong> Territory A's instrument aesthetic requires IBM Plex Mono 700 at display scale for the product name wordmark (VIGIL) and major headings. Weight 700 at data-layer sizes (≤14px) is prohibited — the amendment is scoped to display use only. No other token values change.
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>No further token amendments required for Phase 5 implementation.</strong> Territory A's surface palette is an exact match to the v2.0.0 product dark register. No custom colors outside the token set are used in the Vigil professional product system. The one Phase 4 amendment (IBM Plex Mono 700) is the only delta from the token spec.
+  </div>
+</div>
+
+<!-- 13 HANDOFF -->
+<div class="section" id="handoff">
+  <div class="section-head">
+    <span class="section-num">13</span>
+    <h2>Phase 4→5 Handoff</h2>
+  </div>
+  <p class="section-sub">What Phase 5 (website) and Phase 6 (product application) inherit as confirmed. These decisions are not re-litigated in Phase 5 or Phase 6.</p>
+
+  <h3 class="sub">Confirmed for Phase 5 and Phase 6</h3>
+  <ul class="ls">
+    <li><strong>Brand name:</strong> Vigil by Lede. Trademark clearance pending (class 36 and 42, US/UK/EU). If Vigil fails, Bearing activates — same identity system applies; name slot substitutes.</li>
+    <li><strong>Territory:</strong> A — The Instrument. IBM Plex Mono 700 display, dark product register, Flare event-signal-only. No other territory is in scope.</li>
+    <li><strong>Token spec:</strong> lede-tokens.json v2.0.0 + Amendment P4-01 (IBM Plex Mono weight 700). All token values are final.</li>
+    <li><strong>Type system:</strong> IBM Plex Mono (700 display, 500 heading, 400 data/label) + Schibsted Grotesk (400/500/700) + Newsreader (400, reading only). No Lede Serif / Instrument Serif in product UI.</li>
+    <li><strong>Color system:</strong> Product dark register primary. Brand light register for print/marketing. WCAG 2.2 AA required; contrast table in §07 is the compliance reference.</li>
+    <li><strong>Logomark:</strong> Step motif SVG (Flare and grayscale knockdown variants). Minimum 16px event circle. Clearspace: 1× node diameter.</li>
+    <li><strong>Wordmark:</strong> VIGIL (IBM Plex Mono 700) + by Lede (Schibsted Grotesk 400). Horizontal primary, stacked secondary. Minimum 16px VIGIL size.</li>
+    <li><strong>Motion:</strong> the-line-steps. Line 550ms → node 200ms. Once per event. No ambient product motion. prefers-reduced-motion: final states only.</li>
+    <li><strong>Partner system:</strong> "Powered by Vigil" (post-clearance), "Powered by Lede" (transition/white-label). Powered+ definition conflict requires brand owner resolution before Phase 5 partner pages are built.</li>
+    <li><strong>FM-04:</strong> Confirmatory test in Phase 4. Phase 5 cannot launch without documented FM-04 PASS result. Contingency: Territory B.</li>
+  </ul>
+
+  <h3 class="sub">Open conditions for Phase 5 / Phase 6</h3>
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Blocks Phase 5 public launch</div>
+    <div class="ci-title">Trademark clearance — Vigil, class 36 and 42 (US, UK, EU)</div>
+    <div class="ci-body">Vigil cannot appear in any public-facing materials until trademark counsel provides at least a preliminary clearance opinion. If Vigil fails clearance, Bearing activates immediately — the identity system is unchanged; substitute "BEARING" for "VIGIL" and "Bearing" for "Vigil" throughout. Phase 5 and Phase 6 implementation may proceed internally under conditional name; no public launch without clearance.</div>
+  </div>
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Blocks Phase 5 partner pages</div>
+    <div class="ci-title">Powered+ definition — brand owner decision required</div>
+    <div class="ci-body">Phase 5 partner documentation for the Powered+ tier cannot be built until the brand owner resolves the D2 vs. Phase 3 §04 conflict. Partner pages for the Powered tier (attribution badge) can proceed. Powered+ partner pages are blocked.</div>
+  </div>
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Blocks Phase 5 public launch</div>
+    <div class="ci-title">FM-04 confirmatory test — must be documented PASS</div>
+    <div class="ci-body">Phase 4 administers the FM-04 test per the §11 protocol. Phase 5 cannot launch without a documented panel result meeting the pass definition (≥4/5 panelists, credibility ≥4, friction ≤2).</div>
+  </div>
+  <div class="condition-item p1">
+    <div class="ci-label">P1 — Required before any public Alfa materials update</div>
+    <div class="ci-title">D4: Alfa Bank disambiguation — OFAC/OFSI/EU check</div>
+    <div class="ci-body">Ongoing constraint per Phase 1 D4. Any Alfa-associated materials updated during the D3 transition period must pass OFAC/OFSI/EU entity check before publication. Compliance must document the check.</div>
+  </div>
+  <div class="condition-item">
+    <div class="ci-label">Phase 5 required</div>
+    <div class="ci-title">Token amendment P4-01 applied to lede-tokens.json</div>
+    <div class="ci-body">Before Phase 5 implementation begins, update lede-tokens.json v2.0.0 to reflect Amendment P4-01 (IBM Plex Mono weight 700). The amended file is the authoritative token reference for Phase 5 and Phase 6.</div>
+  </div>
+
+  <div class="callout ok" style="margin-top:32px;">
+    <strong>Phase 4 identity system complete.</strong> The Vigil by Lede professional identity system is fully specified: logotype, logomark, type scale, color system, components, motion, and partner system. Three P0 conditions (trademark clearance, FM-04 test, Powered+ definition) must be resolved before Phase 5 public launch. Phase 5 website implementation may begin immediately for internal development work. Phase 6 product application may begin implementation in parallel with Phase 5.
+  </div>
+</div>
+
+</main>
+</div>
+
+<button class="theme-btn" onclick="
+  const r = document.documentElement;
+  const cur = r.getAttribute('data-theme');
+  const isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  r.setAttribute('data-theme', isDark ? 'light' : 'dark');
+" aria-label="Toggle theme">Toggle theme</button>
+
+<script>
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
