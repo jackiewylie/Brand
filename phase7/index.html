@@ -155,6 +155,7 @@ body {
   display: flex; gap: 40px;
   font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 400;
   color: var(--tm); letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
   border-top: 1px solid var(--rule1); padding-top: 20px;
 }
 .cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
@@ -207,7 +208,7 @@ body {
   font-size: 11px; color: var(--tm); line-height: 1.45;
 }
 .arch-card.brand-card {
-  background: var(--t1);
+  background: var(--pd-bg0);
 }
 .arch-card.brand-card .arch-card-name { color: var(--sp); }
 .arch-card.brand-card .arch-card-desc { color: var(--pd-ink3); }
@@ -459,6 +460,7 @@ body {
 }
 .spec-table td:first-child {
   font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--tm);
+  font-variant-numeric: tabular-nums;
   width: 160px;
 }
 .spec-table tr:last-child td { border-bottom: none; }
@@ -556,7 +558,7 @@ footer {
   </div>
 </header>
 
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 <div class="page">
 
   <!-- ── Cover ── -->
@@ -748,7 +750,8 @@ footer {
           IBM Plex Mono 500, 14–18px.<br>
           Separator: pipe character, text-muted color.<br>
           Partner name precedes Vigil name.<br>
-          "/ Lede" endorsement line at 10px 400.
+          "/ Lede" endorsement line at 10px 400.<br>
+          Light register only. Never on product dark surfaces.
         </div>
       </div>
     </div>
@@ -1001,7 +1004,7 @@ footer {
       </div>
     </div>
 
-    <div class="case-card" style="margin-top:20px; opacity:0.75;" aria-label="White-label reference — illustrative, pending brand owner resolution">
+    <div class="case-card" style="margin-top:20px; background: var(--so);" aria-label="White-label reference — illustrative, pending brand owner resolution">
       <div class="case-header" style="background:var(--st);">
         <div class="case-header-top">
           <div>
