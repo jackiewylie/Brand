@@ -57,7 +57,9 @@
 }
 
 /* ─── Base ─── */
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body {
   background: var(--bg0);
   color: var(--ink);
@@ -67,7 +69,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-.mono { font-family: "IBM Plex Mono", "Fira Code", monospace; }
+.mono { font-family: "IBM Plex Mono", monospace; }
 a { color: inherit; text-decoration: none; }
 
 /* ─── Nav ─── */
@@ -115,7 +117,8 @@ a { color: inherit; text-decoration: none; }
 .btn-sm { font-size: 12px; padding: 6px 14px; }
 .btn-lg { font-size: 15px; padding: 11px 28px; }
 
-.btn:focus-visible, .nav-links a:focus-visible, .footer-link:focus-visible {
+.btn:focus-visible, .nav-links a:focus-visible, .footer-link:focus-visible,
+.nav-brand:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
 
@@ -133,7 +136,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-eyebrow {
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
 }
 .hero-eyebrow::before {
@@ -205,7 +208,7 @@ a { color: inherit; text-decoration: none; }
 .section-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; }
 .section-eyebrow {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
 }
 .section-eyebrow::before {
@@ -231,7 +234,7 @@ h2.section-title {
 }
 .pillar-num {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.16em; color: var(--ink4); text-transform: uppercase;
+  letter-spacing: 0.16em; color: var(--ink3); text-transform: uppercase;
   margin-bottom: 20px;
 }
 .pillar-title {
@@ -263,7 +266,7 @@ h2.section-title {
 }
 .aud-role {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 12px;
 }
 .aud-need {
@@ -295,7 +298,7 @@ h2.section-title {
 }
 .proof-label {
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
-  letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 8px;
 }
 .proof-note {
@@ -311,7 +314,7 @@ h2.section-title {
 .ent-item { }
 .ent-label {
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 8px;
 }
 .ent-title {
@@ -332,7 +335,7 @@ h2.section-title {
 .tier-card.featured { background: var(--bg2); }
 .tier-badge {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
 }
 .tier-name {
   font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700;
@@ -362,7 +365,7 @@ h2.section-title {
 .partner-badge-demo {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: "IBM Plex Mono", monospace; font-size: 11px;
-  color: var(--ink3); letter-spacing: 0.06em;
+  color: var(--ink2); letter-spacing: 0.06em;
   padding: 6px 12px; background: var(--bg2);
   margin-bottom: 20px;
 }
@@ -418,7 +421,7 @@ h2.section-title {
 }
 .footer-col h4 {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 16px;
 }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -522,8 +525,8 @@ h2.section-title {
       <li><a href="#partners">Partners</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#" class="btn btn-ghost btn-sm" role="button">Sign in</a>
-      <a href="#request" class="btn btn-primary btn-sm" role="button">Request access</a>
+      <a href="#" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="#request" class="btn btn-primary btn-sm">Request access</a>
     </div>
   </div>
 </nav>
@@ -546,8 +549,8 @@ h2.section-title {
     </p>
 
     <div class="hero-actions">
-      <a href="#request" class="btn btn-primary btn-lg" role="button">Request access</a>
-      <a href="#product" class="btn btn-secondary btn-lg" role="button">See how it works</a>
+      <a href="#request" class="btn btn-primary btn-lg">Request access</a>
+      <a href="#product" class="btn btn-secondary btn-lg">See how it works</a>
     </div>
 
     <div class="hero-step-wrap" aria-hidden="true">
@@ -632,12 +635,12 @@ h2.section-title {
     <div class="proof-stat" role="listitem">
       <div class="proof-num">100%</div>
       <div class="proof-label">Citations to primary source</div>
-      <p class="proof-note">Every Vigil inference links to a document, page, and sentence. No unsourced conclusions are surfaced.</p>
+      <p class="proof-note">Every Vigil inference links to a document, page, and sentence. No unsourced conclusions are surfaced.<br><span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
     </div>
     <div class="proof-stat" role="listitem">
       <div class="proof-num">0</div>
       <div class="proof-label">Black-box conclusions</div>
-      <p class="proof-note">The reasoning chain from source to signal is fully traceable. You see the logic, not just the answer.</p>
+      <p class="proof-note">The reasoning chain from source to signal is fully traceable. You see the logic, not just the answer.<br><span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
     </div>
   </div>
 </div>
@@ -668,7 +671,7 @@ h2.section-title {
       <div class="audience-card" role="listitem">
         <div class="aud-role">CCO / Compliance</div>
         <div class="aud-need">Evidence you can present in an audit.</div>
-        <p class="aud-body">Cited, traceable, auditable intelligence outputs. Vigil's reasoning logs document how every conclusion was reached — from which document, which sentence, through which inference steps. Designed to hold up under regulatory review.</p>
+        <p class="aud-body">Cited, traceable, auditable intelligence outputs. Vigil's reasoning logs document how every conclusion was reached — from which document, which sentence, through which inference steps. Designed to hold up under regulatory review. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
       </div>
       <div class="audience-card" role="listitem">
         <div class="aud-role">Procurement</div>
@@ -731,7 +734,7 @@ h2.section-title {
   <div class="section-inner">
     <div class="section-eyebrow">Tiers</div>
     <h2 class="section-title">From individual analyst<br>to enterprise platform.</h2>
-    <p class="section-intro">Five tiers. Every tier delivers sourced, traceable intelligence — the scale of deployment changes, not the quality of the signal.</p>
+    <p class="section-intro">Four tiers at launch (Vigil Powered+ pending brand owner resolution). Every tier delivers sourced, traceable intelligence — the scale of deployment changes, not the quality of the signal.</p>
 
     <div class="tiers-grid" role="list">
       <div class="tier-card" role="listitem">
@@ -745,7 +748,7 @@ h2.section-title {
           <li>Configurable alert preferences</li>
         </ul>
         <div class="tier-cta">
-          <a href="#request" class="btn btn-secondary btn-sm" role="button">Request access</a>
+          <a href="#request" class="btn btn-secondary btn-sm">Request access</a>
         </div>
       </div>
       <div class="tier-card featured" role="listitem">
@@ -760,7 +763,7 @@ h2.section-title {
           <li>Priority support</li>
         </ul>
         <div class="tier-cta">
-          <a href="#request" class="btn btn-secondary btn-sm" role="button">Request access</a>
+          <a href="#request" class="btn btn-secondary btn-sm">Request access</a>
         </div>
       </div>
       <div class="tier-card" role="listitem">
@@ -776,7 +779,7 @@ h2.section-title {
           <li>Enterprise SLA</li>
         </ul>
         <div class="tier-cta">
-          <a href="#contact" class="btn btn-secondary btn-sm" role="button">Talk to sales</a>
+          <a href="#contact" class="btn btn-secondary btn-sm">Talk to sales</a>
         </div>
       </div>
       <div class="tier-card" role="listitem">
@@ -790,7 +793,7 @@ h2.section-title {
           <li>Coverage configuration by partner</li>
         </ul>
         <div class="tier-cta">
-          <a href="#partners" class="btn btn-secondary btn-sm" role="button">Partner inquiry</a>
+          <a href="#partners" class="btn btn-secondary btn-sm">Partner inquiry</a>
         </div>
       </div>
     </div>
@@ -847,7 +850,7 @@ h2.section-title {
           <li>Attribution badge SVG files and clearspace specification</li>
           <li>Onboarding support and partner CSM</li>
         </ul>
-        <a href="#contact" class="btn btn-secondary" role="button">Partner inquiry</a>
+        <a href="#contact" class="btn btn-secondary">Partner inquiry</a>
       </div>
     </div>
   </div>
@@ -856,13 +859,12 @@ h2.section-title {
 <!-- ═══ CTA BAND ═══ -->
 <section class="cta-band" id="request" aria-label="Request access">
   <div class="cta-band-inner">
-    <h2 class="cta-headline">Ready to see<br>what you've been missing?</h2>
+    <h2 class="cta-headline">Begin your<br>coverage evaluation.</h2>
     <p class="cta-sub">
       Vigil is currently in access-controlled early availability. Request a briefing and coverage list evaluation with the Lede team.
     </p>
     <div class="cta-actions">
-      <a href="#contact" class="btn btn-primary btn-lg" role="button">Request access</a>
-      <a href="#" class="btn btn-ghost btn-lg" role="button">Download overview</a>
+      <a href="#contact" class="btn btn-primary btn-lg">Request access</a>
     </div>
   </div>
 </section>
