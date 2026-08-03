@@ -164,7 +164,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-step-label {
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3);
   margin-bottom: 16px;
 }
 .step-canvas {
@@ -192,7 +192,7 @@ a { color: inherit; text-decoration: none; }
 .step-label-event {
   position: absolute;
   font-family: "IBM Plex Mono", monospace; font-size: 9px;
-  color: var(--ink4); letter-spacing: 0.06em; white-space: nowrap;
+  color: var(--ink3); letter-spacing: 0.06em; white-space: nowrap;
   top: calc(50% + 18px); opacity: 0;
 }
 .step-tick {
@@ -353,7 +353,7 @@ h2.section-title {
   line-height: 1.55;
 }
 .tier-features li::before {
-  content: "—"; position: absolute; left: 0; color: var(--ink3);
+  content: "—"; position: absolute; left: 0; color: var(--ink2);
 }
 .tier-cta { margin-top: 8px; }
 
@@ -454,6 +454,8 @@ h2.section-title {
 .partner-section .section-eyebrow,
 .partner-section .section-intro { color: var(--ink2); }
 
+.partner-section .ent-label { color: var(--ink2); }
+
 /* ─── Motion — the-line-steps ─── */
 @keyframes lineExtend {
   from { width: 0; }
@@ -513,7 +515,16 @@ h2.section-title {
   .footer { padding: 48px 24px 32px; }
   .cta-band { padding: 64px 24px; }
 }
+.skip-link {
+  position: absolute; top: -100%; left: 8px; z-index: 9999;
+  font-family: "IBM Plex Mono", monospace; font-size: 12px;
+  background: var(--bg0); color: var(--ink); border: 1px solid var(--rule2);
+  padding: 8px 16px; text-decoration: none;
+}
+.skip-link:focus { top: 8px; outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- ═══ NAV ═══ -->
 <nav class="nav" aria-label="Primary navigation">
@@ -539,7 +550,7 @@ h2.section-title {
   </div>
 </nav>
 
-<main class="page">
+<main class="page" id="main-content">
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" aria-label="Product hero">
@@ -593,7 +604,7 @@ h2.section-title {
         <div class="pillar-num">01 — Monitor</div>
         <div class="pillar-title">Coverage<br>without blindspots</div>
         <p class="pillar-body">
-          Vigil watches your coverage list in real time — SEC filings, earnings transcripts, regulatory disclosures, corporate actions. You define the coverage universe; Vigil monitors it continuously so you don't have to.
+          Vigil watches your coverage list in near-real time — SEC filings, earnings transcripts, regulatory disclosures, corporate actions. You define the coverage universe; Vigil monitors it around the clock so you don't have to.
         </p>
         <ul class="pillar-detail">
           <li>10-K, 10-Q, 8-K, proxy filings</li>
@@ -619,7 +630,7 @@ h2.section-title {
         <div class="pillar-num">03 — Cite</div>
         <div class="pillar-title">Every claim<br>to a source</div>
         <p class="pillar-body">
-          Intelligence without provenance is opinion. Vigil links every inference to the exact sentence in the exact document that produced it — an SEC filing, an earnings transcript, a regulatory record. Present it in a board meeting.
+          Intelligence without provenance is opinion. Vigil is designed to link every inference to the source sentence in the source document that produced it — an SEC filing, an earnings transcript, a regulatory record. Present it in a board meeting. <span class="rvh">REQUIRES HUMAN VERIFICATION</span>
         </p>
         <ul class="pillar-detail">
           <li>Sentence-level source linking</li>
