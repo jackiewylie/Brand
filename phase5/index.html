@@ -1,0 +1,1010 @@
+<title>Vigil by Lede — AI Investment Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Token system: lede-tokens.json v2.1.0 ─── */
+:root {
+  --bg0: #131210;
+  --bg1: #1B1A16;
+  --bg2: #242320;
+  --bg3: #2C2B26;
+  --bg-overlay: #181713;
+  --ink:  #F7F5EF;
+  --ink2: #E8E6DC;
+  --ink3: #847D75;
+  --ink4: #6C6A5E;
+  --rule: #2C2B26;
+  --rule2: #383630;
+  --accent: #FF5A14;
+  --accent-hover: #FF7A42;
+  --accent-text: #FF7A42;
+  --ok:   #3FA971;
+  --err:  #E05A47;
+  --warn: #E2A93B;
+
+  /* Functional */
+  --nav-h: 56px;
+  --max-w: 1180px;
+  --col: 1fr;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg0: #F7F5EF; --bg1: #EFECE2; --bg2: #E6E3D5; --bg3: #DEDACA;
+    --bg-overlay: #F2F0E7;
+    --ink: #131210; --ink2: #2A2925; --ink3: #706B63; --ink4: #8B897D;
+    --rule: #E3E0D4; --rule2: #D2CFC0;
+    --accent: #FF4B00; --accent-hover: #E64300; --accent-text: #C93A00;
+    --ok: #1E7D4F; --err: #C33B2E; --warn: #B07C1E;
+  }
+}
+:root[data-theme="dark"] {
+  --bg0:#131210; --bg1:#1B1A16; --bg2:#242320; --bg3:#2C2B26; --bg-overlay:#181713;
+  --ink:#F7F5EF; --ink2:#E8E6DC; --ink3:#847D75; --ink4:#6C6A5E;
+  --rule:#2C2B26; --rule2:#383630;
+  --accent:#FF5A14; --accent-hover:#FF7A42; --accent-text:#FF7A42;
+  --ok:#3FA971; --err:#E05A47; --warn:#E2A93B;
+}
+:root[data-theme="light"] {
+  --bg0:#F7F5EF; --bg1:#EFECE2; --bg2:#E6E3D5; --bg3:#DEDACA; --bg-overlay:#F2F0E7;
+  --ink:#131210; --ink2:#2A2925; --ink3:#706B63; --ink4:#8B897D;
+  --rule:#E3E0D4; --rule2:#D2CFC0;
+  --accent:#FF4B00; --accent-hover:#E64300; --accent-text:#C93A00;
+  --ok:#1E7D4F; --err:#C33B2E; --warn:#B07C1E;
+}
+
+/* ─── Base ─── */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.mono { font-family: "IBM Plex Mono", "Fira Code", monospace; }
+a { color: inherit; text-decoration: none; }
+
+/* ─── Nav ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h); background: var(--bg0);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center;
+  padding: 0 40px;
+}
+.nav-inner {
+  max-width: var(--max-w); width: 100%; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 700;
+  letter-spacing: -0.01em; color: var(--ink);
+}
+.nav-brand svg { flex-shrink: 0; }
+.nav-links {
+  display: flex; align-items: center; gap: 28px; list-style: none;
+}
+.nav-links a {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink3);
+  transition: color 80ms;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.btn {
+  font-family: "Schibsted Grotesk", sans-serif; font-size: 13px; font-weight: 500;
+  padding: 7px 18px; border-radius: 100px; border: none; cursor: pointer;
+  line-height: 1; white-space: nowrap; transition: background 80ms, color 80ms;
+}
+.btn-ghost {
+  background: transparent; color: var(--ink3); border: 1px solid var(--rule2);
+  border-radius: 100px;
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink3); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--bg2); color: var(--ink2); }
+.btn-secondary:hover { background: var(--bg3); }
+.btn-sm { font-size: 12px; padding: 6px 14px; }
+.btn-lg { font-size: 15px; padding: 11px 28px; }
+
+.btn:focus-visible, .nav-links a:focus-visible, .footer-link:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+/* ─── Layout shell ─── */
+.page { padding-top: var(--nav-h); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 88vh; padding: 80px 40px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-inner {
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+}
+.hero-eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ""; display: block; width: 24px; height: 1px; background: var(--rule2);
+}
+.hero-headline {
+  font-family: "IBM Plex Mono", monospace; font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.04;
+  color: var(--ink); max-width: 840px; text-wrap: balance;
+  margin-bottom: 28px;
+}
+.hero-headline em {
+  font-style: italic; color: var(--ink3);
+}
+.hero-sub {
+  font-size: 18px; color: var(--ink3); line-height: 1.65;
+  max-width: 520px; margin-bottom: 40px;
+}
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+/* ─── The Step — animated instrument line ─── */
+.hero-step-wrap {
+  margin-top: 64px; padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.hero-step-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 16px;
+}
+.step-canvas {
+  width: 100%; height: 48px; position: relative; overflow: visible;
+}
+.step-line-track {
+  position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+  background: var(--rule2); transform: translateY(-50%);
+}
+.step-line-draw {
+  position: absolute; top: 50%; left: 0; height: 1px;
+  background: var(--ink3); transform: translateY(-50%);
+  width: 0; transform-origin: left center;
+}
+.step-descent {
+  position: absolute; width: 1px; background: var(--ink3);
+  top: 50%; bottom: auto; height: 0; transform-origin: top center;
+}
+.step-node {
+  position: absolute; border-radius: 50%;
+  background: var(--accent);
+  width: 10px; height: 10px;
+  transform: scale(0); transform-origin: center;
+}
+.step-label-event {
+  position: absolute;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink4); letter-spacing: 0.06em; white-space: nowrap;
+  top: calc(50% + 18px); opacity: 0;
+}
+.step-tick {
+  position: absolute; top: 50%; width: 1px; height: 8px;
+  background: var(--rule2); transform: translateY(-100%);
+}
+
+/* ─── Section skeleton ─── */
+.section {
+  padding: 88px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.section-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; }
+.section-eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before {
+  content: ""; display: block; width: 16px; height: 1px; background: var(--rule2);
+}
+h2.section-title {
+  font-family: "IBM Plex Mono", monospace; font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;
+  color: var(--ink); text-wrap: balance; margin-bottom: 16px;
+}
+.section-intro {
+  font-size: 16px; color: var(--ink3); line-height: 1.70;
+  max-width: 580px; margin-bottom: 48px;
+}
+
+/* ─── Three pillars ─── */
+.pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--rule);
+}
+.pillar {
+  background: var(--bg0); padding: 40px 32px;
+}
+.pillar-num {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.16em; color: var(--ink4); text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.pillar-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink); margin-bottom: 12px;
+}
+.pillar-body {
+  font-size: 14px; color: var(--ink3); line-height: 1.70; margin-bottom: 20px;
+}
+.pillar-detail {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4);
+  line-height: 1.60;
+}
+.pillar-detail li {
+  list-style: none; padding-left: 14px; position: relative; margin-bottom: 4px;
+}
+.pillar-detail li::before {
+  content: "—"; position: absolute; left: 0; color: var(--ink4);
+}
+
+/* ─── Audience grid ─── */
+.audience-section { background: var(--bg1); }
+.audience-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--rule);
+}
+.audience-card {
+  background: var(--bg1); padding: 36px 28px;
+}
+.aud-role {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 12px;
+}
+.aud-need {
+  font-family: "IBM Plex Mono", monospace; font-size: 16px; font-weight: 500;
+  letter-spacing: -0.01em; color: var(--ink); margin-bottom: 16px; line-height: 1.25;
+  text-wrap: balance;
+}
+.aud-body {
+  font-size: 13px; color: var(--ink3); line-height: 1.65;
+}
+
+/* ─── Quote / proof strip ─── */
+.proof-strip {
+  background: var(--bg0); padding: 56px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.proof-inner {
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--rule);
+}
+.proof-stat {
+  background: var(--bg0); padding: 32px 24px;
+}
+.proof-num {
+  font-family: "IBM Plex Mono", monospace; font-size: 36px; font-weight: 700;
+  letter-spacing: -0.04em; color: var(--ink); line-height: 1;
+  margin-bottom: 8px; font-variant-numeric: tabular-nums;
+}
+.proof-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 8px;
+}
+.proof-note {
+  font-size: 12px; color: var(--ink4); line-height: 1.5;
+}
+.rvh { color: var(--warn); font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500; }
+
+/* ─── Enterprise section ─── */
+.enterprise-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px 64px; margin-top: 48px;
+}
+.ent-item { }
+.ent-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 8px;
+}
+.ent-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 500;
+  color: var(--ink); margin-bottom: 8px;
+}
+.ent-body { font-size: 13px; color: var(--ink3); line-height: 1.65; }
+
+/* ─── Tiers ─── */
+.tiers-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--rule); margin-top: 48px;
+}
+.tier-card {
+  background: var(--bg1); padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.tier-card.featured { background: var(--bg2); }
+.tier-badge {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink4);
+}
+.tier-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.tier-tagline {
+  font-size: 13px; color: var(--ink3); line-height: 1.60;
+}
+.tier-features {
+  list-style: none; display: flex; flex-direction: column; gap: 6px;
+  padding: 0; margin-top: auto;
+}
+.tier-features li {
+  font-size: 12px; color: var(--ink3); padding-left: 14px; position: relative;
+  line-height: 1.55;
+}
+.tier-features li::before {
+  content: "—"; position: absolute; left: 0; color: var(--ink4);
+}
+.tier-cta { margin-top: 8px; }
+
+/* ─── Partner section ─── */
+.partner-section { background: var(--bg1); }
+.partner-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.partner-badge-demo {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: "IBM Plex Mono", monospace; font-size: 11px;
+  color: var(--ink3); letter-spacing: 0.06em;
+  padding: 6px 12px; background: var(--bg2);
+  margin-bottom: 20px;
+}
+.pb-wordmark { color: var(--ink2); font-weight: 700; }
+.partner-formulations {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--rule); margin: 24px 0;
+}
+.pf-row {
+  background: var(--bg1); padding: 14px 20px;
+  display: grid; grid-template-columns: 120px 1fr;
+  gap: 16px; font-size: 13px;
+}
+.pf-key {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink4);
+}
+.pf-val { color: var(--ink3); line-height: 1.55; }
+
+/* ─── CTA band ─── */
+.cta-band {
+  padding: 88px 40px; text-align: center;
+  background: var(--bg0); border-bottom: 1px solid var(--rule);
+}
+.cta-band-inner { max-width: 640px; margin: 0 auto; }
+.cta-headline {
+  font-family: "IBM Plex Mono", monospace; font-size: clamp(24px, 4vw, 48px);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;
+  color: var(--ink); text-wrap: balance; margin-bottom: 16px;
+}
+.cta-sub {
+  font-size: 16px; color: var(--ink3); line-height: 1.65;
+  margin-bottom: 36px;
+}
+.cta-actions { display: flex; align-items: center; gap: 14px; justify-content: center; }
+
+/* ─── Footer ─── */
+.footer {
+  background: var(--bg0); padding: 56px 40px 40px;
+}
+.footer-inner {
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 220px 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand .fb-name {
+  font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 700;
+  color: var(--ink); display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+}
+.footer-brand .fb-sub {
+  font-size: 12px; color: var(--ink4); line-height: 1.65;
+}
+.footer-col h4 {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-link {
+  font-size: 13px; color: var(--ink3);
+  transition: color 80ms;
+}
+.footer-link:hover { color: var(--ink); }
+.footer-bottom {
+  max-width: var(--max-w); margin: 0 auto; width: 100%;
+  padding-top: 24px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 24px; flex-wrap: wrap;
+}
+.footer-legal {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  color: var(--ink4); line-height: 1.65; max-width: 640px;
+}
+.footer-legal a { color: var(--ink4); text-decoration: underline; }
+.footer-byline {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink4);
+  white-space: nowrap;
+}
+
+/* ─── Motion — the-line-steps ─── */
+@keyframes lineExtend {
+  from { width: 0; }
+  to   { width: var(--line-w, 100%); }
+}
+@keyframes descentDraw {
+  from { height: 0; }
+  to   { height: var(--descent-h, 20px); }
+}
+@keyframes nodeAppear {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes labelFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-line-draw.animate {
+  animation: lineExtend 550ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-descent.animate {
+  animation: descentDraw 220ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-node.animate {
+  animation: nodeAppear 200ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-label-event.animate {
+  animation: labelFade 200ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .step-line-draw { width: var(--line-w, 100%) !important; }
+  .step-descent { height: var(--descent-h, 20px) !important; }
+  .step-node { transform: scale(1) !important; opacity: 1 !important; }
+  .step-label-event { opacity: 1 !important; }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .pillars { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .tiers-grid { grid-template-columns: 1fr 1fr; }
+  .partner-inner { grid-template-columns: 1fr; }
+  .proof-inner { grid-template-columns: 1fr; }
+  .enterprise-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+  .hero { padding: 56px 24px 48px; min-height: 70vh; }
+  .section { padding: 64px 24px; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .tiers-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer { padding: 48px 24px 32px; }
+  .cta-band { padding: 64px 24px; }
+}
+</style>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand" aria-label="Vigil by Lede — home">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M2,7 L12,7 L12,13" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="13" r="3" fill="#FF5A14"/>
+      </svg>
+      VIGIL <span style="font-weight:400; color:var(--ink3); margin-left:2px; font-size:13px;">by Lede</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#audiences">Who it's for</a></li>
+      <li><a href="#enterprise">Enterprise</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#partners">Partners</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-ghost btn-sm" role="button">Sign in</a>
+      <a href="#request" class="btn btn-primary btn-sm" role="button">Request access</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" aria-label="Product hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">AI investment intelligence</div>
+
+    <h1 class="hero-headline">
+      The market doesn't<br>
+      announce itself.<br>
+      <em>Vigil does.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Continuous coverage monitoring. Traceable reasoning. Every inference cited to a primary source — a filing, a transcript, a regulatory disclosure.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#request" class="btn btn-primary btn-lg" role="button">Request access</a>
+      <a href="#product" class="btn btn-secondary btn-lg" role="button">See how it works</a>
+    </div>
+
+    <div class="hero-step-wrap" aria-hidden="true">
+      <div class="hero-step-label">Coverage timeline — signal detection</div>
+      <div class="step-canvas" id="stepCanvas">
+        <div class="step-line-track"></div>
+        <!-- Ticks for temporal reference -->
+        <div class="step-tick" style="left:16.6%;"></div>
+        <div class="step-tick" style="left:33.3%;"></div>
+        <div class="step-tick" style="left:50%;"></div>
+        <div class="step-tick" style="left:66.6%;"></div>
+        <div class="step-tick" style="left:83.3%;"></div>
+        <!-- The Step: draws left → 68%, then descends, then node appears -->
+        <div class="step-line-draw" id="stepLineDraw" style="--line-w: 68%;"></div>
+        <div class="step-descent" id="stepDescent" style="--descent-h: 22px; left: 68%;"></div>
+        <div class="step-node" id="stepNode" style="left: calc(68% - 5px);"></div>
+        <div class="step-label-event" id="stepLabel" style="left: calc(68% + 14px);">Form 8-K · Material Event · 14:32 ET</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCT PILLARS ═══ -->
+<section class="section" id="product" aria-label="How Vigil works">
+  <div class="section-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Three things<br>most platforms defer.</h2>
+    <p class="section-intro">The gap between a filing and a decision is where intelligence is lost. Vigil closes it.</p>
+
+    <div class="pillars" role="list">
+      <div class="pillar" role="listitem">
+        <div class="pillar-num">01 — Monitor</div>
+        <div class="pillar-title">Coverage<br>without blindspots</div>
+        <p class="pillar-body">
+          Vigil watches your coverage list in real time — SEC filings, earnings transcripts, regulatory disclosures, corporate actions. You define the coverage universe; Vigil monitors it continuously so you don't have to.
+        </p>
+        <ul class="pillar-detail">
+          <li>10-K, 10-Q, 8-K, proxy filings</li>
+          <li>Earnings calls and conference transcripts</li>
+          <li>Regulatory and compliance disclosures</li>
+          <li>Configurable monitoring cadence</li>
+        </ul>
+      </div>
+      <div class="pillar" role="listitem">
+        <div class="pillar-num">02 — Reason</div>
+        <div class="pillar-title">Inference you<br>can follow</div>
+        <p class="pillar-body">
+          Every signal Vigil surfaces is the result of structured reasoning from primary sources. Not a summary of a summary. The logic from document to conclusion is explicit, each step traceable and auditable.
+        </p>
+        <ul class="pillar-detail">
+          <li>Structured reasoning chains</li>
+          <li>Explicit inference steps</li>
+          <li>No black-box conclusions</li>
+          <li>Audit-grade reasoning logs</li>
+        </ul>
+      </div>
+      <div class="pillar" role="listitem">
+        <div class="pillar-num">03 — Cite</div>
+        <div class="pillar-title">Every claim<br>to a source</div>
+        <p class="pillar-body">
+          Intelligence without provenance is opinion. Vigil links every inference to the exact sentence in the exact document that produced it — an SEC filing, an earnings transcript, a regulatory record. Present it in a board meeting.
+        </p>
+        <ul class="pillar-detail">
+          <li>Sentence-level source linking</li>
+          <li>Document and page citation</li>
+          <li>Primary source, not secondary synthesis</li>
+          <li>Shareable citation packages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROOF STRIP ═══ -->
+<div class="proof-strip" aria-label="Key metrics">
+  <div class="proof-inner" role="list">
+    <div class="proof-stat" role="listitem">
+      <div class="proof-num">8-K</div>
+      <div class="proof-label">First signal class monitored</div>
+      <p class="proof-note">Vigil alerts within minutes of filing acceptance.<br><span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+    </div>
+    <div class="proof-stat" role="listitem">
+      <div class="proof-num">100%</div>
+      <div class="proof-label">Citations to primary source</div>
+      <p class="proof-note">Every Vigil inference links to a document, page, and sentence. No unsourced conclusions are surfaced.</p>
+    </div>
+    <div class="proof-stat" role="listitem">
+      <div class="proof-num">0</div>
+      <div class="proof-label">Black-box conclusions</div>
+      <p class="proof-note">The reasoning chain from source to signal is fully traceable. You see the logic, not just the answer.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AUDIENCES ═══ -->
+<section class="section audience-section" id="audiences" aria-label="Who Vigil is for">
+  <div class="section-inner">
+    <div class="section-eyebrow">Who it's for</div>
+    <h2 class="section-title">Built for the professionals<br>who can't afford to miss.</h2>
+    <p class="section-intro">Different roles, same problem: intelligence that arrives late isn't intelligence.</p>
+
+    <div class="audience-grid" role="list">
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">PM / Head of Research</div>
+        <div class="aud-need">Coverage depth without headcount.</div>
+        <p class="aud-body">Vigil monitors the full coverage list while your team focuses on judgment calls. New filings, material events, and signal changes surface automatically — with context and citation — before the market moves.</p>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">CIO</div>
+        <div class="aud-need">Accountability across the portfolio.</div>
+        <p class="aud-body">Vigil's sourced reasoning provides the audit trail your compliance and governance processes require. Every signal has a documented chain of evidence — not an opaque AI output that can't be presented to a board.</p>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">CTO</div>
+        <div class="aud-need">Infrastructure that earns its place.</div>
+        <p class="aud-body">API access, SSO, data residency options, and SOC-2 posture. Vigil integrates into existing institutional infrastructure without requiring your team to maintain a custom intelligence pipeline. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">CCO / Compliance</div>
+        <div class="aud-need">Evidence you can present in an audit.</div>
+        <p class="aud-body">Cited, traceable, auditable intelligence outputs. Vigil's reasoning logs document how every conclusion was reached — from which document, which sentence, through which inference steps. Designed to hold up under regulatory review.</p>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">Procurement</div>
+        <div class="aud-need">Enterprise controls, institutional terms.</div>
+        <p class="aud-body">Vigil Platform includes procurement-grade SLAs, enterprise billing, dedicated CSM, and data processing agreements aligned to institutional requirements. Evaluation periods available for Vigil Platform.</p>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="aud-role">Partners</div>
+        <div class="aud-need">Intelligence infrastructure for your product.</div>
+        <p class="aud-body">Embed Vigil's coverage monitoring and sourced reasoning directly into your platform. Vigil Powered provides the intelligence layer; your product provides the surface. Attribution: "Powered by Vigil."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENTERPRISE ═══ -->
+<section class="section" id="enterprise" aria-label="Enterprise features">
+  <div class="section-inner">
+    <div class="section-eyebrow">Enterprise</div>
+    <h2 class="section-title">Institutional infrastructure<br>from the first deployment.</h2>
+    <p class="section-intro">Vigil Platform is built for organizations where "good enough" means something different.</p>
+
+    <div class="enterprise-grid">
+      <div class="ent-item">
+        <div class="ent-label">Access &amp; Identity</div>
+        <div class="ent-title">SSO / SAML integration</div>
+        <p class="ent-body">Vigil Platform supports SSO via SAML 2.0 and OIDC-compatible identity providers. User provisioning integrates with your existing identity management. No shadow IT. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+      </div>
+      <div class="ent-item">
+        <div class="ent-label">Data Governance</div>
+        <div class="ent-title">Data residency &amp; processing agreements</div>
+        <p class="ent-body">Data residency options are available for Vigil Platform. Data processing agreements (DPAs) aligned to institutional data governance requirements. Your coverage data does not train shared models. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+      </div>
+      <div class="ent-item">
+        <div class="ent-label">Compliance Posture</div>
+        <div class="ent-title">Audit-grade reasoning logs</div>
+        <p class="ent-body">Every Vigil inference that reaches a user is logged: source document, reasoning chain, timestamp, user session. The log is exportable and designed to support regulatory and internal audit review.</p>
+      </div>
+      <div class="ent-item">
+        <div class="ent-label">Integration</div>
+        <div class="ent-title">API access &amp; webhook delivery</div>
+        <p class="ent-body">Vigil Platform exposes coverage events via REST API and webhook. Integrate Vigil signals into existing portfolio management systems, alerting infrastructure, or compliance workflows.</p>
+      </div>
+      <div class="ent-item">
+        <div class="ent-label">Service</div>
+        <div class="ent-title">Dedicated customer success</div>
+        <p class="ent-body">Vigil Platform includes a named customer success manager, onboarding support for coverage list configuration, and a procurement-grade SLA with uptime commitments and incident response terms. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+      </div>
+      <div class="ent-item">
+        <div class="ent-label">Security</div>
+        <div class="ent-title">SOC 2 Type II posture</div>
+        <p class="ent-body">Security documentation and SOC 2 Type II report available to Vigil Platform customers under NDA. Penetration test results and security architecture overview available during evaluation. <span class="rvh">REQUIRES HUMAN VERIFICATION</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING / TIERS ═══ -->
+<section class="section" id="pricing" aria-label="Product tiers and pricing">
+  <div class="section-inner">
+    <div class="section-eyebrow">Tiers</div>
+    <h2 class="section-title">From individual analyst<br>to enterprise platform.</h2>
+    <p class="section-intro">Five tiers. Every tier delivers sourced, traceable intelligence — the scale of deployment changes, not the quality of the signal.</p>
+
+    <div class="tiers-grid" role="list">
+      <div class="tier-card" role="listitem">
+        <div class="tier-badge">Individual</div>
+        <div class="tier-name">Vigil Pro</div>
+        <p class="tier-tagline">Single professional license. Full monitoring, traceable reasoning, source citation. The instrument in your hands.</p>
+        <ul class="tier-features">
+          <li>Continuous coverage monitoring</li>
+          <li>Traceable reasoning chain</li>
+          <li>Primary source citation</li>
+          <li>Configurable alert preferences</li>
+        </ul>
+        <div class="tier-cta">
+          <a href="#request" class="btn btn-secondary btn-sm" role="button">Request access</a>
+        </div>
+      </div>
+      <div class="tier-card featured" role="listitem">
+        <div class="tier-badge">Team</div>
+        <div class="tier-name">Vigil Prime</div>
+        <p class="tier-tagline">2–20 seats. Shared coverage lists, team signal feeds, compliance officer visibility. For research teams.</p>
+        <ul class="tier-features">
+          <li>Shared coverage universe</li>
+          <li>Team signal feeds</li>
+          <li>Compliance officer read access</li>
+          <li>Coverage event audit log</li>
+          <li>Priority support</li>
+        </ul>
+        <div class="tier-cta">
+          <a href="#request" class="btn btn-secondary btn-sm" role="button">Request access</a>
+        </div>
+      </div>
+      <div class="tier-card" role="listitem">
+        <div class="tier-badge">Enterprise</div>
+        <div class="tier-name">Vigil Platform</div>
+        <p class="tier-tagline">Unlimited seats. API access, SSO, data residency, dedicated CSM. Procurement-grade SLAs.</p>
+        <ul class="tier-features">
+          <li>Unlimited user seats</li>
+          <li>SSO / SAML integration</li>
+          <li>API access &amp; webhooks</li>
+          <li>Data residency options</li>
+          <li>Dedicated customer success</li>
+          <li>Enterprise SLA</li>
+        </ul>
+        <div class="tier-cta">
+          <a href="#contact" class="btn btn-secondary btn-sm" role="button">Talk to sales</a>
+        </div>
+      </div>
+      <div class="tier-card" role="listitem">
+        <div class="tier-badge">Partner embedded</div>
+        <div class="tier-name">Vigil Powered</div>
+        <p class="tier-tagline">Embed Vigil's intelligence layer in your platform. Attribution badge. You deploy; Vigil monitors.</p>
+        <ul class="tier-features">
+          <li>Intelligence layer API</li>
+          <li>"Powered by Vigil" badge</li>
+          <li>Partner onboarding support</li>
+          <li>Coverage configuration by partner</li>
+        </ul>
+        <div class="tier-cta">
+          <a href="#partners" class="btn btn-secondary btn-sm" role="button">Partner inquiry</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:24px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink4);">
+      Pricing available on request. All tiers require a brief evaluation period for coverage list configuration. Vigil name conditional on trademark clearance (class 36/42, US/UK/EU). <span class="rvh">REQUIRES HUMAN VERIFICATION on all pricing claims before publication.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══ PARTNER SECTION ═══ -->
+<section class="section partner-section" id="partners" aria-label="Partner program">
+  <div class="section-inner">
+    <div class="section-eyebrow">Partners</div>
+    <div class="partner-inner">
+      <div>
+        <h2 class="section-title" style="margin-bottom:16px;">Intelligence infrastructure<br>for your product.</h2>
+        <p class="section-intro" style="margin-bottom:32px;">
+          Vigil Powered lets you embed continuous coverage monitoring and sourced AI reasoning directly in your platform. Your product surface. Our intelligence layer.
+        </p>
+
+        <div class="partner-badge-demo" aria-label="Powered by Vigil badge specimen">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M1,5 L9,5 L9,10" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="10" r="2.5" fill="#FF5A14"/>
+          </svg>
+          <span>POWERED BY </span><span class="pb-wordmark">VIGIL</span>
+        </div>
+
+        <div class="partner-formulations">
+          <div class="pf-row">
+            <div class="pf-key">Standard</div>
+            <div class="pf-val">"Powered by Vigil" — after Vigil trademark clearance in class 36 and 42.</div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-key">Transition</div>
+            <div class="pf-val">"Powered by Lede" — pre-clearance, or when partner standards require company-level attribution.</div>
+          </div>
+          <div class="pf-row">
+            <div class="pf-key">Grayscale</div>
+            <div class="pf-val">Grayscale badge variant available for partners whose brand standards prohibit orange.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="ent-label" style="margin-bottom:16px;">What partners receive</div>
+        <ul class="tier-features" style="margin-bottom:32px;">
+          <li>Intelligence layer API with webhook event delivery</li>
+          <li>Coverage monitoring scoped to your users' watchlists</li>
+          <li>Sourced reasoning chains available via API response</li>
+          <li>Step logomark SVG kit (Flare and grayscale variants, dark and light ground)</li>
+          <li>Partner brand standards documentation</li>
+          <li>Attribution badge SVG files and clearspace specification</li>
+          <li>Onboarding support and partner CSM</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary" role="button">Partner inquiry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BAND ═══ -->
+<section class="cta-band" id="request" aria-label="Request access">
+  <div class="cta-band-inner">
+    <h2 class="cta-headline">Ready to see<br>what you've been missing?</h2>
+    <p class="cta-sub">
+      Vigil is currently in access-controlled early availability. Request a briefing and coverage list evaluation with the Lede team.
+    </p>
+    <div class="cta-actions">
+      <a href="#contact" class="btn btn-primary btn-lg" role="button">Request access</a>
+      <a href="#" class="btn btn-ghost btn-lg" role="button">Download overview</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer" id="contact" aria-label="Site footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fb-name">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M1,6 L10,6 L10,12" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="12" r="2.5" fill="#FF5A14"/>
+        </svg>
+        Vigil by Lede
+      </div>
+      <p class="fb-sub">AI investment intelligence. Continuous monitoring. Traceable reasoning. Primary-source citation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#product" class="footer-link">How it works</a></li>
+        <li><a href="#audiences" class="footer-link">Who it's for</a></li>
+        <li><a href="#enterprise" class="footer-link">Enterprise</a></li>
+        <li><a href="#pricing" class="footer-link">Tiers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" class="footer-link">About Lede</a></li>
+        <li><a href="#" class="footer-link">Security</a></li>
+        <li><a href="#" class="footer-link">Changelog</a></li>
+        <li><a href="#" class="footer-link">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Partners</h4>
+      <ul>
+        <li><a href="#partners" class="footer-link">Vigil Powered</a></li>
+        <li><a href="#" class="footer-link">Partner inquiry</a></li>
+        <li><a href="#" class="footer-link">Brand standards</a></li>
+        <li><a href="#" class="footer-link">API documentation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-legal">
+      © 2026 Lede (formerly Boosted.ai). All rights reserved. "Vigil" is a trademark of Lede, registration pending (class 36 and 42, US/UK/EU). "Powered by Vigil" and the Step logomark are trademarks of Lede. This website contains forward-looking statements and product descriptions that are subject to change. Claims marked <span class="rvh">REQUIRES HUMAN VERIFICATION</span> have not been independently verified and must be reviewed by Lede's legal and compliance team before public publication. Nothing on this website constitutes investment advice.
+    </div>
+    <div class="footer-byline">
+      Vigil by Lede · Phase 5 · Aug 2026
+    </div>
+  </div>
+</footer>
+
+</div><!-- .page -->
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+/* ─ The-line-steps animation — fires once on load ─ */
+(function() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runLineSteps() {
+    const lineDraw  = document.getElementById('stepLineDraw');
+    const descent   = document.getElementById('stepDescent');
+    const node      = document.getElementById('stepNode');
+    const label     = document.getElementById('stepLabel');
+
+    if (!lineDraw) return;
+
+    const canvas = document.getElementById('stepCanvas');
+    const canvasW = canvas.offsetWidth || 800;
+    const eventPct = 0.68;
+    const lineEnd   = eventPct * canvasW;
+    const descentH  = 22;
+
+    /* Position descent and node precisely */
+    descent.style.left = (lineEnd) + 'px';
+    descent.style.top  = '50%';
+    descent.style.transformOrigin = 'top';
+
+    const nodeLeft = lineEnd - 5;
+    const nodeTop  = 'calc(50% + ' + descentH + 'px - 5px)';
+    node.style.left = nodeLeft + 'px';
+    node.style.top  = 'calc(50% + ' + descentH + 'px - 5px)';
+    label.style.left = (lineEnd + 14) + 'px';
+    label.style.top  = 'calc(50% + ' + (descentH + 8) + 'px)';
+
+    if (prefersReduced) {
+      lineDraw.style.width = (eventPct * 100) + '%';
+      descent.style.height = descentH + 'px';
+      node.style.transform = 'scale(1)';
+      node.style.opacity   = '1';
+      label.style.opacity  = '1';
+      return;
+    }
+
+    /* Sequence: line draws → descent → node → label */
+    const LINE_DUR  = 550;
+    const DESC_DUR  = 220;
+    const NODE_DUR  = 200;
+    const LABEL_DUR = 200;
+
+    setTimeout(function() {
+      lineDraw.classList.add('animate');
+    }, 400);
+
+    setTimeout(function() {
+      descent.classList.add('animate');
+    }, 400 + LINE_DUR);
+
+    setTimeout(function() {
+      node.classList.add('animate');
+    }, 400 + LINE_DUR + DESC_DUR);
+
+    setTimeout(function() {
+      label.classList.add('animate');
+    }, 400 + LINE_DUR + DESC_DUR + NODE_DUR - 60);
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(runLineSteps, 50);
+  } else {
+    window.addEventListener('DOMContentLoaded', function() { setTimeout(runLineSteps, 50); });
+  }
+})();
+
+/* ─ Theme toggle (hidden, accessible via query param ?theme=light) ─ */
+(function() {
+  const p = new URLSearchParams(window.location.search);
+  if (p.has('theme')) {
+    document.documentElement.setAttribute('data-theme', p.get('theme'));
+  }
+})();
+
+/* ─ Nav scroll state ─ */
+(function() {
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', function() {
+    nav.style.borderBottomColor = window.scrollY > 0
+      ? 'var(--rule2)' : 'var(--rule)';
+  }, { passive: true });
+})();
+</script>
