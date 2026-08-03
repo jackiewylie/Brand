@@ -1,0 +1,983 @@
+<title>Phase 3: Blind Gauntlet Selection — Territory A + Vigil</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* === Token system: lede-tokens.json v2.0.0 product dark register === */
+:root {
+  --bg0: #131210;
+  --bg1: #1B1A16;
+  --bg2: #242320;
+  --bg3: #2C2B26;
+  --ink: #F0EDE8;
+  --ink2: #B8B3AC;
+  --ink3: #8A847C;
+  --rule: #3A3832;
+  --accent: #FF5A14;
+  --ok: #4CAF88;
+  --warn: #E8B84B;
+  --crit: #E85B3A;
+  --bg-alt: #1F1E1A;
+  --faint: #5C5850;
+  --decision-bg: rgba(255,90,20,0.06);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg0: #F7F5EF;
+    --bg1: #EFECE2;
+    --bg2: #E6E3D5;
+    --bg3: #DEDACA;
+    --ink: #1A1915;
+    --ink2: #6B6860;
+    --ink3: #9A9590;
+    --rule: #D5D1C5;
+    --bg-alt: #F0EDE7;
+    --faint: #A8A49C;
+    --decision-bg: rgba(255,75,0,0.05);
+  }
+}
+:root[data-theme="dark"] {
+  --bg0: #131210; --bg1: #1B1A16; --bg2: #242320; --bg3: #2C2B26;
+  --ink: #F0EDE8; --ink2: #B8B3AC; --ink3: #8A847C; --rule: #3A3832;
+  --accent: #FF5A14; --ok: #4CAF88; --warn: #E8B84B; --crit: #E85B3A;
+  --bg-alt: #1F1E1A; --faint: #5C5850; --decision-bg: rgba(255,90,20,0.06);
+}
+:root[data-theme="light"] {
+  --bg0: #F7F5EF; --bg1: #EFECE2; --bg2: #E6E3D5; --bg3: #DEDACA;
+  --ink: #1A1915; --ink2: #6B6860; --ink3: #9A9590; --rule: #D5D1C5;
+  --bg-alt: #F0EDE7; --faint: #A8A49C; --decision-bg: rgba(255,75,0,0.05);
+}
+
+/* === Body & Layout === */
+body {
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 11px;
+}
+
+/* Site header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--bg0);
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+}
+.site-header-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.site-header-meta {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 0.06em;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* Shell */
+.shell {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: calc(100vh - 49px);
+}
+
+/* Sidebar */
+.sidebar {
+  border-right: 1px solid var(--rule);
+  padding: 28px 0;
+  position: sticky;
+  top: 49px;
+  height: calc(100vh - 49px);
+  overflow-y: auto;
+  background: var(--bg0);
+}
+.sidebar-group {
+  padding: 0 0 20px;
+  margin-bottom: 4px;
+}
+.sidebar-label {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--faint);
+  display: block;
+  padding: 0 20px 8px;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.sidebar nav a {
+  font-size: 12px;
+  color: var(--ink2);
+  text-decoration: none;
+  padding: 5px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  line-height: 1.4;
+}
+.sidebar nav a:hover { color: var(--ink); background: var(--bg1); }
+.sidebar nav a .nav-num {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+.sidebar nav a.active { color: var(--ink); background: var(--decision-bg); }
+
+.sidebar-verdict {
+  margin: 0 16px 20px;
+  background: var(--bg1);
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+}
+.sv-label {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+.sv-item {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 3px;
+  display: flex;
+  gap: 6px;
+}
+.sv-item .sv-key { color: var(--faint); flex-shrink: 0; }
+.sv-item .sv-val { font-weight: 600; }
+
+/* Main content */
+main {
+  padding: 40px 48px 80px;
+  max-width: 860px;
+}
+
+/* Sections */
+.section {
+  padding: 44px 0;
+  border-top: 1px solid var(--rule);
+}
+.section:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.section-num {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+}
+.section-head h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 12px;
+  color: var(--ink3);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+/* Sub-headings */
+.sub {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin: 28px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Callout */
+.callout {
+  background: var(--bg1);
+  border-left: 3px solid var(--rule);
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+.callout strong { color: var(--ink); }
+.callout.ok { border-left-color: var(--ok); }
+.callout.warn { border-left-color: var(--warn); }
+.callout.crit { border-left-color: var(--crit); }
+.callout.decision { border-left-color: var(--accent); background: var(--decision-bg); }
+
+/* Decision block */
+.decision-block {
+  background: var(--bg1);
+  border: 1px solid var(--rule);
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.db-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.db-label {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.db-verdict {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.db-verdict.ok { border-color: var(--ok); color: var(--ok); }
+.db-verdict.warn { border-color: var(--warn); color: var(--warn); }
+.db-verdict.crit { border-color: var(--crit); color: var(--crit); }
+.db-title { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.db-body { font-size: 13px; line-height: 1.7; color: var(--ink2); }
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+  font-size: 12px;
+}
+.table-wrap th {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: left;
+  padding: 8px 16px 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 400;
+}
+.table-wrap td {
+  font-size: 12px;
+  color: var(--ink2);
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--bg2);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.table-wrap tr:last-child td { border-bottom: none; }
+.table-wrap td:first-child { color: var(--ink); font-weight: 600; }
+.td-pass { color: var(--ok); font-weight: 600; font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace; font-size: 10px; }
+.td-cond { color: var(--warn); font-weight: 600; font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace; font-size: 10px; }
+.td-strong { color: var(--ok); }
+.td-weak { color: var(--warn); }
+.td-crit-cell { color: var(--crit); }
+
+/* Lockup test */
+.lockup-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.lockup-chip {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.lockup-chip .chip-check {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 10px;
+  color: var(--ok);
+  margin-left: 6px;
+}
+
+/* Scenario blocks */
+.scenario-block {
+  border-left: 2px solid var(--rule);
+  padding: 14px 18px;
+  margin: 12px 0;
+  background: var(--bg-alt);
+}
+.sb-when {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 4px;
+}
+.sb-formula {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.sb-examples {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.sb-examples em {
+  color: var(--ink3);
+  font-style: normal;
+}
+
+/* Handoff checklist */
+.handoff-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg2);
+  align-items: start;
+}
+.handoff-item:last-child { border-bottom: none; }
+.hi-num {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 10px;
+  color: var(--faint);
+  padding-top: 1px;
+}
+.hi-body { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+.hi-body strong { color: var(--ink); }
+
+/* Conditions list */
+.condition-item {
+  background: var(--bg1);
+  border-left: 2px solid var(--warn);
+  padding: 12px 16px;
+  margin: 10px 0;
+}
+.condition-item.p0 { border-left-color: var(--crit); }
+.condition-item.info { border-left-color: var(--rule); }
+.ci-label {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 4px;
+}
+.ci-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.ci-body { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+
+/* Body text */
+p { font-size: 13px; line-height: 1.75; color: var(--ink2); margin-bottom: 12px; max-width: 640px; }
+p:last-child { margin-bottom: 0; }
+p strong { color: var(--ink); }
+
+ul.prose {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0;
+}
+ul.prose li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink2);
+  padding-left: 14px;
+  position: relative;
+  max-width: 640px;
+}
+ul.prose li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--faint);
+}
+
+/* Competitor table accent rows */
+.comp-strong td:nth-child(2) { color: var(--ok); font-weight: 600; }
+.comp-warn td:nth-child(2) { color: var(--warn); }
+
+/* Theme toggle */
+.theme-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  letter-spacing: 0.08em;
+  background: var(--bg1);
+  color: var(--ink2);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--ink3); }
+</style>
+
+<header class="site-header">
+  <div class="site-header-title">Phase 3 — Blind Gauntlet Selection</div>
+  <div class="site-header-meta">
+    Blind Evaluator · Aug 3, 2026 · Inputs: Phase 2 PASSED 8.44/10 (MC-P2-02)<br>
+    Gate: MC-P3-01 ≥ 7.0 required before Phase 4 · Confidential
+  </div>
+</header>
+
+<div class="shell">
+
+<aside class="sidebar">
+  <div class="sidebar-group">
+    <div class="sidebar-verdict">
+      <div class="sv-label">Selections</div>
+      <div class="sv-item"><span class="sv-key">Territory</span><span class="sv-val">A — The Instrument</span></div>
+      <div class="sv-item"><span class="sv-key">Name</span><span class="sv-val">Vigil</span></div>
+      <div class="sv-item"><span class="sv-key">Bench</span><span class="sv-val">Bearing</span></div>
+    </div>
+  </div>
+  <div class="sidebar-group">
+    <span class="sidebar-label">Sections</span>
+    <nav>
+      <a href="#summary"><span class="nav-num">01</span> Executive Summary</a>
+      <a href="#territory"><span class="nav-num">02</span> Territory Selection</a>
+      <a href="#name"><span class="nav-num">03</span> Name Selection</a>
+      <a href="#powered"><span class="nav-num">04</span> Powered / Powered+</a>
+      <a href="#copresence"><span class="nav-num">05</span> Co-presence</a>
+      <a href="#handoff"><span class="nav-num">06</span> Phase 3→4 Handoff</a>
+      <a href="#conditions"><span class="nav-num">07</span> Open Conditions</a>
+    </nav>
+  </div>
+</aside>
+
+<main>
+
+<!-- ===== 01 EXECUTIVE SUMMARY ===== -->
+<div class="section" id="summary">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>Executive Summary</h2>
+  </div>
+
+  <div class="callout ok">
+    <strong>Territory A (The Instrument) is selected.</strong> Name finalist: <strong>Vigil</strong>, subject to trademark clearance in class 36 and class 42 (US, UK, EU). Bench priority: <strong>Bearing</strong>, which activates if Vigil fails trademark clearance; if both fail, a Phase 3 contingency naming process must be completed before Phase 4 begins. Powered/Powered+ attribution syntax is resolved as a three-scenario framework: <strong>"Powered by Vigil"</strong> when the product name is publicly established and trademark-cleared; <strong>"Powered by Lede"</strong> during the Alfa-to-Vigil transition period and for any white-label deployment where only the company endorsement appears; and <strong>"Vigil by Lede"</strong> as the full co-brand lockup for the Powered+ tier, which is a co-branding scenario rather than an attribution-badge scenario. Territory A carries zero open conditions from Phase 2 — no FM-04 conditional, no D7 amendment, no token surface-value deviations — and is a drop-in with lede-tokens.json v2.0.0 product dark register. This is the binding selection record for Phase 4.
+  </div>
+</div>
+
+<!-- ===== 02 TERRITORY SELECTION ===== -->
+<div class="section" id="territory">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Territory Selection</h2>
+  </div>
+  <p class="section-sub">Territory A — The Instrument. One selection, four arguments, no conditions.</p>
+
+  <div class="decision-block">
+    <div class="db-header">
+      <div class="db-label">Territory Selected</div>
+      <div class="db-verdict ok">Selected</div>
+    </div>
+    <div class="db-title">Territory A — The Instrument</div>
+    <div class="db-body">The brand as a precision measurement tool. Dark product register. IBM Plex Mono primary face. Flare orange appears only where an event registered — never as decoration, always as documentation. The editorial identity from consumer Lede is fully retired. The instrument aesthetic is the native visual language of the institutional due-diligence context the platform sells into.</div>
+  </div>
+
+  <div class="sub">Why Territory A wins over the other three</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Rejected territory</th>
+          <th>Specific argument for rejection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>B — The Record</td>
+          <td>Territory B has the highest FM-04 confidence and the strongest Bloomberg/Brightwave differentiation of any territory — a complete register opposite that wins the swap test decisively. The rejection is not on those grounds. The light archival paper aesthetic trades CTO and PM resonance for CCO and Procurement strength. A compliance officer recognizes the document register; a CTO may read it as "stodgy" (Territory B's own Phase 2 note). More concretely: Territory B's surface values deviate from lede-tokens.json v2.0.0 brand register and require Phase 4 reconciliation before execution — #F4F2E8 vs. the token spec's #F7F5EF, and so on through the surface hierarchy. Territory A is a perfect token drop-in; Territory B is not. That engineering friction, combined with the audience coverage gap, is the decisive argument.</td>
+        </tr>
+        <tr>
+          <td>C — Coverage Matrix</td>
+          <td>Territory C argues from completeness — the coverage grid as brand identity — and is the strongest CIO territory by audience resonance. The rejection rests on two risks the Phase 2 materials identify and do not resolve. First: the blue-navy palette is palette-adjacent to FactSet's institutional blue; Phase 2 explicitly flags that grid structure must be the differentiator, but if competitors ship coverage grids (and they will), the differentiation erodes. Second: "is the grid a distinctive brand asset, or is it a UI pattern that any competitor could replicate?" (Territory C Phase 3 Notes, Risk row.) A brand identity that is contingent on the competitor landscape remaining static is architecturally fragile. Territory A's IBM Plex Mono instrument aesthetic is a typographic identity — it cannot be replicated by shipping a feature. Token deviation applies here too: Territory C's cool blue-tinted surface palette (#0C0D10 / #131419) deviates from the warm-neutral product register and requires Phase 4 authorization.</td>
+        </tr>
+        <tr>
+          <td>D — First Light</td>
+          <td>Territory D is the only territory the Phase 3 evaluator cannot select without explicit condition-acceptance, and those conditions compound. FM-04 is CONDITIONAL — Instrument Serif italic on professional surfaces must survive three institutional context tests (bank procurement, pension fund DDQ, RIA marketing review) before Phase 4 can commit to the typography. Dawn amber (#C4A560) requires a D7 amendment — the v1 yellow was retired, and the amber sits in the same yellow-gold range requiring explicit Phase 4 approval. Brightwave proximity risk is the highest of all territories — Phase 2's cross-territory comparison explicitly notes "highest risk" for the Brightwave swap test and requires Phase 4 re-evaluation before gradient execution. Surface palette deviates from the product register token spec. That is four unresolved conditions. Territory D's temporal concept ("before the open") is the strongest PM-audience argument in Phase 2, and this evaluator recognizes it. But a selection burdened with four open conditions is a conditional selection, not a binding one — and the Phase 3 brief requires exactly one territory, no hedging. Territory A delivers zero conditions.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">FM-04 Verdict — Territory A</div>
+
+  <div class="callout ok">
+    <strong>FM-04: PASS (high confidence)</strong> — The Instrument territory has no editorial residue. The consumer Lede editorial identity markers — Instrument Serif, STET stamp, broadsheet column aesthetic, editorial metaphors — are fully absent. IBM Plex Mono is the primary face; the brand IS the readout. A bank procurement portal, a compliance audit, an LP data room: the instrument aesthetic reads identically in all three. The Phase 2 FM-04 verdict: "high confidence." The Phase 4 bank procurement portal simulation is a confirmatory test, not an exploratory one.
+  </div>
+
+  <p><strong>What Phase 4 must execute for FM-04:</strong> A bank procurement portal simulation using Territory A's type stack and dark register — confirming that IBM Plex Mono bold on #131210 reads as "credible professional" (not as "technical startup") to a bank technology procurement panel. Expected result: PASS. An unexpected failure would require territory re-evaluation by the Phase 4 team, but Phase 2 analysis gives no grounds to anticipate failure.</p>
+
+  <div class="sub">Token Compliance</div>
+
+  <div class="callout ok">
+    <strong>Territory A is a lede-tokens.json v2.0.0 product register drop-in — zero surface value deviations.</strong> Phase 2 explicitly states: "The full palette is token-compatible with lede-tokens.json v2.0.0 product register — a drop-in." Confirmed: bg0 #131210, bg1 #1B1A16, bg2 #242320, bg3 #2C2B26 — exact match to the product register. No Phase 4 token amendment required for surface values. Territories B, C, and D each disclosed surface value deviations requiring Phase 4 authorization; Territory A does not.
+  </div>
+
+  <p>The Flare orange signal (#FF5A14 product register) and brand-text variant (#FF7A42 for small type on dark backgrounds) are both in the token spec and used as specified. No new color values are introduced. Token compliance is unconditional.</p>
+
+  <div class="sub">D7 Compliance</div>
+
+  <p>Flare orange (#FF5A14) appears at ≤2% of any surface, event-triggered only, never as decorative interface chrome. Territory A's Phase 2 color specification is explicit: "Two roles only — surface hierarchy and one signal. Flare orange appears at ≤2% of any surface, only where an event occurred." D7 requires appearance-earned signal color at ≤2%; Territory A's implementation requires exactly this. No D7 amendment. Flare orange is not used as a button primary, as ambient background tinting, or as a background in any non-event context. The application sample confirms: one Flare orange element per surface, triggered by a 10-K/A filing event. D7 compliance is unconditional.</p>
+
+  <div class="sub">Competitor Differentiation</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Differentiation argument</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bloomberg</td>
+          <td>Bloomberg amber is interface chrome — persistent, distributed across navigation, labels, and data chrome at high frequency (Phase 2 states >30% of the interface). Territory A's Flare orange is a semantic event endpoint: one instance per detected event, at the terminus of a completed monitoring action. The differentiation is categorical, not tonal. The key requirement Phase 4 must execute: any professional context where Territory A's Flare signal appears must make this semantic use explicit — a Flare element is never decoration; it always documents something that happened. Without that discipline, the visual proximity is a liability. With it, the two uses of orange are distinguishable to an institutional buyer who uses both products.</td>
+          <td class="td-strong">High — with execution discipline</td>
+        </tr>
+        <tr>
+          <td>Brightwave</td>
+          <td>Brightwave uses a dark premium design with expressive motion and a sans-serif/serif type mix. Territory A differentiates through: IBM Plex Mono as the dominant primary typeface (not a data-only mono — the brand IS the readout); warm near-black (#131210, not a cool or blue-shifted dark); zero decorative gradients; Flare orange held to single semantic event signals. No ambient glow, no atmospheric gradient, no expressive motion beyond the Instrument Line spec (line draws left-to-right 550ms, node appears 200ms at terminus, once per event). Territory A is the type-system differentiator; Brightwave is an aesthetic differentiator. These are different registers. <em>Note: Phase 2 designates Territory D — not Territory A — as the highest Brightwave proximity risk. Territory A carries the lowest Brightwave proximity of any dark territory in Phase 2.</em></td>
+          <td class="td-strong">High — lowest Brightwave risk of dark territories</td>
+        </tr>
+        <tr>
+          <td>AlphaSense</td>
+          <td>AlphaSense uses a light, approachable SaaS design language with clean sans-serif — a research assistant aesthetic. Territory A is dark, mono-primary, instrument-precision. Complete register difference. No proximity risk.</td>
+          <td class="td-strong">High</td>
+        </tr>
+        <tr>
+          <td>Hebbia</td>
+          <td>Hebbia's document-analysis workspace is light and modern. Territory A's dark instrument aesthetic is architecturally different in palette, register, and product concept (continuous portfolio monitoring vs. document analysis).</td>
+          <td class="td-strong">High</td>
+        </tr>
+        <tr>
+          <td>Rogo</td>
+          <td>Rogo uses conventional institutional SaaS design. IBM Plex Mono as a primary brand typeface has no precedent in the institutional AI research space. No proximity risk. <em>[REQUIRES HUMAN VERIFICATION — this claim about Rogo's design system is based on Phase 2 assessment; verify against Rogo's current brand as of launch date.]</em></td>
+          <td class="td-strong">High pending verification</td>
+        </tr>
+        <tr>
+          <td>FactSet</td>
+          <td>FactSet uses blue-grey institutional data density. Territory A's warm near-black (#131210) with Flare event signal is not palette-adjacent to FactSet's blue-grey. Territory A's visual logic (whitespace as signal, Flare reserved for events) differs from FactSet's data-density approach (information distributed across the surface). No palette proximity risk, unlike Territory C's blue-navy palette.</td>
+          <td class="td-strong">High</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">What Phase 4 Must Resolve</div>
+
+  <ul class="prose">
+    <li><strong>FM-04 confirmatory test:</strong> Bank procurement portal simulation. Expected PASS. Panel of ≥5 institutional professionals, confirmatory not exploratory.</li>
+    <li><strong>Full type stack:</strong> IBM Plex Mono (400, 500, 700) and Schibsted Grotesk (400, 500, 700) must be licensed and loaded. Phase 2 used system mono as fallback. Both are SIL Open Font License (Google Fonts). No commercial license required.</li>
+    <li><strong>Light-register variant:</strong> Territory A specifies dark product register only. Phase 4 must decide if a light-register variant is required for print or partner contexts. This is a Phase 4 decision, not a Phase 3 selection condition.</li>
+    <li><strong>Step grayscale knockdown:</strong> Flare orange at 16px on partner brand backgrounds. Phase 2 specifies a #C6C4B6 grayscale Step variant for partner brand standards that prohibit orange. Phase 4 must formally specify both the orange and grayscale Step states in the production logomark file.</li>
+    <li><strong>Bloomberg orange discipline protocol:</strong> A written protocol specifying that any co-branded or partner-facing material where Flare orange appears must include the semantic differentiation — "Flare orange = event signal, not brand chrome." This is an execution standard, not a design change.</li>
+  </ul>
+</div>
+
+<!-- ===== 03 NAME SELECTION ===== -->
+<div class="section" id="name">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Name Selection</h2>
+  </div>
+  <p class="section-sub">Three finalists: Brief, Vigil, Bearing. One selection. All three are conditional on trademark clearance in class 36 and class 42 — this is equal across finalists and not a differentiating factor in the selection.</p>
+
+  <div class="decision-block">
+    <div class="db-header">
+      <div class="db-label">Name Selected</div>
+      <div class="db-verdict ok">Selected</div>
+    </div>
+    <div class="db-title">Vigil</div>
+    <div class="db-body">A vigil is sustained, watchful monitoring — maintained without rest, through the night, until something happens. "The platform maintains a vigil across the portfolio universe." The word belongs to institutional monitoring and risk management vocabulary. Two syllables, unambiguous pronunciation (VI-gil), no secondary-meaning tax, the cleanest AI agent formulation of the three finalists. Subject to trademark clearance in class 36 and class 42 (US, UK, EU).</div>
+  </div>
+
+  <div class="sub">Why Vigil over Brief</div>
+  <p>Brief is the strongest option on phonetic simplicity — one syllable, zero ambiguity, "Your Briefs" is a completely natural plural. The rejection is not on those grounds. Brief positions the platform as a reporting output — the document the instrument produces — rather than as the monitoring system itself. For Territory A's instrument argument, a name that describes the sustained action (the vigil maintained between events, continuously, across 47 names) is more architecturally coherent than a name that describes the artifact produced at an event endpoint (the brief). The decisive criterion is D5·3: "Ask [Name]" for the agent interface. "Ask Brief a question" is syntactically awkward in a way that "Ask Vigil a question" is not. This is a small friction, but it is documented in Phase 2 ("Ask [Name] should work for the agent interface" — the criterion is implicitly harder to meet for "Brief"), and it compounds across every user interaction with the platform's agent surface.</p>
+
+  <div class="sub">Why Vigil over Bearing</div>
+  <p>Bearing has the strongest territory fit with Territory A — Phase 2 states "Take a bearing is the instrument's primary action" and rates Bearing as "Strongest fit" in the Territory A naming compatibility table. This is a real argument for Bearing. But three factors tip the decision to Vigil. First, Phase 2 explicitly flags that "Ask Bearing" is "slightly less idiomatic (navigation instruments don't typically precede 'ask') but falls within acceptable bounds" — the hedge is documented, not eliminated. Second, "Your Bearings" as a plural is acknowledged as "slightly weaker" than "Your Briefs" or "Your Vigils" in Phase 2. Third, Bearing carries a documented secondary-meaning tax — the mechanical ball-bearing connotation — that Vigil does not. None of these is fatal individually. Together, they make Bearing the second-best choice: strong, clean, well-fitted to Territory A, but with three small documented frictions versus Vigil's zero.</p>
+
+  <div class="sub">D5 Criterion Assessment — Vigil</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>Verdict</th>
+          <th>Basis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>D5·1 — Entity clean</td>
+          <td class="td-pass">PASS pending</td>
+          <td>"Vigil" is not a known financial institution name and does not return a sanctioned financial entity in standard entity-check databases. Entity check against OFAC SDN, EU Consolidated Sanctions List, and UK OFSI list required before Phase 4 use.</td>
+        </tr>
+        <tr>
+          <td>D5·2 — Fund-manager legible</td>
+          <td class="td-pass">PASS</td>
+          <td>"Regulatory vigil" and "capital markets vigil" appear in institutional compliance and risk management contexts without explanation. Not a consumer-brand word. Not an editorial metaphor. Passes the board meeting / prime broker / fund auditor test without qualification.</td>
+        </tr>
+        <tr>
+          <td>D5·3 — Works with "by Lede"</td>
+          <td class="td-pass">PASS</td>
+          <td>"Vigil by Lede" reads cleanly in both spoken and written form. "Vigil Platform" — clear. "Powered by Vigil" — clear. "Ask Vigil" — works for the agent interface without syntactic awkwardness. All four compound forms pass without hedge.</td>
+        </tr>
+        <tr>
+          <td>D5·4 — Finance-adjacent, not finance-literal</td>
+          <td class="td-pass">PASS</td>
+          <td>Monitoring and watchfulness domain. Not an asset class, metric, index, or product category in common financial use. Evokes precision, diligence, and sustained attention — the platform's operating posture — without being a finance-literal term.</td>
+        </tr>
+        <tr>
+          <td>D5·5 — Speakable, ≤2 syllables</td>
+          <td class="td-pass">PASS</td>
+          <td>VI-gil. Two syllables. Unambiguous pronunciation in English-speaking financial contexts. No silent letters, no homophone tax, no spelling ambiguity. Clear across British, American, and international English.</td>
+        </tr>
+        <tr>
+          <td>D5·6 — Trademark class 36/42 viable</td>
+          <td class="td-cond">CONDITIONAL</td>
+          <td>Requires legal vetting. Phase 2 notes potential prior registrations in security and monitoring contexts. Do not assume clear. Trademark counsel must provide a preliminary clearance opinion before Phase 4 logo execution begins. This condition is equal across all three finalists — not a Vigil-specific risk.</td>
+        </tr>
+        <tr>
+          <td>D5·7 — Product lexicon available</td>
+          <td class="td-pass">PASS</td>
+          <td>"A Vigil on TSLA" — the platform's ongoing monitoring position on a name. "Your Vigil" — the monitoring protocol. "Vigil flagged unusual options activity" — works without preposition. "Your Vigils" as plural of monitoring positions across the portfolio universe. All forms build naturally in professional research vocabulary.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">Bench Priority</div>
+
+  <div class="callout">
+    <strong>Bench: Bearing.</strong> If Vigil fails trademark clearance in class 36 or class 42 (US, UK, or EU), Bearing activates as the primary name candidate and advances to trademark counsel. Rationale: Bearing has the strongest territory fit with Territory A of the remaining finalists, passes all D5 criteria that are immediately checkable, and has no secondary meaning that would compound in institutional contexts beyond the documented mechanical-bearing tax. If Bearing also fails clearance, a Phase 3 contingency naming process is required before Phase 4 begins — this process must be treated as P0 at that point. Brief is the third-priority finalist.
+  </div>
+
+  <div class="sub">Tier Lockup Test</div>
+
+  <p>All five tier lockups must read cleanly as standalone brand units:</p>
+
+  <div class="lockup-row">
+    <div class="lockup-chip">Vigil Pro <span class="chip-check">✓</span></div>
+    <div class="lockup-chip">Vigil Prime <span class="chip-check">✓</span></div>
+    <div class="lockup-chip">Vigil Platform <span class="chip-check">✓</span></div>
+    <div class="lockup-chip">Vigil Powered <span class="chip-check">✓</span></div>
+    <div class="lockup-chip">Vigil Powered+ <span class="chip-check">✓</span></div>
+  </div>
+
+  <p>"Vigil by Lede" — clean. "Vigil Platform" in IBM Plex Mono Bold reads as a system name, not a product description. "Powered by Vigil" works for partner attribution. All five tier suffixes attach without phonetic friction and without ambiguity about which word is the master brand. Two-syllable master name is comfortable at all lockup sizes and at all type scales from 8px label to 48px display headline.</p>
+
+  <div class="sub">Territory Fit — Vigil in Territory A</div>
+
+  <p>Territory A's naming compatibility section describes the fit directly: "A vigil is what the instrument maintains between events. The monitoring connotation pairs with the continuous-coverage claim: the instrument keeps a vigil on every name in scope." The instrument takes readings; the vigil is the state between readings — sustained, documented, unbroken. These are the same claim from two temporal positions. "Vigil by Lede" in IBM Plex Mono Bold renders with exactly the systematic precision the territory's instrument aesthetic demands. The word is short, institutional, and has no decorative connotations — it does not soften the precision claim the way "Brief" does (too output-focused) or complicate it the way "Bearing" does (navigation metaphor requires one more cognitive step). Vigil and The Instrument are the same product concept stated in two registers.</p>
+</div>
+
+<!-- ===== 04 POWERED / POWERED+ ===== -->
+<div class="section" id="powered">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Powered / Powered+ Attribution Syntax</h2>
+  </div>
+  <p class="section-sub">Three-way fork from Phase 2 resolved here. This decision is binding for Phase 4. No deferral.</p>
+
+  <p>Phase 2 defined the three formulations under consideration: (1) "Powered by [Name]" — partner uses the post-Alfa product name; (2) "Powered by [New Name]" — partner uses a future successor name if the product name is itself in transition; (3) "Powered by Lede" — company-level endorsement when the product name is not yet established or when the partner prefers company-name attribution. The resolution maps each formulation to a specific application scenario.</p>
+
+  <div class="sub">Resolution: Three Scenarios</div>
+
+  <div class="scenario-block">
+    <div class="sb-when">Scenario 1 — Primary formulation (post-transition, established name)</div>
+    <div class="sb-formula">"Powered by Vigil"</div>
+    <div class="sb-examples">
+      <em>When:</em> Vigil is publicly launched and trademark-cleared in class 36 and class 42. The product name is publicly established in the market.<br><br>
+      <em>Application examples:</em><br>
+      — A prime-broker integration where Vigil is the live product name: partner's platform displays "Market Intelligence Powered by Vigil"<br>
+      — A data-vendor API attribution after public launch: API documentation footer reads "Powered by Vigil — Lede Professional Intelligence"<br>
+      — A sell-side workflow integration launched post-Alfa transition: "Research monitoring powered by Vigil by Lede" in the partner's product documentation<br><br>
+      <em>This is the target-state formulation. All partner integrations migrate to it once the product name is established.</em>
+    </div>
+  </div>
+
+  <div class="scenario-block">
+    <div class="sb-when">Scenario 2 — Transition-period formulation</div>
+    <div class="sb-formula">"Powered by Lede"</div>
+    <div class="sb-examples">
+      <em>When:</em> During the Alfa-to-Vigil transition period (D3 dual-path, 60-day bench-activation clause); before trademark clearance is confirmed; or any white-label deployment where (a) the partner's brand standards require only the company name in attribution, or (b) the product name is not yet visible in the partner's market-facing materials.<br><br>
+      <em>Application examples:</em><br>
+      — A white-label deployment where the partner's technology stack is not publicly attributed to any vendor by name: partner uses "Powered by Lede" in a small-type system footer<br>
+      — Partner co-branded materials printed or published during the bench-activation period before Vigil is publicly launched: "Powered by Lede" holds until the transition is complete, then updated to "Powered by Vigil"<br>
+      — A Powered-tier integration launched during Alfa's 60-day bench period where Vigil's name is not yet confirmed: company-level attribution until product name is confirmed and cleared<br><br>
+      <em>This formulation serves as the default during any naming uncertainty. It is stable, cannot be invalidated by trademark disputes, and keeps the Lede company brand in every partner context regardless of product name status.</em>
+    </div>
+  </div>
+
+  <div class="scenario-block">
+    <div class="sb-when">Scenario 3 — Reserved succession formulation</div>
+    <div class="sb-formula">"Powered by [Successor Name]"</div>
+    <div class="sb-examples">
+      <em>When:</em> Vigil is itself superseded by a future product name. Not a current application scenario.<br><br>
+      <em>Activation trigger:</em> Phase 4 must document the criteria that would trigger a Vigil succession event — trademark failure post-launch, strategic repositioning, or product line consolidation. Until those criteria are defined and triggered, this formulation does not apply. All current partner integrations use Scenarios 1 or 2.
+    </div>
+  </div>
+
+  <div class="sub">Powered+ Tier — Separate Treatment</div>
+
+  <div class="callout decision">
+    <strong>Powered+ is not an attribution badge — it is a co-branding tier.</strong> The correct formulation for Powered+ is not "Powered by Vigil" but <strong>"[Partner Brand] + Vigil by Lede"</strong> — the full product lockup appearing alongside the partner brand at co-brand visual weight. This is a distinct format from the attribution tag used in Scenarios 1 and 2. The Powered+ tier (per D2) is defined as "co-branded partner capability" — the partner brings distribution, Vigil by Lede brings the named intelligence layer. Both names appear at equivalent visual weight in the co-brand lockup.
+  </div>
+
+  <p><strong>Powered+ application example:</strong> An institutional research platform integrates Vigil as a named capability and co-brands the offering: the platform's brand name appears alongside "Vigil by Lede" in the product UI, partner documentation, and joint marketing materials. The Step logomark appears at the standard co-brand scale (24px preferred, 16px minimum per Phase 2 spec). The partner's brand is not subordinated; both are primary within the co-branded context.</p>
+
+  <p><strong>Differentiation from Powered tier:</strong> A Powered-tier integration uses "Powered by Vigil" as an attribution tag (small-type, endorsement-badge format). A Powered+ integration uses "Vigil by Lede" as a co-brand lockup at display-scale visual weight. The tier distinction is architecturally enforced by the format difference.</p>
+</div>
+
+<!-- ===== 05 CO-PRESENCE ===== -->
+<div class="section" id="copresence">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2>Co-presence</h2>
+  </div>
+  <p class="section-sub">How Territory A handles Boosted.ai + Alfa + Lede / Vigil by Lede simultaneously in market.</p>
+
+  <p>The D3 dual-path requires that Boosted.ai (consumer), Alfa (professional current product), and the incoming professional product (Vigil by Lede) coexist in market during the bench-activation period. Territory A's instrument aesthetic handles this cleanly.</p>
+
+  <div class="sub">Visual Register Separation</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Register</th>
+          <th>Primary type</th>
+          <th>Collision risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Boosted.ai (consumer)</td>
+          <td>Consumer editorial</td>
+          <td>Consumer type system</td>
+          <td class="td-strong">None — endorsed house architecture by design</td>
+        </tr>
+        <tr>
+          <td>Alfa (professional current)</td>
+          <td>Professional product (current)</td>
+          <td>Alfa's current type system</td>
+          <td class="td-strong">None — D3 dual-path; Alfa continues unchanged during bench period</td>
+        </tr>
+        <tr>
+          <td>Vigil by Lede (professional incoming)</td>
+          <td>Dark instrument · IBM Plex Mono primary</td>
+          <td>IBM Plex Mono 700</td>
+          <td class="td-strong">None — instrument register is architecturally distinct from both above</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>IBM Plex Mono as the primary typeface in Territory A is the key co-presence differentiator. Whatever consumer Lede's editorial type system uses, and whatever Alfa's current product type system uses, IBM Plex Mono as a brand-primary face is tonally distinct from both. The "by Lede" endorsement in IBM Plex Mono Regular at 60% scale creates company-level coherence — the same company name appears across all three brand contexts — without visual-house blending. Three distinct products, one parent company name, zero visual collision.</p>
+
+  <div class="sub">Partner Attribution During Transition</div>
+
+  <p>Per the Powered/Powered+ syntax resolution in §04: during the 60-day bench-activation period and until Vigil's trademark clearance is confirmed, partner materials use "Powered by Lede." After the transition is complete and trademark is cleared, partner materials update to "Powered by Vigil." The company-level attribution ("Powered by Lede") is the stable formulation during any period when the product name is in flux — this ensures no partner materials go out of date during the Alfa-to-Vigil transition.</p>
+
+  <div class="callout ok">
+    <strong>No Phase 4 amendment to co-presence rules is required for Territory A.</strong> The Phase 1 D1, D3, and D4 co-presence constraints apply without modification. Territory A's visual register separation, IBM Plex Mono primary-face architecture, and the Powered attribution transition-period framework together handle the three-brand simultaneous-in-market scenario without requiring any new rules.
+  </div>
+</div>
+
+<!-- ===== 06 HANDOFF ===== -->
+<div class="section" id="handoff">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2>Phase 3→4 Handoff</h2>
+  </div>
+  <p class="section-sub">Authoritative record. Phase 4 inherits these as confirmed inputs — they are not open for re-selection.</p>
+
+  <div class="handoff-item">
+    <div class="hi-num">1</div>
+    <div class="hi-body"><strong>Selected territory: A — The Instrument.</strong> Dark product register. IBM Plex Mono primary typeface (400, 500, 700). Schibsted Grotesk for navigation and UI labels. No display serif on professional surfaces. Flare orange (#FF5A14 product register) at ≤2% of any surface, event-signal only. Warm near-black (#131210) surface primary. Step logomark as event-endpoint circle. Token-compatible with lede-tokens.json v2.0.0 product register — drop-in, no surface value amendments.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">2</div>
+    <div class="hi-body"><strong>Selected name: Vigil.</strong> Subject to trademark clearance in class 36 and class 42, US, UK, and EU. Phase 4 cannot begin logo execution until preliminary clearance opinion is received from trademark counsel. All Phase 4 identity execution proceeds with "Vigil" as the product name pending clearance; if clearance fails, Bearing activates (see item 3).</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">3</div>
+    <div class="hi-body"><strong>Bench priority: Bearing.</strong> Activates if Vigil fails trademark clearance in any jurisdiction. Bearing advances to trademark counsel as the primary candidate at that point. D5 criterion-by-criterion assessment for Bearing is in Phase 2 §02 — the Phase 4 team should consult it before initiating Bearing's clearance process. If both Vigil and Bearing fail clearance, a Phase 3 contingency naming process is P0 before Phase 4 begins.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">4</div>
+    <div class="hi-body"><strong>Powered / Powered+ attribution syntax: resolved.</strong> Three-scenario framework per §04 of this document. "Powered by Vigil" (established, primary); "Powered by Lede" (transition period and white-label); "Vigil by Lede" co-brand lockup (Powered+ tier). Successor formulation reserved for future succession events. Phase 4 must document the succession trigger criteria.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">5</div>
+    <div class="hi-body"><strong>FM-04: PASS (high confidence) for Territory A.</strong> Phase 4 must conduct the bank procurement portal confirmatory simulation. This is a confirmatory test — not exploratory. An unexpected failure would require territory re-evaluation. Expected PASS based on Phase 2 analysis.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">6</div>
+    <div class="hi-body"><strong>D7: Flare orange compliant.</strong> ≤2%, event-signal only, never decorative. No D7 amendment required. Phase 4 must maintain this discipline across all executions — any Flare orange element must document a real event or trigger.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">7</div>
+    <div class="hi-body"><strong>Co-presence: no amendment required.</strong> Territory A handles Boosted.ai + Alfa + Vigil by Lede simultaneous-in-market without Phase 4 co-presence rule changes. Phase 1 D1, D3, D4 rules apply as written.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">8</div>
+    <div class="hi-body"><strong>All Phase 1 decisions D1–D7 confirmed.</strong> Phase 4 does not relitigate them. Endorsed house architecture (D1), five tiers (D2), Alfa dual-path (D3), Alfa Bank disambiguation (D4), D5 naming criteria (Vigil meets 6/7, conditional on trademark), positioning (D6), Flare orange ≤2% (D7) — all confirmed.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">9</div>
+    <div class="hi-body"><strong>D4 ongoing — Alfa Bank disambiguation.</strong> OFAC/OFSI/EU check required before any named Alfa association appears in public materials. This is an ongoing constraint from Phase 1, not resolved in Phase 3. Phase 4 must confirm this check has been completed before updating or publishing any Alfa-associated materials during the transition period.</div>
+  </div>
+
+  <div class="handoff-item">
+    <div class="hi-num">10</div>
+    <div class="hi-body"><strong>Type stack execution.</strong> IBM Plex Mono and Schibsted Grotesk — both SIL Open Font License, available via Google Fonts, no commercial license required. Phase 4 must load both faces; Phase 2 used system monospace as fallback. Production identity requires the specified faces.</div>
+  </div>
+</div>
+
+<!-- ===== 07 OPEN CONDITIONS ===== -->
+<div class="section" id="conditions">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2>Open Conditions</h2>
+  </div>
+  <p class="section-sub">Conditions this selection carries forward. Territory A has zero Phase 2 open conditions — all conditions below are standard process requirements that apply regardless of territory selection.</p>
+
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Blocks Phase 4 logo execution</div>
+    <div class="ci-title">Trademark clearance — Vigil, class 36 and 42 (US, UK, EU)</div>
+    <div class="ci-body">Trademark counsel must provide at least a preliminary clearance opinion on "Vigil" in trademark class 36 (financial services) and class 42 (software / SaaS) across all three jurisdictions before Phase 4 logo execution begins. Phase 2 notes potential prior registrations in security and monitoring contexts — this is the specific area counsel should search first. If clearance is denied, Bearing activates immediately. Timeline: Phase 4 cannot begin mark execution without clearance opinion in hand.</div>
+  </div>
+
+  <div class="condition-item p0">
+    <div class="ci-label">P0 — Required before Phase 4 production</div>
+    <div class="ci-title">Entity check — "Vigil" against OFAC SDN, EU Consolidated Sanctions List, UK OFSI list</div>
+    <div class="ci-body">D5·1 requires entity-level confirmation that "Vigil" does not share a name with any entity on the three sanctions lists. Phase 2 assessment: "Vigil is not a known financial institution name." This is an assessment, not a check — the actual check must be performed by compliance. Standard due diligence; no known risk factors, but the check is required before any public use of the name.</div>
+  </div>
+
+  <div class="condition-item">
+    <div class="ci-label">Phase 4 confirmatory</div>
+    <div class="ci-title">FM-04 bank procurement portal simulation — Territory A</div>
+    <div class="ci-body">Confirmatory test, not exploratory. Territory A's FM-04 verdict is PASS (high confidence) from Phase 2. Phase 4 must conduct the simulation anyway — a panel of ≥5 institutional professionals evaluating the Territory A IBM Plex Mono dark register in a bank procurement context. Expected PASS. An unexpected failure result would require territory re-evaluation by the Phase 4 team.</div>
+  </div>
+
+  <div class="condition-item">
+    <div class="ci-label">Ongoing — D4</div>
+    <div class="ci-title">Alfa Bank disambiguation — OFAC/OFSI/EU check</div>
+    <div class="ci-body">Phase 1 D4 requires OFAC/OFSI/EU and UK check before any named Alfa association in public materials. This is an ongoing constraint that applies to all Alfa-associated materials during the D3 transition period. Phase 4 must confirm this check has been completed and documented before any Alfa materials are updated or published.</div>
+  </div>
+
+  <div class="condition-item info">
+    <div class="ci-label">Phase 4 specification required</div>
+    <div class="ci-title">Domain strategy — vigil.com / vigil.ai / getvigil.com</div>
+    <div class="ci-body">Phase 4 must confirm domain availability and strategy before public launch. Domain acquisition does not block Phase 4 logo execution or internal development, but must be resolved before any public-facing Vigil brand materials are published. Phase 2 did not assess Vigil domain status directly (the domain note in Phase 2 is on Bearing, not Vigil).</div>
+  </div>
+
+  <div class="condition-item info">
+    <div class="ci-label">Phase 4 decision required</div>
+    <div class="ci-title">Light-register variant — Territory A</div>
+    <div class="ci-body">Territory A specifies dark product register only — no light-register variant is defined in Phase 2. Phase 4 must decide whether a light-register variant is required for print contexts, partner brand standards that require light surfaces, or LP presentation materials. Neither path changes the primary dark register selection. This is a Phase 4 architecture decision, not a Phase 3 condition.</div>
+  </div>
+
+  <div class="condition-item info">
+    <div class="ci-label">Phase 4 specification required</div>
+    <div class="ci-title">Step grayscale knockdown variant</div>
+    <div class="ci-body">Phase 2 specifies a grayscale Step variant (#C6C4B6) for partner brand standards that prohibit orange. Phase 4 must formally specify both the Flare orange (primary) and grayscale knockdown (partner-restricted) Step states in the production logomark file, with minimum size (16px) and clearspace (1px all sides) documented for both states.</div>
+  </div>
+
+  <div style="margin-top:32px;">
+    <div class="callout ok">
+      <strong>Summary: Territory A carries zero Phase 2 open conditions.</strong> All conditions listed above are standard process requirements — trademark clearance, entity check, FM-04 confirmatory, D4 ongoing — that apply regardless of which territory is selected. Territory D would have carried four additional conditions (FM-04 conditional, D7 amendment, Brightwave re-evaluation, surface token deviations) on top of these standard requirements. Territory A adds none. This document is the Phase 3 binding selection record. Phase 4 begins after MC-P3-01 clears this document at ≥7.0/10.
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<button class="theme-btn" onclick="
+  const r = document.documentElement;
+  const cur = r.getAttribute('data-theme');
+  const isDark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  r.setAttribute('data-theme', isDark ? 'light' : 'dark');
+" aria-label="Toggle theme">Toggle theme</button>
+
+<script>
+// Sidebar active-section highlight
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -65% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
