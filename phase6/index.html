@@ -1,0 +1,1314 @@
+<title>Vigil · Coverage Dashboard — Phase 6 Product Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Token system: lede-tokens.json v2.1.0 — product dark register ─── */
+:root {
+  --bg0: #131210;
+  --bg1: #1B1A16;
+  --bg2: #242320;
+  --bg3: #2C2B26;
+  --bg-overlay: #181713;
+  --ink:  #F7F5EF;
+  --ink2: #E8E6DC;
+  --ink3: #847D75;
+  --ink4: #6C6A5E;
+  --rule: #2C2B26;
+  --rule2: #383630;
+  --accent: #FF5A14;
+  --accent-hover: #FF7A42;
+  --ok:   #3FA971;
+  --err:  #E05A47;
+  --warn: #E2A93B;
+
+  --sidebar-w: 200px;
+  --detail-w: 348px;
+  --demo-h: 28px;
+  --col-h: 32px;
+  --row-h: 40px;
+  --main-header-h: 84px;
+}
+
+/* ─── Base ─── */
+html, body {
+  height: 100%;
+  background: var(--bg0);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+.mono { font-family: "IBM Plex Mono", monospace; }
+
+/* ─── Skip link ─── */
+.skip-link {
+  position: fixed; top: -100%; left: 8px; z-index: 9999;
+  font-family: "IBM Plex Mono", monospace; font-size: 12px;
+  background: var(--bg0); color: var(--ink); border: 1px solid var(--rule2);
+  padding: 6px 14px; text-decoration: none;
+}
+.skip-link:focus { top: calc(var(--demo-h) + 8px); outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ─── Demo banner ─── */
+.demo-banner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  height: var(--demo-h);
+  background: var(--bg-overlay); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3);
+}
+.demo-dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--warn); margin-right: 10px; flex-shrink: 0;
+}
+
+/* ─── App shell ─── */
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr var(--detail-w);
+  grid-template-rows: 1fr;
+  height: 100%;
+  padding-top: var(--demo-h);
+  overflow: hidden;
+}
+
+/* ═══════════ SIDEBAR ═══════════ */
+.sidebar {
+  background: var(--bg1);
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-logo {
+  height: 52px; flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.logo-mark svg { flex-shrink: 0; }
+.logo-vigil {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.logo-by {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 400;
+  color: var(--ink3); margin-left: 1px;
+}
+
+.sidebar-nav {
+  flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px;
+  overflow-y: auto;
+}
+.sidebar-section-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3);
+  padding: 8px 8px 4px; margin-top: 4px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 10px; border-radius: 5px; cursor: pointer;
+  font-size: 13px; color: var(--ink2);
+  transition: background 80ms, color 80ms;
+  text-decoration: none; user-select: none;
+}
+.nav-item:hover { background: var(--bg3); color: var(--ink); }
+.nav-item.active { background: var(--bg3); color: var(--ink); }
+.nav-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nav-icon {
+  width: 14px; height: 14px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-count {
+  margin-left: auto;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  background: var(--bg2); color: var(--ink3); border-radius: 100px;
+  padding: 1px 7px; font-variant-numeric: tabular-nums;
+}
+.nav-count.has-signal { background: var(--err); color: var(--ink); }
+
+.sidebar-divider { height: 1px; background: var(--rule); margin: 8px 10px; }
+
+.sidebar-footer {
+  flex-shrink: 0; padding: 12px 10px;
+  border-top: 1px solid var(--rule);
+}
+.workspace-badge {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 5px;
+  cursor: pointer; transition: background 80ms;
+}
+.workspace-badge:hover { background: var(--bg3); }
+.workspace-avatar {
+  width: 22px; height: 22px; border-radius: 4px;
+  background: var(--bg3); flex-shrink: 0;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
+  color: var(--ink2); display: flex; align-items: center; justify-content: center;
+}
+.workspace-name { font-size: 12px; color: var(--ink2); }
+.workspace-role {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); margin-top: 1px;
+}
+
+/* ═══════════ MAIN ═══════════ */
+.main {
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: var(--bg0);
+}
+
+.main-header {
+  flex-shrink: 0; height: var(--main-header-h);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+}
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.01em;
+}
+.header-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.header-meta span + span::before { content: " · "; color: var(--rule2); }
+.header-meta .pulse { color: var(--ok); }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.btn {
+  font-family: "Schibsted Grotesk", sans-serif; font-size: 12px; font-weight: 500;
+  padding: 5px 14px; border-radius: 100px; border: none; cursor: pointer;
+  line-height: 1; white-space: nowrap; transition: background 80ms, color 80ms;
+}
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-ghost {
+  background: transparent; color: var(--ink2); border: 1px solid var(--rule2);
+}
+.btn-ghost:hover { border-color: var(--ink3); color: var(--ink); }
+.btn-sm { background: var(--bg2); color: var(--ink2); }
+.btn-sm:hover { background: var(--bg3); }
+
+.tab-bar {
+  display: flex; align-items: center; gap: 0;
+}
+.tab {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 14px; color: var(--ink3); cursor: pointer;
+  border-bottom: 1px solid transparent; transition: color 80ms, border-color 80ms;
+  user-select: none;
+}
+.tab:hover { color: var(--ink2); }
+.tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ─── Coverage table ─── */
+.table-wrap { flex: 1; overflow-y: auto; overflow-x: hidden; }
+
+.table-header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg0);
+  display: grid;
+  grid-template-columns: 140px 80px 96px 80px 56px 48px;
+  height: var(--col-h);
+  border-bottom: 1px solid var(--rule2);
+  padding: 0 24px;
+}
+.col-label {
+  display: flex; align-items: center;
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  font-variant-numeric: tabular-nums;
+}
+.col-label.right { justify-content: flex-end; }
+.col-label.center { justify-content: center; }
+
+.coverage-row {
+  display: grid;
+  grid-template-columns: 140px 80px 96px 80px 56px 48px;
+  height: var(--row-h);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 24px;
+  cursor: pointer;
+  align-items: center;
+  transition: background 60ms;
+  position: relative;
+}
+.coverage-row:hover { background: var(--bg3); }
+.coverage-row.selected { background: var(--bg2); }
+.coverage-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.row-company { display: flex; flex-direction: column; gap: 1px; }
+.row-ticker {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
+}
+.row-name { font-size: 11px; color: var(--ink2); }
+
+.row-type {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  color: var(--ink2); letter-spacing: 0.01em;
+}
+.row-item {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); margin-top: 1px;
+}
+
+.row-filed {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px;
+  color: var(--ink2); font-variant-numeric: tabular-nums;
+}
+.row-filed-date {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); margin-top: 1px;
+}
+
+.priority-chip {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 100px;
+  display: inline-flex; align-items: center;
+}
+.priority-high { background: rgba(224,90,71,0.15); color: var(--err); }
+.priority-med  { background: rgba(226,169,59,0.12); color: var(--warn); }
+.priority-low  { background: var(--bg3); color: var(--ink3); }
+
+.signal-cell { display: flex; align-items: center; justify-content: center; }
+.signal-mark { display: flex; align-items: center; justify-content: center; }
+.no-signal { color: var(--ink4); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.signal-reviewed svg circle { fill: var(--ink3); }
+
+/* ═══════════ DETAIL PANE ═══════════ */
+.detail {
+  background: var(--bg1);
+  border-left: 1px solid var(--rule);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+.detail-header {
+  flex-shrink: 0;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.detail-status-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.detail-status-chip {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 100px;
+}
+.status-active { background: rgba(255,90,20,0.15); color: var(--accent); }
+.status-reviewed { background: var(--bg3); color: var(--ink3); }
+.status-monitoring { background: var(--bg3); color: var(--ink3); }
+
+.detail-timestamp {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
+}
+.detail-entity {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em; line-height: 1.1;
+  margin-bottom: 3px;
+}
+.detail-filing-type {
+  font-size: 13px; color: var(--ink2); margin-bottom: 2px;
+}
+.detail-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); line-height: 1.7; font-variant-numeric: tabular-nums;
+}
+
+/* ─── Signal timeline (Step animation) ─── */
+.signal-timeline {
+  flex-shrink: 0; padding: 16px 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.timeline-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3);
+  margin-bottom: 12px;
+}
+.step-canvas {
+  width: 100%; height: 44px; position: relative;
+}
+.step-line-track {
+  position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+  background: var(--rule2); transform: translateY(-50%);
+}
+.step-line-draw {
+  position: absolute; top: 50%; left: 0; height: 1px;
+  background: var(--ink3); transform: translateY(-50%);
+  width: 0; transform-origin: left center;
+}
+.step-descent {
+  position: absolute; width: 1px; background: var(--ink3);
+  top: 50%; height: 0; transform-origin: top;
+}
+.step-node {
+  position: absolute; border-radius: 50%;
+  background: var(--accent);
+  width: 8px; height: 8px;
+  transform: scale(0); transform-origin: center;
+}
+.step-event-label {
+  position: absolute;
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  color: var(--ink3); white-space: nowrap; opacity: 0;
+  top: calc(50% + 16px);
+}
+.step-tick {
+  position: absolute; top: 50%; width: 1px; height: 6px;
+  background: var(--rule2); transform: translateY(-100%);
+}
+
+/* Step animation keyframes */
+@keyframes lineExtend {
+  from { width: 0; }
+  to   { width: var(--line-w, 72%); }
+}
+@keyframes descentDraw {
+  from { height: 0; }
+  to   { height: var(--descent-h, 18px); }
+}
+@keyframes nodeAppear {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes labelFade {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.step-line-draw.animate {
+  animation: lineExtend 550ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-descent.animate {
+  animation: descentDraw 220ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-node.animate {
+  animation: nodeAppear 200ms cubic-bezier(0.2,0,0,1) forwards;
+}
+.step-event-label.animate {
+  animation: labelFade 200ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .step-line-draw { width: var(--line-w, 72%) !important; }
+  .step-descent { height: var(--descent-h, 18px) !important; }
+  .step-node { transform: scale(1) !important; opacity: 1 !important; }
+  .step-event-label { opacity: 1 !important; }
+}
+
+/* ─── Detail body ─── */
+.detail-body {
+  flex: 1; overflow-y: auto; padding: 0;
+}
+
+.detail-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.detail-section:last-child { border-bottom: none; }
+.detail-section-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.detail-section-label::after {
+  content: ""; flex: 1; height: 1px; background: var(--rule);
+}
+
+/* Reasoning chain */
+.chain-steps { display: flex; flex-direction: column; gap: 12px; }
+.chain-step { display: grid; grid-template-columns: 24px 1fr; gap: 8px; }
+.step-num {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  color: var(--ink3); padding-top: 1px;
+  letter-spacing: 0.08em;
+}
+.step-content { }
+.step-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
+  color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.step-body { font-size: 12px; color: var(--ink2); line-height: 1.65; }
+.step-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink3); margin-top: 4px; font-variant-numeric: tabular-nums;
+}
+.rvh { color: var(--warn); font-family: "IBM Plex Mono", monospace; font-size: 8px; }
+
+/* Citation block */
+.citation-block {
+  background: var(--bg2); border-radius: 4px; padding: 12px 14px;
+}
+.citation-doc {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+  color: var(--ink); margin-bottom: 4px;
+}
+.citation-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  color: var(--ink2); line-height: 1.7; font-variant-numeric: tabular-nums;
+}
+.citation-excerpt {
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--rule2);
+  font-size: 11px; color: var(--ink2); line-height: 1.65;
+  font-style: italic;
+}
+
+/* Monitoring (no-signal) state */
+.monitoring-state {
+  padding: 20px;
+  text-align: center;
+}
+.monitoring-icon { margin-bottom: 12px; }
+.monitoring-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
+  color: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.monitoring-body { font-size: 12px; color: var(--ink3); line-height: 1.60; }
+
+/* Tags */
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 100px; background: var(--bg3); color: var(--ink2);
+}
+
+/* ─── Detail action bar ─── */
+.detail-actions {
+  flex-shrink: 0; padding: 12px 20px;
+  border-top: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ─── Empty / non-signal filing state ─── */
+.filing-meta { display: flex; flex-direction: column; gap: 6px; }
+.filing-row {
+  display: grid; grid-template-columns: 72px 1fr; gap: 8px;
+  font-size: 12px; align-items: baseline;
+}
+.filing-key {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3);
+}
+.filing-val { color: var(--ink2); font-variant-numeric: tabular-nums; }
+
+/* ─── Responsive ─── */
+@media (max-width: 960px) {
+  .detail { display: none; }
+  :root { --sidebar-w: 160px; }
+}
+@media (max-width: 640px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+</style>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="demo-banner" aria-label="Demo notice">
+  <span class="demo-dot" aria-hidden="true"></span>
+  Demo · Illustrative coverage data — not real SEC filings
+</div>
+
+<div class="app" role="application" aria-label="Vigil coverage dashboard">
+
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="sidebar" aria-label="Vigil application navigation">
+    <div class="sidebar-logo" aria-label="Vigil by Lede">
+      <div class="logo-mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2,7 L12,7 L12,13" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="13" r="3" fill="#FF5A14"/>
+        </svg>
+      </div>
+      <span class="logo-vigil">VIGIL</span>
+      <span class="logo-by">/ Lede</span>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <div class="sidebar-section-label" aria-hidden="true">Monitor</div>
+      <a href="#" class="nav-item active" aria-current="page" aria-label="Coverage universe — 42 companies">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="7" y="1" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="7" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="7" y="7" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+        </span>
+        Coverage
+        <span class="nav-count">42</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Signals — 3 open signals">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2,5 L7,5 L7,9" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="9" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+        </span>
+        Signals
+        <span class="nav-count has-signal">3</span>
+      </a>
+      <a href="#" class="nav-item" aria-label="Research documents">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="1" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="4" x2="8" y2="4" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="6.5" x2="8" y2="6.5" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="9" x2="6" y2="9" stroke="currentColor" stroke-width="1.2"/></svg>
+        </span>
+        Research
+      </a>
+      <a href="#" class="nav-item" aria-label="Audit log">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><polyline points="6,3.5 6,6 7.5,7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Audit Log
+      </a>
+
+      <div class="sidebar-divider" aria-hidden="true"></div>
+      <div class="sidebar-section-label" aria-hidden="true">Workspace</div>
+      <a href="#" class="nav-item" aria-label="Configure coverage">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M6,1 L6,3 M6,9 L6,11 M1,6 L3,6 M9,6 L11,6 M2.5,2.5 L4,4 M8,8 L9.5,9.5 M9.5,2.5 L8,4 M4,8 L2.5,9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </span>
+        Configure
+      </a>
+      <a href="#" class="nav-item" aria-label="API and integrations">
+        <span class="nav-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1,4 L4,1 L7,4 L4,7 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M5,8 L8,5 L11,8 L8,11 Z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        </span>
+        API / Webhooks
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="workspace-badge" role="button" aria-label="Workspace: Gradient Boosted Investments, Role: PM/Research">
+        <div class="workspace-avatar" aria-hidden="true">GBI</div>
+        <div>
+          <div class="workspace-name">GBI</div>
+          <div class="workspace-role">PM / Research</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════ MAIN ══════ -->
+  <main class="main" id="main-content" aria-label="Coverage universe">
+
+    <div class="main-header">
+      <div class="header-top">
+        <div>
+          <div class="header-title">Coverage Universe</div>
+          <div class="header-meta">
+            <span>42 companies monitored</span>
+            <span class="pulse">3 open signals</span>
+            <span>Last sync <time datetime="2026-08-03T14:32:07-04:00">14:32:07 ET</time></span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-ghost" type="button">+ Add company</button>
+          <button class="btn btn-sm" type="button">Configure alerts</button>
+        </div>
+      </div>
+      <div class="tab-bar" role="tablist" aria-label="Coverage filters">
+        <div class="tab active" role="tab" aria-selected="true" tabindex="0">All</div>
+        <div class="tab" role="tab" aria-selected="false" tabindex="-1">Signals</div>
+        <div class="tab" role="tab" aria-selected="false" tabindex="-1">Material</div>
+        <div class="tab" role="tab" aria-selected="false" tabindex="-1">Routine</div>
+      </div>
+    </div>
+
+    <div class="table-wrap" role="region" aria-label="Coverage list">
+      <div class="table-header" role="row" aria-hidden="true">
+        <div class="col-label">Company</div>
+        <div class="col-label">Type</div>
+        <div class="col-label">Filed ET</div>
+        <div class="col-label">Priority</div>
+        <div class="col-label center">Signal</div>
+        <div class="col-label center">Item</div>
+      </div>
+
+      <!-- Row 1 — TSLA active signal (selected) -->
+      <div class="coverage-row selected" role="row" tabindex="0"
+           data-id="tsla" data-signal="active"
+           aria-selected="true" aria-label="Tesla Inc, 8-K material event, filed 14:32:07, high priority, active signal selected">
+        <div class="row-company">
+          <div class="row-ticker">TSLA</div>
+          <div class="row-name">Tesla, Inc.</div>
+        </div>
+        <div>
+          <div class="row-type">8-K</div>
+          <div class="row-item">Material</div>
+        </div>
+        <div>
+          <div class="row-filed">14:32:07</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-high">High</span></div>
+        <div class="signal-cell">
+          <div class="signal-mark" aria-label="Active signal" title="Active signal">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2,7 L10,7 L10,11.5" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="10" cy="11.5" r="2.5" fill="#FF5A14"/>
+            </svg>
+          </div>
+        </div>
+        <div class="signal-cell">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--ink3);">5.02</span>
+        </div>
+      </div>
+
+      <!-- Row 2 — NVDA -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="nvda" data-signal="none"
+           aria-label="NVIDIA Corp, earnings transcript, filed 13:15:42, medium priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">NVDA</div>
+          <div class="row-name">NVIDIA Corp.</div>
+        </div>
+        <div>
+          <div class="row-type">Trns</div>
+          <div class="row-item">Earnings</div>
+        </div>
+        <div>
+          <div class="row-filed">13:15:42</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-med">Med</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 3 — MSFT -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="msft" data-signal="none"
+           aria-label="Microsoft Corp, 10-Q quarterly filing, filed 12:44:11, low priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">MSFT</div>
+          <div class="row-name">Microsoft Corp.</div>
+        </div>
+        <div>
+          <div class="row-type">10-Q</div>
+          <div class="row-item">Quarterly</div>
+        </div>
+        <div>
+          <div class="row-filed">12:44:11</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-low">Low</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 4 — AAPL reviewed signal -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="aapl" data-signal="reviewed"
+           aria-label="Apple Inc, 8-K material event, filed 11:59:03, high priority, reviewed signal">
+        <div class="row-company">
+          <div class="row-ticker">AAPL</div>
+          <div class="row-name">Apple Inc.</div>
+        </div>
+        <div>
+          <div class="row-type">8-K</div>
+          <div class="row-item">Material</div>
+        </div>
+        <div>
+          <div class="row-filed">11:59:03</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-high">High</span></div>
+        <div class="signal-cell">
+          <div class="signal-mark signal-reviewed" aria-label="Reviewed signal" title="Reviewed">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1,6 L8,6 L8,10" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="10" r="2" fill="#847D75"/>
+            </svg>
+          </div>
+        </div>
+        <div class="signal-cell">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--ink3);">8.01</span>
+        </div>
+      </div>
+
+      <!-- Row 5 — META -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="meta" data-signal="none"
+           aria-label="Meta Platforms, 10-K annual report, filed 10:30:55, low priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">META</div>
+          <div class="row-name">Meta Platforms</div>
+        </div>
+        <div>
+          <div class="row-type">10-K</div>
+          <div class="row-item">Annual</div>
+        </div>
+        <div>
+          <div class="row-filed">10:30:55</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-low">Low</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 6 — AMZN -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="amzn" data-signal="none"
+           aria-label="Amazon.com, proxy filing DEF 14A, filed 09:15:22, medium priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">AMZN</div>
+          <div class="row-name">Amazon.com, Inc.</div>
+        </div>
+        <div>
+          <div class="row-type">DEF 14A</div>
+          <div class="row-item">Proxy</div>
+        </div>
+        <div>
+          <div class="row-filed">09:15:22</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-med">Med</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 7 — BRK.B -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="brkb" data-signal="none"
+           aria-label="Berkshire Hathaway, 13-F holdings report, filed 09:00:00, low priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">BRK.B</div>
+          <div class="row-name">Berkshire Hathaway</div>
+        </div>
+        <div>
+          <div class="row-type">13-F</div>
+          <div class="row-item">Holdings</div>
+        </div>
+        <div>
+          <div class="row-filed">09:00:00</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-low">Low</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 8 — GOOGL reviewed signal -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="googl" data-signal="reviewed"
+           aria-label="Alphabet Inc, 8-K material disclosure, filed 08:45:19, medium priority, reviewed signal">
+        <div class="row-company">
+          <div class="row-ticker">GOOGL</div>
+          <div class="row-name">Alphabet Inc.</div>
+        </div>
+        <div>
+          <div class="row-type">8-K</div>
+          <div class="row-item">Material</div>
+        </div>
+        <div>
+          <div class="row-filed">08:45:19</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-med">Med</span></div>
+        <div class="signal-cell">
+          <div class="signal-mark signal-reviewed" aria-label="Reviewed signal" title="Reviewed">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1,6 L8,6 L8,10" stroke="#847D75" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="8" cy="10" r="2" fill="#847D75"/>
+            </svg>
+          </div>
+        </div>
+        <div class="signal-cell">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--ink3);">7.01</span>
+        </div>
+      </div>
+
+      <!-- Row 9 — JPM -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="jpm" data-signal="none"
+           aria-label="JPMorgan Chase, 10-Q quarterly filing, filed 08:30:44, low priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">JPM</div>
+          <div class="row-name">JPMorgan Chase</div>
+        </div>
+        <div>
+          <div class="row-type">10-Q</div>
+          <div class="row-item">Quarterly</div>
+        </div>
+        <div>
+          <div class="row-filed">08:30:44</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-low">Low</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+      <!-- Row 10 — GS -->
+      <div class="coverage-row" role="row" tabindex="0"
+           data-id="gs" data-signal="none"
+           aria-label="Goldman Sachs, 8-K filing, filed 08:15:37, medium priority, no signal">
+        <div class="row-company">
+          <div class="row-ticker">GS</div>
+          <div class="row-name">Goldman Sachs</div>
+        </div>
+        <div>
+          <div class="row-type">8-K</div>
+          <div class="row-item">Material</div>
+        </div>
+        <div>
+          <div class="row-filed">08:15:37</div>
+          <div class="row-filed-date">Aug 3, 2026</div>
+        </div>
+        <div><span class="priority-chip priority-med">Med</span></div>
+        <div class="signal-cell"><span class="no-signal" aria-label="No signal">—</span></div>
+        <div class="signal-cell"></div>
+      </div>
+
+    </div><!-- .table-wrap -->
+  </main>
+
+  <!-- ══════ DETAIL PANE ══════ -->
+  <aside class="detail" id="detail-pane" aria-label="Signal detail" aria-live="polite">
+
+    <!-- Header — rendered by JS -->
+    <div class="detail-header" id="detail-header">
+      <div class="detail-status-row">
+        <span class="detail-status-chip status-active">Signal</span>
+        <span class="detail-timestamp">14:32:07 ET · Aug 3, 2026</span>
+      </div>
+      <div class="detail-entity">TSLA</div>
+      <div class="detail-filing-type">Form 8-K — Material Event</div>
+      <div class="detail-meta">
+        Tesla, Inc. · NASDAQ<br>
+        EDGAR File No. 001-34001 · CIK 1318605
+      </div>
+    </div>
+
+    <!-- Step animation (signal rows only) -->
+    <div class="signal-timeline" id="detail-timeline" aria-hidden="true">
+      <div class="timeline-label">Coverage timeline — signal detection</div>
+      <div class="step-canvas" id="stepCanvas">
+        <div class="step-line-track"></div>
+        <div class="step-tick" style="left:20%;"></div>
+        <div class="step-tick" style="left:40%;"></div>
+        <div class="step-tick" style="left:60%;"></div>
+        <div class="step-tick" style="left:80%;"></div>
+        <div class="step-line-draw" id="stepLineDraw" style="--line-w: 72%;"></div>
+        <div class="step-descent" id="stepDescent" style="--descent-h: 18px; left: 72%;"></div>
+        <div class="step-node" id="stepNode" style="left: calc(72% - 4px);"></div>
+        <div class="step-event-label" id="stepLabel" style="left: calc(72% + 12px);">8-K · 14:32:07 ET</div>
+      </div>
+    </div>
+
+    <!-- Body content -->
+    <div class="detail-body" id="detail-body">
+
+      <!-- Reasoning chain -->
+      <div class="detail-section">
+        <div class="detail-section-label">Reasoning chain</div>
+        <div class="chain-steps">
+          <div class="chain-step">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <div class="step-title">Detection</div>
+              <div class="step-body">
+                Form 8-K filing accepted by SEC EDGAR. Item 5.02 — Departure of Directors or Certain Officers.
+              </div>
+              <div class="step-meta">
+                Accepted: 14:32:07 ET · Processing: 23 sec <span class="rvh">REQUIRES HUMAN VERIFICATION</span>
+              </div>
+            </div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <div class="step-title">Classification</div>
+              <div class="step-body">
+                Item 5.02 identifies a material leadership change. Cross-referenced with coverage configuration: governance triggers enabled. Priority: High.
+              </div>
+              <div class="step-meta">Confidence: Model-assessed · Governance · Class 1</div>
+            </div>
+          </div>
+          <div class="chain-step">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <div class="step-title">Signal</div>
+              <div class="step-body">
+                Director departure affecting Compensation Committee oversight. Governance risk flag raised. Analyst review required.
+              </div>
+              <div class="step-meta">Status: SIGNAL DETECTED · Awaiting review</div>
+              <div class="tag-row">
+                <span class="tag">Governance</span>
+                <span class="tag">Leadership</span>
+                <span class="tag">Compensation</span>
+                <span class="tag">Item 5.02</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Citation -->
+      <div class="detail-section">
+        <div class="detail-section-label">Citation</div>
+        <div class="citation-block">
+          <div class="citation-doc">Form 8-K — Tesla, Inc.</div>
+          <div class="citation-meta">
+            Filed: August 3, 2026 · 14:32:07 ET<br>
+            EDGAR File No. 001-34001 · CIK 1318605<br>
+            Section: Item 5.02 · Page 2
+          </div>
+          <div class="citation-excerpt">
+            "[Source sentence — illustrative demo content. Primary source sentence will appear here, linked to the exact document location.]"
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <span class="rvh">REQUIRES HUMAN VERIFICATION — demo content only</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action bar -->
+    <div class="detail-actions">
+      <button class="btn btn-ghost" type="button" style="flex:1;">Share</button>
+      <button class="btn btn-ghost" type="button" style="flex:1;">Export</button>
+      <button class="btn btn-sm" type="button" style="flex:1;">Dismiss</button>
+    </div>
+
+  </aside>
+
+</div><!-- .app -->
+
+<script>
+/* ─ Coverage data for detail pane rendering ─ */
+const DETAIL_DATA = {
+  tsla: {
+    signal: 'active',
+    ticker: 'TSLA',
+    company: 'Tesla, Inc.',
+    exchange: 'NASDAQ',
+    type: '8-K',
+    typeLabel: 'Form 8-K — Material Event',
+    filed: '14:32:07 ET · Aug 3, 2026',
+    filedFull: 'August 3, 2026 · 14:32:07 ET',
+    edgar: 'EDGAR File No. 001-34001 · CIK 1318605',
+    item: 'Item 5.02',
+    page: 'Page 2',
+    statusLabel: 'Signal',
+    statusClass: 'status-active',
+    timelineLabel: '8-K · 14:32:07 ET',
+    chain: [
+      {
+        num: '01', title: 'Detection',
+        body: 'Form 8-K filing accepted by SEC EDGAR. Item 5.02 — Departure of Directors or Certain Officers.',
+        meta: 'Accepted: 14:32:07 ET · Processing: 23 sec',
+        metaRvh: true,
+        tags: []
+      },
+      {
+        num: '02', title: 'Classification',
+        body: 'Item 5.02 identifies a material leadership change. Cross-referenced with coverage configuration: governance triggers enabled. Priority: High.',
+        meta: 'Confidence: Model-assessed · Governance · Class 1',
+        tags: []
+      },
+      {
+        num: '03', title: 'Signal',
+        body: 'Director departure affecting Compensation Committee oversight. Governance risk flag raised. Analyst review required.',
+        meta: 'Status: SIGNAL DETECTED · Awaiting review',
+        tags: ['Governance', 'Leadership', 'Compensation', 'Item 5.02']
+      }
+    ]
+  },
+  aapl: {
+    signal: 'reviewed',
+    ticker: 'AAPL',
+    company: 'Apple Inc.',
+    exchange: 'NASDAQ',
+    type: '8-K',
+    typeLabel: 'Form 8-K — Material Disclosure',
+    filed: '11:59:03 ET · Aug 3, 2026',
+    filedFull: 'August 3, 2026 · 11:59:03 ET',
+    edgar: 'EDGAR File No. 000-10030 · CIK 320193',
+    item: 'Item 8.01',
+    page: 'Page 1',
+    statusLabel: 'Reviewed',
+    statusClass: 'status-reviewed',
+    timelineLabel: '8-K · 11:59 ET',
+    chain: [
+      {
+        num: '01', title: 'Detection',
+        body: 'Form 8-K received. Item 8.01 — Other Events. Accepted: 11:59:03 ET.',
+        meta: 'Filing accepted · Processed',
+        tags: []
+      },
+      {
+        num: '02', title: 'Classification',
+        body: 'Item 8.01 — voluntary disclosure. Content review: product or regulatory announcement. Priority: High per coverage rules.',
+        meta: 'Model-assessed · Disclosure',
+        tags: []
+      },
+      {
+        num: '03', title: 'Reviewed',
+        body: 'Signal reviewed and acknowledged. No escalation required. Coverage status: Reviewed.',
+        meta: 'Status: REVIEWED · No further action',
+        tags: ['Reviewed', 'Item 8.01', 'Disclosure']
+      }
+    ]
+  },
+  googl: {
+    signal: 'reviewed',
+    ticker: 'GOOGL',
+    company: 'Alphabet Inc.',
+    exchange: 'NASDAQ',
+    type: '8-K',
+    typeLabel: 'Form 8-K — Material Disclosure',
+    filed: '08:45:19 ET · Aug 3, 2026',
+    filedFull: 'August 3, 2026 · 08:45:19 ET',
+    edgar: 'EDGAR File No. 000-50726 · CIK 1652044',
+    item: 'Item 7.01',
+    page: 'Page 1',
+    statusLabel: 'Reviewed',
+    statusClass: 'status-reviewed',
+    timelineLabel: '8-K · 08:45 ET',
+    chain: [
+      {
+        num: '01', title: 'Detection',
+        body: 'Form 8-K received. Item 7.01 — Regulation FD disclosure. Accepted: 08:45:19 ET.',
+        meta: 'Filing accepted · Processed',
+        tags: []
+      },
+      {
+        num: '02', title: 'Classification',
+        body: 'Regulation FD voluntary disclosure. Earnings guidance or investor communication probable. Priority: Medium.',
+        meta: 'Model-assessed · Reg FD',
+        tags: []
+      },
+      {
+        num: '03', title: 'Reviewed',
+        body: 'Signal reviewed. Investor communication acknowledged. No escalation required.',
+        meta: 'Status: REVIEWED · Reg FD',
+        tags: ['Reviewed', 'Reg FD', 'Item 7.01']
+      }
+    ]
+  }
+};
+
+const FILING_DATA = {
+  nvda:  { ticker: 'NVDA', company: 'NVIDIA Corp.', exchange: 'NASDAQ', type: 'Earnings Transcript', filed: '13:15:42 ET · Aug 3, 2026', edgar: 'CIK 1045810', item: 'Earnings Call', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  msft:  { ticker: 'MSFT', company: 'Microsoft Corp.', exchange: 'NASDAQ', type: '10-Q Quarterly Filing', filed: '12:44:11 ET · Aug 3, 2026', edgar: 'EDGAR File No. 000-14278 · CIK 789019', item: 'Quarterly Report', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  meta:  { ticker: 'META', company: 'Meta Platforms, Inc.', exchange: 'NASDAQ', type: '10-K Annual Report', filed: '10:30:55 ET · Aug 3, 2026', edgar: 'CIK 1326801', item: 'Annual Report', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  amzn:  { ticker: 'AMZN', company: 'Amazon.com, Inc.', exchange: 'NASDAQ', type: 'DEF 14A Proxy Statement', filed: '09:15:22 ET · Aug 3, 2026', edgar: 'CIK 1018724', item: 'Proxy Statement', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  brkb:  { ticker: 'BRK.B', company: 'Berkshire Hathaway Inc.', exchange: 'NYSE', type: '13-F Holdings Report', filed: '09:00:00 ET · Aug 3, 2026', edgar: 'CIK 1067983', item: 'Portfolio Holdings', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  jpm:   { ticker: 'JPM', company: 'JPMorgan Chase & Co.', exchange: 'NYSE', type: '10-Q Quarterly Filing', filed: '08:30:44 ET · Aug 3, 2026', edgar: 'CIK 19617', item: 'Quarterly Report', statusLabel: 'Monitoring', statusClass: 'status-monitoring' },
+  gs:    { ticker: 'GS', company: 'The Goldman Sachs Group', exchange: 'NYSE', type: 'Form 8-K', filed: '08:15:37 ET · Aug 3, 2026', edgar: 'CIK 886982', item: 'Item 8.01', statusLabel: 'Monitoring', statusClass: 'status-monitoring' }
+};
+
+/* ─ Step animation ─ */
+function runStepAnimation() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const lineDraw = document.getElementById('stepLineDraw');
+  const descent  = document.getElementById('stepDescent');
+  const node     = document.getElementById('stepNode');
+  const label    = document.getElementById('stepLabel');
+
+  if (!lineDraw) return;
+
+  /* Reset state */
+  [lineDraw, descent, node, label].forEach(function(el) {
+    el.classList.remove('animate');
+    void el.offsetWidth; /* force reflow */
+  });
+
+  if (prefersReduced) {
+    lineDraw.style.width = '72%';
+    descent.style.height = '18px';
+    node.style.transform = 'scale(1)';
+    node.style.opacity   = '1';
+    label.style.opacity  = '1';
+    return;
+  }
+
+  var LINE_DUR = 550, DESC_DUR = 220, NODE_DUR = 200;
+
+  setTimeout(function() { lineDraw.classList.add('animate'); }, 300);
+  setTimeout(function() { descent.classList.add('animate'); }, 300 + LINE_DUR);
+  setTimeout(function() { node.classList.add('animate'); }, 300 + LINE_DUR + DESC_DUR);
+  setTimeout(function() { label.classList.add('animate'); }, 300 + LINE_DUR + DESC_DUR + NODE_DUR - 60);
+}
+
+/* ─ Render detail pane header ─ */
+function renderHeader(data, isSignal) {
+  var header = document.getElementById('detail-header');
+  if (!header) return;
+
+  header.innerHTML =
+    '<div class="detail-status-row">' +
+      '<span class="detail-status-chip ' + data.statusClass + '">' + data.statusLabel + '</span>' +
+      '<span class="detail-timestamp">' + data.filed + '</span>' +
+    '</div>' +
+    '<div class="detail-entity">' + data.ticker + '</div>' +
+    '<div class="detail-filing-type">' + data.typeLabel + '</div>' +
+    '<div class="detail-meta">' + data.company + ' · ' + data.exchange + '<br>' + data.edgar + '</div>';
+}
+
+/* ─ Render reasoning chain ─ */
+function renderChain(chain) {
+  return chain.map(function(step) {
+    var tagsHtml = '';
+    if (step.tags && step.tags.length) {
+      tagsHtml = '<div class="tag-row">' +
+        step.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') +
+        '</div>';
+    }
+    var metaHtml = step.meta
+      ? '<div class="step-meta">' + step.meta + (step.metaRvh ? ' <span class="rvh">REQUIRES HUMAN VERIFICATION</span>' : '') + '</div>'
+      : '';
+    return '<div class="chain-step">' +
+      '<div class="step-num">' + step.num + '</div>' +
+      '<div class="step-content">' +
+        '<div class="step-title">' + step.title + '</div>' +
+        '<div class="step-body">' + step.body + '</div>' +
+        metaHtml + tagsHtml +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+/* ─ Render detail body ─ */
+function renderDetailBody(id, data, isSignal) {
+  var body = document.getElementById('detail-body');
+  var timeline = document.getElementById('detail-timeline');
+  if (!body) return;
+
+  if (isSignal) {
+    timeline.style.display = '';
+    var label = document.getElementById('stepLabel');
+    if (label) label.textContent = data.timelineLabel;
+
+    body.innerHTML =
+      '<div class="detail-section">' +
+        '<div class="detail-section-label">Reasoning chain</div>' +
+        '<div class="chain-steps">' + renderChain(data.chain) + '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+        '<div class="detail-section-label">Citation</div>' +
+        '<div class="citation-block">' +
+          '<div class="citation-doc">Form 8-K — ' + data.company + '</div>' +
+          '<div class="citation-meta">' +
+            'Filed: ' + data.filedFull + '<br>' + data.edgar + '<br>' +
+            'Section: ' + data.item + ' · ' + data.page +
+          '</div>' +
+          '<div class="citation-excerpt">"[Source sentence — illustrative demo content. Primary source will appear here, linked to the exact document location.]"</div>' +
+        '</div>' +
+        '<div style="margin-top:8px;"><span class="rvh">REQUIRES HUMAN VERIFICATION — demo content only</span></div>' +
+      '</div>';
+
+  } else {
+    /* Monitoring / no-signal state */
+    timeline.style.display = 'none';
+    var f = FILING_DATA[id] || {};
+
+    body.innerHTML =
+      '<div class="detail-section">' +
+        '<div class="detail-section-label">Filing details</div>' +
+        '<div class="filing-meta">' +
+          '<div class="filing-row"><div class="filing-key">Issuer</div><div class="filing-val">' + (f.company || '—') + '</div></div>' +
+          '<div class="filing-row"><div class="filing-key">Exchange</div><div class="filing-val">' + (f.exchange || '—') + '</div></div>' +
+          '<div class="filing-row"><div class="filing-key">Form</div><div class="filing-val">' + (f.type || '—') + '</div></div>' +
+          '<div class="filing-row"><div class="filing-key">Section</div><div class="filing-val">' + (f.item || '—') + '</div></div>' +
+          '<div class="filing-row"><div class="filing-key">Filed</div><div class="filing-val">' + (f.filed || '—') + '</div></div>' +
+          '<div class="filing-row"><div class="filing-key">EDGAR</div><div class="filing-val">' + (f.edgar || '—') + '</div></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="detail-section">' +
+        '<div class="monitoring-state">' +
+          '<div class="monitoring-icon" aria-hidden="true">' +
+            '<svg width="32" height="32" viewBox="0 0 32 32" fill="none">' +
+              '<circle cx="16" cy="16" r="14" stroke="#2C2B26" stroke-width="1.5"/>' +
+              '<path d="M8,15 L20,15 L20,22" stroke="#383630" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+              '<circle cx="20" cy="22" r="3" fill="#2C2B26"/>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="monitoring-label">Monitoring</div>' +
+          '<div class="monitoring-body">No signal detected in this filing. Coverage continues.</div>' +
+        '</div>' +
+      '</div>';
+  }
+}
+
+/* ─ Row selection ─ */
+function selectRow(row) {
+  var id = row.dataset.id;
+  var signalType = row.dataset.signal;
+  var isSignal = (signalType === 'active' || signalType === 'reviewed');
+
+  /* Update row states */
+  document.querySelectorAll('.coverage-row').forEach(function(r) {
+    r.classList.remove('selected');
+    r.setAttribute('aria-selected', 'false');
+  });
+  row.classList.add('selected');
+  row.setAttribute('aria-selected', 'true');
+
+  /* Render detail pane */
+  if (isSignal && DETAIL_DATA[id]) {
+    renderHeader(DETAIL_DATA[id], true);
+    renderDetailBody(id, DETAIL_DATA[id], true);
+    if (signalType === 'active') {
+      runStepAnimation();
+    }
+  } else {
+    var filing = FILING_DATA[id] || { ticker: id.toUpperCase(), company: id.toUpperCase(), exchange: '—', type: '—', filed: '—', edgar: '—', item: '—', statusLabel: 'Monitoring', statusClass: 'status-monitoring' };
+    renderHeader(filing, false);
+    renderDetailBody(id, filing, false);
+  }
+}
+
+/* ─ Init ─ */
+(function() {
+  /* Attach row click handlers */
+  document.querySelectorAll('.coverage-row').forEach(function(row) {
+    row.addEventListener('click', function() { selectRow(row); });
+    row.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectRow(row);
+      }
+    });
+  });
+
+  /* Tab bar — visual only for demo */
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.tab').forEach(function(t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+    });
+  });
+
+  /* Run initial step animation for TSLA (selected on load) */
+  var ready = document.readyState;
+  if (ready === 'complete' || ready === 'interactive') {
+    setTimeout(runStepAnimation, 400);
+  } else {
+    window.addEventListener('DOMContentLoaded', function() { setTimeout(runStepAnimation, 400); });
+  }
+})();
+</script>
