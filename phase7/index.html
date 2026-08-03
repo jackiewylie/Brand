@@ -22,7 +22,6 @@
 
   /* Accent */
   --brand: #FF4B00;       /* Flare — decorative only in light register */
-  --brand-hover: #E64300;
   --brand-text: #C93A00;  /* brand-text — ≥4.73:1 on sp only */
 
   /* Rules */
@@ -327,7 +326,7 @@ body {
 /* Clearspace diagram */
 .clearspace-wrap {
   display: flex; align-items: center; justify-content: center;
-  padding: 24px; background: var(--st); border-radius: 4px;
+  padding: 24px; background: var(--ss); border-radius: 4px;
   margin-bottom: 12px;
 }
 .clearspace-inner {
@@ -403,7 +402,7 @@ body {
 }
 .lk-p-sep {
   font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 400;
-  color: var(--rule2); margin: 0 12px;
+  color: var(--tm); margin: 0 12px;
 }
 .lk-p-vigil {
   font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 500;
@@ -475,7 +474,7 @@ body {
 
 /* ─── Notice box ─── */
 .notice-box {
-  background: var(--so); border: 1px solid var(--rule1);
+  background: var(--so);
   border-radius: 4px; padding: 16px 20px;
   margin-bottom: 12px;
 }
@@ -541,7 +540,7 @@ footer {
 <header class="doc-header" role="banner">
   <div class="doc-header-inner">
     <div class="doc-wordmark">
-      <div class="doc-logo-mark" aria-label="Vigil logo" aria-hidden="false">
+      <div class="doc-logo-mark" role="img" aria-label="Vigil logo">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M2,9 L14,9 L14,15" stroke="#55534A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="14" cy="15" r="3.5" fill="#FF4B00"/>
@@ -712,9 +711,9 @@ footer {
         <div class="tier-cobrand">Endorsed lockup — see §5</div>
       </div>
 
-      <div class="tier-card tier-pending" role="listitem" aria-label="Fifth partner tier — pending brand owner resolution">
+      <div class="tier-card tier-pending" role="listitem" aria-label="Powered+ — fifth partner tier, pending brand owner resolution">
         <div class="tier-number">Tier 05</div>
-        <div class="tier-name pending-name">Partner Tier</div>
+        <div class="tier-name pending-name">Powered+</div>
         <div class="tier-tag">Pending resolution</div>
         <div class="tier-desc">Full white-label configuration. Attribution terms subject to brand owner and legal review. See §7.</div>
         <div class="tier-cobrand pending-cobrand">White-label — pending</div>
@@ -989,7 +988,7 @@ footer {
       It is documented here for completeness — it is not currently offered.
     </p>
 
-    <div class="notice-box" style="background:#FDFCF8; border-color:var(--warn);">
+    <div class="notice-box" style="background: var(--so);">
       <div class="notice-label" style="color:var(--err);">Open Condition — Brand Owner Resolution Required</div>
       <div class="notice-text">
         The fifth partner tier (full white-label, no Vigil or Lede attribution) involves an unresolved
