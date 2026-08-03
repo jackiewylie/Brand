@@ -131,7 +131,7 @@ html, body {
   background: var(--bg2); color: var(--ink3); border-radius: 100px;
   padding: 1px 7px; font-variant-numeric: tabular-nums;
 }
-.nav-count.has-signal { background: var(--err); color: var(--ink); }
+.nav-count.has-signal { background: var(--bg0); color: var(--err); }
 
 .sidebar-divider { height: 1px; background: var(--rule); margin: 8px 10px; }
 
@@ -360,6 +360,7 @@ html, body {
   position: absolute; border-radius: 50%;
   background: var(--accent);
   width: 8px; height: 8px;
+  top: calc(50% + 14px); /* center at bottom of 18px descent from 50% track */
   transform: scale(0); transform-origin: center;
 }
 .step-event-label {
@@ -658,7 +659,7 @@ html, body {
           <div class="signal-mark" aria-label="Active signal" title="Active signal">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M2,7 L10,7 L10,11.5" stroke="#C6C4B6" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="10" cy="11.5" r="2.5" fill="#FF5A14"/>
+              <circle cx="10" cy="11.5" r="2.5" fill="#C6C4B6"/>
             </svg>
           </div>
         </div>
@@ -1288,6 +1289,14 @@ function selectRow(row) {
       }
     });
   });
+
+  /* Workspace badge keyboard activation */
+  var wsBadge = document.querySelector('.workspace-badge');
+  if (wsBadge) {
+    wsBadge.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wsBadge.click(); }
+    });
+  }
 
   /* Tab bar */
   var tabs = Array.from(document.querySelectorAll('.tab'));
