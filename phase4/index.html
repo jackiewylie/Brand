@@ -100,11 +100,11 @@ body {
   border-radius: 3px; font-family: "IBM Plex Mono", monospace;
 }
 .sidebar nav a:hover { color: var(--ink); background: var(--bg2); }
-.sidebar nav a.active { color: var(--accent-text); }
+.sidebar nav a.active { color: var(--ink); background: var(--bg1); }
 .sidebar nav a .nav-num { color: var(--ink4); font-size: 9px; margin-right: 4px; }
 
 .selection-badge {
-  margin: 16px; background: var(--bg2); padding: 12px;
+  margin: 16px; background: var(--bg1); padding: 12px;
   font-family: "IBM Plex Mono", monospace; font-size: 10px;
 }
 .sel-row { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; line-height: 1.4; }
@@ -211,17 +211,23 @@ h3.sub:first-of-type { margin-top: 20px; }
 .component-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
 .btn {
   font-family: "Schibsted Grotesk", sans-serif; font-size: 13px; font-weight: 500;
-  padding: 8px 20px; border-radius: 999px; border: none; cursor: pointer;
+  padding: 8px 20px; border-radius: 100px; border: none; cursor: pointer;
   line-height: 1; white-space: nowrap;
 }
 .btn-primary   { background: var(--accent); color: #fff; }
 .btn-secondary { background: var(--bg2); color: var(--ink2); }
-.btn-ghost     { background: transparent; color: var(--ink2); border: 1px solid var(--rule2); border-radius: 999px; }
+.btn-ghost     { background: transparent; color: var(--ink2); border: 1px solid var(--rule2); border-radius: 100px; }
 .btn-sm { font-size: 11px; padding: 5px 14px; }
+
+/* WCAG 2.2 SC 2.4.7 / 2.4.11 — focus states */
+.btn:focus-visible, .theme-btn:focus-visible,
+.sidebar nav a:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
 
 .chip {
   font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
-  padding: 3px 8px; border-radius: 999px; letter-spacing: 0.04em; display: inline-block;
+  padding: 3px 8px; border-radius: 100px; letter-spacing: 0.04em; display: inline-block;
 }
 .chip-ok   { background: var(--ok-tint); color: var(--ok); }
 .chip-warn { background: var(--warn-tint); color: var(--warn); }
@@ -310,7 +316,7 @@ h3.sub:first-of-type { margin-top: 20px; }
 .ms-val { color: var(--ink2); line-height: 1.55; }
 
 /* ─── Token amendment ─── */
-.amendment { background: var(--bg2); border-left: 2px solid var(--warn); padding: 16px 20px; margin: 16px 0; }
+.amendment { background: var(--bg1); border-left: 2px solid var(--warn); padding: 16px 20px; margin: 16px 0; }
 .amendment-label {
   font-family: "IBM Plex Mono", monospace; font-size: 9px; text-transform: uppercase;
   letter-spacing: 0.12em; color: var(--warn); margin-bottom: 6px;
@@ -341,7 +347,7 @@ h3.sub:first-of-type { margin-top: 20px; }
 .theme-btn {
   position: fixed; bottom: 24px; right: 24px; z-index: 300;
   font-family: "IBM Plex Mono", monospace; font-size: 10px; padding: 6px 14px;
-  background: var(--bg2); color: var(--ink3); border-radius: 999px; border: none;
+  background: var(--bg2); color: var(--ink3); border-radius: 100px; border: none;
   cursor: pointer; letter-spacing: 0.06em;
 }
 .theme-btn:hover { color: var(--ink); }
@@ -449,7 +455,7 @@ h3.sub:first-of-type { margin-top: 20px; }
           <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
             <div style="height:1px; width:140px; background:var(--rule2); margin-bottom:0;"></div>
             <div style="width:1px; height:16px; background:var(--rule2);"></div>
-            <div style="background:var(--bg3); padding:12px 20px; text-align:center; border-left:2px solid var(--accent);">
+            <div style="background:var(--bg2); padding:12px 20px; text-align:center; border-left:2px solid var(--accent);">
               <div class="mono" style="font-size:13px; font-weight:700; color:var(--ink);">Vigil by Lede</div>
               <div class="mono" style="font-size:9px; color:var(--ink4); text-transform:uppercase; letter-spacing:0.10em; margin-top:4px;">Professional</div>
             </div>
@@ -568,6 +574,44 @@ h3.sub:first-of-type { margin-top: 20px; }
       <tr><td>What is forbidden</td><td>Outlined letterforms. Drop shadows. Color gradients on the wordmark. Stretching or condensing. Separating VIGIL from "by Lede" except in abbreviated contexts. Any color other than the two specified palettes.</td></tr>
     </tbody>
   </table>
+
+  <h3 class="sub">Abbreviated "V" mark — sub-16px and favicon contexts</h3>
+  <p style="font-size:13px; color:var(--ink3); margin-bottom:16px;">When "VIGIL" cannot render at 16px minimum, the abbreviated V mark is used. It is a capital V in IBM Plex Mono 700 at 12–14px, paired with the Step logomark at equal height. The V carries the product; the Step logomark carries the brand.</p>
+  <div style="background:var(--bg1); padding:32px; margin:20px 0; display:flex; align-items:flex-end; gap:32px; flex-wrap:wrap;">
+    <div class="logomark-cell">
+      <div class="lm-label">14px — compact UI</div>
+      <div class="lm-swatch on-dark" style="gap:6px; flex-direction:row; align-items:center;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1,5 L9,5 L9,10" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="10" r="2.5" fill="#FF5A14"/>
+        </svg>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:700; color:var(--ink); letter-spacing:-0.01em; line-height:1;">V</span>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">12px — tab / favicon</div>
+      <div class="lm-swatch on-dark" style="gap:5px; flex-direction:row; align-items:center;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M1,4 L8,4 L8,9" stroke="#847D75" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8" cy="9" r="2" fill="#FF5A14"/>
+        </svg>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:700; color:var(--ink); letter-spacing:-0.01em; line-height:1;">V</span>
+      </div>
+    </div>
+    <div class="logomark-cell">
+      <div class="lm-label">Light ground</div>
+      <div class="lm-swatch on-light" style="gap:6px; flex-direction:row; align-items:center;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1,5 L9,5 L9,10" stroke="#706B63" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="10" r="2.5" fill="#FF4B00"/>
+        </svg>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:700; color:#131210; letter-spacing:-0.01em; line-height:1;">V</span>
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>V mark usage rule:</strong> The V mark is always the Step logomark + "V" in IBM Plex Mono 700. It is never the letter V alone. The Step logomark provides the brand connection; the V provides the product shorthand. The V mark never replaces the full wordmark in body content — only in constrained-space UI contexts (browser tabs, notification icons, embedded widget headers).
+  </div>
 </div>
 
 <!-- 04 LOGOMARK -->
@@ -641,6 +685,10 @@ h3.sub:first-of-type { margin-top: 20px; }
       <tr><td>What is forbidden</td><td>Filled or outlined instrument line. Multiple event nodes. Rotation. Any color other than specified pairs. The node is always at the end of the step — never mid-line, never floating.</td></tr>
     </tbody>
   </table>
+
+  <div class="callout warn">
+    <strong>SVG asset delivery — dark and light variants required:</strong> The SVG specimens above hardcode dark-register color values (#847D75 line, #FF5A14 node). The production SVG asset kit must supply two files per size: <code>step-dark-32.svg</code> (line #847D75, node #FF5A14) and <code>step-light-32.svg</code> (line #706B63, node #FF4B00). Do not use CSS <code>currentColor</code> for the Flare orange node — it must be an explicit fill to prevent it from inheriting foreground color. Phase 5 implementation must select the correct variant based on the active color register.
+  </div>
 </div>
 
 <!-- 05 TIER NAMING -->
@@ -690,7 +738,7 @@ h3.sub:first-of-type { margin-top: 20px; }
     <span class="section-num">06</span>
     <h2>Type System</h2>
   </div>
-  <p class="section-sub">IBM Plex Mono is the dominant display face for Territory A — the instrument register. Schibsted Grotesk carries body and UI copy. Newsreader handles long-form reading content (briefs, research). Lede Serif / Instrument Serif is reserved for consumer brand surfaces only — it does not appear in professional product UI.</p>
+  <p class="section-sub">IBM Plex Mono is the dominant display face for Territory A — the instrument register. Schibsted Grotesk carries body, UI, and reading-scale copy (D4 binding: two families only). Lede Serif / Instrument Serif is reserved for consumer brand surfaces only — it does not appear in professional product UI.</p>
 
   <div class="amendment">
     <div class="amendment-label">P4 Token Amendment — lede-tokens.json v2.0.0</div>
@@ -751,14 +799,15 @@ h3.sub:first-of-type { margin-top: 20px; }
       <div class="ts-meta">Tickers, prices, percentages</div>
     </div>
     <div class="ts-row">
-      <div class="ts-meta"><strong>Reading</strong>Newsreader 400<br>16px · 0 · lh 1.80</div>
-      <div style="font-family:'Newsreader','Georgia',serif; font-size:16px; font-weight:400; line-height:1.80; color:var(--ink2);">The position sizing model carries three open conditions from the 10-Q disclosure.</div>
+      <div class="ts-meta"><strong>Reading</strong>Schibsted Grotesk 400<br>16px · 0 · lh 1.80</div>
+      <div style="font-family:'Schibsted Grotesk',sans-serif; font-size:16px; font-weight:400; line-height:1.80; color:var(--ink2);">The position sizing model carries three open conditions from the 10-Q disclosure.</div>
       <div class="ts-meta">Intelligence briefs, research documents</div>
     </div>
   </div>
 
   <h3 class="sub">Typography rules</h3>
   <ul class="ls">
+    <li>D4 (binding): only two typeface families are authorized — IBM Plex Mono and Schibsted Grotesk. No third family may be introduced without a formal Phase 4 token amendment. This includes serif reading faces; Schibsted Grotesk at 16px/lh 1.80 is the D4-compliant reading register.</li>
     <li>IBM Plex Mono is always the display face in product interfaces. Lede Serif / Instrument Serif does not appear in Vigil product UI — it is reserved for the consumer Lede brand and brand-only marketing surfaces.</li>
     <li>IBM Plex Mono weight 700 is authorized at display scale (≥18px) only. Data values use 400 or 500. No 700 weight in the data layer.</li>
     <li>All data columns use <code>font-variant-numeric: tabular-nums</code> to prevent digit-width jitter as values change.</li>
@@ -822,9 +871,9 @@ h3.sub:first-of-type { margin-top: 20px; }
         <tr><td>#847D75 (ink3)</td><td>#1B1A16 (bg1)</td><td>4.37:1</td><td class="ct-pass">AA (large text ≥18px)</td></tr>
         <tr><td>#F7F5EF (ink)</td><td>#242320 (bg2)</td><td>14.0:1</td><td class="ct-aaa">AAA</td></tr>
         <tr><td>#847D75 (ink3)</td><td>#242320 (bg2)</td><td>3.75:1</td><td class="ct-exempt">Use ink2 for body on bg2</td></tr>
-        <tr><td>#FF7A42 (accent-text)</td><td>#131210 (bg0)</td><td>5.2:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#FF7A42 (accent-text)</td><td>#131210 (bg0)</td><td>7.2:1</td><td class="ct-aaa">AAA</td></tr>
         <tr><td>#3FA971 (ok)</td><td>#131210 (bg0)</td><td>5.6:1</td><td class="ct-pass">AA</td></tr>
-        <tr><td>#E05A47 (err)</td><td>#131210 (bg0)</td><td>4.5:1</td><td class="ct-pass">AA</td></tr>
+        <tr><td>#E05A47 (err)</td><td>#131210 (bg0)</td><td>5.1:1</td><td class="ct-pass">AA</td></tr>
         <tr><td>#E2A93B (warn)</td><td>#131210 (bg0)</td><td>5.8:1</td><td class="ct-pass">AA</td></tr>
         <tr><td>#131210 (ink)</td><td>#F7F5EF (light bg0)</td><td>17.3:1</td><td class="ct-aaa">AAA</td></tr>
         <tr><td>#706B63 (ink3 light)</td><td>#F7F5EF (light bg0)</td><td>4.87:1</td><td class="ct-pass">AA</td></tr>
@@ -859,7 +908,7 @@ h3.sub:first-of-type { margin-top: 20px; }
       <tr><td>Primary (Flare fill)</td><td>Background: #FF5A14. Text: #fff. Use ONLY for the action that triggers an event (run scan, confirm alert, subscribe). Not for generic CTAs.</td></tr>
       <tr><td>Secondary</td><td>Background: bg2 (#242320). Text: ink2. For supporting actions (export, share, configure).</td></tr>
       <tr><td>Ghost</td><td>Transparent background. Border: 1px solid rule2 (#383630). Text: ink3. For destructive-safe cancel or dismiss actions only.</td></tr>
-      <tr><td>All variants</td><td>border-radius: 999px (pill). Schibsted Grotesk 500. 8px/20px padding standard; 5px/14px small. No box-shadow. Active state: scale(0.97). Focus: 2px outline, 2px offset, var(--accent).</td></tr>
+      <tr><td>All variants</td><td>border-radius: 100px (pill — token value). Schibsted Grotesk 500. 8px/20px padding standard; 5px/14px small. No box-shadow. Active state: scale(0.97). Focus: 2px outline, 2px offset, var(--accent). D7 enforcement: primary button Flare fill is valid only when the action IS the event trigger. "Submit form" or "Save" do not qualify. "Run coverage scan," "Confirm alert," "Subscribe to signal" do qualify. When unsure, default to Secondary.</td></tr>
     </tbody>
   </table>
 
@@ -1056,8 +1105,11 @@ h3.sub:first-of-type { margin-top: 20px; }
     </div>
   </div>
 
+  <div class="callout ok">
+    <strong>No further token amendments required for Phase 5 implementation.</strong> Territory A's surface palette is an exact match to the v2.0.0 product dark register. No custom colors outside the token set are used in the Vigil professional product system. The one Phase 4 amendment (IBM Plex Mono 700) is the only delta from the token spec. The amended lede-tokens.json file must be produced and delivered as a discrete artifact before Phase 5 implementation begins (see §13 handoff).
+  </div>
   <div class="callout">
-    <strong>No further token amendments required for Phase 5 implementation.</strong> Territory A's surface palette is an exact match to the v2.0.0 product dark register. No custom colors outside the token set are used in the Vigil professional product system. The one Phase 4 amendment (IBM Plex Mono 700) is the only delta from the token spec.
+    <strong>MC-P4-01 remediation applied (Aug 3 2026):</strong> Following independent review, the following corrections were made to this document: (1) Newsreader typeface removed — D4 binding authorizes two families only; Reading scale now uses Schibsted Grotesk 16px/lh 1.80. (2) Focus-visible CSS rules added per WCAG 2.2. (3) Surface-stepping violations corrected (three instances: amendment, selection-badge, architecture node). (4) Active nav Flare color removed per D7 table. (5) Contrast table values corrected (accent-text: 7.2:1, err: 5.1:1). (6) Abbreviated V mark specimen added to §03. (7) SVG dark/light variant requirement noted in §04. (8) Pill-radius normalized to 100px throughout. (9) D7 enforcement language added to button spec.
   </div>
 </div>
 
@@ -1074,7 +1126,7 @@ h3.sub:first-of-type { margin-top: 20px; }
     <li><strong>Brand name:</strong> Vigil by Lede. Trademark clearance pending (class 36 and 42, US/UK/EU). If Vigil fails, Bearing activates — same identity system applies; name slot substitutes.</li>
     <li><strong>Territory:</strong> A — The Instrument. IBM Plex Mono 700 display, dark product register, Flare event-signal-only. No other territory is in scope.</li>
     <li><strong>Token spec:</strong> lede-tokens.json v2.0.0 + Amendment P4-01 (IBM Plex Mono weight 700). All token values are final.</li>
-    <li><strong>Type system:</strong> IBM Plex Mono (700 display, 500 heading, 400 data/label) + Schibsted Grotesk (400/500/700) + Newsreader (400, reading only). No Lede Serif / Instrument Serif in product UI.</li>
+    <li><strong>Type system:</strong> IBM Plex Mono (700 display, 500 heading, 400 data/label) + Schibsted Grotesk (400/500/700 including reading contexts at 16px/lh 1.80). D4 binding: no third typeface family. No Lede Serif / Instrument Serif in product UI.</li>
     <li><strong>Color system:</strong> Product dark register primary. Brand light register for print/marketing. WCAG 2.2 AA required; contrast table in §07 is the compliance reference.</li>
     <li><strong>Logomark:</strong> Step motif SVG (Flare and grayscale knockdown variants). Minimum 16px event circle. Clearspace: 1× node diameter.</li>
     <li><strong>Wordmark:</strong> VIGIL (IBM Plex Mono 700) + by Lede (Schibsted Grotesk 400). Horizontal primary, stacked secondary. Minimum 16px VIGIL size.</li>

@@ -2,9 +2,28 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "meta": {
     "brand": "Lede (formerly Boosted.ai)",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "delivered": "2026-10-16",
-    "notes": "v2 \u2014 'The Instrument Line' (supersedes v1 'Masthead & the Mark'). Drop-in remap for existing alfa-ds roles. Registers: 'product' (dark) and 'brand' (light). Inherited hard rules kept: surface-stepped elevation, no shadows, no card borders, pill buttons. v2 hard rules: ONE signal color (Flare, international orange) \u2014 the node/step/action only, rationed at ~2% of any surface; brand-text variant for small type contrast; yellow and the v1 accent blue are retired; market up/down are data-only; the step motif appears only where an event actually occurred."
+    "amended": "2026-08-03",
+    "amendments": [
+      {
+        "id": "P4-01",
+        "phase": "Phase 4",
+        "date": "2026-08-03",
+        "change": "Add IBM Plex Mono weight 700 to font-mono weight register. Authorized for display-scale brand use (\u226518px) only \u2014 wordmarks, major headings. Prohibited at data-layer sizes (\u226414px).",
+        "prior-value": "font-mono.weights = [400, 500]",
+        "amended-value": "font-mono.weights = [400, 500, 700]"
+      },
+      {
+        "id": "P4-02",
+        "phase": "Phase 4",
+        "date": "2026-08-03",
+        "change": "Remove font-reading (Newsreader). Phase 1 D4 binding: only IBM Plex Mono and Schibsted Grotesk are authorized. Newsreader was never formally approved via the amendment process. Reading-scale content uses Schibsted Grotesk 400 at 16px/lh 1.80.",
+        "prior-value": "font-reading: { family: 'Newsreader', usage: 'Long-form reading: briefs, research.' }",
+        "amended-value": "REMOVED"
+      }
+    ],
+    "notes": "v2 \u2014 'The Instrument Line' (supersedes v1 'Masthead & the Mark'). Drop-in remap for existing alfa-ds roles. Registers: 'product' (dark) and 'brand' (light). Inherited hard rules kept: surface-stepped elevation, no shadows, no card borders, pill buttons. v2 hard rules: ONE signal color (Flare, international orange) \u2014 the node/step/action only, rationed at ~2% of any surface; brand-text variant for small type contrast; yellow and the v1 accent blue are retired; market up/down are data-only; the step motif appears only where an event actually occurred. v2.1 amendments: P4-01 (IBM Plex Mono 700 at display scale), P4-02 (Newsreader removed \u2014 D4 correction)."
   },
   "registers": {
     "product": {
@@ -72,15 +91,13 @@
     },
     "font-mono": {
       "family": "IBM Plex Mono",
-      "usage": "The tape layer: timestamps, tickers, figures, filings. tabular-nums wherever digits meet.",
+      "usage": "The tape layer: timestamps, tickers, figures, filings (400, 500). Display-scale brand headlines and wordmarks in product dark register (700 only, ≥18px). tabular-nums wherever digits meet.",
       "weights": [
         400,
-        500
-      ]
-    },
-    "font-reading": {
-      "family": "Newsreader",
-      "usage": "Long-form reading: briefs, research."
+        500,
+        700
+      ],
+      "amendment": "P4-01"
     }
   },
   "motion": {
