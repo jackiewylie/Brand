@@ -541,7 +541,8 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
   </div>
   <div class="meta">
     Brand Director<br>
-    Aug 3, 2026<br>
+    Aug 3, 2026 · Materials: repo HEAD<br>
+    Delivery book: Oct 16, 2026 (per metadata)<br>
     Confidential
   </div>
 </header>
@@ -794,6 +795,10 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
           <td>LedeAI trademark conflict (class 42)</td>
           <td>Requires counsel opinion; binary outcome per red-team review</td>
         </tr>
+        <tr>
+          <td>Alfa Bank sanctions risk for "Alfa" product name</td>
+          <td>Alfa Bank (Russia's largest private bank) is under Western sanctions. The product name "Alfa" returns Alfa Bank in App Store and entity search results. Before any professional marketing or enterprise sales material uses the "Alfa" product name, confirm with legal that the name does not create reputational proximity risk in regulated markets (EU, UK, US) where sanction awareness is high among compliance officers — the exact audience Boosted.ai is selling to.</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -807,12 +812,14 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
   </div>
 
   <div class="callout crit">
-    <strong>The core finding of this audit in one sentence:</strong> The prior 11-week engagement was a consumer rebrand. The professional brand problem was not addressed. What follows is the first systematic examination of Boosted.ai's professional identity gap.
+    <strong>The core finding of this audit in one sentence:</strong> The prior 11-week engagement established institutional architecture parameters — naming migration, rollout priority, competitive positioning — but produced no professional brand execution. This project builds what was parameterized but not built.
   </div>
 
-  <p>The prior engagement (Fair Copy × Boosted.ai, Aug–Oct 2026) produced a complete consumer brand system under the name Lede: naming, visual identity, verbal identity, and a concept launch page for the Daily Reliant Investor (DRI). The institutional/professional side received exactly three lines on the concept launch page: <em>"Lede Institutional · formerly Boosted.ai. The engine behind your analysts' morning has run institutional research for eight years. The name is new. The audit trail isn't."</em></p>
+  <p>The prior engagement (Fair Copy × Boosted.ai; kickoff Aug 3, delivery Oct 16, 2026 per delivery book metadata) produced a complete consumer brand system under the name Lede. The delivery book also addressed the institutional/professional side in structural terms: a naming migration table specifying that "Alfa" persists in-channel 12–18 months before folding; a competitive landscape map with Alfa's institutional position annotated; a three-door messaging hierarchy with a dedicated institutional retention message; and a rollout note that institutional users receive the transition first. These are architecture decisions, not design executions.</p>
 
-  <p>This is not a professional brand. This is a reassurance footer. The engagement was correctly scoped to its primary objective — the consumer brand — and it delivered. The professional brand system was explicitly deferred. This project fills that gap.</p>
+  <p>What the engagement did not produce: a professional visual identity, an enterprise trust surface, a co-branding framework, a white-label specification, professional workflow design, a security/governance page, or any institutional-facing production asset. The consumer concept launch page contains three sentences for the institutional audience — a reassurance strip, not a design system. The engagement was correctly scoped to its primary objective. The professional brand system was parameterized but not built. This project converts those parameters into an executed system.</p>
+
+  <p><strong>Temporal note.</strong> This audit is dated August 3, 2026 — the same day as the prior engagement's kickoff. The delivery book appears in the repository as a completed artifact (delivered Oct 16, 2026 per its own metadata). All materials are reviewed as they exist in the repository at branch HEAD, regardless of their stated delivery dates. Where the delivery date is relevant to a constraint (see FM-07), it is cited explicitly.</p>
 
   <h3 class="sub">The Two Audiences and Their Different Brand Needs</h3>
   <div class="table-wrap">
@@ -1110,12 +1117,16 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
     <!-- Open seat -->
     <div class="dot open-seat" style="left:56%;top:54%;">Open: Finance-AI<br>for individual PMs</div>
 
+    <!-- Embedded institutional — top left dominant -->
+    <div class="dot" style="left:6%;top:7%; border-color:var(--crit); color:var(--crit);">Aladdin (BlackRock)</div>
+    <div class="dot" style="left:32%;top:10%;">FactSet Alpha</div>
+
     <!-- Individual-facing — bottom half -->
     <div class="dot" style="left:28%;top:72%;">Koyfin</div>
     <div class="dot" style="left:20%;top:80%;">Quartr</div>
     <div class="dot" style="left:10%;top:85%;">Sentieo</div>
-    <div class="dot" style="left:74%;top:82%;">Perplexity</div>
-    <div class="dot" style="left:86%;top:78%;">ChatGPT / Claude</div>
+    <div class="dot" style="left:74%;top:75%;">Perplexity</div>
+    <div class="dot" style="left:86%;top:70%;">ChatGPT / Claude</div>
   </div>
 
   <h3 class="sub">Reference Brand Analysis — Extracted Lessons, Not a Mood Board</h3>
@@ -1179,6 +1190,11 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
           <td>What the incumbent looks like</td>
           <td>FactSet is the direct competitive alternative for institutional research. Their brand is 2010-era enterprise: functional but dated, intimidating to new users, with no concept of the analyst's workflow as a design surface. Beating FactSet on brand is achievable — the gap is visible.</td>
         </tr>
+        <tr>
+          <td><strong>Aladdin (BlackRock)</strong></td>
+          <td>The dominant embedded institutional platform — and the category ceiling for co-branding durability</td>
+          <td>Aladdin is embedded in more institutional workflows than any single product in this landscape — over $21T in assets managed on its platform. Its co-branding model (Aladdin-led, client-branded portal overlays, full white-label for some deployments) is the reference case for enterprise embedded design. The professional brand's white-label and partner-primary systems will be evaluated against Aladdin's by enterprise procurement teams. This benchmark was absent from the audit's competitive map and must be carried as a reference into Phase 7.</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -1198,10 +1214,11 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
   <p class="section-sub">Documented failures from prior in-house and engagement work. The gauntlet rules require that any repeat failure cap the score at 6.0. These must be tracked and explicitly resolved.</p>
 
   <div class="finding p0">
-    <div class="f-label">FM-01 · P0 · Consumer-first, professional retrofit</div>
-    <h4>The professional brand was designed as an afterthought to a consumer engagement</h4>
-    <p>The Fair Copy engagement was scoped correctly to the consumer brand. The institutional/professional side received exactly three sentences on the concept homepage. This created a structural gap: no professional naming architecture, no institutional visual applications, no co-branding system, no enterprise trust design. Any new professional brand attempt must be built from the professional buyer's context — not adapted from a consumer system.</p>
-    <p><strong>Resolution required:</strong> Begin from institutional buying contexts (compliance review, procurement, demo-to-contract, embedded deployment) — not from the consumer product's morning ritual.</p>
+    <div class="f-label">FM-01 · P0 · Professional architecture defined, not built</div>
+    <h4>The delivery book established institutional parameters — naming migration, competitive position, messaging hierarchy — but produced no professional design execution</h4>
+    <p>The delivery book (§02, inspected) contains substantive institutional work: a naming migration table specifying that "Alfa" persists in-channel 12–18 months before folding; a competitive landscape map placing Alfa in the institutional quadrant; a three-door messaging hierarchy with a dedicated institutional retention message ("Same engine, same team, sharper name. Nothing about your deployment changes but the letterhead"); and a rollout sequence that prioritizes institutional users in the transition. This is not "three sentences." It is a set of architecture parameters.</p>
+    <p>What it is not: a built professional identity system. The engagement produced zero professional design execution — no co-branding specification, no enterprise trust surface, no institutional visual applications, no professional workflow documentation, no partner-integration design, no security or governance page design. The gap is not that the institutional audience was ignored; it is that architecture parameters without execution cannot be shipped. A naming migration plan without a design system for the product being migrated is a decision log, not a deliverable.</p>
+    <p><strong>Resolution required:</strong> Begin from the architecture parameters the delivery book established — treat them as inputs, not deliverables. The professional brand project converts those parameters into an executed system.</p>
   </div>
 
   <div class="finding p0">
@@ -1227,9 +1244,18 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
 
   <div class="finding">
     <div class="f-label">FM-05 · "Flare" orange proximity to Bloomberg orange</div>
-    <h4>International orange is documented as unclaimed in investing — but Bloomberg's association is real</h4>
-    <p>The Instrument Line v2 identifies international orange as "unclaimed in investing" — this is a strategic claim, not a verified fact. Bloomberg Terminal is institutionally associated with a vivid orange in professional investor vocabulary ("Bloomberg orange"). The color story is well-justified (flight recorder), but the association risk needs explicit resolution, not assumption. If a fund manager's compliance officer raises "that's Bloomberg's color" in a vendor evaluation, what is the answer?</p>
-    <p><strong>Resolution required:</strong> Compare the exact values, test the association explicitly with a professional investor sample, and pre-load the differentiation story into all brand materials.</p>
+    <h4>International orange is documented as unclaimed in investing — the values are close enough to require a prepared answer</h4>
+    <p>The Instrument Line v2 identifies international orange as "unclaimed in investing" — this is a strategic claim. The token file (inspected) gives Flare: product register <span class="mono">#FF5A14</span>, brand register <span class="mono">#FF4B00</span>. Bloomberg Terminal's signature orange runs approximately <span class="mono">#F5821F–#FF6C0C</span> depending on surface and screen calibration. At 100% saturation these are visually close — a fund manager who operates a Bloomberg terminal daily has a strong color association that Flare triggers.</p>
+    <p>The color story is genuinely distinct (flight recorder; "the instrument that must never be missed" vs. terminal interface chrome), but the differentiation is a verbal story, not a visual one. The values are too close for the brand to rely on color alone. The professional brand system must pre-load the flight recorder story into every context where the orange appears institutionally — not just in brand guidelines, but in sales materials, partnership documents, and design handoffs. "That's Bloomberg's color" is a foreseeable objection; the system must answer it without requiring a verbal explanation.</p>
+    <p><strong>Resolution required:</strong> Design the orange to always appear with its justification (the instrument-line gesture, the "never be missed" story) rather than as a standalone color block. Test with professional investor sample — if 3+ evaluators identify it as Bloomberg without prompting, reconsider the exact hue.</p>
+  </div>
+
+  <div class="finding p0">
+    <div class="f-label">FM-07 · P0 · The Alfa naming clock is running — Phase 1 must carry it as a gate condition</div>
+    <h4>The prior engagement scheduled Alfa's retirement; the professional brand project does not have unlimited runway on that name</h4>
+    <p>The delivery book §02 naming migration table states: "Institutional product [NAME] Institutional — 'Alfa' persists in-channel 12–18 months ('Alfa, by [NAME] — formerly Boosted.ai'), then folds. The engine name survives internally." If Lede's delivery date (Oct 16, 2026) approximates the consumer launch, the Alfa phase-out window runs from <strong>October 2027 to April 2028</strong>.</p>
+    <p>This is a material constraint. Phase 7 (enterprise, co-branding, white-label) produces partner-integration design specifications for a product name that is scheduled for retirement before many enterprise contracts would reach renewal. Any co-branding system that centers "Alfa" must either: (a) be designed for migration to the new name within its initial lifespan, or (b) carry an explicit recommendation to extend the phase-out window based on enterprise contract timelines. The professional brand project must not ignore this clock.</p>
+    <p><strong>Source:</strong> delivery book §02 naming migration table, "Alfa persists in-channel 12–18 months." <strong>Deadline:</strong> Oct 2027–Apr 2028. <strong>Gate condition for Phase 1:</strong> Naming architecture decision must address Alfa's sunset explicitly — extend, accelerate, or design for migration.</p>
   </div>
 
   <div class="finding">
@@ -1293,6 +1319,11 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
           <td>The "Step" logomark concept</td>
           <td>A mark built from the visual representation of new information arriving in a market — this is concept-native to the product in a way no other proposed mark achieves.</td>
           <td>Test in professional contexts. Validate at 16px. Test in grayscale, embroidered, and on partner colors. Confirm or replace with evidence.</td>
+        </tr>
+        <tr>
+          <td>Lede Serif (custom font in development)<br><span style="font-size:11px; font-weight:400; color:var(--muted);">Interim: Instrument Serif · Tokens: font-display.family = "Lede Serif"</span></td>
+          <td>A commissioned display face is a rare brand asset — it is what separates a made identity from an assembled one. If the custom cut is completed, it becomes an uncloneable differentiator. The interim face (Instrument Serif) is already doing real work in the identity system.</td>
+          <td>Commission status must be confirmed: is Lede Serif under active development, scoped, or aspirational? If active, the professional brand display typography decision cannot be final until the commission is resolved. If deferred indefinitely, Instrument Serif becomes the de facto display face and should be evaluated as a permanent choice.</td>
         </tr>
       </tbody>
     </table>
@@ -1425,6 +1456,16 @@ ul.ls li { margin-bottom: 7px; font-size: 14px; }
           <td>Professional brand decisions retail may not override</td>
           <td>Enterprise naming, security documentation design, co-branding framework, "Powered by" attribution, compliance footer standards, governance visual language. These are professional brand assets that flow downward — retail inherits, does not define.</td>
           <td><span class="badge badge-crit">Professional-owned — enforce in Phase 7</span></td>
+        </tr>
+        <tr>
+          <td>Token cascade authority direction</td>
+          <td>The Lede token file (v2.0.0) was designed to cascade into the existing <span class="mono">alfa-ds</span> role names — the consumer system inherits from the professional system's role vocabulary. This upstream authority question must be documented: does the professional brand own the base token layer, with the consumer system overriding at the brand-register level? Or are the systems siblings with a shared foundation? The cascade direction determines which team has design authority over shared tokens.</td>
+          <td><span class="badge badge-warn">Pending Phase 4 — authority decision required</span></td>
+        </tr>
+        <tr>
+          <td>Advertising co-presence standards</td>
+          <td>What happens when a consumer Lede advertisement appears in an institutional context — a Bloomberg ad unit, a financial media sponsorship, a conference program — alongside Boosted.ai or Alfa professional materials? Is there a presentation rule? A co-presence boundary? An institutional buyer who sees the consumer product advertised in their professional feed may be confused about the brand relationship. The interface contract must define whether the two brands may appear in the same ad medium and, if so, how they are separated.</td>
+          <td><span class="badge badge-warn">Pending Phase 1 — architecture decision required</span></td>
         </tr>
       </tbody>
     </table>
