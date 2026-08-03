@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 1: Professional Brand Strategy — Boosted.ai Professional Rebrand</title>
+<style>
+/* === TOKENS — same system as Phase 0 === */
+:root {
+  --bg:       #F2F1ED;
+  --bg-alt:   #ECEAE4;
+  --bg-card:  #E8E6DF;
+  --ink:      #1C1A18;
+  --muted:    #5A5856;
+  --faint:    #96938E;
+  --rule:     #D0CEC8;
+  --rule2:    #B8B5AE;
+  --accent:   #1B3461;
+  --accent-l: #2A4E92;
+  --crit:     #9B2A1A;
+  --warn:     #7A5A15;
+  --ok:       #1E5E38;
+  --decision: #2A4520;
+  --decision-bg: rgba(42,69,32,0.08);
+  --deferred: #2A3D5A;
+  --deferred-bg: rgba(27,52,97,0.08);
+  --score-bar-bg: rgba(27,52,97,0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:       #0F0E0D;
+    --bg-alt:   #161513;
+    --bg-card:  #1C1B19;
+    --ink:      #EDEAE4;
+    --muted:    #8C8A86;
+    --faint:    #5A5856;
+    --rule:     #282624;
+    --rule2:    #343230;
+    --accent:   #5A80C4;
+    --accent-l: #7BA0E0;
+    --crit:     #D45A44;
+    --warn:     #C49830;
+    --ok:       #4CA870;
+    --decision: #6AAA56;
+    --decision-bg: rgba(106,170,86,0.1);
+    --deferred: #7BA0E0;
+    --deferred-bg: rgba(90,128,196,0.1);
+    --score-bar-bg: rgba(90,128,196,0.15);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:       #0F0E0D;
+  --bg-alt:   #161513;
+  --bg-card:  #1C1B19;
+  --ink:      #EDEAE4;
+  --muted:    #8C8A86;
+  --faint:    #5A5856;
+  --rule:     #282624;
+  --rule2:    #343230;
+  --accent:   #5A80C4;
+  --accent-l: #7BA0E0;
+  --crit:     #D45A44;
+  --warn:     #C49830;
+  --ok:       #4CA870;
+  --decision: #6AAA56;
+  --decision-bg: rgba(106,170,86,0.1);
+  --deferred: #7BA0E0;
+  --deferred-bg: rgba(90,128,196,0.1);
+  --score-bar-bg: rgba(90,128,196,0.15);
+}
+:root[data-theme="light"] {
+  --bg:       #F2F1ED;
+  --bg-alt:   #ECEAE4;
+  --bg-card:  #E8E6DF;
+  --ink:      #1C1A18;
+  --muted:    #5A5856;
+  --faint:    #96938E;
+  --rule:     #D0CEC8;
+  --rule2:    #B8B5AE;
+  --accent:   #1B3461;
+  --accent-l: #2A4E92;
+  --crit:     #9B2A1A;
+  --warn:     #7A5A15;
+  --ok:       #1E5E38;
+  --decision: #2A4520;
+  --decision-bg: rgba(42,69,32,0.08);
+  --deferred: #2A3D5A;
+  --deferred-bg: rgba(27,52,97,0.08);
+  --score-bar-bg: rgba(27,52,97,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+p { max-width: 68ch; margin-bottom: 1em; }
+p:last-child { margin-bottom: 0; }
+
+.mono {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8em;
+  letter-spacing: 0.02em;
+}
+.tabnum { font-variant-numeric: tabular-nums; }
+
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.site-header {
+  grid-column: 1 / -1;
+  background: var(--accent);
+  color: #fff;
+  padding: 20px 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.site-header .eyebrow {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.site-header h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: normal;
+  letter-spacing: -0.01em;
+}
+.site-header .meta {
+  margin-left: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  text-align: right;
+  line-height: 1.8;
+}
+
+.sidebar {
+  background: var(--bg-alt);
+  border-right: 1px solid var(--rule);
+  padding: 32px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-section { margin-bottom: 28px; }
+.sidebar-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0 20px 8px;
+  display: block;
+}
+.sidebar nav a {
+  display: block;
+  padding: 6px 20px;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.sidebar nav a:hover, .sidebar nav a.active {
+  color: var(--ink);
+  border-left-color: var(--accent);
+  background: var(--bg-card);
+}
+
+main { padding: 40px 48px 80px; min-width: 0; }
+
+.section {
+  padding: 48px 0;
+  border-top: 1px solid var(--rule);
+}
+.section:first-child { border-top: none; padding-top: 8px; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.section-num {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+.section-head h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: normal;
+  letter-spacing: -0.02em;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  max-width: 60ch;
+}
+
+h3.sub {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 32px 0 14px;
+}
+
+.callout {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 20px 0;
+  max-width: 72ch;
+  font-size: 14.5px;
+}
+.callout.crit  { border-color: var(--crit); }
+.callout.warn  { border-color: var(--warn); }
+.callout.ok    { border-color: var(--ok); }
+.callout.decision { border-color: var(--decision); background: var(--decision-bg); }
+.callout.deferred { border-color: var(--deferred); background: var(--deferred-bg); }
+
+.table-wrap { overflow-x: auto; margin: 16px 0 28px; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: left;
+  padding: 0 20px 10px 0;
+  border-bottom: 1px solid var(--rule2);
+}
+td {
+  padding: 10px 20px 10px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.5;
+}
+td:first-child { color: var(--muted); font-size: 12.5px; }
+td strong { font-weight: 600; color: var(--ink); }
+tr:last-child td { border-bottom: none; }
+
+.badge {
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.badge-ok       { background: rgba(30,94,56,0.12); color: var(--ok); }
+.badge-warn     { background: rgba(122,90,21,0.12); color: var(--warn); }
+.badge-crit     { background: rgba(155,42,26,0.12); color: var(--crit); }
+.badge-na       { background: var(--bg-card); color: var(--faint); }
+.badge-decision { background: var(--decision-bg); color: var(--decision); border: 1px solid currentColor; }
+.badge-deferred { background: var(--deferred-bg); color: var(--deferred); border: 1px solid currentColor; }
+
+.decision-block {
+  border-left: 3px solid var(--decision);
+  background: var(--decision-bg);
+  padding: 18px 20px;
+  margin: 20px 0;
+  max-width: 72ch;
+}
+.decision-block .d-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--decision);
+  margin-bottom: 6px;
+}
+.decision-block h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 8px; }
+
+.finding {
+  border-left: 3px solid var(--rule2);
+  padding: 16px 20px;
+  margin: 16px 0;
+  max-width: 70ch;
+}
+.finding .f-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+.finding h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 8px; }
+
+.arch-tree {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  background: var(--bg-card);
+  border: 1px solid var(--rule2);
+  padding: 20px 24px;
+  margin: 16px 0;
+  max-width: 68ch;
+  overflow-x: auto;
+}
+.arch-tree .company { color: var(--accent); font-weight: 700; }
+.arch-tree .product { color: var(--ok); }
+.arch-tree .tier    { color: var(--muted); }
+.arch-tree .consumer { color: var(--warn); }
+
+.audience-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  padding: 20px 24px;
+  margin: 16px 0;
+  max-width: 72ch;
+}
+.audience-card .a-role {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 4px;
+}
+.audience-card .a-name {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 12px;
+}
+.audience-card .a-claim {
+  font-size: 14px;
+  font-weight: 600;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  margin: 12px 0;
+  max-width: 58ch;
+  font-style: italic;
+}
+.audience-card .a-section {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 14px 0 6px;
+}
+
+.pos-statement {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  background: var(--bg-card);
+  border: 1px solid var(--rule2);
+  border-left: 4px solid var(--accent);
+  padding: 20px 24px;
+  margin: 16px 0;
+  max-width: 68ch;
+}
+.pos-statement .bracket { color: var(--faint); font-style: normal; font-size: 13px; }
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 20px 0 32px;
+}
+.summary-cell {
+  background: var(--bg);
+  padding: 18px 20px;
+}
+.summary-cell .sc-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.summary-cell .sc-val {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  color: var(--ink);
+}
+.summary-cell .sc-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+ul.ls { margin: 0 0 16px 20px; max-width: 68ch; }
+ul.ls li { margin-bottom: 7px; font-size: 14px; }
+
+.theme-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule2);
+  color: var(--muted);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+  z-index: 100;
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--rule2); }
+
+.contract-table td:first-child {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: normal;
+  min-width: 180px;
+}
+.contract-table td:nth-child(2) { color: var(--muted); font-size: 13px; }
+
+.handoff-row { display: flex; gap: 0; margin: 16px 0; max-width: 72ch; }
+.handoff-col {
+  flex: 1;
+  padding: 16px 20px;
+  border: 1px solid var(--rule2);
+  font-size: 13.5px;
+}
+.handoff-col:first-child { border-right: none; background: var(--decision-bg); }
+.handoff-col:last-child  { background: var(--deferred-bg); }
+.handoff-col .hc-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+.handoff-col ul { margin: 0 0 0 16px; }
+.handoff-col li { margin-bottom: 7px; line-height: 1.45; }
+
+@media (max-width: 800px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--rule); }
+  main { padding: 24px 20px 60px; }
+  .site-header .meta { display: none; }
+  .handoff-row { flex-direction: column; }
+  .handoff-col:first-child { border-right: 1px solid var(--rule2); border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<header class="site-header">
+  <div>
+    <div class="eyebrow">Boosted.ai · Professional Rebrand Gauntlet</div>
+    <h1>Phase 1 — Professional Brand Strategy &amp; Architecture</h1>
+  </div>
+  <div class="meta">
+    Brand Director<br>
+    Aug 3, 2026 · Inputs: Phase 0 v4 (passed 7.13/10)<br>
+    Gate: Phase 0 cleared · Ready for Phase 2<br>
+    Confidential
+  </div>
+</header>
+
+<aside class="sidebar">
+  <div class="sidebar-section">
+    <span class="sidebar-label">Sections</span>
+    <nav>
+      <a href="#summary">00 Summary &amp; Gate</a>
+      <a href="#inputs">01 Strategic Inputs</a>
+      <a href="#naming">02 Naming Architecture</a>
+      <a href="#positioning">03 Positioning Strategy</a>
+      <a href="#audiences">04 Audience Messaging</a>
+      <a href="#voice">05 Brand Voice</a>
+      <a href="#color">06 Color Constraint</a>
+      <a href="#contract">07 Retail Interface Contract</a>
+      <a href="#handoff">08 Phase 1→2 Handoff</a>
+      <a href="#verdict">09 Verdict &amp; Gate</a>
+    </nav>
+  </div>
+  <div class="sidebar-section">
+    <span class="sidebar-label">Status</span>
+    <nav>
+      <a href="#verdict">Phase 1: Awaiting Critic</a>
+    </nav>
+  </div>
+</aside>
+
+<main>
+
+<!-- 00 SUMMARY -->
+<div class="section" id="summary" style="padding-top:0; border-top:none;">
+  <div class="callout ok">
+    <strong>Phase 0 gate cleared.</strong> Score: 7.13/10 (MC-P0-03). This document is Phase 1: the naming architecture, positioning strategy, audience messaging hierarchy, voice standard, and retail interface contract. No creative direction is proposed here — that is Phase 2. This document defines what the professional brand must accomplish and who it must reach. Phase 2 proposes how.
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-cell">
+      <div class="sc-label">Decisions Made</div>
+      <div class="sc-val">7</div>
+      <div class="sc-sub">D1–D7: naming, tiers, positioning, voice, color, FM-04 gate, Alfa Bank protocol</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">P0 Defects Addressed</div>
+      <div class="sc-val">7 / 7</div>
+      <div class="sc-sub">All gated to specific phases; none unresolved without a resolution path</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Audiences Defined</div>
+      <div class="sc-val">6</div>
+      <div class="sc-sub">PM/Head of Research, CIO, CTO, Compliance, Procurement, Partner</div>
+    </div>
+    <div class="summary-cell">
+      <div class="sc-label">Deferred to Phase 2</div>
+      <div class="sc-val">5</div>
+      <div class="sc-sub">Post-Alfa name, visual language, Step logomark spec, website direction, editorial identity test</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What this document is not.</strong> This is not a brand book, a style guide, a creative brief, or a visual direction. It is the strategic architecture that gates into Phase 2. A Phase 2 creative director reading this document should know exactly what the professional brand must do — and have zero instruction about what it should look like. That ambiguity is intentional and protected: it allows four genuinely independent creative territories in Phase 2.
+  </div>
+</div>
+
+<!-- 01 STRATEGIC INPUTS -->
+<div class="section" id="inputs">
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2>Strategic Inputs &amp; Constraints</h2>
+  </div>
+  <p class="section-sub">Seven conditions inherited from Phase 0 that constrain this strategy. No creative direction may ignore these. Where a constraint is conditional (pending legal clearance), the condition is stated explicitly.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Constraint on Phase 1</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alfa Bank sanctions (P0-B3)</strong></td>
+          <td>The product name "Alfa" requires a legal opinion before any professional marketing material enters market. Until clearance, all professional materials carrying "Alfa" must include the vendor due diligence disambiguation language defined in §02. No enterprise or partner material may omit this protocol.</td>
+          <td>FM-09 · Phase 0 §04</td>
+        </tr>
+        <tr>
+          <td><strong>Alfa naming clock (P0-B1)</strong></td>
+          <td>The naming strategy must account for the Alfa retirement window: Oct 2027–Apr 2028. Any co-branding or tier-naming architecture that centers "Alfa" must be designed for migration or the window must be explicitly extended with rationale. Phase 2 naming work targets the post-Alfa professional product name.</td>
+          <td>FM-06 · delivery book §02</td>
+        </tr>
+        <tr>
+          <td><strong>Endorsement expiry Q3 2027 (P0-B2)</strong></td>
+          <td>"Formerly Boosted.ai" language is active through Q3 2027. All materials produced in this window carry this phrase. A version-management protocol is required — see §07 Retail Interface Contract. After Q3 2027, "formerly Boosted.ai" is retired from all professional materials.</td>
+          <td>FM-08 · delivery book §02 line 618</td>
+        </tr>
+        <tr>
+          <td><strong>Consumer brand approved: Lede</strong></td>
+          <td>The consumer product is "Lede." The professional brand is built under the same company (Lede, formerly Boosted.ai) but is a distinct product brand. The professional project does not rename the consumer product and does not own the Lede name — it defines how the professional product relates to it.</td>
+          <td>delivery book delivered Oct 16, 2026</td>
+        </tr>
+        <tr>
+          <td><strong>No creative work in Phase 1</strong></td>
+          <td>Phase 1 produces strategy and architecture only. Visual language, logomark specifications, typography decisions, and website direction are Phase 2 and Phase 4 deliverables. Phase 1 may define color constraints (§06) but may not select a palette.</td>
+          <td>Gauntlet rules: Phase 1 definition</td>
+        </tr>
+        <tr>
+          <td><strong>FM-04 gate: editorial identity compatibility</strong></td>
+          <td>Whether the Instrument Line's editorial visual language (proofreader's marks, STET stamp, Masthead metaphors) survives institutional contexts is a Phase 4 gate condition. Phase 2 creative territories must each explicitly propose how they handle this question — they may not assume a default. See §08 Phase 1→2 handoff.</td>
+          <td>FM-04 · Phase 0 §06</td>
+        </tr>
+        <tr>
+          <td><strong>Token architecture: no shadows, no card borders, surface-stepped</strong></td>
+          <td>The hard rules from the v2 token spec apply to all professional surfaces: no drop shadows, no card borders, surface-stepped elevation. Professional register may adapt the palette and accent within these constraints but may not add visual complexity in the form of shadows or borders as a proxy for "enterprise seriousness."</td>
+          <td>lede-tokens.json v2.0.0 meta</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 02 NAMING ARCHITECTURE -->
+<div class="section" id="naming">
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Naming Architecture Decision</h2>
+  </div>
+  <p class="section-sub">The resolution of P0-A2 (naming architecture unresolved) and P0-B1/B3 (Alfa clock and Alfa Bank risk). This section makes seven discrete naming decisions, each with a documented rationale.</p>
+
+  <div class="callout crit">
+    <strong>The problem at Phase 0.</strong> Seven names for one product: Alfa, Alpha, Alpha 3, Alpha Prime, AlphaHub, Ask Alpha, Intelligence. Five tier labels — Pro, Prime, Platform, Powered, Retail — nowhere defined. Two overlapping clocks: Alfa retirement and endorsement expiry. A potential institutional client who has heard "Alfa" at a conference, received a deck about "Alpha Prime," and seen a LinkedIn ad for "Boosted.ai" cannot confirm they're buying the same product. This section resolves that.
+  </div>
+
+  <h3 class="sub">D1 — Architecture Model: Endorsed House</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D1 · Confirmed</div>
+    <h4>The professional brand is an endorsed house: one company (Lede), two tracked brands (Lede consumer / [Professional Brand] by Lede)</h4>
+    <p>The company is Lede (formerly Boosted.ai). The company endorses two distinct product brands: the consumer product (Lede, standalone) and the professional product ([Professional Brand] by Lede, currently Alfa by Lede). The two product brands are not siblings — they serve different buyers, different contexts, and different sales motions. They share the company endorsement and the token architecture. They do not share a visual register, a naming system, or a co-branding framework.</p>
+    <p style="margin-top:10px;"><strong>Rejected alternatives:</strong> (a) <em>Unified master brand</em> — "Lede Pro / Lede Prime / Lede Platform" — rejected because "Lede" is a journalism/editorial word that earns trust in consumer contexts; in fund board language, a product called "Lede" is unexplained. (b) <em>Federated peers</em> — Lede and Alfa as independent sibling brands — rejected because it fragments company equity and requires two brand systems to be maintained independently. (c) <em>Permanent Alfa</em> — rejected due to P0-B3 (Alfa Bank sanctions) and P0-B1 (naming clock).</p>
+  </div>
+
+  <div class="arch-tree" aria-label="Brand architecture tree">
+<span class="company">LEDE</span> (company · formerly Boosted.ai · Gradient Boosted Investments, Inc.)
+│
+├── <span class="consumer">LEDE</span> (consumer product · standalone · $25/month · retail)
+│
+└── <span class="product">[PROFESSIONAL BRAND]</span> by Lede (named in Phase 2 · currently: Alfa)
+      │
+      ├── <span class="tier">PRO</span>      — individual analyst · self-serve or sales-assisted
+      ├── <span class="tier">PRIME</span>    — team license · multi-user · shared workspaces
+      ├── <span class="tier">PLATFORM</span> — enterprise deployment · SSO · SOC 2 · SLA
+      ├── <span class="tier">POWERED</span>  — partner integration · co-branding system · attribution options
+      └── <span class="tier">POWERED+</span> — full white-label · no attribution · negotiated
+  </div>
+
+  <h3 class="sub">D2 — Tier Definitions</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D2 · Confirmed</div>
+    <h4>Five tiers defined: Pro, Prime, Platform, Powered, Powered+. "Retail" is removed as a tier label.</h4>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Buyer</th>
+          <th>Scope</th>
+          <th>Naming syntax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pro</strong></td>
+          <td>Individual analyst, PM at boutique fund, independent RIA</td>
+          <td>Full product access. Named user license. Standard agent fleet. Self-serve or sales-assisted onboarding. No SSO requirement.</td>
+          <td>"Alfa Pro" → "[New Name] Pro" (in-product only; marketing typically omits tier)</td>
+        </tr>
+        <tr>
+          <td><strong>Prime</strong></td>
+          <td>Head of Research, PM team at 5–50 person fund</td>
+          <td>Multi-user license. Shared watchlists, shared agent outputs, research collaboration features. Expanded agent fleet. Team admin dashboard. Annual contract standard.</td>
+          <td>"Alfa Prime" → "[New Name] Prime"</td>
+        </tr>
+        <tr>
+          <td><strong>Platform</strong></td>
+          <td>CTO / VP Technology at asset manager, bank, hedge fund</td>
+          <td>Enterprise deployment. SSO / LDAP / AD. Admin console. Audit logging. Data-processing agreement. SOC 2 documentation (requires human verification). SLA commitment (requires human verification). Custom agent fleet. Dedicated support contact.</td>
+          <td>"Alfa Platform" → "[New Name] Platform"</td>
+        </tr>
+        <tr>
+          <td><strong>Powered</strong></td>
+          <td>Technology partner, bank portal team, platform vendor</td>
+          <td>Product engine embedded in partner platform. API access with versioned stability commitment. Co-branding design system (six scenarios — §07). Attribution options: co-branded equal weight / partner-primary quiet / partner-primary silent (negotiated).</td>
+          <td>"Powered by Alfa" / "Powered by [New Name]" / "Powered by Lede"</td>
+        </tr>
+        <tr>
+          <td><strong>Powered+</strong></td>
+          <td>Largest enterprise partners; full white-label deployments</td>
+          <td>Full engine without attribution. Product is effectively the partner's own product. No "[Name]" brand visible. Negotiated separately; not on standard rate card. Minimum AUM / volume threshold to qualify.</td>
+          <td>No attribution. Product identity is entirely the partner's.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <strong>Retired names — do not use.</strong> Alpha 3, Alpha Prime, AlphaHub, Ask Alpha, Intelligence are all retired effective Phase 1 completion. "Retail" as a tier label is retired — the consumer product is "Lede," not a tier of the professional product. Any material carrying these names must be flagged for update during the rebrand rollout.
+  </div>
+
+  <h3 class="sub">D3 — Alfa Continuation Condition</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D3 · Conditional</div>
+    <h4>Alfa continues in-channel through Q3 2027, conditional on legal opinion rating the Alfa Bank sanctions conflict manageable</h4>
+    <p>If legal counsel rates the Alfa Bank / class 36/42 risk as low or manageable: Alfa continues with the vendor due diligence disambiguation protocol active. The retirement window is Oct 2027–Apr 2028 as specified in the delivery book. The professional brand naming work (Phase 2) selects the post-Alfa professional product name for launch no later than Q2 2027, allowing a minimum six-month parallel period.</p>
+    <p style="margin-top:10px;"><strong>If legal rates the risk high:</strong> The bench activates immediately. The professional brand project prioritizes the naming work above all other Phase 2 deliverables. The post-Alfa name is selected within 60 days of the legal opinion. Enterprise contracts in negotiation are notified with the disambiguation protocol as a bridge.</p>
+    <p style="margin-top:10px;"><strong>Gate condition:</strong> Legal opinion must be delivered before any professional brand material enters market. This is a P0-B3 requirement that does not go away because Phase 1 has been completed. The decision to proceed to Phase 2 production does not authorize deployment of materials carrying "Alfa" without the legal clearance and disambiguation protocol in place.</p>
+  </div>
+
+  <h3 class="sub">D4 — Vendor Due Diligence Disambiguation Protocol</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D4 · Confirmed — Required in all enterprise and partner materials</div>
+    <h4>Standard entity disambiguation language for procurement and vendor due diligence submissions</h4>
+    <p>The following language must appear in all vendor registration documents, enterprise RFP submissions, SOC 2 documentation, and partner integration agreements where "Alfa" appears as a product name:</p>
+  </div>
+  <div class="callout" style="font-family:'Courier New',Courier,monospace; font-size:13px; line-height:1.7;">
+    <strong>Entity disambiguation notice:</strong> "Alfa" is a registered product of Gradient Boosted Investments, Inc. (d/b/a Boosted.ai, being rebranded to Lede). This product is unrelated to Alfa Bank PJSC or any financial institution subject to US (OFAC), UK (OFSI), or European Union financial sanctions. Entity: Gradient Boosted Investments, Inc. Registered in: [REQUIRES HUMAN VERIFICATION — jurisdiction, registration number, EIN]. For entity verification purposes, search under: Gradient Boosted Investments.
+  </div>
+  <p style="font-size:13px; color:var(--muted); max-width:68ch;">This language is required until the product name is retired or until legal counsel confirms the conflict risk is negligible. It must appear on page one of any enterprise procurement document, not in an appendix.</p>
+
+  <h3 class="sub">D5 — Phase 2 Naming Brief for Post-Alfa Professional Brand</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D5 · Brief delivered to Phase 2</div>
+    <h4>The post-Alfa professional product name is selected in Phase 2, governed by seven criteria</h4>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>Description</th>
+          <th>Failure examples</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · Entity clean</strong></td>
+          <td>Does not share a name with any entity on the OFAC SDN list, EU Consolidated Sanctions List, or UK OFSI list. Does not return a sanctioned financial institution in standard entity-check databases.</td>
+          <td>Alfa (Alfa Bank), Horizon (sanctioned entities), Sigma (overloaded in fintech)</td>
+        </tr>
+        <tr>
+          <td><strong>2 · Fund-manager legible</strong></td>
+          <td>Can appear in a board meeting, a prime broker agreement, or a fund auditor's vendor list without explanation. Not a consumer-brand word. Not an editorial metaphor.</td>
+          <td>Lede, Early, Tenor (consumer/editorial), Tape (too niche)</td>
+        </tr>
+        <tr>
+          <td><strong>3 · Works with "by Lede"</strong></td>
+          <td>The compound "[Name] by Lede" reads cleanly in both spoken and written form. "[Name] Platform" and "Powered by [Name]" must both work. "Ask [Name]" should work for the agent interface.</td>
+          <td>Names that are verbs (makes "Ask" awkward), names that end in vowels (elide with "by")</td>
+        </tr>
+        <tr>
+          <td><strong>4 · Finance-adjacent but not finance-literal</strong></td>
+          <td>Evokes precision, coverage, signal, or timing without being a common finance term that is already in use as an asset class, metric, or product category.</td>
+          <td>Alpha (finance concept), Beta (finance concept), Signal (overused), Yield (overused)</td>
+        </tr>
+        <tr>
+          <td><strong>5 · Speakable, 1–2 syllables preferred</strong></td>
+          <td>Pronounced without ambiguity in an English-speaking financial context. No silent letters. No homophone tax equivalent to "Lede / Lead." Maximum 2 syllables for the master name; tier descriptors can be longer.</td>
+          <td>Bellwether (3 syllables, misspelling tax), Standfirst (obscure outside UK newsroom)</td>
+        </tr>
+        <tr>
+          <td><strong>6 · Trademark class 36/42 viable</strong></td>
+          <td>Can be registered as a trademark in class 36 (financial services) and class 42 (software/SaaS) in US, UK, and EU without a high-conflict opposition risk from an existing registration.</td>
+          <td>Must be tested — do not assume</td>
+        </tr>
+        <tr>
+          <td><strong>7 · Product lexicon available</strong></td>
+          <td>"A [Name]" can be a noun for a thing the product produces or detects. "Your [Name]s" must be a natural plural in a professional research context.</td>
+          <td>Names that work only as company names, not as product nouns</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px; color:var(--muted); max-width:68ch;">Seed territories for Phase 2 exploration (not commitments): names in the measurement / instrument / record / coverage domains — words that a fund manager's auditor would associate with precision rather than personality. Specifically: naming territories around the concepts of <em>record</em> (what is documented), <em>watch</em> (what is monitored), <em>scope</em> (what is covered), and <em>mark</em> (what is flagged). These territories avoid both finance-literal and consumer-editorial pitfalls.</p>
+</div>
+
+<!-- 03 POSITIONING STRATEGY -->
+<div class="section" id="positioning">
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Positioning Strategy</h2>
+  </div>
+  <p class="section-sub">The professional brand's strategic position in the competitive landscape. Confirmed for Phase 2 creative development. Not a tagline brief — a decision about what the brand stands for and against.</p>
+
+  <h3 class="sub">D6 — Positioning Statement</h3>
+  <div class="decision-block">
+    <div class="d-label">Decision D6 · Confirmed</div>
+    <h4>The professional brand owns the "intelligence layer" position: continuous, verifiable, coverage-complete</h4>
+  </div>
+
+  <div class="pos-statement">
+    <span class="bracket">For</span> professional investment teams<br>
+    <span class="bracket">who</span> need continuous, verifiable research coverage across their entire portfolio universe<br>
+    <span class="bracket">without</span> gaps in scope, speed, or source transparency,<br>
+    <span class="bracket">[Professional Brand] by Lede</span> is the only AI investment intelligence platform<br>
+    <span class="bracket">that</span> monitors continuously, reasons transparently, and cites every source—<br>
+    <span class="bracket">so</span> nothing material ever goes unseen.
+  </div>
+
+  <h3 class="sub">Three Strategic Claims (Priority Order)</h3>
+  <div class="finding">
+    <div class="f-label">Claim 01 · Primary · "Coverage without gaps"</div>
+    <h4>The platform monitors every name in scope, every source in scope, continuously — not on request</h4>
+    <p>This is the most precise articulation of the institutional value proposition available in any prior material. It is analyst-legible, compliance-credible, and CIO-relevant. It distinguishes Alfa from point-solution tools (which answer questions you ask) and from terminal data (which holds information you must retrieve). Carry this claim verbatim into all professional brand materials or improve it with specific evidence — do not replace it with vaguer language.</p>
+    <p><strong>The proof: </strong> 10,000+ agents in production monitoring named securities and sectors. Pre-market briefings generated without user request. Material change detection across earnings transcripts, 8-K filings, guidance language, analyst notes, and market data. <em>(All figures require human verification before public use.)</em></p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">Claim 02 · Trust anchor · "Verifiable by design"</div>
+    <h4>Every output cites its source. Every reasoning step is logged. Compliance does not need to trust the AI — they can audit it.</h4>
+    <p>The product's deepest differentiator is auditable AI reasoning — not a brand promise but a technical architecture decision that becomes a trust claim when surfaced to institutional buyers. Source attribution at the output level transforms an AI tool from a black box into a documented instrument. This is the brand's answer to every enterprise procurement committee question about AI reliability.</p>
+    <p><strong>The proof:</strong> Source citation in every output (link to primary document or data source). Audit trail architecture for Platform tier. Distinguishes "material fact from primary source" from "AI-generated synthesis." Output provenance chain available for compliance review.</p>
+  </div>
+
+  <div class="finding">
+    <div class="f-label">Claim 03 · Brand register · "The instrument that never misses"</div>
+    <h4>The flight-recorder story, adapted for institutional contexts: not an editorial metaphor, a precision instrument metaphor</h4>
+    <p>This claim connects the consumer Lede identity (the Flare orange story: "the instrument that must never be missed") to the professional context without importing the consumer editorial aesthetic. The flight recorder is an institutional instrument: precise, mandatory, regulatory, and trusted by exactly the kind of compliance-minded buyer Alfa is targeting. The metaphor survives institutional scrutiny where the proofreader's mark metaphor does not.</p>
+    <p><strong>Use of this claim:</strong> Brand register only — does not appear in sales materials or product UI. It is the emotional anchor for the visual language in Phase 2 creative territories, not a tagline for enterprise procurement documents.</p>
+  </div>
+
+  <h3 class="sub">Competitive Differentiation — Required Answers</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Their claim</th>
+          <th>Professional brand's answer</th>
+          <th>Must not say</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Bloomberg Terminal</strong></td>
+          <td>The definitive financial data platform. The terminal.</td>
+          <td>Bloomberg holds the data. We read it for you, flag what's portfolio-material, and leave a documented record. We're not replacing the terminal — we're the analyst who already worked through it before the open.</td>
+          <td>"Better than Bloomberg." Bloomberg is infrastructure; this is an intelligence layer built on top of infrastructure.</td>
+        </tr>
+        <tr>
+          <td><strong>AlphaSense</strong></td>
+          <td>AI-powered search across financial documents.</td>
+          <td>AlphaSense searches when you ask. We monitor when you don't. Coverage without gaps means nothing missed before you knew to look.</td>
+          <td>Do not position as "search, but better." Different use case: proactive vs. reactive.</td>
+        </tr>
+        <tr>
+          <td><strong>Hebbia / Rogo</strong></td>
+          <td>Your AI analyst — answers questions about documents.</td>
+          <td>They answer questions. We anticipate them. Hebbia and Rogo are document-question tools. This is a portfolio-intelligence platform that runs between your questions, not just when you ask one.</td>
+          <td>Do not claim superior document analysis. Differentiate on the monitoring and coverage dimensions, not the query dimension.</td>
+        </tr>
+        <tr>
+          <td><strong>FactSet</strong></td>
+          <td>The institutional data and analytics platform.</td>
+          <td>FactSet is the library. We're the system that read everything in the library last night, flagged what changed in your portfolio, and left notes on your desk this morning. FactSet is where analysts find information; this is where information finds analysts.</td>
+          <td>Do not attack FactSet directly. Many enterprise Alfa buyers also use FactSet. Coexistence is the likely deployment scenario.</td>
+        </tr>
+        <tr>
+          <td><strong>Morningstar Direct</strong></td>
+          <td>Research credentialed by the Morningstar Rating — an independent analytical methodology.</td>
+          <td>Morningstar owns the rating methodology as a trust anchor. Our trust anchor is source transparency — not a proprietary score, but a documented chain from primary source to output. One is credentialed authority; the other is auditable reasoning. These are different trust architectures for different needs.</td>
+          <td>Do not claim superior ratings methodology. This is a different product for a different workflow.</td>
+        </tr>
+        <tr>
+          <td><strong>Aladdin (BlackRock)</strong></td>
+          <td>The dominant embedded institutional platform — the portfolio risk and operations infrastructure for over $21T in assets.</td>
+          <td>Aladdin is portfolio risk and operations infrastructure. This is research intelligence. The two coexist in institutional deployments — Aladdin holds the positions; we monitor the news, filings, and signals that affect those positions. Platform-tier deployments may sit alongside or embed into Aladdin environments.</td>
+          <td>Do not attempt to displace Aladdin. Position as complementary intelligence, not competitive infrastructure.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">The Competitor Swap Test — Applied to This Positioning</h3>
+  <div class="callout ok">
+    <strong>Confirmation: This positioning fails the competitor swap test — which is required.</strong> "Coverage without gaps" cannot be claimed by AlphaSense (reactive search), Hebbia (document answers), FactSet (library, not monitor), or Bloomberg (terminal, not intelligence system). "Verifiable by design" with output-level source citation and audit trail is a specific technical claim that most competitors either cannot make or have not centered. The "intelligence layer" position — continuous, between the terminal and the analyst's judgment — is an unoccupied competitive territory as of August 2026. A Phase 2 creative team must build a visual language that makes this position untransferable.
+  </div>
+</div>
+
+<!-- 04 AUDIENCE MESSAGING -->
+<div class="section" id="audiences">
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2>Audience-Specific Messaging Hierarchy</h2>
+  </div>
+  <p class="section-sub">Six professional audiences, each with a primary claim, a fear, a proof point, and a tone protocol. These are inputs to Phase 2 copywriting, not taglines. Do not use this section to write marketing copy — use it to write the right marketing copy.</p>
+
+  <div class="callout warn">
+    <strong>A critical gap from Phase 0.</strong> The prior engagement produced no audience-specific professional messaging. The brand has one institutional retention message ("Same engine, same team, sharper name. Nothing about your deployment changes but the letterhead.") and one professional hero headline ("The AI engine behind modern investing.") Neither is differentiated by professional role, buying stage, or use case. This section fills that gap.
+  </div>
+
+  <!-- Audience 1 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 01 · Primary professional buyer</div>
+    <div class="a-name">Head of Research / Portfolio Manager</div>
+    <div class="a-claim">"Alfa surfaces what's portfolio-material before you know to ask."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>Missing a material development in a name they cover. Being the last to know about an earnings pre-announcement, a regulatory filing, a guidance change. Having a blank in coverage that a competitor exploits at the investment committee. Not because they weren't working — but because the signal was in the 47th document of the morning.</p>
+
+    <div class="a-section">What they value</div>
+    <p>Speed to synthesis. Reliability of signal over volume of output. Credibility with the investment committee — the ability to say "we saw it, we verified it, here's the source."</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>Pre-market briefings generated without user request — every morning, your watchlist, sources cited</li>
+      <li>Material change detection before earnings calls — thesis drift, guidance language shifts, unusual volume</li>
+      <li>Source cited in every output — no black-box synthesis</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Peer-to-peer. No "empower" or "transform." Never imply they weren't doing their job before. Never suggest the AI decides — it <em>surfaces</em>; the PM decides. "Before the open" not "accelerate your workflow." Outcome language: "you saw it first" not "we found it for you."</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">game-changing, revolutionary, AI-powered, seamless, next-generation, insights platform, decision intelligence</span></p>
+  </div>
+
+  <!-- Audience 2 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 02 · Senior economic buyer</div>
+    <div class="a-name">Chief Investment Officer</div>
+    <div class="a-claim">"Coverage without gaps. Your research infrastructure scales with the mandate — not with headcount."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>Research infrastructure that doesn't scale with the portfolio mandate. A team equipped for 80 names managing 200. A single researcher as a coverage risk — the fund's research capability is one departure away from a gap. LP pressure on operational efficiency.</p>
+
+    <div class="a-section">What they value</div>
+    <p>Operational scale. Defensibility to the investment committee and LPs. Coverage documentation. A research infrastructure story that sounds like operational discipline, not AI experimentation.</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>10,000+ agents in production (requires human verification)</li>
+      <li>$5T+ AUM on platform (requires human verification of current figure and definition)</li>
+      <li>8 years of institutional deployment — not a pilot, a production system</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Business-case framing. Operational. Defensible to a board. Never "AI-first" — "research infrastructure." Never imply replacing the research team — always "scales the team's coverage." AUM and agent counts establish scale; do not over-rely on them without verification.</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">augment your team, AI copilot, intelligent assistant, supercharge, unlock insights</span></p>
+  </div>
+
+  <!-- Audience 3 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 03 · Technical buyer</div>
+    <div class="a-name">Chief Technology Officer / VP Technology</div>
+    <div class="a-claim">"Every output carries its full provenance chain. Deploy, audit, verify."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>AI vendor lock-in with no exit path. AI outputs that fail audit because they cannot be traced to a source. Deployment instability in production. Data leakage. Security certification that exists in a PDF but not in a live system. A vendor who is small enough to fail before the contract expires.</p>
+
+    <div class="a-section">What they value</div>
+    <p>Auditability. Interoperability (can this sit next to Aladdin, Bloomberg, FactSet?). SOC 2 certification. Deployment flexibility. Clear API contracts with versioned stability. Named support contacts. A vendor due diligence package that is already written.</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>Source citation at output level — every synthesis traces to a primary document or data source</li>
+      <li>Audit trail architecture in Platform tier — compliance review without calling support</li>
+      <li>SOC 2 compliance documentation (requires human verification — current status and scope)</li>
+      <li>Deployment options: cloud, on-prem, or hybrid (requires human verification)</li>
+      <li>API with versioned stability commitment (requires human verification of terms)</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Technical. Precise. Stripe-like documentation aesthetic — meticulous, not designed-to-impress. Show, don't assert. Every claim needs a reference: "SOC 2 Type II, scope: [list]" not "enterprise-grade security." The CTO is looking for the thing that will fail at 2 AM — address that thing.</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">AI-powered (without specifics), enterprise-grade (without documentation), cutting-edge, state-of-the-art, military-grade encryption (unless literally true)</span></p>
+  </div>
+
+  <!-- Audience 4 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 04 · Regulatory buyer</div>
+    <div class="a-name">Chief Compliance Officer / General Counsel</div>
+    <div class="a-claim">"Alfa produces research inputs, not investment decisions. Every source is documented. Every output is reproducible."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>AI-generated research treated as investment advice or a recommendation in a regulatory audit. Failure to document how a trading decision was reached when an AI tool was in the workflow. MNPI / Reg FD obligations triggered by an AI that ingests non-public information without a clear policy. A vendor who is not aware of their compliance exposure.</p>
+
+    <div class="a-section">What they value</div>
+    <p>Clear scope definition: what the product produces and what it is not. Output classification (fact vs. synthesis vs. alert). Audit trail for compliance review. Disclosed methodology. Separation from trading decisions documented in writing. A vendor who can answer the regulator's question before the CCO finishes asking it.</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>Output classification taxonomy: material fact (cited primary source) / AI-generated synthesis (labeled) / monitored alert (triggered by defined conditions)</li>
+      <li>Complete source attribution — every output links to the originating document or data source</li>
+      <li>Audit log accessible for compliance review without requiring a support ticket</li>
+      <li>MNPI handling policy (requires human verification — current policy must be confirmed and documented)</li>
+      <li>The product does not make investment decisions. It surfaces research inputs. The compliance framing is "research tool," not "advisory system."</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Precise, legal-grade language. No marketing adjectives unless they are legal terms. Never "insight" (legally ambiguous in investment contexts). Never "recommendation." Never "advice." The CCO is reading to find the thing that will create a compliance problem — acknowledge that thing and explain how it is handled before they ask.</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">investment advice, recommendations, insights (as a product noun), predictive (without a specific definition), real-time (unless technically true and defined)</span></p>
+  </div>
+
+  <!-- Audience 5 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 05 · Procurement buyer</div>
+    <div class="a-name">Vendor Management / Procurement</div>
+    <div class="a-claim">"Alfa is enterprise-ready. The documentation is already written. Your review starts on page one."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>A vendor who cannot pass security review without three months of follow-up questions. Unclear contractual scope that creates disputes at renewal. Hidden data usage that violates their data policy. Vendor exit risk — what happens to their data if the vendor is acquired or fails?</p>
+
+    <div class="a-section">What they value</div>
+    <p>A complete vendor due diligence package that anticipates their checklist. Standard DPA template that their legal team can sign without significant redlines. SOC 2. Data residency clarity. SLA terms. Named enterprise support contact. A vendor who treats procurement as a professional function, not an obstacle.</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>Vendor due diligence package: pre-written, covering security, data handling, compliance, deployment, SLA</li>
+      <li>Standard DPA template (requires human verification — current document must be confirmed available)</li>
+      <li>Entity disambiguation notice (D4 — required for Alfa; resolves the Alfa Bank entity check)</li>
+      <li>Named enterprise support contact and escalation path</li>
+      <li>Data deletion and exit procedure documented</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Document-forward. Professional. Anticipate the checklist before it is issued. The procurement audience is not buying the product — they are de-risking it. Every claim must be backed by a document. "SOC 2 Type II" not "enterprise security." The brand experience for procurement is the quality of the vendor package, not the landing page.</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">platform (without specification), solution, best-in-class, industry-leading, trusted by leading firms (unless named and approved)</span></p>
+  </div>
+
+  <!-- Audience 6 -->
+  <div class="audience-card">
+    <div class="a-role">Audience 06 · Integration buyer · Platform / Powered tier</div>
+    <div class="a-name">Technology Partner / Platform Vendor / Bank Portal Team</div>
+    <div class="a-claim">"Six co-presence models. Attribution from invisible to co-branded equal weight — your call."</div>
+
+    <div class="a-section">What they fear</div>
+    <p>Co-branding that diminishes their own brand identity in their own product. Technical integration risk with a vendor whose API stability is uncertain. Attribution requirements that they didn't agree to being baked into the product's design. A "Powered by" designation that reads as a sub-brand rather than a technology attribution.</p>
+
+    <div class="a-section">What they value</div>
+    <p>Design system compatibility — can this engine be embedded without visible seams? API stability with versioned contracts. Attribution flexibility — the ability to choose how (and whether) the engine provider's name appears. A named partnership team who will still be there at the next contract renewal.</p>
+
+    <div class="a-section">Proof points</div>
+    <ul class="ls">
+      <li>Six explicitly designed co-presence scenarios — detailed in Phase 7 brand system (not yet built; this is the Phase 7 deliverable)</li>
+      <li>Design system delivered as a token set that maps to the partner's existing design system — not as static mockups</li>
+      <li>API with semantic versioning and deprecation notice period (requires human verification of terms)</li>
+      <li>Named partnership team (requires human verification of current team structure)</li>
+    </ul>
+
+    <div class="a-section">Tone protocol</div>
+    <p>Partnership-framing. Empowering to the partner brand. Specific about what "Powered by" means (it is a designed system with options) and what it does not mean (it is not mandatory branding — Powered+ has no attribution). The engine is a tool the partner uses; the partner's success is the measure of the relationship.</p>
+
+    <div class="a-section">Forbidden phrases</div>
+    <p><span class="mono">partner ecosystem, co-innovation, synergy, white-glove (unless that is the literal service tier)</span></p>
+  </div>
+</div>
+
+<!-- 05 BRAND VOICE -->
+<div class="section" id="voice">
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2>Brand Voice &amp; Verbal Standards</h2>
+  </div>
+  <p class="section-sub">Extension of the institutional voice standard from the prior engagement. The existing standard is confirmed and extended with professional-specific rules. This section does not replace the delivery book's voice work — it adds the professional layer that was not in scope.</p>
+
+  <h3 class="sub">Confirmed from Prior Engagement</h3>
+  <div class="callout ok">
+    <strong>The institutional voice standard survives.</strong> Specific over vague. Outcome-led. The real banned-words list (game-changing, revolutionary, seamless, transform). "Coverage without gaps" as a precise claim. These are confirmed for professional use and extended below.
+  </div>
+
+  <h3 class="sub">Professional Voice Principles</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Principle</th>
+          <th>What it means in practice</th>
+          <th>Example: wrong → right</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Claim with evidence or don't claim</strong></td>
+          <td>Every factual assertion about the product's capabilities must be backed by a specific metric, a documented output, or an auditable example. "Comprehensive coverage" is forbidden. "Coverage of 10,000+ named securities across 47 markets" is permitted — if verified.</td>
+          <td>"Industry-leading accuracy" → "Source cited in every output. Verify it yourself."</td>
+        </tr>
+        <tr>
+          <td><strong>The product surfaces; the analyst decides</strong></td>
+          <td>Never claim the product makes decisions, recommends actions, or predicts outcomes. The product is an instrument that surfaces material information. The analyst applies judgment. This is not a legal hedge — it is an accurate description of the product and a respect for the buyer's expertise.</td>
+          <td>"Alfa recommends reducing your position" → "Alfa flagged a material guidance change in the 10-Q filed this morning."</td>
+        </tr>
+        <tr>
+          <td><strong>Specificity is credibility</strong></td>
+          <td>In institutional contexts, vagueness reads as either ignorance or evasion. Name the filing type. Name the detection method. Name the source. "Something changed" is not a sentence the brand uses. "The company revised full-year guidance downward by 12% in the 8-K filed at 8:47 AM" is.</td>
+          <td>"We detected a change in company outlook" → "Guidance revised -12% in 8-K filed 8:47 AM ET. Source: SEC EDGAR."</td>
+        </tr>
+        <tr>
+          <td><strong>Quiet confidence, not performance</strong></td>
+          <td>The brand does not shout. It does not use exclamation marks in professional materials. It does not use "!" in enterprise documentation. The confidence is in the specificity of the claim, not the volume of the assertion.</td>
+          <td>"Alfa is the most powerful AI research platform available!" → "Coverage without gaps. Nothing material escapes unread."</td>
+        </tr>
+        <tr>
+          <td><strong>The audience is not a target — they are a peer</strong></td>
+          <td>Buy-side analysts, heads of research, and CIOs are among the most analytically sophisticated professionals in any industry. They will read through vague claims immediately. The brand writes to them as peers — not as subjects of persuasion.</td>
+          <td>"Even experienced investors miss critical signals" → [deleted; condescending]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">Permitted / Forbidden by Context</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Term or pattern</th>
+          <th>Professional use</th>
+          <th>Consumer use</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="mono">coverage</span></td>
+          <td><span class="badge badge-ok">Permitted</span></td>
+          <td><span class="badge badge-ok">Permitted</span></td>
+          <td>Shared strategic frame. Always followed by specificity.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">intelligence</span></td>
+          <td><span class="badge badge-warn">With care</span></td>
+          <td><span class="badge badge-ok">Permitted</span></td>
+          <td>Professional contexts: use only where "intelligence" means a processed, analyzed output — not a vague descriptor. "Investment intelligence platform" is permitted; "AI intelligence" is not.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">lede</span> (as product noun)</td>
+          <td><span class="badge badge-warn">Not yet</span></td>
+          <td><span class="badge badge-ok">Permitted</span></td>
+          <td>"The lede" is a consumer product word. Professional brand does not import it until Phase 2 decides how to bridge the two registers — if at all.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">alpha</span> (finance concept)</td>
+          <td><span class="badge badge-crit">Forbidden</span></td>
+          <td><span class="badge badge-crit">Forbidden</span></td>
+          <td>Creates confusion with "Alfa" the product name and with "alpha" the investment return concept. Both confusions damage credibility in professional contexts.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">insight(s)</span></td>
+          <td><span class="badge badge-crit">Forbidden</span></td>
+          <td><span class="badge badge-warn">With care</span></td>
+          <td>In professional/compliance contexts, "insight" is legally ambiguous as a possible proxy for "advice" or "recommendation." In consumer contexts, acceptable only when not describing a product feature in investment contexts.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">recommendation</span></td>
+          <td><span class="badge badge-crit">Forbidden</span></td>
+          <td><span class="badge badge-crit">Forbidden</span></td>
+          <td>The product does not make investment recommendations. This claim, if made, creates regulatory exposure. Even if technically true of a product feature, it should be described differently.</td>
+        </tr>
+        <tr>
+          <td><span class="mono">formerly Boosted.ai</span></td>
+          <td><span class="badge badge-ok">Required through Q3 2027</span></td>
+          <td><span class="badge badge-warn">Optional after consumer launch</span></td>
+          <td>Required in all professional materials through Q3 2027 per delivery book §02 and FM-08. After Q3 2027, retired from all materials. Consumer brand manages its own transition language independently.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 06 COLOR CONSTRAINT -->
+<div class="section" id="color">
+  <div class="section-head">
+    <span class="section-num">06</span>
+    <h2>Professional Brand Color Constraint</h2>
+  </div>
+  <p class="section-sub">A strategic constraint on the use of Flare orange in professional contexts. Not a palette decision — palette is Phase 4. This section defines what the professional color system must not do, regardless of what creative direction Phase 2 selects.</p>
+
+  <div class="decision-block">
+    <div class="d-label">Decision D7 · Confirmed</div>
+    <h4>Flare orange is permitted in professional contexts at ≤2% of surface, appearance-earned — never as a decorative accent</h4>
+    <p>The v2.0.0 token spec specifies: "ONE signal color (Flare, international orange) — the node/step/action only, rationed at ~2% of any surface." This constraint is confirmed for professional contexts with an additional requirement: in professional surfaces, the orange may only appear where something actually happened. It marks an agent action, a material event detection, a new coverage signal. It does not appear as a border color, a button hover, a card background, or a section header.</p>
+    <p style="margin-top:10px;">The differentiation from Bloomberg orange is not achieved by hue adjustment — the values are too close for a visual distinction to carry the argument. It is achieved by context of use: Bloomberg orange is interface chrome (the Terminal's navigation, controls, and data chrome). Flare orange is a semantic event signal (something material changed). This distinction must be made explicit in every professional brand context where the orange appears. Phase 2 creative territories must either: (a) confirm the orange with this constraint applied and a prepared Bloomberg differentiation answer, or (b) propose an alternative professional accent that preserves the Step logomark's semantic logic without the Bloomberg proximity risk.</p>
+  </div>
+
+  <h3 class="sub">Constraints That Apply Regardless of Phase 2 Color Decision</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Constraint</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>No drop shadows on professional surfaces</td>
+          <td>Hard rule from v2.0.0 token spec. Shadow-free discipline is the design system's most distinctive constraint. "Enterprise seriousness" is not achieved by adding visual depth — it is achieved by surface-stepped elevation and information density.</td>
+        </tr>
+        <tr>
+          <td>No card borders on professional surfaces</td>
+          <td>Same hard rule. Cards are separated by surface elevation (stepped background values), not by drawn borders. A professional brand that adds card borders to signal "enterprise" has misunderstood the system's logic.</td>
+        </tr>
+        <tr>
+          <td>WCAG 2.2 AA required on all professional surfaces</td>
+          <td>Both the dark product register and any professional light register must pass WCAG 2.2 AA contrast testing before Phase 4 is complete. The pre-Lede system was never audited. This is a P0-A4 (enterprise trust) requirement — enterprise procurement requires accessibility documentation.</td>
+        </tr>
+        <tr>
+          <td>Semantic color must not conflict with data colors</td>
+          <td>Any professional accent color must be visually distinct from the data-up (#3FA971 dark register / #1E7D4F light register) and data-down (#E05A47 dark register / #C33B2E light register) values. In a dense research UI, accent color that reads as "up" or "down" destroys the semantic clarity of the interface.</td>
+        </tr>
+        <tr>
+          <td>IBM Plex Mono for all numeric values, tickers, and timestamps</td>
+          <td>Non-negotiable in all professional surfaces. tabular-nums required wherever digits line up in columns.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 07 RETAIL INTERFACE CONTRACT (FORMALIZED) -->
+<div class="section" id="contract">
+  <div class="section-head">
+    <span class="section-num">07</span>
+    <h2>Retail Interface Contract — Formalized</h2>
+  </div>
+  <p class="section-sub">The Phase 0 placeholder, now a binding specification. The professional brand owns the rules in this contract. The retail/consumer team inherits them. Changes to these rules require professional brand approval.</p>
+
+  <div class="callout">
+    <strong>Contract authority.</strong> The professional brand owns the base token layer. The consumer system inherits the professional system's role vocabulary and extends it at the brand-register level. Changes to shared tokens (surface hierarchy, semantic colors, IBM Plex Mono, citation/verification patterns) require sign-off from the professional brand system owner. Consumer-specific extensions (Morning Lede visual ritual, Instrument Serif display, Flare on consumer marketing surfaces) are consumer-zone decisions that do not require professional brand approval.
+  </div>
+
+  <div class="table-wrap">
+    <table class="contract-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Rule</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Parent endorsement pattern</td>
+          <td>All professional materials use "by Lede" as the company endorsement. During the transition window (through Q3 2027): "formerly Boosted.ai" appended. Consumer product uses "Lede" standalone — no "by [Professional Brand]" on consumer surfaces. The lockup rules and size/position specifications are Phase 4 deliverables. The pattern itself is confirmed: professional brand endorsement is "[Product] by Lede," not "Lede [Tier]."</td>
+          <td><span class="badge badge-ok">Pattern confirmed · Specifications: Phase 4</span></td>
+        </tr>
+        <tr>
+          <td>Shared typography</td>
+          <td>IBM Plex Mono is shared and non-negotiable across both systems. Schibsted Grotesk is the shared body face (consumer may extend with Newsreader for long-form; professional may use Schibsted Grotesk only or extend with a separate professional body face — Phase 4 decision). Instrument Serif / Lede Serif is consumer-zone only — may not appear on professional surfaces unless Phase 4 explicitly extends it with evidence of institutional compatibility. Both systems share the tabular-nums requirement wherever digits appear in columns.</td>
+          <td><span class="badge badge-ok">IBM Plex Mono: confirmed shared · Others: Phase 4</span></td>
+        </tr>
+        <tr>
+          <td>Shared color architecture</td>
+          <td>The dark product register is shared primary. Semantic color values must be identical across both systems — data-up green and data-down red mean the same thing in both professional and consumer contexts. Brand accent may differ: the professional brand may use a distinct accent from Flare orange if Phase 2 determines a professional-specific accent is needed. The base dark surface (#131210) is shared. The light register (#F7F5EF) may be extended differently — the professional light register may be a distinct treatment from the consumer brand register.</td>
+          <td><span class="badge badge-warn">Semantic colors: locked · Professional accent: Phase 4 decision</span></td>
+        </tr>
+        <tr>
+          <td>Protected trust patterns</td>
+          <td>Citation patterns (source attribution, "computed from [source]" language, data provenance), audit indicators, and verification badges must appear identically in both professional and consumer products. These are legal and compliance signals — they define how the product presents evidence and how users verify outputs. Any design variation that changes the visual language of verification is a compliance risk, not a design decision. Both systems must use the same citation component — designed in Phase 6, owned by the professional brand, inherited by consumer.</td>
+          <td><span class="badge badge-crit">Must not vary · Professional brand owns · Phase 6 designs</span></td>
+        </tr>
+        <tr>
+          <td>Naming syntax</td>
+          <td>Consumer: "Lede" standalone. Professional (during Alfa period): "[Tier], by Lede" where tier appears in product UI context; "[Professional Brand] by Lede" in marketing and enterprise contexts. Professional (post-Alfa): "[New Name] [Tier], by Lede." Retail/consumer does not use tier names (Pro/Prime/Platform/Powered) — those are professional architecture. Consumer pricing tiers, if any, use distinct naming decided independently by the consumer team.</td>
+          <td><span class="badge badge-ok">Naming syntax confirmed · Post-Alfa name: Phase 2</span></td>
+        </tr>
+        <tr>
+          <td>Navigation relationship</td>
+          <td>The professional product and consumer product are distinct products with distinct authentication, distinct URLs, and distinct navigation. Cross-links are permitted (e.g., "For individual investors: Lede" from the professional website; "For institutional teams: [Professional Brand]" from the consumer product). The upgrade path from consumer to professional is a Phase 5 design decision. No shared login model is assumed — enterprise SSO requirements and consumer authentication are incompatible.</td>
+          <td><span class="badge badge-warn">Principle confirmed · Upgrade path: Phase 5</span></td>
+        </tr>
+        <tr>
+          <td>Consumer-zone decisions (retail owns independently)</td>
+          <td>Consumer pricing presentation. Open-signup CTA design. App store presence and metadata. Consumer-specific feature marketing (Morning Lede ritual, daily brief, personal watchlist). Consumer ad campaigns. The Instrument Serif / Lede Serif display face in consumer marketing. The "bury the lede" tagline and editorial brand voice. These do not require professional brand approval. Consumer team governs them independently.</td>
+          <td><span class="badge badge-ok">Consumer zone confirmed</span></td>
+        </tr>
+        <tr>
+          <td>Professional-owned decisions retail may not override</td>
+          <td>Enterprise naming architecture (the Professional Brand / tier names). Security and compliance documentation design. Co-branding and "Powered by" attribution design system. The entity disambiguation protocol (D4). The vendor due diligence package. Compliance footer standards. Governance visual language. The citation component design (Phase 6). These flow downward from professional to consumer — consumer inherits but does not redefine.</td>
+          <td><span class="badge badge-crit">Professional-owned — Phase 4/6/7 designs</span></td>
+        </tr>
+        <tr>
+          <td>Token cascade authority</td>
+          <td>The professional brand owns the base token layer. The token file (lede-tokens.json v2.0.0) uses alfa-ds role names — the professional system defines the roles. The consumer system overrides at the brand-register level (consumer-specific values for surface-primary, brand accent, display typography). When a token conflict arises between professional and consumer values, the professional value is authoritative for the shared token; the consumer override is valid only for consumer-zone tokens. This authority direction is documented here and enforced in Phase 4.</td>
+          <td><span class="badge badge-ok">Authority direction confirmed · Phase 4 enforces</span></td>
+        </tr>
+        <tr>
+          <td>Transition-period co-presence protocol</td>
+          <td>During the rebrand window (professional brand launch through Alfa retirement Oct 2027–Apr 2028 and endorsement expiry Q3 2027), three names are simultaneously in market: Boosted.ai (legacy, retiring), Alfa (professional product, on the clock), Lede (consumer, newly launched). Rules: (1) In institutional sales materials: "[Professional Brand] by Lede — formerly Boosted.ai" through Q3 2027, then "[Professional Brand] by Lede." (2) In consumer marketing: "Lede" standalone — no reference to Boosted.ai unless required for brand search / trademark purposes. (3) In enterprise contracts: the entity is always "Gradient Boosted Investments, Inc." regardless of which brand name is on the materials. (4) The professional brand name leads in professional contexts. The consumer brand name leads in consumer contexts. Neither leads in the other's context. (5) Authority to approve legacy-name exceptions in enterprise contracts: designated legal + brand authority at Gradient Boosted Investments (requires naming of specific DRI before any contract is signed).</td>
+          <td><span class="badge badge-crit">Required · DRI must be named before contract signing</span></td>
+        </tr>
+        <tr>
+          <td>Advertising co-presence standards</td>
+          <td>If both consumer (Lede) and professional ([Professional Brand] by Lede) materials appear in the same advertising medium (Bloomberg ad unit, financial media sponsorship, conference program), they must be visually distinct — a viewer must immediately identify which product the ad is for. No combined "Lede / Alfa by Lede" advertisement. Separate ads in the same medium are permitted. Co-branded ads (a single ad for both products) are not permitted until the Phase 2 creative team designs a system for it, which is not in scope for Phase 2. If both products appear in the same conference program, they use separate, visually distinct entries.</td>
+          <td><span class="badge badge-warn">Rule confirmed · Co-branded format: not in Phase 2 scope</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 08 HANDOFF -->
+<div class="section" id="handoff">
+  <div class="section-head">
+    <span class="section-num">08</span>
+    <h2>Phase 1 → Phase 2 Handoff</h2>
+  </div>
+  <p class="section-sub">What Phase 2 receives as confirmed inputs vs. what Phase 2 decides. Phase 2 may not relitigate Phase 1 decisions. Phase 2 must answer all deferred questions.</p>
+
+  <div class="handoff-row">
+    <div class="handoff-col">
+      <div class="hc-label">Confirmed — Phase 2 inherits as inputs</div>
+      <ul>
+        <li>Endorsed house architecture: company = Lede; professional product = [Name] by Lede; consumer = Lede standalone</li>
+        <li>Five tier definitions: Pro / Prime / Platform / Powered / Powered+</li>
+        <li>Naming syntax: "[Product] by Lede" for professional; "[Tier], by Lede" in UI contexts</li>
+        <li>Alfa continues through Q3 2027 conditional on legal clearance</li>
+        <li>Entity disambiguation protocol (D4) — required in all enterprise materials</li>
+        <li>Positioning: "Coverage without gaps" primary; "Verifiable by design" trust anchor</li>
+        <li>Six audience definitions with primary claims and tone protocols</li>
+        <li>Institutional voice standard extended with professional-specific rules</li>
+        <li>Color constraint: no shadows, no card borders, ≤2% Flare orange appearance-earned, WCAG 2.2 AA required</li>
+        <li>IBM Plex Mono shared and non-negotiable</li>
+        <li>Retail interface contract: all 11 rules confirmed</li>
+        <li>Token authority: professional brand owns base layer; consumer overrides at brand register</li>
+      </ul>
+    </div>
+    <div class="handoff-col">
+      <div class="hc-label">Deferred — Phase 2 decides</div>
+      <ul>
+        <li><strong>Post-Alfa professional product name</strong> — must meet all seven criteria in D5; Phase 2 naming funnel produces 3 finalists for Phase 3 blind gauntlet selection</li>
+        <li><strong>Four independent creative territories</strong> — visual language, logomark approach, typography, motion, and "what does the brand look like?" Each territory must explicitly address FM-04 (editorial identity institutional compatibility) and the Bloomberg orange differentiation question</li>
+        <li><strong>Step logomark specifications for professional use</strong> — Phase 2 confirms or replaces the Step for professional contexts; must survive at 16px grayscale on partner colors</li>
+        <li><strong>Professional website visual direction</strong> — Phase 5 deliverable; Phase 2 provides the visual system it runs on</li>
+        <li><strong>FM-04 resolution</strong> — does the Instrument Line adapt to institutional contexts, or does the professional register inherit token architecture only? Phase 2 must test this explicitly in each territory and document the outcome</li>
+        <li><strong>Professional accent color decision</strong> — Phase 2 may confirm Flare orange (with Bloomberg differentiation answer) or propose a distinct professional accent (must satisfy all color constraints in D7)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub">Open Questions Phase 2 Must Not Leave Unanswered</h3>
+  <ul class="ls">
+    <li>Is the Instrument Line editorial identity compatible with bank procurement portals? — required for each territory, not an assumption</li>
+    <li>Does the Step logomark survive in partner colors at 16px? — required as a visual test, not assumed</li>
+    <li>What is the professional accent color, and how does it differentiate from Bloomberg orange in professional context? — required answer, not a hedge</li>
+    <li>What is the Phase 2 naming funnel recommendation? — 3 finalists required for Phase 3 blind selection</li>
+    <li>How do the four territories handle the transition-period co-presence (Boosted.ai + Alfa + Lede simultaneously in market)?</li>
+  </ul>
+</div>
+
+<!-- 09 VERDICT -->
+<div class="section" id="verdict">
+  <div class="section-head">
+    <span class="section-num">09</span>
+    <h2>Verdict &amp; Gate</h2>
+  </div>
+
+  <div class="callout ok">
+    <strong>Gate status: Ready for independent critic review.</strong> This strategy document is complete, decision-based, and does not advocate for a creative direction. It makes seven architecture decisions (D1–D7), defines six professional audiences with specific claims and tone protocols, extends the institutional voice standard, confirms the professional color constraint, formalizes the retail interface contract, and delivers a clean Phase 1→2 handoff. All seven P0 defects from Phase 0 have a documented resolution path — either confirmed in this document or gated to a specific later phase with a named deliverable.
+  </div>
+
+  <h3 class="sub">What the Critic Should Verify</h3>
+  <ul class="ls">
+    <li>Whether the naming architecture decision is internally consistent — does the endorsed house model survive the transition period? Can "formerly Boosted.ai" appear alongside "[Professional Brand] by Lede" without confusion?</li>
+    <li>Whether the positioning statement is differentiated from AlphaSense, Hebbia, Rogo, and Brightwave — does "coverage without gaps" + "verifiable by design" actually occupy a distinct position?</li>
+    <li>Whether the audience messaging is specific enough to be useful to a Phase 2 copywriter — or is it still vague?</li>
+    <li>Whether all seven P0 defects have a resolution path that a Phase 1→2 team can actually execute</li>
+    <li>Whether the retail interface contract is complete and binding — are there gaps that will cause disputes between the professional and consumer teams?</li>
+    <li>Whether the vendor due diligence disambiguation protocol (D4) is specific enough to use in an actual procurement submission</li>
+    <li>Whether the Phase 2 naming brief (D5) is specific enough to gate out bad names and directional enough to generate good ones</li>
+  </ul>
+
+  <h3 class="sub">What Must Not Change Before Critic Review</h3>
+  <ul class="ls">
+    <li>No creative direction may be developed until this strategy clears 7.0</li>
+    <li>No naming finalist may be selected until Phase 2 delivers the funnel</li>
+    <li>No professional brand visual work may begin until this strategy is critic-approved</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Proceeding to:</strong> Phase 1 Mean Critic Review (MC-P1-01). A fresh context will score this document using the gauntlet rubric. The builder may not serve as critic. After critic review, proceed to Phase 2 (Four Independent Creative Territories) only if this strategy clears 7.0.
+  </div>
+</div>
+
+</main>
+</div>
+
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">Toggle theme</button>
+
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  const isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+}
+
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
