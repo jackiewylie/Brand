@@ -161,7 +161,7 @@ body {
 .cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
 .cover-meta-label {
   font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--td);
+  color: var(--tm);
 }
 
 /* ─── Confidential badge ─── */
@@ -191,12 +191,12 @@ body {
 .arch-label-col {
   width: 120px; flex-shrink: 0;
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--td);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm);
   padding-top: 12px;
 }
 .arch-cards { display: flex; gap: 10px; flex: 1; flex-wrap: wrap; }
 .arch-card {
-  background: var(--sp); border: 1px solid var(--rule1);
+  background: var(--sp);
   border-radius: 4px; padding: 12px 16px;
   flex: 1; min-width: 120px;
 }
@@ -208,20 +208,20 @@ body {
   font-size: 11px; color: var(--tm); line-height: 1.45;
 }
 .arch-card.brand-card {
-  background: var(--t1); border-color: var(--t1);
+  background: var(--t1);
 }
 .arch-card.brand-card .arch-card-name { color: var(--sp); }
 .arch-card.brand-card .arch-card-desc { color: var(--pd-ink3); }
 .arch-card.product-card {
-  background: var(--pd-bg0); border-color: var(--pd-bg2);
+  background: var(--pd-bg0);
 }
 .arch-card.product-card .arch-card-name { color: var(--pd-ink); }
 .arch-card.product-card .arch-card-desc { color: var(--pd-ink3); }
 .arch-card.pending-card {
-  background: var(--so); border: 1px dashed var(--rule2);
+  background: var(--so);
 }
-.arch-card.pending-card .arch-card-name { color: var(--td); }
-.arch-card.pending-card .arch-card-desc { color: var(--td); }
+.arch-card.pending-card .arch-card-name { color: var(--tm); }
+.arch-card.pending-card .arch-card-desc { color: var(--tm); }
 .arch-connector {
   width: 1px; height: 20px; background: var(--rule2);
   margin-left: 160px; margin-bottom: 0;
@@ -236,21 +236,20 @@ body {
 }
 .tier-card {
   border-radius: 4px; padding: 20px 16px;
-  border: 1px solid var(--rule1);
-  background: var(--sp);
+  background: var(--ss);
 }
-.tier-card.tier-active { background: var(--ss); }
-.tier-card.tier-pending { background: var(--so); border-style: dashed; }
+.tier-card.tier-active { background: var(--st); }
+.tier-card.tier-pending { background: var(--so); }
 .tier-number {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--td);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tm);
   margin-bottom: 10px;
 }
 .tier-name {
   font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 500;
   color: var(--t1); margin-bottom: 6px; letter-spacing: -0.01em;
 }
-.tier-name.pending-name { color: var(--td); }
+.tier-name.pending-name { color: var(--tm); }
 .tier-tag {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm);
@@ -264,8 +263,8 @@ body {
   letter-spacing: 0.10em; text-transform: uppercase;
   color: var(--ok);
 }
-.tier-cobrand.no-cobrand { color: var(--td); }
-.tier-cobrand.pending-cobrand { color: var(--td); }
+.tier-cobrand.no-cobrand { color: var(--tm); }
+.tier-cobrand.pending-cobrand { color: var(--tm); }
 
 /* ─── Co-brand lockup standards ─── */
 .lockup-spec {
@@ -308,11 +307,14 @@ body {
 }
 .lockup-powered-partner {
   font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 700;
-  color: var(--t1); letter-spacing: -0.02em;
+  color: var(--pd-ink); letter-spacing: -0.02em;
 }
 .lockup-powered-sub {
   font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
-  letter-spacing: 0.10em; text-transform: uppercase; color: var(--tm);
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--pd-ink3);
+}
+.lockup-visual.dark-visual {
+  background: var(--pd-bg0); padding: 20px; border-radius: 4px;
 }
 .lockup-spec-note {
   width: 220px; flex-shrink: 0;
@@ -350,12 +352,11 @@ body {
 
 /* ─── Enterprise case study card ─── */
 .case-card {
-  border: 1px solid var(--rule1); border-radius: 4px; overflow: hidden;
+  background: var(--ss); border-radius: 4px; overflow: hidden;
   margin-bottom: 12px;
 }
 .case-header {
-  background: var(--ss); padding: 24px 28px 20px;
-  border-bottom: 1px solid var(--rule1);
+  background: var(--st); padding: 24px 28px 20px;
 }
 .case-header-top {
   display: flex; align-items: center; justify-content: space-between;
@@ -376,21 +377,20 @@ body {
 .case-body { padding: 28px; }
 .case-section-label {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--td);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--tm);
   margin-bottom: 16px;
 }
 .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
 /* Lockup preview inside case card */
 .lockup-preview {
-  background: var(--sp); border: 1px solid var(--rule1);
+  background: var(--sp);
   border-radius: 4px; padding: 24px 28px;
   display: flex; align-items: center; justify-content: center;
   min-height: 80px;
 }
 .lockup-preview.dark-preview {
   background: var(--pd-bg0);
-  border-color: var(--pd-bg2);
 }
 
 /* Platform tier lockup */
@@ -449,7 +449,7 @@ body {
 .spec-table { width: 100%; border-collapse: collapse; }
 .spec-table th {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--td);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm);
   border-bottom: 1px solid var(--rule1); padding: 8px 12px 8px 0;
   text-align: left;
 }
@@ -481,7 +481,7 @@ body {
 }
 .notice-label {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--warn);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tm);
   margin-bottom: 6px;
 }
 .notice-text { font-size: 13px; color: var(--t2); line-height: 1.55; }
@@ -493,11 +493,10 @@ body {
 .gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .gov-card {
   background: var(--ss); border-radius: 4px; padding: 20px;
-  border: 1px solid var(--rule1);
 }
 .gov-card-label {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--td);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tm);
   margin-bottom: 8px;
 }
 .gov-card-title { font-size: 14px; font-weight: 500; color: var(--t1); margin-bottom: 6px; }
@@ -717,7 +716,7 @@ footer {
         <div class="tier-number">Tier 05</div>
         <div class="tier-name pending-name">Partner Tier</div>
         <div class="tier-tag">Pending resolution</div>
-        <div class="tier-desc" style="color:var(--td);">Full white-label configuration. Attribution terms subject to brand owner and legal review. See §7.</div>
+        <div class="tier-desc">Full white-label configuration. Attribution terms subject to brand owner and legal review. See §7.</div>
         <div class="tier-cobrand pending-cobrand">White-label — pending</div>
       </div>
 
@@ -760,7 +759,7 @@ footer {
       <div class="lockup-spec-label">Pattern B — Powered Tier (Vigil Powered, product dark register)</div>
 
       <div class="lockup-row">
-        <div class="lockup-visual">
+        <div class="lockup-visual dark-visual">
           <div class="lockup-powered">
             <div class="lockup-powered-partner">[Partner]</div>
             <div class="lockup-powered-sub">Powered by Vigil · Lede</div>
@@ -846,7 +845,7 @@ footer {
         <div class="case-header-top">
           <div>
             <div class="case-partner-name">Meridian Capital</div>
-            <div class="case-partner-desc">$12B AUM · Long/short equity · 23 analysts<span class="mono" style="font-size:9px;color:var(--warn);"> REQUIRES HUMAN VERIFICATION</span></div>
+            <div class="case-partner-desc">$12B AUM · Long/short equity · 23 analysts<span class="mono" style="font-size:9px;color:var(--tm);"> REQUIRES HUMAN VERIFICATION</span></div>
           </div>
           <span class="case-tier-chip" aria-label="Vigil Platform tier">Platform Tier</span>
         </div>
@@ -1010,7 +1009,7 @@ footer {
             <div class="case-partner-name">Vertex Intelligence</div>
             <div class="case-partner-desc">Illustrative technology partner · Full white-label configuration</div>
           </div>
-          <span class="case-tier-chip" style="background:var(--so); border-style:dashed; color:var(--td);" aria-label="Partner tier — pending resolution">Partner Tier — Pending</span>
+          <span class="case-tier-chip" style="background:var(--so); border-style:dashed; color:var(--tm);" aria-label="Partner tier — pending resolution">Partner Tier — Pending</span>
         </div>
       </div>
 
