@@ -193,7 +193,7 @@ body {
   width: 10px; height: 10px;
   border-radius: 999px;
   background: var(--flare);
-  box-shadow: 0 0 16px rgba(255,90,20,0.6);
+  /* shadow-free hard rule: no drop shadow on Flare nodes */
 }
 .horizon-text {
   position: absolute;
@@ -339,7 +339,7 @@ body {
   border-radius: 999px;
   background: var(--flare);
   margin-bottom: 8px;
-  box-shadow: 0 0 12px rgba(255,90,20,0.5);
+  /* shadow-free hard rule: no drop shadow on Flare nodes */
 }
 .logo-wordmark-serif { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--ink); margin-bottom: 6px; }
 .logo-wordmark-sans { font-family: var(--sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink4); }
@@ -433,6 +433,18 @@ body {
 
     <div class="callout warn">
       <strong>Color constraint note (D7 compliance):</strong> The dawn amber (#C4A560) is in the yellow-gold range. Phase 1 D7 notes that the v1 identity yellow was "retired" — the v2 identity replaced it with Flare orange. Territory D's dawn amber is not yellow in the sense of the retired v1 accent; it is a warm neutralized gold used as a gradient endpoint, not as a signal or interactive color. The Phase 4 color decision must confirm whether this reintroduction of warm gold is within the D7 constraint, or whether it requires an amendment to D7.
+    </div>
+
+    <div class="callout">
+      <strong>Competitor swap test — full six-competitor panel:</strong>
+      <ul style="margin:8px 0 0 0; padding-left:16px; font-size:13px; line-height:1.7;">
+        <li><strong>Bloomberg:</strong> Bloomberg Terminal uses warm amber on near-black as persistent interface chrome. Territory D uses cold-to-warm temporal gradient — the warmth is at the horizon edge, not distributed across the interface. The visual argument is temporal (before vs. after the open), not terminal (the data environment you live in all day).</li>
+        <li><strong>Brightwave</strong> (highest risk): Brightwave uses a dark, premium, gradient-adjacent aesthetic with motion and expressive design. This is Phase 2's most visible Brightwave proximity risk. Territory D differentiates through: (a) explicit temporal argument ("before the open" — a specific moment, not ambient premium); (b) Flare orange as a single event node, not ambient glow; (c) source attribution taxonomy in the output footer (Brightwave does not show source classification); (d) Instrument Serif display type (Brightwave uses sans-serif). The Brightwave risk is real and must be explicitly re-evaluated in Phase 4 before the gradient executes at production quality.</li>
+        <li><strong>AlphaSense:</strong> AlphaSense uses a warm, approachable light palette with modern SaaS sans-serif. Territory D's deep blue-black with dawn gradient is the opposite register. No visual proximity risk.</li>
+        <li><strong>Hebbia:</strong> Hebbia markets as a document-analysis workspace — a clean, modern light interface. Territory D's dark temporal aesthetic is categorically different. No visual proximity risk.</li>
+        <li><strong>Rogo:</strong> Rogo uses conventional institutional SaaS design. Territory D is the most visually distinctive direction in Phase 2 relative to any SaaS aesthetic. No visual proximity risk.</li>
+        <li><strong>FactSet:</strong> FactSet uses a blue-grey institutional terminal aesthetic. Territory D's temporal gradient is architecturally different from FactSet's static data-density approach. No visual proximity risk.</li>
+      </ul>
     </div>
   </div>
 
@@ -560,41 +572,54 @@ body {
 
     <p class="td-body" style="margin-bottom:12px;">Territory D is the only territory where FM-04 is a live risk rather than a cleared gate. The reason: Instrument Serif italic appears on professional brand surfaces. This is the editorial identity question that FM-04 specifically flags.</p>
 
+    <p class="td-body" style="margin-bottom:12px;">The Phase 4 FM-04 test must cover three distinct institutional context types — each represents a materially different gatekeeper with different aesthetic expectations and different tolerance for editorial-register typography:</p>
+
+    <table class="spec-table">
+      <thead><tr><th>Institutional context</th><th>Test question</th><th>Friction level</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bank procurement portal</strong></td><td>Does Instrument Serif italic on a product page read as credible-professional to a bank's technology procurement team, or does it read as editorial/consumer?</td><td>Medium — banks maintain conservative aesthetic standards for vendor materials; modern premium typography is accepted in financial products but must not read as a consumer brand</td></tr>
+        <tr><td><strong>Pension fund LP due diligence questionnaire</strong></td><td>Does Instrument Serif on a DDQ cover page and section headers communicate institutional seriousness to a pension fund's manager selection team?</td><td>High — pension fund LPs are the most conservative institutional capital; any aesthetic that suggests editorial or consumer brand may trigger questions about product maturity and intended audience</td></tr>
+        <tr><td><strong>SEC-registered investment adviser marketing review</strong></td><td>Does Instrument Serif pass a compliance officer's standard for professional presentation in materials distributed to institutional clients under the Investment Advisers Act?</td><td>Low-Medium — RIA compliance review focuses primarily on substantive claims and disclosures; aesthetic professionalism is a factor in firm selection but typography is less likely to be flagged than in LP due diligence</td></tr>
+      </tbody>
+    </table>
+
+    <p class="td-body" style="margin-bottom:12px; margin-top:12px;"><strong>Passing criteria:</strong> The FM-04 test passes when a panel of ≥5 institutional professionals — at least one from each of the three context types above — rates Instrument Serif as "credible professional" (not "editorial or consumer-facing") in a blind comparison against Territories A and B using identical content templates. Threshold: ≥4/5 panelists must rate Instrument Serif as credible-professional across all three context types. If the threshold is not met in any context type, Territory D advances with Schibsted Grotesk as the display face replacement.</p>
+
     <p class="td-body" style="margin-bottom:12px;">Two possible outcomes of the Phase 4 FM-04 test:</p>
 
     <table class="spec-table">
       <thead><tr><th>Test outcome</th><th>Implication</th></tr></thead>
       <tbody>
-        <tr><td>Instrument Serif passes institutional review</td><td>Territory D advances with Instrument Serif on brand surfaces. The editorial-to-professional register question is resolved in favor of the serif's adaptability. This would be the strongest brand continuity outcome — maximum visual connection between consumer Lede and professional brand.</td></tr>
-        <tr><td>Instrument Serif fails institutional review</td><td>Territory D requires modification: Schibsted Grotesk replaces Instrument Serif as the display face. The gradient horizon and temporal concept survive; only the typography changes. The result is a brand that argues from temporal advantage in a sans-serif register — still distinctive, but with lower consumer-brand continuity. This is the conditional advancement path.</td></tr>
+        <tr><td>Instrument Serif passes all three context types</td><td>Territory D advances with Instrument Serif on brand surfaces. The editorial-to-professional register question is resolved in favor of the serif's adaptability. This would be the strongest brand continuity outcome — maximum visual connection between consumer Lede and professional brand.</td></tr>
+        <tr><td>Instrument Serif fails one or more context types</td><td>Territory D requires modification: Schibsted Grotesk replaces Instrument Serif as the display face. The gradient horizon and temporal concept survive; only the typography changes. The result is a brand that argues from temporal advantage in a sans-serif register — still distinctive, but with lower consumer-brand continuity. This is the conditional advancement path.</td></tr>
       </tbody>
     </table>
 
     <div class="callout">
-      <strong>The gauntlet position:</strong> Territory D cannot be selected by Phase 3 without explicitly accepting the FM-04 conditional. A Phase 3 selection of Territory D must include: "this selection is conditional on FM-04 passing in Phase 4; if Instrument Serif fails institutional review, Phase 4 replaces it with Schibsted Grotesk at the display role." The territory concept (temporal, gradient, pre-dawn) is not dependent on the serif; the serif is a bonus that may or may not survive institutional testing.
+      <strong>The gauntlet position:</strong> Territory D cannot be selected by Phase 3 without explicitly accepting the FM-04 conditional. A Phase 3 selection of Territory D must include: "this selection is conditional on FM-04 passing in Phase 4 across bank procurement, pension fund DDQ, and RIA marketing review contexts; if Instrument Serif fails the ≥4/5 threshold in any context type, Phase 4 replaces it with Schibsted Grotesk at the display role." The territory concept (temporal, gradient, pre-dawn) is not dependent on the serif; the serif is a bonus that may or may not survive institutional testing.
     </div>
   </div>
 
   <!-- NAMING COMPATIBILITY -->
   <div class="td-section">
     <div class="td-h2">Naming Compatibility</div>
-    <p class="td-body" style="margin-bottom:16px;">First Light's naming needs a word that sounds right as a pre-dawn moment — something with temporal weight and epistemic connotation.</p>
+    <p class="td-body" style="margin-bottom:16px;">First Light's naming needs a word that carries temporal weight and orientation — something about positioning at a specific moment, before everything else.</p>
 
     <div class="name-row">
       <div class="name-card">
-        <div class="nc-name">Standfirst</div>
-        <div class="nc-fit strong">Strongest fit</div>
-        <div class="nc-reason">The standfirst is the first thing that precedes the story — the pre-dawn intelligence layer. "Standfirst by Lede" in Instrument Serif italic is the most visually coherent pairing of any territory/name combination. The journalism metaphor is not editorial here — it is temporal. The standfirst comes before everything else.</div>
-      </div>
-      <div class="name-card">
         <div class="nc-name">Bearing</div>
-        <div class="nc-fit good">Good fit</div>
-        <div class="nc-reason">A bearing is taken at a specific moment — the pre-dawn observation. "Bearing by Lede" in the italic serif still works, though the navigation metaphor is less temporal than the journalism one.</div>
+        <div class="nc-fit strong">Strongest fit</div>
+        <div class="nc-reason">A bearing is a navigational reading taken at a specific moment to establish your position. "Get your Bearing before the open." "The Morning Bearing." The temporal claim and the navigation metaphor are the same claim: you know where you stand because the platform took your position in the pre-dawn window. "Bearing by Lede" in the italic serif is visually coherent — the navigation instrument rendered in editorial type.</div>
       </div>
       <div class="name-card">
-        <div class="nc-name">Bellwether</div>
-        <div class="nc-fit weaker">Weaker fit</div>
-        <div class="nc-reason">Bellwether is a signal, not a moment. The temporal brand concept needs a word about when, not just what. "Bellwether by Lede" in italic serif is plausible but doesn't reinforce the pre-dawn claim. Works; not the strongest.</div>
+        <div class="nc-name">Brief</div>
+        <div class="nc-fit good">Good fit</div>
+        <div class="nc-reason">A Brief is a daily intelligence document — the pre-dawn summary. "Your morning Brief" = the First Light deliverable named exactly. "Brief by Lede" in Instrument Serif italic is clean. The intelligence brief connotation pairs well with the temporal-moment brand concept, though the word itself doesn't carry the navigational precision of Bearing.</div>
+      </div>
+      <div class="name-card">
+        <div class="nc-name">Vigil</div>
+        <div class="nc-fit weaker">Adequate fit</div>
+        <div class="nc-reason">A vigil is a sustained watch through the night — monitoring until something happens. This is the product concept (continuous monitoring), but the temporal metaphor doesn't align with the brand moment (the detection, not the watching). "Vigil by Lede" in the serif is plausible. The word describes the process, not the event. Works; not the strongest pairing for Territory D.</div>
       </div>
     </div>
   </div>
