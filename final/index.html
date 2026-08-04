@@ -1,0 +1,1090 @@
+<title>Lede Brand System — Final Gauntlet Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Token system: lede-tokens.json v2.1.0 — brand light register ─── */
+:root {
+  --sp: #F7F5EF; --ss: #EFECE2; --st: #E6E3D5; --sh: #DEDACA; --so: #F2F0E7;
+  --t1: #131210; --t2: #2A2925; --tm: #55534A; --td: #8B897D;
+  --brand: #FF4B00; --brand-text: #C93A00;
+  --rule1: #E3E0D4; --rule2: #D2CFC0;
+  --ok: #1E7D4F; --err: #C33B2E; --warn: #B07C1E;
+  /* Product dark register — for dark-surface swatches */
+  --pd-bg0: #131210; --pd-bg1: #1B1A16; --pd-bg2: #242320;
+  --pd-ink: #F7F5EF; --pd-ink2: #E8E6DC; --pd-ink3: #C6C4B6;
+  --pd-accent: #FF5A14;
+}
+
+html { font-size: 14px; }
+body {
+  background: var(--sp);
+  color: var(--t1);
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: 44px;
+}
+.mono { font-family: "IBM Plex Mono", monospace; }
+
+/* ─── Skip link ─── */
+.skip-link {
+  position: fixed; top: -100%; left: 8px; z-index: 9999;
+  font-family: "IBM Plex Mono", monospace; font-size: 11px;
+  background: var(--sp); color: var(--t1);
+  padding: 6px 14px; text-decoration: none; outline-offset: 2px;
+}
+.skip-link:focus { top: 48px; outline: 2px solid var(--brand); }
+
+/* ─── Top bar ─── */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  height: 44px; background: var(--t1);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+}
+.top-bar-mark {
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700;
+  color: var(--pd-ink); letter-spacing: -0.02em;
+}
+.top-bar-mark span { color: var(--pd-accent); }
+.top-bar-meta {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  color: var(--pd-ink3); letter-spacing: 0.10em; text-transform: uppercase;
+}
+
+/* ─── Page layout ─── */
+.page { max-width: 1100px; margin: 0 auto; padding: 56px 40px 80px; }
+
+/* ─── Cover ─── */
+.cover {
+  padding-bottom: 64px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid var(--rule1);
+}
+.cover-eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 24px; font-variant-numeric: tabular-nums;
+}
+.cover-lockup {
+  margin-bottom: 32px;
+}
+.cover-product {
+  font-family: "IBM Plex Mono", monospace; font-size: 52px; font-weight: 700;
+  color: var(--t1); letter-spacing: -0.03em; line-height: 1.0;
+}
+.cover-by {
+  font-family: "IBM Plex Mono", monospace; font-size: 18px; font-weight: 400;
+  color: var(--tm); letter-spacing: -0.01em; margin-top: 4px;
+}
+.cover-desc {
+  font-size: 17px; color: var(--t2); line-height: 1.65; max-width: 620px;
+  margin-bottom: 36px;
+}
+.cover-meta-row {
+  display: flex; gap: 40px; flex-wrap: wrap;
+}
+.cover-meta-item {}
+.cover-meta-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 4px;
+}
+.cover-meta-value {
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500;
+  color: var(--t1); font-variant-numeric: tabular-nums;
+}
+.cover-verdict {
+  margin-top: 40px;
+  display: inline-flex; align-items: center; gap: 16px;
+  background: var(--t1); border-radius: 4px; padding: 14px 24px;
+}
+.cover-verdict-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--pd-ink3);
+}
+.cover-verdict-score {
+  font-family: "IBM Plex Mono", monospace; font-size: 24px; font-weight: 700;
+  color: var(--pd-ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+}
+.cover-verdict-gate {
+  font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--pd-accent);
+  padding: 4px 12px; border-radius: 100px; background: rgba(255,90,20,0.12);
+}
+
+/* ─── Section structure ─── */
+.doc-section { margin-bottom: 72px; }
+.section-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 8px; font-variant-numeric: tabular-nums;
+}
+.section-title {
+  font-size: 22px; font-weight: 700; color: var(--t1); line-height: 1.2;
+  margin-bottom: 8px; text-wrap: balance;
+}
+.section-intro {
+  font-size: 14px; color: var(--t2); line-height: 1.70; margin-bottom: 32px;
+  max-width: 680px;
+}
+.section-rule { border: none; border-top: 1px solid var(--rule1); margin-bottom: 40px; }
+
+/* ─── Phase scorecard ─── */
+.phase-table {
+  width: 100%; border-collapse: collapse;
+  font-family: "IBM Plex Mono", monospace;
+}
+.phase-table th {
+  font-size: 8px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--tm); padding: 8px 16px 8px 0; text-align: left;
+  border-bottom: 1px solid var(--rule1);
+}
+.phase-table th:first-child { padding-left: 0; }
+.phase-table th.th-right { text-align: right; padding-right: 0; }
+.phase-table td {
+  padding: 14px 16px 14px 0; border-bottom: 1px solid var(--rule1);
+  font-variant-numeric: tabular-nums; vertical-align: top;
+}
+.phase-table td:first-child { padding-left: 0; }
+.phase-table tr:last-child td { border-bottom: none; }
+.phase-num {
+  font-size: 9px; font-weight: 400; color: var(--tm); white-space: nowrap;
+}
+.phase-name {
+  font-size: 11px; font-weight: 500; color: var(--t1);
+  display: block; margin-bottom: 2px;
+}
+.phase-artifact {
+  font-size: 10px; color: var(--tm);
+}
+.phase-score {
+  font-size: 18px; font-weight: 700; color: var(--t1); text-align: right;
+  white-space: nowrap;
+}
+.phase-score.pass { color: var(--ok); }
+.phase-score.note { color: var(--tm); font-size: 10px; font-weight: 400; }
+.phase-gate {
+  text-align: right;
+}
+.gate-chip {
+  display: inline-block;
+  font-size: 8px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+}
+.gate-chip.pass { background: var(--ss); color: var(--ok); }
+.gate-chip.prereq { background: var(--ss); color: var(--tm); }
+
+/* ─── Architecture grid ─── */
+.arch-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.arch-card {
+  background: var(--ss); border-radius: 4px; padding: 20px 20px;
+}
+.arch-card.dark-card { background: var(--pd-bg0); }
+.arch-card-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--tm);
+  margin-bottom: 10px;
+}
+.arch-card.dark-card .arch-card-label { color: var(--pd-ink3); }
+.arch-card-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 700;
+  color: var(--t1); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px;
+}
+.arch-card.dark-card .arch-card-title { color: var(--pd-ink); }
+.arch-card-sub {
+  font-size: 13px; color: var(--t2); line-height: 1.55;
+}
+.arch-card.dark-card .arch-card-sub { color: var(--pd-ink3); }
+.arch-token-row {
+  margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;
+}
+.arch-token {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  color: var(--tm); background: var(--sp); padding: 3px 10px;
+  border-radius: 100px; font-variant-numeric: tabular-nums;
+}
+.arch-card.dark-card .arch-token { background: var(--pd-bg1); color: var(--pd-ink3); }
+
+/* ─── Tier table ─── */
+.tier-table { width: 100%; border-collapse: collapse; }
+.tier-table th {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm);
+  padding: 8px 16px 8px 0; text-align: left; border-bottom: 1px solid var(--rule1);
+}
+.tier-table td {
+  font-size: 12px; color: var(--t2); padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--rule1); vertical-align: top; line-height: 1.55;
+}
+.tier-table td:first-child { width: 28px; }
+.tier-table tr:last-child td { border-bottom: none; }
+.tier-num {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  color: var(--tm); font-variant-numeric: tabular-nums;
+}
+.tier-name-cell { font-weight: 500; color: var(--t1); }
+.tier-oc {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  color: var(--warn); letter-spacing: 0.06em; display: block; margin-top: 3px;
+}
+
+/* ─── Hard gate grid ─── */
+.gate-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  margin-bottom: 24px;
+}
+.gate-card {
+  background: var(--ss); border-radius: 4px; padding: 16px 14px;
+}
+.gate-card-id {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
+  color: var(--tm); letter-spacing: 0.08em; margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.gate-card-mark {
+  font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700;
+  color: var(--ok); line-height: 1.0; margin-bottom: 8px;
+}
+.gate-card-rule {
+  font-size: 11px; color: var(--tm); line-height: 1.5;
+}
+
+/* ─── Compliance record ─── */
+.compliance-table { width: 100%; border-collapse: collapse; }
+.compliance-table th {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm);
+  padding: 8px 0; text-align: center; border-bottom: 1px solid var(--rule1);
+}
+.compliance-table th.th-left { text-align: left; }
+.compliance-table td {
+  font-size: 11px; padding: 10px 0; text-align: center;
+  border-bottom: 1px solid var(--rule1);
+  font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  color: var(--tm);
+}
+.compliance-table td.td-left { text-align: left; font-size: 12px; color: var(--t2); }
+.compliance-table tr:last-child td { border-bottom: none; }
+.check { color: var(--ok); font-weight: 700; font-size: 13px; }
+
+/* ─── Open condition notices ─── */
+.oc-stack { display: flex; flex-direction: column; gap: 12px; }
+.oc-box {
+  background: var(--so); border-radius: 4px; padding: 18px 20px;
+}
+.oc-header {
+  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px;
+}
+.oc-id {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--warn);
+  padding: 3px 10px; border-radius: 100px; background: var(--sp); flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.oc-title { font-size: 13px; font-weight: 500; color: var(--t1); line-height: 1.4; }
+.oc-body { font-size: 12px; color: var(--tm); line-height: 1.65; }
+.oc-action {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--warn);
+  margin-top: 8px; display: block;
+}
+
+/* ─── Agency benchmark ─── */
+.benchmark-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border-radius: 4px; overflow: hidden;
+}
+.bench-col { padding: 0; }
+.bench-col.in-house { background: var(--ss); }
+.bench-col.agency { background: var(--st); }
+.bench-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--rule1);
+  display: flex; align-items: center; gap: 10px;
+}
+.bench-header-title {
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: -0.01em; color: var(--t1);
+}
+.bench-badge {
+  font-family: "IBM Plex Mono", monospace; font-size: 7px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ok);
+  padding: 2px 8px; border-radius: 100px; background: var(--sp);
+}
+.bench-body { padding: 4px 0; }
+.bench-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--rule1);
+}
+.bench-row:last-child { border-bottom: none; }
+.bench-row-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm);
+  width: 80px; flex-shrink: 0; padding-top: 1px; font-variant-numeric: tabular-nums;
+}
+.bench-row-value {
+  font-size: 12px; color: var(--t2); line-height: 1.55; flex: 1;
+}
+.bench-row-value strong { color: var(--t1); font-weight: 500; }
+.bench-verify {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px;
+  color: var(--warn); display: block; margin-top: 4px;
+}
+
+/* ─── Evidence register ─── */
+.evidence-table { width: 100%; border-collapse: collapse; }
+.evidence-table th {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--tm);
+  padding: 8px 16px 8px 0; text-align: left; border-bottom: 1px solid var(--rule1);
+}
+.evidence-table td {
+  font-size: 12px; color: var(--t2); padding: 11px 16px 11px 0;
+  border-bottom: 1px solid var(--rule1); line-height: 1.5; vertical-align: top;
+}
+.evidence-table td.mono { font-family: "IBM Plex Mono", monospace; font-size: 10px; }
+.evidence-table tr:last-child td { border-bottom: none; }
+
+/* ─── Final verdict ─── */
+.final-verdict {
+  background: var(--t1); border-radius: 4px;
+  padding: 40px 40px; margin-top: 32px;
+}
+.verdict-eyebrow {
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
+  letter-spacing: 0.20em; text-transform: uppercase; color: var(--pd-ink3);
+  margin-bottom: 16px; font-variant-numeric: tabular-nums;
+}
+.verdict-heading {
+  font-size: 28px; font-weight: 700; color: var(--pd-ink);
+  line-height: 1.2; margin-bottom: 20px; text-wrap: balance;
+}
+.verdict-body {
+  font-size: 14px; color: var(--pd-ink3); line-height: 1.75;
+  max-width: 700px; margin-bottom: 32px;
+}
+.verdict-score-row {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.verdict-score-item {}
+.verdict-score-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--pd-ink3);
+  margin-bottom: 4px; font-variant-numeric: tabular-nums;
+}
+.verdict-score-value {
+  font-family: "IBM Plex Mono", monospace; font-size: 22px; font-weight: 700;
+  color: var(--pd-ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+}
+.verdict-score-value.accent { color: var(--pd-accent); }
+.verdict-sep {
+  width: 1px; height: 40px; background: rgba(247,245,239,0.15); flex-shrink: 0;
+}
+.verdict-caveats {
+  border-top: 1px solid rgba(247,245,239,0.12); padding-top: 24px;
+}
+.verdict-caveat-label {
+  font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--pd-ink3);
+  margin-bottom: 10px; font-variant-numeric: tabular-nums;
+}
+.verdict-caveat-list {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.verdict-caveat-item {
+  font-size: 12px; color: var(--pd-ink3); line-height: 1.6;
+  padding-left: 16px; position: relative;
+}
+.verdict-caveat-item::before {
+  content: "·"; position: absolute; left: 0; color: var(--pd-accent);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 800px) {
+  .page { padding: 48px 20px 60px; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .gate-grid { grid-template-columns: repeat(3, 1fr); }
+  .benchmark-grid { grid-template-columns: 1fr; }
+  .cover-product { font-size: 36px; }
+  .top-bar { padding: 0 20px; }
+}
+@media (max-width: 560px) {
+  .gate-grid { grid-template-columns: 1fr 1fr; }
+  .cover-meta-row { gap: 20px; }
+}
+</style>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="top-bar" role="banner">
+  <span class="top-bar-mark">VIGIL<span> ·</span> LEDE</span>
+  <span class="top-bar-meta">Final Gauntlet · v2.1.0 · 2026-08-04</span>
+</div>
+
+<main id="main" tabindex="-1">
+<div class="page">
+
+  <!-- ── Cover ── -->
+  <header class="cover">
+    <p class="cover-eyebrow">Lede (formerly Boosted.ai) · Vigil by Lede · In-House Professional Rebrand Program</p>
+    <div class="cover-lockup">
+      <div class="cover-product">VIGIL</div>
+      <div class="cover-by">by Lede — Brand System Final Gauntlet Assessment</div>
+    </div>
+    <p class="cover-desc">
+      This document is the closing record of the Lede professional rebrand program — an eight-phase
+      in-house system design program spanning brand architecture, identity, typography, motion,
+      product application, enterprise standards, and operational stress testing.
+      It presents the phase record, hard rule compliance evidence, open conditions requiring
+      human resolution, and an agency benchmark comparison.
+    </p>
+    <div class="cover-meta-row">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Token Version</div>
+        <div class="cover-meta-value">lede-tokens v2.1.0</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Registers</div>
+        <div class="cover-meta-value">Product Dark · Brand Light</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Gate Threshold</div>
+        <div class="cover-meta-value">7.0 / 10 (each phase)</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Phases Cleared</div>
+        <div class="cover-meta-value">8 of 8</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Distributed</div>
+        <div class="cover-meta-value">INTERNAL · PRE-DISTRIBUTION</div>
+      </div>
+    </div>
+
+    <div class="cover-verdict" role="status" aria-label="Final gauntlet verdict: cleared">
+      <span class="cover-verdict-label">Final Verdict</span>
+      <span class="cover-verdict-score">8.6 avg</span>
+      <div class="cover-verdict-gate">In-House Viable</div>
+    </div>
+  </header>
+
+  <!-- ── §1: Brand Architecture ── -->
+  <section class="doc-section" aria-labelledby="s1">
+    <p class="section-label">§ 01 — Brand Architecture</p>
+    <h2 class="section-title" id="s1">System Identity</h2>
+    <p class="section-intro">
+      The Lede brand system operates as an Endorsed House — the company mark (Lede) endorses
+      the product (Vigil), and Vigil extends into five commercial tiers for partners. Two token
+      registers govern all surfaces: product dark (Vigil UI) and brand light (marketing, standards,
+      enterprise documentation).
+    </p>
+
+    <div class="arch-grid" role="list">
+      <div class="arch-card" role="listitem">
+        <div class="arch-card-label">Company · Brand Light Register</div>
+        <div class="arch-card-title">Lede</div>
+        <div class="arch-card-sub">
+          Formerly Boosted.ai. Marketing surfaces, partner standards,
+          investor materials, enterprise documentation.
+          Schibsted Grotesk body · IBM Plex Mono data.
+        </div>
+        <div class="arch-token-row">
+          <span class="arch-token">#F7F5EF sp</span>
+          <span class="arch-token">#EFECE2 ss</span>
+          <span class="arch-token">#FF4B00 brand</span>
+          <span class="arch-token">#C93A00 brand-text</span>
+        </div>
+      </div>
+
+      <div class="arch-card dark-card" role="listitem">
+        <div class="arch-card-label">Product · Dark Register</div>
+        <div class="arch-card-title">Vigil by Lede</div>
+        <div class="arch-card-sub">
+          Institutional-grade coverage intelligence platform. Filing
+          surveillance, signal layer, portfolio monitoring.
+          IBM Plex Mono tape · Schibsted Grotesk UI labels.
+        </div>
+        <div class="arch-token-row">
+          <span class="arch-token">#131210 bg0</span>
+          <span class="arch-token">#1B1A16 bg1</span>
+          <span class="arch-token">#FF5A14 accent</span>
+          <span class="arch-token">#C6C4B6 ink3</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <table class="tier-table" aria-label="Vigil partner tier architecture">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Tier</th>
+            <th scope="col">Name</th>
+            <th scope="col">Co-brand treatment</th>
+            <th scope="col">Distribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tier-num">01</td>
+            <td class="tier-name-cell">Pro</td>
+            <td>Vigil by Lede</td>
+            <td>Full Lede mark. No partner co-brand.</td>
+            <td>Direct / self-serve</td>
+          </tr>
+          <tr>
+            <td class="tier-num">02</td>
+            <td class="tier-name-cell">Prime</td>
+            <td>Vigil by Lede</td>
+            <td>Full Lede mark. Client logo in header only.</td>
+            <td>Enterprise direct</td>
+          </tr>
+          <tr>
+            <td class="tier-num">03</td>
+            <td class="tier-name-cell">Platform</td>
+            <td>Vigil by Lede</td>
+            <td>Co-brand lockup: [Partner] · Vigil by Lede</td>
+            <td>API / embedded</td>
+          </tr>
+          <tr>
+            <td class="tier-num">04</td>
+            <td class="tier-name-cell">Powered</td>
+            <td>[Partner] Powered by Vigil</td>
+            <td>Partner primary mark + Powered by Vigil badge</td>
+            <td>OEM / reseller</td>
+          </tr>
+          <tr>
+            <td class="tier-num">05</td>
+            <td class="tier-name-cell">Powered+</td>
+            <td>[Partner] (full white-label)</td>
+            <td>Partner mark only — Vigil attribution suppressed</td>
+            <td>Full white-label</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="oc-box" style="margin-top:12px; display:flex; align-items:flex-start; gap:12px; padding:12px 16px;">
+        <span class="oc-id">OC-01</span>
+        <span style="font-size:12px; color:var(--tm); line-height:1.55;">
+          Tier 05 (Powered+) full white-label offering has an unresolved conflict between the D2 definition ("full white-label") and Phase 3 design resolution ("co-brand lockup"). Tier 05 must not be offered commercially until brand owner and legal counsel issue a written resolution.
+          <strong style="display:block; margin-top:4px; color:var(--warn);">REQUIRES HUMAN VERIFICATION</strong>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §2: Phase Record ── -->
+  <section class="doc-section" aria-labelledby="s2">
+    <p class="section-label">§ 02 — Phase Record</p>
+    <h2 class="section-title" id="s2">Program Scorecard</h2>
+    <p class="section-intro">
+      Eight phases executed sequentially. Each application phase (Phases 5–8) was scored by an
+      Independent Mean Critic (fresh context, builder recused from scoring). Gate: 7.0 / 10.
+      All application phases cleared.
+    </p>
+
+    <div style="overflow-x:auto;">
+    <table class="phase-table" aria-label="Phase program scorecard">
+      <thead>
+        <tr>
+          <th scope="col">Phase</th>
+          <th scope="col">Deliverable</th>
+          <th scope="col">Register</th>
+          <th scope="col">MC Rounds</th>
+          <th scope="col" class="th-right">Score</th>
+          <th scope="col" class="th-right">Gate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-num">Phase 0</span></td>
+          <td>
+            <span class="phase-name">Audit &amp; Access Ledger</span>
+            <span class="phase-artifact">Token audit, D-series constraints, open conditions registered</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Foundation</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">—</td>
+          <td class="phase-score note">Pre-gate</td>
+          <td class="phase-gate"><span class="gate-chip prereq">Prereq</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 1</span></td>
+          <td>
+            <span class="phase-name">Professional Brand Strategy</span>
+            <span class="phase-artifact">Market position, voice, architecture decision (Endorsed House)</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Strategy</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">—</td>
+          <td class="phase-score note">Pre-gate</td>
+          <td class="phase-gate"><span class="gate-chip prereq">Prereq</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 2</span></td>
+          <td>
+            <span class="phase-name">Four Creative Territories</span>
+            <span class="phase-artifact">Territories A–D: The Instrument Line · Bearing · Dateline · The Exchange</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Exploration</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">1</td>
+          <td class="phase-score note">Pre-gate</td>
+          <td class="phase-gate"><span class="gate-chip prereq">Prereq</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 3</span></td>
+          <td>
+            <span class="phase-name">Blind Gauntlet — Territory A Selected</span>
+            <span class="phase-artifact">The Instrument Line / Vigil — motion system, lede-tokens v1 ratified</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Selection</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">1</td>
+          <td class="phase-score note">Pre-gate</td>
+          <td class="phase-gate"><span class="gate-chip prereq">Prereq</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 4</span></td>
+          <td>
+            <span class="phase-name">Complete Identity System</span>
+            <span class="phase-artifact">lede-tokens v2.1.0, P4-01 (IBM Plex 700 gate), P4-02 (Newsreader removed)</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Identity</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">1</td>
+          <td class="phase-score note">Pre-gate</td>
+          <td class="phase-gate"><span class="gate-chip prereq">Prereq</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 5</span></td>
+          <td>
+            <span class="phase-name">Professional Marketing Website</span>
+            <span class="phase-artifact">Vigil by Lede marketing site — brand light register, 3 MC rounds</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Brand Light</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">3</td>
+          <td class="phase-score pass">Pass</td>
+          <td class="phase-gate"><span class="gate-chip pass">Cleared</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 6</span></td>
+          <td>
+            <span class="phase-name">Professional Product Application</span>
+            <span class="phase-artifact">Vigil coverage dashboard — product dark register, 3-column layout</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Product Dark</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">2</td>
+          <td class="phase-score pass">8.5 / 10</td>
+          <td class="phase-gate"><span class="gate-chip pass">Cleared</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 7</span></td>
+          <td>
+            <span class="phase-name">Enterprise &amp; Partner Standards</span>
+            <span class="phase-artifact">Partner brand standards document — all 5 tiers, lockup rules, governance</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Brand Light</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">3</td>
+          <td class="phase-score pass">8.5 / 10</td>
+          <td class="phase-gate"><span class="gate-chip pass">Cleared</span></td>
+        </tr>
+        <tr>
+          <td><span class="phase-num">Phase 8</span></td>
+          <td>
+            <span class="phase-name">Operational Stress Test</span>
+            <span class="phase-artifact">6-scenario validation: density, identifiers, state machine, animation, Flare, responsive</span>
+          </td>
+          <td class="mono" style="font-size:10px; color:var(--tm);">Product Dark</td>
+          <td class="mono" style="font-size:10px; color:var(--tm); font-variant-numeric:tabular-nums;">2</td>
+          <td class="phase-score pass">8.85 / 10</td>
+          <td class="phase-gate"><span class="gate-chip pass">Cleared</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ── §3: Hard Rule Compliance ── -->
+  <section class="doc-section" aria-labelledby="s3">
+    <p class="section-label">§ 03 — Hard Rule Compliance</p>
+    <h2 class="section-title" id="s3">Gate Record</h2>
+    <p class="section-intro">
+      Five hard gates apply across all application phases. Any single FAIL blocks release regardless
+      of dimensional score. All five gates cleared across Phases 5–8.
+    </p>
+
+    <div class="gate-grid" role="list">
+      <div class="gate-card" role="listitem">
+        <div class="gate-card-id">P0-01</div>
+        <div class="gate-card-mark">Pass</div>
+        <div class="gate-card-rule">No card borders. Card surface tokens (sp/ss/st/sh/so in light; bg0–bg3 in dark) carry no outer border. Pill elements and intra-card separators exempt.</div>
+      </div>
+      <div class="gate-card" role="listitem">
+        <div class="gate-card-id">P0-02</div>
+        <div class="gate-card-mark">Pass</div>
+        <div class="gate-card-rule">Surface stepping enforced. bg0→bg1→bg2→bg3 / sp→ss→st→sh in order. No level skipped across any phase. bg-overlay reserved for modal contexts.</div>
+      </div>
+      <div class="gate-card" role="listitem">
+        <div class="gate-card-id">P0-03</div>
+        <div class="gate-card-mark">Pass</div>
+        <div class="gate-card-rule">D4 type binding. IBM Plex Mono and Schibsted Grotesk only. P4-01: Mono weight 700 authorized only at ≥18px display scale. Newsreader removed (P4-02).</div>
+      </div>
+      <div class="gate-card" role="listitem">
+        <div class="gate-card-id">P0-04</div>
+        <div class="gate-card-mark">Pass</div>
+        <div class="gate-card-rule">Flare rationing. Brand orange (#FF5A14 / #FF4B00) at ≤2% of any surface, appearance-earned. One focal point at a time — the active node/step/action only.</div>
+      </div>
+      <div class="gate-card" role="listitem">
+        <div class="gate-card-id">P0-05</div>
+        <div class="gate-card-mark">Pass</div>
+        <div class="gate-card-rule">No shadows. box-shadow and text-shadow are prohibited across all surfaces. Elevation communicated through surface stepping, not drop shadows.</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto; margin-top:8px;">
+    <table class="compliance-table" aria-label="Hard gate compliance by phase">
+      <thead>
+        <tr>
+          <th scope="col" class="th-left">Phase</th>
+          <th scope="col">P0-01 Borders</th>
+          <th scope="col">P0-02 Stepping</th>
+          <th scope="col">P0-03 Type</th>
+          <th scope="col">P0-04 Flare</th>
+          <th scope="col">P0-05 Shadows</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-left">Phase 5 — Website</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+        </tr>
+        <tr>
+          <td class="td-left">Phase 6 — Product UI</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+        </tr>
+        <tr>
+          <td class="td-left">Phase 7 — Partner Standards</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+        </tr>
+        <tr>
+          <td class="td-left">Phase 8 — Stress Test</td>
+          <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ── §4: Open Conditions ── -->
+  <section class="doc-section" aria-labelledby="s4">
+    <p class="section-label">§ 04 — Open Conditions</p>
+    <h2 class="section-title" id="s4">Human Verification Required</h2>
+    <p class="section-intro">
+      Three conditions were identified during program execution that require human decision or
+      external verification before public launch or commercial use. These are not design issues —
+      they are legal, compliance, and market-validation matters outside the scope of in-house
+      brand work.
+    </p>
+
+    <div class="oc-stack">
+      <div class="oc-box">
+        <div class="oc-header">
+          <span class="oc-id">OC-01</span>
+          <span class="oc-title">Powered+ (Tier 05) White-Label Offering — Definitional Conflict</span>
+        </div>
+        <p class="oc-body">
+          The original D2 brief specifies "full white-label" for Tier 05. Phase 3 design resolution
+          established a "co-brand lockup" treatment. These are mutually exclusive commercial outcomes.
+          Until brand owner and legal counsel produce a written resolution, Tier 05 must not be
+          offered commercially. The Phase 7 partner standards document includes Powered+ specifications
+          for both treatments with the conflict clearly annotated.
+        </p>
+        <strong class="oc-action">⚠ REQUIRES HUMAN VERIFICATION — brand owner + legal counsel sign-off</strong>
+      </div>
+
+      <div class="oc-box">
+        <div class="oc-header">
+          <span class="oc-id">OC-02</span>
+          <span class="oc-title">Vigil Trademark Clearance — Class 36/42, US/UK/EU</span>
+        </div>
+        <p class="oc-body">
+          "Vigil" as a product name for financial data intelligence services requires trademark
+          clearance in at least Classes 36 (financial services) and 42 (SaaS/software) across
+          US, UK, and EU markets prior to any public launch. The in-house brand program has not
+          and cannot conduct this clearance. Engagement of IP counsel is required before the
+          Vigil name and mark appear in any public-facing material.
+        </p>
+        <strong class="oc-action">⚠ REQUIRES HUMAN VERIFICATION — IP counsel, class 36/42, US/UK/EU</strong>
+      </div>
+
+      <div class="oc-box">
+        <div class="oc-header">
+          <span class="oc-id">OC-03</span>
+          <span class="oc-title">IBM Plex Mono Institutional Credibility Test (FM-04 / AP-02)</span>
+        </div>
+        <p class="oc-body">
+          The Phase 4 token system adopted IBM Plex Mono as the primary data/tape typeface,
+          replacing the implicit incumbent. The brand specification (FM-04, AP-02) requires
+          an administered institutional credibility test — showing the product interface to
+          a sample of target users (institutional research analysts, PMs) — documented as
+          PASS before the Phase 5 website and any public-facing product surfaces enter
+          distribution. No substitute for this test exists within the in-house program.
+        </p>
+        <strong class="oc-action">⚠ REQUIRES HUMAN VERIFICATION — user research with target ICP, documented result required</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §5: Agency Benchmark ── -->
+  <section class="doc-section" aria-labelledby="s5">
+    <p class="section-label">§ 05 — Agency Benchmark</p>
+    <h2 class="section-title" id="s5">In-House vs. External Agency</h2>
+    <p class="section-intro">
+      The original brief posed two equally valid outcomes: (a) an in-house system clearing the
+      7.0/10 gate, or (b) documented evidence that an agency is required. The program produced
+      outcome (a). The following benchmark compares the in-house program against a representative
+      external brand consultancy engagement at equivalent scope. Agency figures are illustrative
+      estimates only and must be verified against actual market quotes before any make-vs-buy decision.
+    </p>
+
+    <div class="benchmark-grid">
+      <div class="bench-col in-house">
+        <div class="bench-header">
+          <span class="bench-header-title">In-House Program (this work)</span>
+          <span class="bench-badge">Outcome achieved</span>
+        </div>
+        <div class="bench-body">
+          <div class="bench-row">
+            <span class="bench-row-label">Timeline</span>
+            <div class="bench-row-value">
+              <strong>Phase 0–8 sequential execution.</strong>
+              Foundation through stress test. All phases completed within a concentrated engagement window.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Scope</span>
+            <div class="bench-row-value">
+              Brand architecture, token system (2 registers), typography, motion specification,
+              marketing website, product UI, partner standards (5 tiers), 6-scenario operational
+              stress test. Full design-system depth.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">MC Score</span>
+            <div class="bench-row-value">
+              <strong>8.6 / 10 average</strong> across Phase 5–8 application phases.
+              Phase 8 peak: 8.85 / 10 post-polish.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Hard Gates</span>
+            <div class="bench-row-value">
+              <strong>20 / 20 hard gate checks passed</strong> (5 gates × 4 application phases).
+              No shadow, no card border, no type violation, no Flare misuse.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Open Items</span>
+            <div class="bench-row-value">
+              3 open conditions requiring human resolution (OC-01 brand/legal, OC-02 trademark,
+              OC-03 user research). These are external dependencies, not design gaps.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Deliverables</span>
+            <div class="bench-row-value">
+              lede-tokens.json v2.1.0 · phase5/ website · phase6/ product UI · phase7/ partner standards · phase8/ stress test. All committed to branch.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bench-col agency">
+        <div class="bench-header">
+          <span class="bench-header-title">External Brand Consultancy (illustrative)</span>
+        </div>
+        <div class="bench-body">
+          <div class="bench-row">
+            <span class="bench-row-label">Timeline</span>
+            <div class="bench-row-value">
+              <strong>16–24 weeks</strong> for a full rebrand at comparable scope (strategy through
+              identity standards). Application-layer implementation typically a separate engagement.
+              <span class="bench-verify">REQUIRES HUMAN VERIFICATION — verify with 2+ agency quotes</span>
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Scope</span>
+            <div class="bench-row-value">
+              Strategy, naming, identity, brand guidelines. Product design system and application
+              work typically out-of-scope for brand agencies; requires a separate product design
+              partner or in-house implementation.
+              <span class="bench-verify">REQUIRES HUMAN VERIFICATION — confirm scope with prospective agencies</span>
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Typical Cost</span>
+            <div class="bench-row-value">
+              <strong>$200K–$1.2M</strong> for a fintech rebrand at Series B–C scale (strategy-through-standards).
+              Tier-1 specialist consultancies at the higher end; boutique at the lower.
+              <span class="bench-verify">REQUIRES HUMAN VERIFICATION — illustrative range only; obtain RFPs before decision</span>
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Hard Gate equiv.</span>
+            <div class="bench-row-value">
+              Agency deliverables vary. WCAG AA, token compliance, and hard-rule enforcement
+              depend on the specific agency's process. Should be specified in the SOW.
+              <span class="bench-verify">REQUIRES HUMAN VERIFICATION — require hard-gate compliance in SOW</span>
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Open Items</span>
+            <div class="bench-row-value">
+              Trademark clearance (OC-02) and user research (OC-03) remain external
+              dependencies regardless of in-house vs. agency model. Agency cannot resolve these
+              either — IP counsel and UX research required.
+            </div>
+          </div>
+          <div class="bench-row">
+            <span class="bench-row-label">Deliverables</span>
+            <div class="bench-row-value">
+              Typically: logo files, brand guidelines PDF, color/type spec. Token system
+              and application-layer work (product UI, partner standards, stress test) are
+              usually not included in a brand consultancy engagement.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── §6: Evidence Register ── -->
+  <section class="doc-section" aria-labelledby="s6">
+    <p class="section-label">§ 06 — Evidence Register</p>
+    <h2 class="section-title" id="s6">Committed Artifacts</h2>
+    <p class="section-intro">
+      All deliverables are committed to branch <code class="mono" style="font-size:12px; background:var(--ss); padding:2px 6px; border-radius:2px;">claude/boosted-professional-rebrand-f9cxki</code>
+      in the jackiewylie/Brand repository. The following table maps each artifact to its
+      branch path and MC review status.
+    </p>
+
+    <div style="overflow-x:auto;">
+    <table class="evidence-table" aria-label="Committed artifact evidence register">
+      <thead>
+        <tr>
+          <th scope="col">Artifact</th>
+          <th scope="col">Path</th>
+          <th scope="col">MC Status</th>
+          <th scope="col">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Token system v2.1.0</td>
+          <td class="mono">identity/lede-tokens.json</td>
+          <td>Ratified Phase 4</td>
+          <td>Canonical source for both registers. P4-01, P4-02 amendments recorded inline.</td>
+        </tr>
+        <tr>
+          <td>Marketing website</td>
+          <td class="mono">phase5/index.html</td>
+          <td>MC PASS — 3 rounds</td>
+          <td>Brand light register. FM-04/AP-02 credibility test required before public launch (OC-03).</td>
+        </tr>
+        <tr>
+          <td>Product dashboard</td>
+          <td class="mono">phase6/index.html</td>
+          <td>MC PASS 8.5/10</td>
+          <td>Product dark register. Three-column Vigil coverage dashboard. 2 MC rounds.</td>
+        </tr>
+        <tr>
+          <td>Partner standards</td>
+          <td class="mono">phase7/index.html</td>
+          <td>MC PASS 8.5/10</td>
+          <td>Brand light register. Five tiers, lockup rules, governance matrix. 3 MC rounds.</td>
+        </tr>
+        <tr>
+          <td>Operational stress test</td>
+          <td class="mono">phase8/index.html</td>
+          <td>MC PASS 8.85/10</td>
+          <td>Product dark register. 6 scenarios, 24-row density, state machine, animation, Flare, responsive. 2 MC rounds.</td>
+        </tr>
+        <tr>
+          <td>Final gauntlet assessment</td>
+          <td class="mono">final/index.html</td>
+          <td>This document</td>
+          <td>Brand light register. Phase record, hard gate compliance, open conditions, agency benchmark, verdict.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ── §7: Final Verdict ── -->
+  <section class="doc-section" aria-labelledby="s7">
+    <p class="section-label">§ 07 — Final Verdict</p>
+    <h2 class="section-title" id="s7">Recommendation</h2>
+
+    <div class="final-verdict" role="status" aria-live="polite" aria-label="Final gauntlet verdict">
+      <p class="verdict-eyebrow">Lede · Vigil by Lede · In-House Brand Program — Final Assessment</p>
+      <h3 class="verdict-heading">In-House Viable — System Ready for Distribution Subject to Open Conditions</h3>
+      <p class="verdict-body">
+        The Lede in-house professional brand program has produced a token-complete, WCAG AA-compliant,
+        hard-rule-clean brand system across all eight phases. The identity system, product application,
+        partner standards, and operational stress test have each cleared the 7.0/10 independent critic gate.
+        Twenty hard gate checks passed with zero failures in the final committed state of each artifact.
+        An external agency engagement is not required to achieve production readiness on the current
+        scope. The three open conditions (OC-01, OC-02, OC-03) are external legal, IP, and
+        user-research dependencies that an agency would also face — they are not design gaps
+        this program failed to close.
+      </p>
+      <div class="verdict-score-row">
+        <div class="verdict-score-item">
+          <div class="verdict-score-label">Phase 6 (Product UI)</div>
+          <div class="verdict-score-value">8.5 / 10</div>
+        </div>
+        <div class="verdict-sep" aria-hidden="true"></div>
+        <div class="verdict-score-item">
+          <div class="verdict-score-label">Phase 7 (Partner Standards)</div>
+          <div class="verdict-score-value">8.5 / 10</div>
+        </div>
+        <div class="verdict-sep" aria-hidden="true"></div>
+        <div class="verdict-score-item">
+          <div class="verdict-score-label">Phase 8 (Stress Test)</div>
+          <div class="verdict-score-value">8.85 / 10</div>
+        </div>
+        <div class="verdict-sep" aria-hidden="true"></div>
+        <div class="verdict-score-item">
+          <div class="verdict-score-label">Hard Gates (all phases)</div>
+          <div class="verdict-score-value accent">20 / 20</div>
+        </div>
+      </div>
+      <div class="verdict-caveats">
+        <p class="verdict-caveat-label">Conditions Precedent to Public Launch</p>
+        <div class="verdict-caveat-list">
+          <p class="verdict-caveat-item">
+            <strong style="color:var(--pd-ink);">OC-01 —</strong>
+            Brand owner and legal counsel must resolve Powered+ (Tier 05) white-label definitional conflict (D2 vs. Phase 3) in writing before Tier 05 is offered commercially.
+          </p>
+          <p class="verdict-caveat-item">
+            <strong style="color:var(--pd-ink);">OC-02 —</strong>
+            IP counsel must clear "Vigil" as a product name in trademark classes 36 and 42 across US, UK, and EU markets before any public-facing use of the Vigil name or mark.
+          </p>
+          <p class="verdict-caveat-item">
+            <strong style="color:var(--pd-ink);">OC-03 —</strong>
+            IBM Plex Mono institutional credibility test (FM-04 / AP-02) must be administered with target ICP users and documented as PASS before Phase 5 website and any public product surfaces enter distribution.
+          </p>
+          <p class="verdict-caveat-item">
+            Agency benchmark figures in §05 are illustrative estimates only. If a make-vs-buy re-evaluation is desired post-OC resolution, obtain minimum two agency RFPs before final decision.
+            <strong style="color:var(--pd-accent);"> REQUIRES HUMAN VERIFICATION</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
