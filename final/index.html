@@ -46,10 +46,10 @@ body {
   padding: 0 40px;
 }
 .top-bar-mark {
-  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700;
+  font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 500;
   color: var(--pd-ink); letter-spacing: -0.02em;
 }
-.top-bar-mark span { color: var(--pd-accent); }
+.top-bar-mark span { color: var(--pd-ink3); }
 .top-bar-meta {
   font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 400;
   color: var(--pd-ink3); letter-spacing: 0.10em; text-transform: uppercase;
@@ -231,7 +231,7 @@ body {
 .tier-name-cell { font-weight: 500; color: var(--t1); }
 .tier-oc {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 400;
-  color: var(--warn); letter-spacing: 0.06em; display: block; margin-top: 3px;
+  color: var(--tm); letter-spacing: 0.06em; display: block; margin-top: 3px;
 }
 
 /* ─── Hard gate grid ─── */
@@ -271,7 +271,7 @@ body {
 }
 .compliance-table td.td-left { text-align: left; font-size: 12px; color: var(--t2); }
 .compliance-table tr:last-child td { border-bottom: none; }
-.check { color: var(--ok); font-weight: 700; font-size: 13px; }
+.check { color: var(--ok); font-weight: 500; font-size: 13px; }
 
 /* ─── Open condition notices ─── */
 .oc-stack { display: flex; flex-direction: column; gap: 12px; }
@@ -283,7 +283,7 @@ body {
 }
 .oc-id {
   font-family: "IBM Plex Mono", monospace; font-size: 8px; font-weight: 500;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--warn);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--tm);
   padding: 3px 10px; border-radius: 100px; background: var(--sp); flex-shrink: 0;
   font-variant-numeric: tabular-nums;
 }
@@ -291,14 +291,16 @@ body {
 .oc-body { font-size: 12px; color: var(--tm); line-height: 1.65; }
 .oc-action {
   font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
-  letter-spacing: 0.10em; text-transform: uppercase; color: var(--warn);
+  letter-spacing: 0.10em; text-transform: uppercase; color: var(--tm);
   margin-top: 8px; display: block;
 }
 
 /* ─── Agency benchmark ─── */
+.benchmark-wrap {
+  background: var(--ss); border-radius: 4px; overflow: hidden;
+}
 .benchmark-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-  border-radius: 4px; overflow: hidden;
 }
 .bench-col { padding: 0; }
 .bench-col.in-house { background: var(--ss); }
@@ -309,7 +311,7 @@ body {
   display: flex; align-items: center; gap: 10px;
 }
 .bench-header-title {
-  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
   letter-spacing: -0.01em; color: var(--t1);
 }
 .bench-badge {
@@ -335,7 +337,7 @@ body {
 .bench-row-value strong { color: var(--t1); font-weight: 500; }
 .bench-verify {
   font-family: "IBM Plex Mono", monospace; font-size: 8px;
-  color: var(--warn); display: block; margin-top: 4px;
+  color: var(--tm); display: block; margin-top: 4px;
 }
 
 /* ─── Evidence register ─── */
@@ -574,7 +576,7 @@ body {
         <span class="oc-id">OC-01</span>
         <span style="font-size:12px; color:var(--tm); line-height:1.55;">
           Tier 05 (Powered+) full white-label offering has an unresolved conflict between the D2 definition ("full white-label") and Phase 3 design resolution ("co-brand lockup"). Tier 05 must not be offered commercially until brand owner and legal counsel issue a written resolution.
-          <strong style="display:block; margin-top:4px; color:var(--warn);">REQUIRES HUMAN VERIFICATION</strong>
+          <strong style="display:block; margin-top:4px; color:var(--tm);">REQUIRES HUMAN VERIFICATION</strong>
         </span>
       </div>
     </div>
@@ -850,6 +852,7 @@ body {
       estimates only and must be verified against actual market quotes before any make-vs-buy decision.
     </p>
 
+    <div class="benchmark-wrap">
     <div class="benchmark-grid">
       <div class="bench-col in-house">
         <div class="bench-header">
@@ -958,6 +961,7 @@ body {
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
