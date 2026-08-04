@@ -120,8 +120,8 @@ body {
   letter-spacing: 0.14em; text-transform: uppercase;
   padding: 4px 12px; border-radius: 100px;
 }
-.verdict.pass { background: var(--bg2); color: var(--ok); }
-.verdict.caution { background: var(--bg2); color: var(--warn); }
+.verdict.pass { background: var(--bg1); color: var(--ok); }
+.verdict.caution { background: var(--bg1); color: var(--warn); }
 
 /* ─── Panel container ─── */
 .panel {
@@ -381,7 +381,7 @@ body {
   letter-spacing: 0.14em; text-transform: uppercase;
 }
 .flare-hdr-label.correct { color: var(--ok); }
-.flare-hdr-label.prohibited { color: var(--err); }
+.flare-hdr-label.prohibited { color: var(--warn); }
 .flare-hdr-note {
   font-family: "IBM Plex Mono", monospace; font-size: 8px;
   color: var(--ink3);
@@ -429,7 +429,7 @@ body {
   display: flex; align-items: center; justify-content: space-between;
 }
 .mock-wordmark {
-  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 700;
+  font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 500;
   color: var(--ink); letter-spacing: -0.02em;
 }
 .mock-menu { display: flex; flex-direction: column; gap: 3px; }
@@ -559,7 +559,7 @@ body {
       <div>
         <p class="section-eyebrow">Stress Test 01</p>
         <h2 class="section-heading" id="s01">Data Density Ceiling</h2>
-        <p class="section-note">24 instruments at 40px row height. One and only one Flare focal point — the most recent active signal. All prior signals render in ink3. Validates: surface stepping, Flare rationing, tabular-nums alignment, long-name truncation.</p>
+        <p class="section-note">24 instruments at 40px row height (1 active, 4 historical, 19 monitoring). One and only one Flare focal point — the most recent active signal. All prior signals render in ink3. Validates: surface stepping, Flare rationing, tabular-nums alignment, long-name truncation.</p>
       </div>
       <span class="verdict pass">Pass</span>
     </div>
@@ -567,7 +567,7 @@ body {
     <div class="panel" role="region" aria-label="24-instrument coverage table">
       <div class="panel-header">
         <span class="panel-label">Coverage Monitor</span>
-        <span class="panel-meta">24 instruments · 1 active signal · 4 historical · 19 monitoring</span>
+        <span class="panel-meta">24 instruments · 1 active · 4 historical · 19 monitoring</span>
       </div>
       <div style="overflow-x:auto;">
       <table class="data-table" aria-label="Instrument coverage monitor">
@@ -670,12 +670,8 @@ body {
           <tr><td class="td-ticker">MRK</td><td class="td-name">Merck &amp; Co Inc</td><td class="td-exch">NYSE</td><td class="td-filing">10-Q · 44d ago</td><td class="td-delta delta-flat">±0.0%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
           <tr><td class="td-ticker">ABBV</td><td class="td-name">AbbVie Inc</td><td class="td-exch">NYSE</td><td class="td-filing">10-K · 47d ago</td><td class="td-delta delta-down">−1.4%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
           <tr><td class="td-ticker">CRM</td><td class="td-name">Salesforce Inc</td><td class="td-exch">NYSE</td><td class="td-filing">10-Q · 51d ago</td><td class="td-delta delta-up">+2.0%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">ORCL</td><td class="td-name">Oracle Corporation</td><td class="td-exch">NYSE</td><td class="td-filing">10-K · 55d ago</td><td class="td-delta delta-up">+1.7%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">ADBE</td><td class="td-name">Adobe Inc</td><td class="td-exch">NASDAQ</td><td class="td-filing">10-Q · 60d ago</td><td class="td-delta delta-flat">±0.3%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">NFLX</td><td class="td-name">Netflix Inc</td><td class="td-exch">NASDAQ</td><td class="td-filing">10-K · 68d ago</td><td class="td-delta delta-down">−0.5%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">BAC</td><td class="td-name">Bank of America Corporation</td><td class="td-exch">NYSE</td><td class="td-filing">SC 13G · 74d ago</td><td class="td-delta delta-flat">±0.1%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">KO</td><td class="td-name">The Coca-Cola Company</td><td class="td-exch">NYSE</td><td class="td-filing">10-Q · 82d ago</td><td class="td-delta delta-up">+0.2%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
-          <tr><td class="td-ticker">IEP</td><td class="td-name">Icahn Enterprises LP Depositary Units</td><td class="td-exch">NASDAQ</td><td class="td-filing">10-K · 88d ago</td><td class="td-delta delta-down">−3.2%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
+          <tr><td class="td-ticker">KO</td><td class="td-name">The Coca-Cola Company</td><td class="td-exch">NYSE</td><td class="td-filing">10-Q · 55d ago</td><td class="td-delta delta-up">+0.2%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
+          <tr><td class="td-ticker">IEP</td><td class="td-name">Icahn Enterprises LP Depositary Units</td><td class="td-exch">NASDAQ</td><td class="td-filing">10-K · 62d ago</td><td class="td-delta delta-down">−3.2%</td><td class="td-signal"><span class="sig-none">·</span></td></tr>
         </tbody>
       </table>
       </div>
@@ -779,7 +775,7 @@ body {
           <div class="empty-wrap">
             <div class="empty-ring" aria-hidden="true">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <circle cx="6" cy="6" r="4.5" stroke="#383630" stroke-width="1"/>
+                <circle cx="6" cy="6" r="4.5" stroke-width="1" style="stroke:var(--rule2)"/>
               </svg>
             </div>
             <p class="empty-text">No instruments in coverage<br>universe. Add a ticker to begin.</p>
@@ -962,7 +958,7 @@ body {
           <span class="flare-hdr-label prohibited">Prohibited — multiple Flare nodes</span>
           <span class="flare-hdr-note">Reference only · not a live state</span>
         </div>
-        <div class="flare-rows" style="opacity:0.6;">
+        <div class="flare-rows">
           <div class="flare-row">
             <span class="flare-tick">NVDA</span>
             <div class="flare-line-wrap"><div class="flare-track"></div><div class="flare-fill-wrap" style="width:100%;"><div class="flare-fill" style="width:100%;"></div></div></div>
@@ -1064,7 +1060,7 @@ body {
               <div class="mock-sidebar-item">Settings</div>
             </div>
             <div class="mock-main">
-              <div class="mock-row"><span class="mock-tick">NVDA</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">10-K · 14h</span></div>
+              <div class="mock-row"><span class="mock-tick">NVDA</span><div class="mock-track"><div class="mock-node live"></div></div><span class="mock-meta" style="font-size:8px;">10-K · 14h</span></div>
               <div class="mock-row"><span class="mock-tick">MSFT</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">10-Q · 2d</span></div>
               <div class="mock-row"><span class="mock-tick">AAPL</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">8-K · 3d</span></div>
               <div class="mock-row"><span class="mock-tick">JPM</span><div class="mock-track"></div><span class="mock-meta" style="font-size:8px;">—</span></div>
@@ -1089,7 +1085,7 @@ body {
               <div class="mock-sidebar-item">Filings</div>
             </div>
             <div class="mock-1280-main">
-              <div class="mock-row"><span class="mock-tick">NVDA</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">10-K · 14h</span></div>
+              <div class="mock-row"><span class="mock-tick">NVDA</span><div class="mock-track"><div class="mock-node live"></div></div><span class="mock-meta" style="font-size:8px;">10-K · 14h</span></div>
               <div class="mock-row"><span class="mock-tick">MSFT</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">10-Q · 2d</span></div>
               <div class="mock-row"><span class="mock-tick">AAPL</span><div class="mock-track"><div class="mock-node hist"></div></div><span class="mock-meta" style="font-size:8px;">8-K · 3d</span></div>
               <div class="mock-row"><span class="mock-tick">JPM</span><div class="mock-track"></div><span class="mock-meta" style="font-size:8px;">—</span></div>
